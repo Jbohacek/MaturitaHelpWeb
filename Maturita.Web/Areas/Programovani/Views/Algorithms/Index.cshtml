@@ -149,7 +149,7 @@
             </div>
         </li>
     </ul>
-    
+    <div>Po rozkliknuti se zobrazí kód</div>
 </div>
 
 <div class="display-4">
@@ -172,12 +172,20 @@
         <thead class="table-sort">
         <tr>
             <th>Název</th>
-            <th>Omikron</th>
-            <th>Omega</th>
-            <th>Theta</th>
-            <th>Stabilní</th>
-            <th>Na Místě</th>
-            <th></th>
+                <th class="d-none d-md-table-cell">Omikron</th>
+                <th class="d-none d-md-table-cell">Omega</th>
+                <th class="d-none d-md-table-cell">Theta</th>
+                <th class="d-md-none d-table-cell">O</th>
+                <th class="d-md-none d-table-cell">Ω</th>
+                <th class="d-md-none d-table-cell">Θ</th>
+            
+                <th class="d-none d-md-table-cell">Stabilní</th>
+                <th class="d-md-none d-table-cell">Stb.</th>
+                
+                <th class="d-none d-md-table-cell">Na místě</th>
+                <th class="d-md-none d-table-cell">nms.</th>
+            
+                <th class="d-none d-md-table-cell"></th>
         </tr>
         </thead>
         <tbody>
@@ -189,27 +197,27 @@
             <td>n²</td>
             <td>✅</td>
             <td>✅</td>
-            <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="BubbleSort">Více..</a></td>
+                <td class="d-none d-md-table-cell"><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="BubbleSort">Více..</a></td>
         </tr>
         <tr>
-            <td><a asp-action="SelectionSort">Selection sort</a></td>
-            
+            <td class="d-none d-md-table-cell"><a asp-action="SelectionSort">Selection sort</a></td>
+                <td class="d-md-none d-table-cell"><a asp-action="SelectionSort">Sel. sort</a></td>
             <td>n²</td>
             <td>n²</td>
             <td>n²</td>
             <td>🚫</td>
             <td>✅</td>
-            <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="SelectionSort">Více..</a></td>
+                <td class="d-none d-md-table-cell"><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="SelectionSort">Více..</a></td>
         </tr>
             <tr>
-                <td><a asp-action="InsertionSort">Insertion sort</a></td>
-
+                <td class="d-none d-md-table-cell"><a asp-action="InsertionSort">Insertion sort</a></td>
+                <td class="d-md-none d-table-cell"><a asp-action="InsertionSort">Ins. sort</a></td>
                 <td>n²</td>
                 <td>n</td>
                 <td>n²</td>
                 <td>✅</td>
                 <td>✅</td>
-                <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="InsertionSort">Více..</a></td>
+                <td class="d-none d-md-table-cell"><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="InsertionSort">Více..</a></td>
             </tr>
         <tr>
             <td><a asp-action="QuickSort">Quick sort</a></td>
@@ -219,7 +227,7 @@
             <td>n²</td>
             <td>🚫</td>
             <td>✅</td>
-            <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="QuickSort">Více..</a></td>
+                <td class="d-none d-md-table-cell"><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="QuickSort">Více..</a></td>
         </tr>
         <tr>
             <td><a asp-action="MergeSort">Merge sort</a></td>
@@ -229,7 +237,7 @@
             <td>n log n</td>
             <td>✅</td>
             <td>✅</td>
-            <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="MergeSort">Více..</a></td>
+                <td class="d-none d-md-table-cell"><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="MergeSort">Více..</a></td>
         </tr>
         <tr>
             <td><a asp-action="HeapSort">Heap sort</a></td>
@@ -239,7 +247,7 @@
             <td>n log n</td>
             <td>🚫</td>
             <td>✅</td>
-            <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="HeapSort">Více..</a></td>
+                <td class="d-none d-md-table-cell"><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="HeapSort">Více..</a></td>
         </tr>
         
 
