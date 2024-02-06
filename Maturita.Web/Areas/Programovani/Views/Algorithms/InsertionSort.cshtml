@@ -1,0 +1,371 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Insertion sort";
+    Layout = "_Layout";
+    ViewBag.Author = "Jakub Boháček";
+}
+<partial name="_Other_Sorts" />
+<h2 class="display-1">Insertion sort</h2>
+
+
+<div class="background-text">
+    Insertion sort je králem mezi jednoduchými třídícími algoritmy. Je
+    stabilní, jednoduchý na implementaci, chová se inteligentně na již
+    předtříděných polích a na malých polích (řádově desítky prvků)
+    díky své jednoduchosti předběhne i QuickSort.<br/>
+
+    Insertion sort vidí pole rozdělené na 2 části - setříděnou a
+    nesetříděnou. Postupně vybírá prvky z nesetříděné části a
+    <b>vkládá je mezi prvky v setříděné části</b> tak, aby
+    zůstala setříděná. Od toho jeho jméno - vkládá prvek přesně tam, kam
+    patří a nedělá tedy žádné zbytečné kroky, jako například Bubble
+    sort.<br/>
+    Na větších polích se samozřejmě začně projevovat handicap algoritmu,
+    který spočívá v jeho časové složitosti O(n²) a začíná
+    zaostávat za algoritmy chytřejšími.
+
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text true">Stabilní</div>
+    <div class="col background-text true">Na místě</div>
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text">O (n²)</div>
+    <div class="col background-text">Vysoká na malých polích</div>
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text"><b>Omicron:</b> n²</div>
+    <div class="col background-text"><b>Omega:</b> n</div>
+    <div class="col background-text"><b>Theta:</b> n²</div>
+</div>
+
+<div class="display-3">Průběh</div>
+<div class="background-text">
+
+
+Máme pole následujících prvků:
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>3</td>
+        <td>2</td>
+        <td>5</td>
+        <td>1</td>
+        <td>9</td>
+        <td>4</td>
+    </tr>
+    </tbody>
+</table>
+
+První prvek (3) budeme považovat za zatříděný a zbytek pole za
+nesedtříděný. Začneme tedy od druhého prvku (2), který si uložíme do
+pomocné paměti.
+
+Paměť: 2
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>3</td>
+        <td><span><b>2</b></span></td>
+        <td><span>5</span></td>
+        <td><span>1</span></td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+
+Nyní budeme vytvářet místo pro tento prvek v již setříděné části,
+kam ho poté vložíme. Budeme posouvat prvky v setříděné části pole
+doprava tak dlouho, dokud buď nenarazíme na prvek menší (nebo stejný) nebo
+na začátek pole. Trochu matoucí může být, že jeden prvek bude v poli
+fyzicky zapsán 2x, protože jednou to bude znamenat mezeru (vyznačeno šedou
+barvou). Z teoretického hlediska je tam prázdno, jak můžete vidět dále na
+demonstraci algoritmu na videu.
+
+Zpátky k našemu případu - v paměti máme prvek 2, který je jistě
+menší než prvek 3, proto prvek 3 posuneme doprava. Tím se připravíme o
+prvek 2, ale ten máme v paměti,takže nám to nijak nevadí.
+
+Paměť: 2
+
+<table>
+    <tbody>
+    <tr>
+        <td class="sha">3</td>
+        <td>3</td>
+        <td><span>5</span></td>
+        <td><span>1</span></td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+Před vzniklou mezerou je již začátek pole, vložíme tedy na "prázdné"
+místo prvek z paměti. Setříděná část pole má již tedy 2 prvky.
+
+Paměť: 2
+
+<table>
+    <tbody>
+    <tr>
+        <td>2</td>
+        <td>3</td>
+        <td><span>5</span></td>
+        <td><span>1</span></td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+Půjdeme zatřídit další prvek, kterým je nyní prvek 5.
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>2</td>
+        <td>3</td>
+        <td><span><b>5</b></span></td>
+        <td><span>1</span></td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+Zjistíme, že je před ním menší číslo, je tedy na správném místě.
+Velikost setříděné části se opět zvětší. Dalším na řadě bude prvek
+1.
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>2</td>
+        <td>3</td>
+        <td>5</td>
+        <td><span><b>1</b></span></td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+
+Paměť: 1
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>2</td>
+        <td >3</td>
+        <td class="sha">5</td>
+        <td>5</td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+
+Paměť: 1
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>2</td>
+        <td class="sha">3</td>
+        <td>3</td>
+        <td>5</td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+Paměť: 1
+
+
+<table>
+    <tbody>
+    <tr>
+        <td class="sha">2</td>
+        <td>2</td>
+        <td>3</td>
+        <td>5</td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+
+Paměť: 1
+
+<table>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>5</td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+Zarazil nás až začátek pole, protože žádný jiný prvek nebyl menší
+než jednička. Prvek 9 očividně zůstane na místě.
+
+
+<table>
+    <tbody>
+    <tr>
+        <td >1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>5</td>
+        <td><span><b>9</b></span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+Poslední je prvek 4, začneme tedy s posouváním.
+
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>5</td>
+        <td>9</td>
+        <td><span><b>4</b></span></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+Paměť: 4
+
+
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>5</td>
+        <td class="sha">9</td>
+        <td>9</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+Paměť: 4
+
+
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td class="sha">5</td>
+        <td>5</td>
+        <td>9</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+Zastavíme se před prvkem 3 a vložíme prvek 4 z paměti na volné místo.
+Hotovo 😎
+
+
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>9</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+</div>
+
+<div class="display-3">Kod</div>
+
+<pre>
+<code class="language-csharp">
+    public static void insertionSort(int[] list) {
+        int item;
+        int j;
+
+        for (int i = 1; i <= (list.Length - 1); i++) 
+        {
+            // ulozeni prvku
+            item = list[i];
+            j = i - 1;
+            while ((j >= 0) && (list[j] > item)) 
+            {
+                  list[j + 1] = list[j];
+                  j--;
+            }
+            list[j + 1] = item;
+        }
+
+    }
+</code>
+</pre>
+
+<div class="display-3">Video</div>
+
+
+
+@await Html.PartialAsync("_VideoPlayer", new VideoModel("Sorts/InsertionSort.mp4", "https://www.youtube.com/watch?v=JU767SDMDvA&t=1s"))
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+            "https://www.itnetwork.cz/algoritmy/razeni/algoritmus-insertion-sort-trideni-cisel-podle-velikosti"
+    ))

@@ -1,0 +1,4 @@
+Black: 	#222831
+Gray: 	#393E46
+Blue: 	#00ADB5
+White: 	#EEEEEE

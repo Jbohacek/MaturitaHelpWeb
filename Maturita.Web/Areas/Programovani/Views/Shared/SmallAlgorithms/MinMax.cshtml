@@ -1,0 +1,51 @@
+﻿<pre>
+<code class="language-csharp">
+    public static int FindMax(int[] numbers)
+    {
+        if (numbers == null || numbers.Length == 0)
+        {
+            throw new ArgumentException("The array must not be null or empty.");
+        }
+
+        // Vytvoři si pomocnou proměnnou, která bude uchovávat maximální hodnotu
+        int max = numbers[0];
+
+        // Projed celé pole
+        for (int i = 1; i < numbers.Length; i++)
+        {
+            // Porovnej každý prvek s aktuálním maximem
+            if (numbers[i] > max)
+            {
+                // Vyměn maximální hodnotu, pokud je aktuální prvek větší
+                max = numbers[i];
+            }
+        }
+
+        return max;
+    }
+    
+    public static int FindMax(int[] numbers)
+    {
+        if (numbers == null || numbers.Length == 0)
+        {
+            throw new ArgumentException("The array must not be null or empty.");
+        }
+
+        // Vytvoři si pomocnou proměnnou, která bude uchovávat minimalní hodnotu
+        int min = numbers[0];
+
+        // Projed celé pole
+        for (int i = 1; i < numbers.Length; i++)
+        {
+            // Porovnej každý prvek s aktuálním minimem
+            if (numbers[i] < min)
+            {
+                // Vyměn minimalní hodnotu, pokud je aktuální prvek menší
+                min = numbers[i];
+            }
+        }
+
+        return min;
+    }
+</code>
+</pre>

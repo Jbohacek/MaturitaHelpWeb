@@ -1,0 +1,313 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Bubble sort";
+    Layout = "_Layout";
+    ViewBag.Author = "Jakub Boháček";
+}
+<partial name="_Other_Sorts" />
+<h2 class="display-1">Bubble sort</h2>
+
+
+
+<div class="background-text">Bubble sort je poměrně hloupý algoritmus, který se vyskytuje v podstatě
+    jen v akademickém světě. Nemá žádné dobré vlastnosti a je zajímavý
+    pouze svým průběhem, který může připomínat fyzikální nebo přírodní
+    jevy. Algoritmus probíhá ve vlnách, přičemž <b>při každé vlně
+        propadne "nejtěžší" prvek na konec</b> (nebo nejlehčí vybublá
+    nahoru, záleží na implementaci). Vlna porovnává dvojice sousedních prvků
+    a v případě, že je levý prvek větší než pravý, prvky prohodí.
+    Algoritmus je stabilní.
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text true">Stabilní</div>
+    <div class="col background-text true">Na místě</div>
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text">O (n²)</div>
+    <div class="col background-text">Velmi špatná rychlost</div>
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text"><b>Omicron:</b> n²</div>
+    <div class="col background-text"><b>Omega:</b> n</div>
+    <div class="col background-text"><b>Theta:</b> n²</div>
+</div>
+
+<div class="display-3">Průběh</div>
+<div class="background-text">
+Protože Bubble sort je poněkud neoptimalizovaný algoritmus, bude průběh
+o něco delší, než bylo doposud zvykem.
+
+Mějme pole následujících prvků:
+
+
+	
+<table>
+    <tbody>
+    <tr>
+        <td>3</td>
+        <td>2</td>
+        <td>5</td>
+        <td>1</td>
+        <td>9</td>
+        <td>4</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+První vlna projede celým polem a největší prvek "probublá" na
+konec.
+
+
+<table>
+    <tbody>
+    <tr>
+        <td><span>3</span></td>
+        <td><span>2</span></td>
+        <td><span>5</span></td>
+        <td><span>1</span></td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+Začneme tedy s vlnou a porovnáme první 2 prvky (3 a 2):
+
+
+<table>
+    <tbody>
+    <tr>
+        <td><span><b>3</b></span></td>
+        <td><span><b>2</b></span></td>
+        <td><span>5</span></td>
+        <td><span>1</span></td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+
+3 je jistě větší než 2, proto prvky prohodíme
+
+
+<table>
+    <tbody>
+    <tr>
+        <td><span>2</span></td>
+        <td><span>3</span></td>
+        <td><span>5</span></td>
+        <td><span>1</span></td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+Porovnáme další 2 prvky (3 a 5)
+
+
+<table>
+    <tbody>
+    <tr>
+        <td><span>2</span></td>
+        <td><span><b>3</b></span></td>
+        <td><span><b>5</b></span></td>
+        <td><span>1</span></td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    </tbody>
+</table>
+
+
+Ty jsou ve správném pořadí, takže je prohazovat nebudeme. Vlna
+pokračuje dále...
+
+
+
+<table>
+    <tbody>
+    <tr>
+        <td><span>2</span></td>
+        <td><span>3</span></td>
+        <td><span><b>5</b></span></td>
+        <td><span><b>1</b></span></td>
+        <td><span>9</span></td>
+        <td><span>4</span></td>
+    </tr>
+    <tr>
+        <td><span>2</span></td>
+        <td><span>3</span></td>
+        <td><span>1</span></td>
+        <td><span><b>5</b></span></td>
+        <td><span><b>9</b></span></td>
+        <td><span>4</span></td>
+    </tr>
+    <tr>
+        <td><span>2</span></td>
+        <td><span>3</span></td>
+        <td><span>1</span></td>
+        <td><span>5</span></td>
+        <td><span><b>9</b></span></td>
+        <td><span><b>4</b></span></td>
+    </tr>
+    <tr>
+        <td><span>2</span></td>
+        <td><span>3</span></td>
+        <td><span>1</span></td>
+        <td><span>5</span></td>
+        <td><span>4</span></td>
+        <td>9</td>
+    </tr>
+    </tbody>
+</table>
+	
+		
+	
+
+
+Po první vlně se maximum (9) opravdu probublalo na konec. Poslední prvek
+je tedy zatříděný a my si ho už nebudeme všímat. Další vlna bude o 1
+prvek kratší, než předchozí, a vynese na konec maximum z nesetříděné
+části pole.
+
+<table>
+    <tbody>
+    <tr>
+        <td><span><b>2</b></span></td>
+        <td><span><b>3</b></span></td>
+        <td><span>1</span></td>
+        <td><span>5</span></td>
+        <td><span>4</span></td>
+        <td>9</td>
+    </tr>
+    <tr>
+        <td><span>2</span></td>
+        <td><span><b>3</b></span></td>
+        <td><span><b>1</b></span></td>
+        <td><span>5</span></td>
+        <td><span>4</span></td>
+        <td>9</td>
+    </tr>
+    <tr>
+        <td><span>2</span></td>
+        <td><span>1</span></td>
+        <td><span><b>3</b></span></td>
+        <td><span><b>5</b></span></td>
+        <td><span>4</span></td>
+        <td>9</td>
+    </tr>
+    <tr>
+        <td><span>2</span></td>
+        <td><span>1</span></td>
+        <td><span>3</span></td>
+        <td><span><b>5</b></span></td>
+        <td><span><b>4</b></span></td>
+        <td>9</td>
+    </tr>
+    <tr>
+        <td><span>2</span></td>
+        <td><span>1</span></td>
+        <td><span>3</span></td>
+        <td><span>4</span></td>
+        <td>5</td>
+        <td>9</td>
+    </tr>
+    </tbody>
+</table>
+
+Po druhé vlně máme na konci již 2 setříděné prvky. Uděláme další
+vlnu.
+
+<table>
+    <tbody>
+    <tr>
+        <td><span><b>2</b></span></td>
+        <td><span><b>1</b></span></td>
+        <td><span>3</span></td>
+        <td><span>4</span></td>
+        <td>5</td>
+        <td>9</td>
+    </tr>
+    <tr>
+        <td><span>1</span></td>
+        <td><span><b>2</b></span></td>
+        <td><span><b>3</b></span></td>
+        <td><span>4</span></td>
+        <td>5</td>
+        <td>9</td>
+    </tr>
+    <tr>
+        <td><span>1</span></td>
+        <td><span>2</span></td>
+        <td><span><b>3</b></span></td>
+        <td><span><b>4</b></span></td>
+        <td>5</td>
+        <td>9</td>
+    </tr>
+    <tr>
+        <td><span>1</span></td>
+        <td><span>2</span></td>
+        <td><span>3</span></td>
+        <td>4</td>
+        <td>5</td>
+        <td>9</td>
+    </tr>
+    </tbody>
+</table>
+
+Vidíme, že pole je nyní setříděné. Program by udělal ještě jednu
+vlnu a když by zjistil, že se nic neprohodilo, vrátil by výsledek.
+
+</div>
+
+<div class="display-3">Kod</div>
+
+<pre>
+<code class="language-csharp">
+    public static void BubbleSort(int[] data)
+    {
+        for (int j = 0; j < data.Length; j++)
+        {
+            bool change = false;
+
+            for (int i = 0; i < data.Length - 1 - j; i++)
+            {
+                if (data[i] > data[i + 1])
+                {
+                    Swap(i, i + 1, data);
+                    change = true;
+                }
+            }
+
+            if (!change)
+            break;
+        }
+    }
+
+
+    public static void Swap(int a, int b, int[] data)
+    {
+        int tmp = data[a];
+        data[a] = data[b];
+        data[b] = tmp;
+    }
+</code>
+</pre>
+
+<div class="display-3">Video</div>
+
+@await Html.PartialAsync("_VideoPlayer", new VideoModel("Sorts/BubbleSort.mp4", "https://www.youtube.com/watch?v=xli_FI7CuzA&t=2s"))
+
+
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+            "https://www.itnetwork.cz/algoritmy/razeni/algoritmus-bubblesort-probublavani-trideni-cisel"
+    ))

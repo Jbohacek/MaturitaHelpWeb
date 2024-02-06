@@ -1,0 +1,91 @@
+
+@font-face {
+    font-family: NotoSans;
+    src: url(../Font/NotoSans.ttf);
+}
+
+
+body {
+    font-size: 22px;
+    font-family: NotoSans !important;
+}
+.container {
+    padding: 5vh 5vw;
+    border-radius: 0 0 15px 15px;
+    background-color: #2b2d31;
+    -webkit-box-shadow: 0px 0px 7px 10px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0px 0px 7px 10px rgba(0,0,0,0.33);
+    box-shadow: 0px 0px 7px 10px rgba(0,0,0,0.33);
+    min-height: 100vh;
+}
+nav {
+    margin-bottom: 0 !important;
+    background-color: #222831;
+}
+
+body {
+    background-color: #393E46;
+    color: #EEEEEE;
+}
+
+
+.writer {
+    color: #636363 !important;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+@media(max-width: 570px) {
+    .container {
+        border-radius: 0;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+main a {
+    color: #636363 !important;
+}
+
+main a:any-link {
+    color: #00ADB5 !important;
+    text-decoration: none;
+}
+main a:hover {
+    text-decoration: solid underline;
+}
+
+.mail-Link {
+    color: #00ADB5 !important;
+    text-decoration: none;
+}
+
+.mail-Link:hover {
+     text-decoration: solid underline;
+}
+
+.display-1 {
+    margin: 3vh 0;
+    font-weight: 400;
+}
+
+.display-4 {
+    margin-bottom: 2vh; 
+    font-weight: 200;
+}
+

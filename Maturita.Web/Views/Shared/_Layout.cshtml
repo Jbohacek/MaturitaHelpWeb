@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Maturita</title>
+    
+    @* Boostrap *@
+    <link rel="stylesheet" href="~/css/Boosrap_Main.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap-icons-1.11.3/font/bootstrap-icons.css"/>
+    
+    @* Custom CSS *@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Sort/MainSort.css" asp-append-version="true" />
+    
+    @* Highlight.js *@
+    <link rel="stylesheet" href="~/lib/HighLight/styles/default.css">
+    <link rel="stylesheet" href="~/lib/HighLight/dracula.css" />
+    
+    @* Video.js *@
+    <link rel="stylesheet" href="~/lib/video-js-8.9.0/video-js.min.css"/>
+</head>
+<body>
+    @* Highlight.js *@
+    <script src="~/lib/HighLight/highlight.min.js"></script>
+
+    <partial name="_NavBar"/>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+        @if (ViewData["Author"] != null)
+        {
+            <div class="writer text-center">Napsal: <span class="text-primary">@ViewData["Author"]</span></div>
+        }
+        @if (ViewData["Editor"] != null)
+        {
+            <div class="writer text-center">Upravil: <span class="text-primary">@ViewData["Editor"]</span></div>
+        }
+    </div>
+
+    @* Jquery *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    @* Boostrap *@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    @* Video.js *@
+    <script src="~/lib/video-js-8.9.0/video.min.js"></script>
+
+    @* Highlight.js *@
+    <script>hljs.highlightAll();</script>
+
+
+    @* Custom JS *@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

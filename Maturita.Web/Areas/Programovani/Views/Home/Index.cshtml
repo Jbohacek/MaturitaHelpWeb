@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model dynamic
+
+@{
+    ViewBag.Title = "Domovní stránka";
+    Layout = "_Layout";
+}
+
+<h2 class="display-1 mb-4">Programování maturita</h2>
+<div class="row gap-5">
+    <div class="col-md-6 background-text h-100">
+        Tento web slouží jako zápisky a přípava na maturitu z programování na <a href="https://www.sssvt.cz/">soukromé střední škole výpočetní techniky</a> a jsou zde zapsaný okruhy na ústní maturitní zkoušku a jejich vysvětlení.<br/>
+        Web byl vytvořený, protože jsem si chtěl všechny informace zapsat a mít je na jednom místě, kde se k nim mohu kdykoliv vrátit. Tím pádem jsem se rozhodl, že je zveřejním, protože by se mohli hodit i někomu jinému. <br /> <br />
+        Web vytvořil <b>Jakub Boháček</b> třída 4.A. ročník 23/24.
+    </div>
+    <div class="background-text col-md">
+        <div class="display-4 mb-3">Okruhy</div>
+        <div class="ms-3">
+            <div style="font-weight: 300; font-size: 26px">1. Okruh</div>
+            <ul>
+                <li><a>Proměnné, Datové typy</a></li>
+                <li><a>Procedury, Funkce</a></li>
+                <li><a>Garbage collector</a></li>
+                <li><a>Řídící struktury</a></li>
+                <li><a asp-area="Programovani" asp-controller="Algorithms" asp-action="Index">Algoritmy</a></li>
+                <li><a>Pole a kolekce</a></li>
+                <li><a>Řetězce</a></li>
+                <li><a>Datové struktury</a></li>
+                <li><a>Soubory a souborový systém</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

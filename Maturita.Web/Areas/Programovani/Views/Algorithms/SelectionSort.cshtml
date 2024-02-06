@@ -1,0 +1,224 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Selection sort";
+    Layout = "_Layout";
+    ViewBag.Author = "Jakub Boháček";
+}
+<partial name="_Other_Sorts"/>
+
+<h2 class="display-1">Selection sort</h2>
+
+
+<div class="background-text">
+    Selection sort je jedním z nejjednodušších řadících algoritmů. Jeho
+    myšlenka spočívá v nalezení minima, které se přesune na začátek pole
+    (nebo můžeme hledat i maximum a to dávat na konec). V prvním kroku tedy
+    nalezneme nejmenší prvek v poli a ten poté přesuneme na začátek. V druhém
+    kroku již nebudeme při hledání minima brát v potaz dříve nalezené
+    minimum. Po dostatečném počtu kroků dostaneme pole seřazené. Algoritmus
+    má nepříliš výhodnou časovou složitost a není stabilní. Je však velice
+    jednoduchý na pochopení i implementaci.
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text false">Není stabilní</div>
+    <div class="col background-text true">Na místě</div>
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text">O (n²)</div>
+    <div class="col background-text">Pomalý</div>
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text"><b>Omicron:</b> n²</div>
+    <div class="col background-text"><b>Omega:</b> n²</div>
+    <div class="col background-text"><b>Theta:</b> n²</div>
+</div>
+
+<div class="display-3">Průběh</div>
+
+<div class="background-text">
+    Máme pole následujících prvků:
+
+
+    <table>
+        <tbody>
+            <tr>
+                <td>3</td>
+                <td>5</td>
+                <td>2</td>
+                <td>8</td>
+                <td>9</td>
+                <td>1</td>
+            </tr>
+        </tbody>
+    </table>
+
+    Nyní cyklem projedeme pole od prvního do posledního prvku (rozsah cyklu je
+    zvýrazněn barevně) a vybereme to nejmenší číslo (zde 1).
+
+    <table>
+        <tbody>
+            <tr>
+                <td><span>3</span></td>
+                <td><span>5</span></td>
+                <td><span>2</span></td>
+                <td><span>8</span></td>
+                <td><span>9</span></td>
+                <td><span><b>1</b></span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    Toto číslo prohodíme s prvním číslem (zde s 3):
+
+    <table>
+        <tbody>
+            <tr>
+                <td><span>1</span></td>
+                <td><span>5</span></td>
+                <td><span>2</span></td>
+                <td><span>8</span></td>
+                <td><span>9</span></td>
+                <td><span><b>3</b></span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    Tímto krokem jsme dostali první prvek v pole zatříděný. Nyní cyklem
+    opět projedeme pole a najdeme nejmenší prvek. Ale protože ten úplně
+    nejmenší již máme na začátku, nebudeme ho zahrnovat a projedeme tedy pole
+    od druhého do posledního prvku a opět vybereme nejmenší prvek (2):
+
+
+    <table>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><span>5</span></td>
+                <td><span><b>2</b></span></td>
+                <td><span>8</span></td>
+                <td><span>9</span></td>
+                <td><span>3</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    Prvek si opět zatřídíme, protože již máme 1 prvek zatříděný z
+    minula, prohodíme ho s druhým prvkem (5).
+
+
+    <table>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td><span><b>5</b></span></td>
+                <td><span>8</span></td>
+                <td><span>9</span></td>
+                <td><span>3</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    Teď máme již 2 první prvky správně. Takto budeme pokračovat dále,
+    budeme vybírat minimum ze zbylých prvků a zatřizovat ho tak dlouho, dokud
+    nebudeme mít pole celé setříděné. Další kroky algoritmu by vypadaly
+    následovně:
+
+    <table>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td><span>5</span></td>
+                <td><span>8</span></td>
+                <td><span>9</span></td>
+                <td><span><b>3</b></span></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td><span>3</span></td>
+                <td><span>8</span></td>
+                <td><span>9</span></td>
+                <td><span><b>5</b></span></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td><span>8</span></td>
+                <td><span>9</span></td>
+                <td><span><b>5</b></span></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td><span>5</span></td>
+                <td><span>9</span></td>
+                <td><span><b>8</b></span></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>5</td>
+                <td><span>9</span></td>
+                <td><span><b>8</b></span></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>5</td>
+                <td><span>8</span></td>
+                <td><span><b>9</b></span></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    Poslední prvek je již logicky zatříděný, proto si můžeme tento krok
+    ušetřit. A je hotovo.
+
+</div>
+
+        
+<div class="display-3">Kod</div>
+
+<pre>
+<code class="language-csharp">
+    public int[] SelectionSort()
+    {
+        var arrayLength = NumArray.Length;
+        for (int i = 0; i < arrayLength - 1; i++)
+        {
+            var smallestVal = i;
+            for (int j = i + 1; j < arrayLength; j++)
+            {
+                if (NumArray[j] < NumArray[smallestVal])
+                {
+                    smallestVal = j;
+                }
+            }
+            var tempVar = NumArray[smallestVal];
+            NumArray[smallestVal] = NumArray[i];
+            NumArray[i] = tempVar;
+        }
+        return NumArray;
+    }
+</code>
+</pre>
+
+<div class="display-3">Video</div>
+
+@await Html.PartialAsync("_VideoPlayer", new VideoModel("Sorts/SelectionSort.mp4", "https://www.youtube.com/watch?v=g-PGLbMth_g"))
+
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+            "https://www.itnetwork.cz/algoritmy/razeni/algoritmus-selection-sort-razeni-cisel-podle-velikosti"
+    ))

@@ -1,0 +1,257 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Vysvětlení";
+    Layout = "_Layout";
+    ViewBag.Author = "Jakub Boháček";
+}
+<partial name="_Other_Sorts" />
+<div class="display-1">
+    Algoritmy
+</div>
+
+<div class="display-4">
+    Co je to algoritmus?
+</div>
+
+<div class="background-text">
+    Algoritmus je pracovní postup, který má tyto povinné vlastnosti.<br/>
+    <ol class="my-2">
+        <li class="mb-1"><b>Rezultativnost</b>.<br/> To znamená, že vždy vydá nějaký výsledek.</li>
+        <li class="mb-1"><b>Finitnost (konečnost).</b><br /> To znamená, že někdy skončí. Jinými slovy, skončí po konečném počtu provedených kroků.</li>
+        <li class="mb-1"><b>Elementárnost (jednoduchost) popisu.</b><br /> Algoritmus je popsán konečným počtem základních instrukcí. Tedy takových, o kterých je jasné, jak se provedou (a tedy neumožňují žádný osobitý výklad některého vykonavatele).</li>
+        <li class="mb-1"><b>Determinovanost (jednoznačnost).</b><br /> Postup práce je jasně daný a vždy závisí pouze na popisu algoritmu a na vstupu („pracovní materiál“, ať už jde o vejce, nebo o informace, tedy nějaká čísla). Na průběh algoritmu nemá žádný vliv náhoda nebo svobodná vůle vykonavatele.</li>
+    </ol>
+
+    Když se na to podíváme z lidského pohledu, algoritmus by mohl být třeba návod, 
+    jak ráno vstát. I když to zní jednoduše, je to docela problém. 
+    Počítače jsou totiž stroje a ty nemyslí. Musíme tedy dopodrobna popsat všechny kroky algoritmu.
+</div>
+
+
+
+<div class="background-text">
+    Algorimy jde vyjádřit více způsoby
+    <ul>
+        <li class="mb-1"><b>Slovně</b>.<br /> jednotlivé kroky postupu jsou vyjádřeny větami v přirozeném jazyce</li>
+        <li class="mb-1"><b>Graficky</b><br />  jednotlivé kroky jsou popsány grafickými značkami se slovním popisem, například pomocí tzv. vývojových diagramů</li>
+        <li class="mb-1"><b>Matematicky</b><br /> soustavou rovnic, vztahem mezi veličinami</li>
+        <li class="mb-1"><b>Programem </b><br /> jednotlivé kroky jsou popsány instrukcemi určitého procesoru</li>
+    </ul>
+    
+    Algoritmy jdou zapsat v různých jazycích, například v jazyce C#, Python, Java, C++ a dalších. Jeden algoritmus může být napsán v různých jazycích. 
+    Ovšem jejich vnitřní fungovaní není vždy stejné
+</div>
+
+
+
+<div class="display-4">
+    Výpočet časové složitosti
+</div>  
+<div class="background-text">
+    Výpočet časové složitosti nám udává teoretický odhad kolik kroků musí algoritmus udělat, než vrátí výsledek. Tento je zavislý na počtu prvků, které algoritmus zpracovává. Tento počet označujeme jako <i>n</i>.<br/>
+    
+    Kdybychom měli projet všechny prvky v poli, které má <i>n</i> prvků, tak nám to zabere O(<i>n</i>) kroků. Jelikož uděláme <i>n</i> kroků.
+    <br/><br/>
+    <b>Příklad:</b>
+    <br/>
+    Máme rybník, kde máme 15 kamennů přes který se máme dostat, tudiž nám to zabere 15 kroků. Tedy O(15) kroků.
+    <br/>
+    <img style="filter: brightness(70%)" class="my-3 rounded-4 mx-auto w-100 img-fluid" src="~/Pictures/Sorts/Stepping on stones.png"/>
+    <br/>
+    Kdybychom ovšem chtěli při každém kroku skočit tak se nám přidá ke každému kroku ještě jedna operace, tedy <b>O(2n)</b> kroků.
+    <br/>
+    Kdybychom chtěli při každém kroku skočit a ještě se otočit, tak se nám přidá ke každému kroku ještě dvě operace, tedy <b>O(3n)</b> kroků.
+    
+    <br/><br />
+    
+    Tohle rychlý souhrn o co se jedná, mnohem lepší vysvtlení je na <a href="https://www.itnetwork.cz/algoritmy/teorie/vypocet-casove-slozitosti-algoritmu">IT networku</a>
+    
+    
+    <div class="text-center mt-3 fs-1">O        Ω          Θ</div>
+    <div class="text-center mt-1 fs-1">Omikron Omega Theta </div>
+    Každý algorimus má 3 časové složitosti které vyjadřují jejich třídní chování (průměrné), horní hranici (nejhorší), dolní hranici (nejlepší)
+    <br/><br/>
+    <b>O Omikron</b> - vyjdařuje horní hranici, tedy nejhorší možný scénář.
+    <br/>
+    <b>Ω Omega</b> - vyjadřuje dolní hranici, tedy nejlepší možný scénář.
+    <br/>
+    <b>Θ Theta</b> - vyjadřuje průměrný scénář.
+</div>
+
+<div class="display-4">
+    Algoritmy v poli
+</div>
+
+
+<div class="background-text">
+    Zde jsou napsaný ty nejlehčí algoritmy, které se dají použít na pole.
+    <ul class="my-2">
+        <li>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#minMax" aria-expanded="false" aria-controls="minMax">
+                    Nalezení Min max
+                </button>
+            </p>
+            <div class="collapse" id="minMax">
+                <div class="card card-body">
+                    <partial name="SmallAlgorithms/MinMax"></partial>
+                </div>
+            </div>
+        </li>
+        <li>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#reverse" aria-expanded="false" aria-controls="reverse">
+                    Otočení pole
+                </button>
+            </p>
+            <div class="collapse" id="reverse">
+                <div class="card card-body">
+                    <partial name="SmallAlgorithms/Reverse"></partial>
+                </div>
+            </div>
+        </li>
+        <li>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#insert" aria-expanded="false" aria-controls="insert">
+                    Vkládání jednoho prvku
+                </button>
+            </p>
+            <div class="collapse" id="insert">
+                <div class="card card-body">
+                    <partial name="SmallAlgorithms/Insertion"></partial>
+                </div>
+            </div>
+        </li>
+        <li>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#linSearch" aria-expanded="false" aria-controls="linSearch">
+                    Linearní vyhledávání
+                </button>
+            </p>
+            <div class="collapse" id="linSearch">
+                <div class="card card-body">
+                    <partial name="SmallAlgorithms/LinearSearch"></partial>
+                </div>
+            </div>
+        </li>
+        <li>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#binSearch" aria-expanded="false" aria-controls="binSearch">
+                    Binární vyhledávání
+                </button>
+            </p>
+            <div class="collapse" id="binSearch">
+                <div class="card card-body">
+                    <partial name="SmallAlgorithms/BinarySearch"></partial>
+
+                </div>
+            </div>
+        </li>
+    </ul>
+    
+</div>
+
+<div class="display-4">
+    Řadící algoritmy
+</div>
+
+<div class="background-text">
+    Řadící algoritmy slouží jak z názvu napovída na řazení algoritmů. Algoritmu je hodně a každý má jiné vlastnosti. U každého určujeme:
+    <ul>
+        <li>Časovou složitost</li>
+        <li>Omikron</li>
+        <li>Omega</li>
+        <li>Theta</li>
+        <li>Stabilitu</li>
+        <li>Na místě</li>
+    </ul>
+    
+    Základní řadící algoritmy jsou:
+    <table>
+        <thead class="table-sort">
+        <tr>
+            <th>Název</th>
+            <th>Omikron</th>
+            <th>Omega</th>
+            <th>Theta</th>
+            <th>Stabilní</th>
+            <th>Na Místě</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><a asp-action="BubbleSort">Bubble sort</a></td>
+            
+            <td>n²</td>
+            <td>n</td>
+            <td>n²</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="BubbleSort">Více..</a></td>
+        </tr>
+        <tr>
+            <td><a asp-action="SelectionSort">Selection sort</a></td>
+            
+            <td>n²</td>
+            <td>n²</td>
+            <td>n²</td>
+            <td>🚫</td>
+            <td>✅</td>
+            <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="SelectionSort">Více..</a></td>
+        </tr>
+            <tr>
+                <td><a asp-action="InsertionSort">Insertion sort</a></td>
+
+                <td>n²</td>
+                <td>n</td>
+                <td>n²</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="InsertionSort">Více..</a></td>
+            </tr>
+        <tr>
+            <td><a asp-action="QuickSort">Quick sort</a></td>
+            
+            <td>n²</td>
+            <td>n log n</td>
+            <td>n²</td>
+            <td>🚫</td>
+            <td>✅</td>
+            <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="QuickSort">Více..</a></td>
+        </tr>
+        <tr>
+            <td><a asp-action="MergeSort">Merge sort</a></td>
+            
+            <td>n log n</td>
+            <td>n log n</td>
+            <td>n log n</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="MergeSort">Více..</a></td>
+        </tr>
+        <tr>
+            <td><a asp-action="HeapSort">Heap sort</a></td>
+            
+            <td>n log n</td>
+            <td>n log n</td>
+            <td>n log n</td>
+            <td>🚫</td>
+            <td>✅</td>
+            <td><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="HeapSort">Více..</a></td>
+        </tr>
+        
+
+        </tbody>
+    </table>
+</div>
+
+
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+        "https://popelka.ms.mff.cuni.cz/~lessner/mw/index.php/U%C4%8Debnice/Algoritmus/Co_je_to_algoritmus",
+        "https://www.itnetwork.cz/algoritmy/teorie/vypocet-casove-slozitosti-algoritmu"
+        ))
+
+

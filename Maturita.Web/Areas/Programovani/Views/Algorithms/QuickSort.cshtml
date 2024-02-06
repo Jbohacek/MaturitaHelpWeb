@@ -1,0 +1,833 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Quick sort";
+    Layout = "_Layout";
+    ViewBag.Author = "Jakub Boháček";
+}
+<partial name="_Other_Sorts" />
+<h2 class="display-1">Quick sort</h2>
+
+
+<div class="background-text">
+    Jak již název napovídá, Quicksort je rychlý. On je dokonce
+    nejrychlejší a je to algoritmus, který se skutečně používá v praxi k
+    třídění prvků, proto bude tento článek o něco obsáhlejší, než
+    ostatní. Chová se dobře jak na malých, tak na velkých polích a je
+    paměťově nenáročný. Algoritmus je založen na principu rozděl a
+    panuj, který jsme si již vysvětlili v algoritmu Merge
+    sort.
+
+    Quicksort si označí jeden prvek v poli jako tzv. <b>pivot.</b>
+    Výběrem pivotu se prozatím nebudeme zabývat a budeme jako pivot brát vždy
+    první prvek v poli. Nyní zavoláme funkci <b>divide</b> (rozděl),
+    která přeuspořádá pole tak, aby byly zleva prvky menší než pivot, poté
+    následovat pivot sám a za pivotem byly prvky větší, než je on sám.
+    Povšimněte si, že jsem napsal přeuspořádá, nikoli setřídí. Prvky jsou
+    tedy mezi sebou stále rozházené a jediné setřídění spočívá v jejich
+    rozdělení pivotem. Tuto operaci jsme schopni zvládnout v lineárním čase a
+    také velmi rychle. Nyní algoritmus rekurzivně zavoláme na levou polovinu
+    pole před pivotem a na pravou polovinu za pivotem (pivota už necháme tam, kde
+    je). S těmi provedeme to samé, jako s původním polem a takto budeme
+    pokračovat až do chvíle, kdy na vstupu dostaneme jednotkové pole (pole
+    velikosti 1). Po vynoření z rekurze nemusíme dělat už vůbec nic, pole je
+    setříděné. Nyní si algoritmus předvedeme v praxi a řekneme si více o
+    funkci rozděl.
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text false">Není Stabilní</div>
+    <div class="col background-text true">Na místě</div>
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text">O (n²)</div>
+    <div class="col background-text">Velmi rychlý</div>
+</div>
+
+<div class="row gap-4 mx-3">
+    <div class="col background-text"><b>Omicron:</b> n²</div>
+    <div class="col background-text"><b>Omega:</b> n log n</div>
+    <div class="col background-text"><b>Theta:</b> n²</div>
+</div>
+
+<div class="display-3">Průběh</div>
+
+<div class="background-text">
+Protože Quicksort je velmi rychlý, předvedeme si ho tentokrát na poli o
+trochu větším, než obvykle, abychom z něj něco vůbec viděli
+Máme tedy pole následujících prvků:
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>5</td>
+        <td>2</td>
+        <td>9</td>
+        <td>3</td>
+        <td>5</td>
+        <td>1</td>
+        <td>8</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+Jako první si musíme vybrat pivot, ten si vybereme tak, že vezeme první prvek, prostřední prvek a poslední prvek, který seřadíme a vybereme ten prostřední jako pivot.
+
+<table>
+    <thead>
+    <tr>
+        <th colspan="7">
+            Vybereme 3
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><b>5</b></td>
+        <td>2</td>
+        <td>9</td>
+        <td><b>3</b></td>
+        <td>5</td>
+        <td>1</td>
+        <td><b>8</b></td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th colspan="7">
+            Uspořádáme 3 vybranné prvky
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <b>3</b>
+        </td>
+        <td>2</td>
+        <td>9</td>
+        <td>
+            <b>5</b>
+        </td>
+        <td>5</td>
+        <td>1</td>
+        <td>
+            <b>8</b>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th colspan="7">
+            Prostřední prvek jako pivot
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            3
+        </td>
+        <td>2</td>
+        <td>9</td>
+        <td>
+            <b>5</b>
+        </td>
+        <td>5</td>
+        <td>1</td>
+        <td>
+           8
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="text-center">
+    Pivot půjde na konec
+</div>
+
+<div class="d-md-flex align-items-center mx-5">
+    <table>
+        <tbody>
+        <tr>
+            <td>3</td>
+            <td>2</td>
+            <td>9</td>
+            <td><b>5</b></td>
+            <td>5</td>
+            <td>1</td>
+            <td>8</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="d-none d-md-block">—></div>
+    <table>
+        <tbody>
+        <tr>
+            <td>3</td>
+            <td>2</td>
+            <td>9</td>
+            <td>8</td>
+            <td>5</td>
+            <td>1</td>
+
+            <td>
+                <b>5</b>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+    
+<br/>
+
+Teď budeme kontrolovat pivot s prvkama z leva a zprava a zastavime se pokud najdeme potvrzeni pravidla
+<br/>
+<b>Zprava</b> je menší jak pivot <br/>
+<b>Zleva</b> je větší jak pivot
+
+
+<table>
+    <thead class="arrow">
+        <tr>
+            <th class="text-center"> 3 > 5 🚫 <br/>↓</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>3</td>
+        <td>2</td>
+        <td>9</td>
+        <td>8</td>
+        <td>5</td>
+        <td>1</td>
+
+        <td>
+            <b>5</b>
+        </td>
+    </tr>
+    <tr class="arrow">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+                <th class="text-center">↑<br /> 1 < 5 ✅ </th>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead class="arrow">
+            
+    <tr>
+        <th></th>
+        <th class="text-center"> 2 > 5 🚫 <br/>↓</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>3</td>
+        <td>2</td>
+        <td>9</td>
+        <td>8</td>
+        <td>5</td>
+        <td>1</td>
+
+        <td>
+            <b>5</b>
+        </td>
+    </tr>
+    <tr class="arrow">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <th class="text-center">↑<br /> 1 < 5 ✅ </th>
+    </tr>
+    </tbody>
+</table>
+
+    <table>
+        <thead class="arrow">
+
+            <tr>
+                <th></th>
+                <th></th>
+                <th class="text-center"> 9 > 5 ✅ <br />↓</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>3</td>
+                <td>2</td>
+                <td>9</td>
+                <td>8</td>
+                <td>5</td>
+                <td>1</td>
+
+                <td>
+                    <b>5</b>
+                </td>
+            </tr>
+            <tr class="arrow">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th class="text-center">↑<br /> 1 < 5 ✅ </th>
+            </tr>
+        </tbody>
+    </table>
+
+    Našla se shoda v obou prvkách, takže je  <b>prohodíme</b>
+    
+    <table>
+        <tbody>
+        <tr>
+            <td>3</td>
+            <td>2</td>
+            <td><span>1</span></td>
+            <td>8</td>
+            <td>5</td>
+            <td><span>9</span></td>
+
+            <td>
+                <b>5</b>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    
+    Pokračujeme dál v kontrole
+    
+    <table>
+        <thead class="arrow">
+
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-center"> 8 > 5 ✅ <br />↓</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>3</td>
+            <td>2</td>
+            <td>1</td>
+            <td>8</td>
+            <td>5</td>
+            <td>9</td>
+
+            <td>
+                <b>5</b>
+            </td>
+        </tr>
+        <tr class="arrow">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th class="text-center">↑<br /> 5 < 5 🚫 </th>
+            <td></td>
+            
+        </tr>
+        </tbody>
+    </table>
+    
+    <table>
+        <thead class="arrow">
+
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-center"> 8 > 5 ✅ <br />↓</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>3</td>
+            <td>2</td>
+            <td>1</td>
+            <td>8</td>
+            <td>5</td>
+            <td>9</td>
+
+            <td>
+                <b>5</b>
+            </td>
+        </tr>
+        <tr class="arrow">
+            <td></td>
+            <td></td>
+            <td></td>
+            <th class="text-center">↑<br /> 8 < 5 🚫 </th>
+            <td></td>
+            
+            <td></td>
+            
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <thead class="arrow">
+
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-center"> 8 > 5 ✅ <br />↓</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>3</td>
+            <td>2</td>
+            <td>1</td>
+            <td>8</td>
+            <td>5</td>
+            <td>9</td>
+
+            <td>
+                <b>5</b>
+            </td>
+        </tr>
+        <tr class="arrow">
+            <td></td>
+            <td></td>
+                <th class="text-center">↑<br /> 1 < 5 ✅ </th>
+
+            <td></td>
+            <td></td>
+            
+            <td></td>
+            
+        </tr>
+        </tbody>
+    </table>
+    
+    Kontrola se ukončí jakmile počítadlo z leva je větší jak zprava a prohodíme předmět z levého počítadla s pivotem.
+    
+    
+    <div class="d-md-flex align-items-center mx-5 gap-2">
+        <table><thead class="arrow">
+
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th class="text-center">↓</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>3</td>
+                <td>2</td>
+                <td>1</td>
+                <td>8</td>
+                <td>5</td>
+                <td>9</td>
+                <td><b>5</b></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="d-none d-md-block">—></div>
+        <table>
+            <thead class="arrow">
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="text-center">↓</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>3</td>
+                <td>2</td>
+                <td>1</td>
+                <td>5</td>
+                <td>5</td>
+                <td>9</td>
+
+                <td>
+                    <b>8</b>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    Jelikož je celá funkce rekurzivní tak se ted pole rozdělí na dvě části a to na 3, 2, 1 a 8, 5, 9. Které budou dělat uplně to samé jako původní pole.
+    <div class="d-md-flex justify-content-around">
+    <div class="d-block">
+        <table>
+            <thead>
+            <tr>
+                <th colspan="7">
+                    Vybereme 3
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><b>3</b></td>
+                <td><b>2</b></td>
+                <td><b>1</b></td>
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+            <tr>
+                <th colspan="7">
+                    Uspořádáme 3 vybranné prvky
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><b>1</b></td>
+                <td><b>2</b></td>
+                <td><b>3</b></td>
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+            <tr>
+                <th colspan="7">
+                    Pivot je uprostřed
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td><b>2</b></td>
+                <td>3</td>
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+            <tr>
+                <th colspan="7">
+                    Pivot jde na konec
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>3</td>
+                <td><b>2</b></td>
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead class="arrow">
+
+            <tr>
+                <th class="text-center"> 1 > 2 🚫 <br />↓</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>3</td>
+
+                <td>
+                    <b>2</b>
+                </td>
+            </tr>
+            <tr class="arrow">
+                <td></td>
+                <th class="text-center">↑<br /> 3 < 2 🚫 </th>
+
+
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead class="arrow">
+
+            <tr>
+                <th></th>
+                <th class="text-center"> 3 > 2 ✅ <br />↓</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>3</td>
+
+                <td>
+                    <b>2</b>
+                </td>
+            </tr>
+            <tr class="arrow">
+
+                <th class="text-center">↑<br /> 1 < 2 ✅ </th>
+            </tr>
+            </tbody>
+        </table>
+        Počítadlo zleva je větší jak zprava, takže prohodíme pivot s počítadlem zleva.
+        <table>
+            <thead>
+            <tr>
+                <th colspan="7">
+                    Vysledek
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-block">
+        <table>
+            <thead>
+            <tr>
+                <th colspan="7">
+                    Vybereme 3
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><b>8</b></td>
+                <td><b>5</b></td>
+                <td><b>9</b></td>
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+            <tr>
+                <th colspan="7">
+                    Uspořádáme 3 vybranné prvky
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><b>5</b></td>
+                <td><b>8</b></td>
+                <td><b>9</b></td>
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+            <tr>
+                <th colspan="7">
+                    Pivot je uprostřed
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>5</td>
+                <td><b>8</b></td>
+                <td>9</td>
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+            <tr>
+                <th colspan="7">
+                    Pivot jde na konec
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>5</td>
+                <td>9</td>
+                <td><b>8</b></td>
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead class="arrow">
+
+            <tr>
+                <th class="text-center"> 5 > 8 🚫 <br />↓</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>5</td>
+                <td>9</td>
+
+                <td>
+                    <b>8</b>
+                </td>
+            </tr>
+            <tr class="arrow">
+                <td></td>
+                <th class="text-center">↑<br /> 9 < 8 🚫 </th>
+
+            
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead class="arrow">
+
+            <tr>
+                <th></th>
+                <th class="text-center"> 9 > 8 ✅ <br/>↓</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>5</td>
+                <td>9</td>
+
+                <td>
+                    <b>8</b>
+                </td>
+            </tr>
+            <tr class="arrow">
+                    
+                <th class="text-center">↑<br /> 5 < 8 ✅ </th>
+            </tr>
+            </tbody>
+        </table>
+        Počítadlo zleva je větší jak zprava, takže prohodíme pivot s počítadlem zleva.
+        <table>
+            <thead>
+            <tr>
+                <th colspan="7">
+                    Vysledek
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>5</td>
+                <td>8</td>
+                <td>9</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <br/>
+    <div class="text-center">Všechny výsledky dáme dohromady a máme výsledek</div>
+    
+    <div class="d-flex justify-content-center align-items-center">
+        <table>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            </tbody>
+        </table>
+        +
+        <table>
+            <tbody>
+            <tr>
+                <td>5</td>
+            </tr>
+            </tbody>
+        </table>
+        +
+        <table>
+            <tbody>
+            <tr>
+                <td>5</td>
+                <td>8</td>
+                <td>9</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <table>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>5</td>
+                <td>5</td>
+                <td>8</td>
+                <td>9</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    
+
+    <div class="display-3">Kod</div>
+
+<pre>
+<code class="language-csharp">
+        public static void QuickSort(int[] data, int start = 0, int end = -1)
+        {
+            if (end < 0)
+                end = data.Length;
+
+            if (start + 1 >= end)
+                return;
+
+            int boundary = start + 1;
+            for (int i = boundary; i < end; i++)
+            {
+                if (data[i] < data[start])
+                {
+                    Swap(i, boundary, data);
+                    boundary++;
+                }
+            }
+
+            Swap(start, boundary - 1, data);
+            QuickSort(data, start, boundary - 1);
+            QuickSort(data, boundary, end);
+        }
+
+
+        public static void Swap(int a, int b, int[] data)
+        {
+            int tmp = data[a];
+            data[a] = data[b];
+            data[b] = tmp;
+        }
+</code>
+</pre>
+
+<div class="display-3">Video</div>
+
+
+@await Html.PartialAsync("_VideoPlayer", new VideoModel("Sorts/QuickSort.mp4", "https://www.youtube.com/watch?v=Hoixgm4-P4M&t=1s"))
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+            "https://www.itnetwork.cz/algoritmy/razeni/algoritmus-quick-sort-razeni-cisel-podle-velikosti"
+    ))

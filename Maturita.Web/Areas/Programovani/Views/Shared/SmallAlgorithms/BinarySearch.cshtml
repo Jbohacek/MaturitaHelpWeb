@@ -1,0 +1,36 @@
+﻿
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MFhxShGxHWc?si=hc1cdXflZzqauSd0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+<pre>
+<code class="language-csharp">
+    static int BinarySearch(int[] arr, int target)
+    {
+        int left = 0;
+        int right = arr.Length - 1;
+
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+
+            // Koukne se zda je na středu
+            if (arr[mid] == target)
+            {
+                return mid;
+            }
+
+            // Pokud je cil větší jak prava tak ignoruje levou polovinu
+            if (arr[mid] < target)
+            {
+                left = mid + 1;
+            }
+            else // Pokud je cil menší tak ignoruje pravou polovinu
+            {
+                right = mid - 1;
+            }
+        }
+
+        // Pokud se dostane až sem, znamená to že prvek nebyl nalezen
+        return -1;
+    }
+</code>
+</pre>

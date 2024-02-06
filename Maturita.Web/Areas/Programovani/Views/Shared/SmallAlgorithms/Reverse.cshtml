@@ -1,0 +1,26 @@
+﻿<pre>
+<code class="language-csharp">
+    public static void ReverseArray(int[] arr)
+    {
+        if (arr == null || arr.Length == 0)
+        {
+            throw new ArgumentException("The array must not be null or empty.");
+        }
+
+        int left = 0;
+        int right = arr.Length - 1;
+
+        while (left < right)
+        {
+            // Vyměn prvka zleva a zprava
+            int temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+
+            // Pohni se na další prvek
+            left++;
+            right--;
+        }
+    }
+</code>
+</pre>

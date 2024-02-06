@@ -1,0 +1,13 @@
+﻿@model SourcesModel
+
+<div class="background-text p-3 fs-5 mt-3">
+    Zdroje:
+    <ul>
+        @foreach (string link in Model.GetLinks())
+        {
+            <li>
+                <a href="@link">@link</a>
+            </li>
+        }
+    </ul>
+</div>
