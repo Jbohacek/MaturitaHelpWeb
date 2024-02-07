@@ -16,9 +16,11 @@
         <li><a href="#DataSize">datové typy a velikosti</a></li>
         <li><a href="#negativeNum">uložení záporných čísel (přímý, doplňkový kód)</a></li>
         <li><a href="#decimal">desetinná čísla</a></li>
-        <li><a>hodnotové a referenční typy</a></li>
-        <li><a>platnost proměnných</a></li>
-        <li><a>enum a přetížení operátorů</a></li>
+        <li><a href="#hodDef">hodnotové a referenční typy</a></li>
+        <li><a href="#platn">platnost proměnných</a></li>
+        <li><a href="#operatory">Operátory</a></li>
+        <li><a href="#enums">Enumy</a></li>
+        <li><a href="#PretizeniOperatoru">Přetížení operátorů</a></li>
     </ul>
 
 </div>
@@ -139,7 +141,31 @@
 </div>
 
 <div class="background-text">
-    Velikosti proměných
+    Velikosti číselných proměných jde pomocí kódu v c# například takto:
+    <pre>
+        <code class="language-csharp">
+  byte.MaxValue;
+  byte.MinValue;
+  
+  short.MaxValue;
+  short.MinValue;
+  
+  int.MaxValue;
+  int.MinValue;
+  
+  long.MinValue;
+  long.MaxValue;
+  
+  float.MaxValue;
+  float.MinValue;
+  
+  double.MaxValue; 
+  double.MinValue;
+  
+  decimal.MaxValue; 
+  decimal.MinValue;
+        </code>
+    </pre>
 </div>
 
 
@@ -190,12 +216,12 @@
                  Tento způsob má však několik nevýhod. Například nula má dva reprezentace: 0 a -0. <br/>
                  Další nevýhodou je, že sčítání a odčítání je složité.
             </p>
-            <img src="~/Pictures/Variables/signed.png" class="img-fluid d-block mx-auto w-50">
+            <img src="~/Pictures/Variables/signed.png" class="img-fluid d-block mx-auto w-75">
         </div>
 
     </div>
     <div class="background-text col">
-        <div class="display-4 mb-0">Doplňkový kód</div>
+        <div id="dopln" class="display-4 mb-0">Doplňkový kód</div>
         <div class="background-text">
             <p>
                 Doplňkový kod není složitý a jeho zapis je velmi podobný přímému.<br/>
@@ -204,7 +230,7 @@
                 Opačnou hodnotou je na mysli, že vidíme <br/><br/><b>(max hodnota) - (uložená hodnota) = (to čislo co chceme)</b> <br/><br/>
                 Ukládáme to kolik musime odečíst od největšího čísla, abychom dostali naše číslo.<br/>
             </p>
-            <img src="~/Pictures/Variables/doplnkovykod.png" class="bg-info img-fluid d-block mx-auto w-50">
+            <img src="~/Pictures/Variables/doplnkovykod.png" class="bg-info img-fluid d-block mx-auto w-75">
             <br/>
             <div class="sha text-center">Více informací: <a href="https://programovaci-ucebnice.g6.cz/ucebnice/UcebniceJazykaJava/7_Cela_cisla.xhtml">Ucebnice</a></div>
         </div>
@@ -213,10 +239,283 @@
 </div>
 
 <div id="decimal" class="display-2">
-    Uložení záporných čísel
+    Ukládání desetinných čísel
+</div>
+
+<div class="background-text">
+    Desetinná čísla se ukládají pomocí IEEE 754. Tento způsob ukládání je velmi přesný a umožňuje ukládat i velmi malé čísla.<br/>
+    Při ukládání desetinných čísel je důležité si uvědomit, že počítače nemohou ukládat desetinná čísla přesně.<br/>
+    Desetinná se skládají z
+    <table>
+        <tbody>
+        <tr>
+            <td>S</td>
+            <td>znaménko</td>
+            <td>1 bit</td>
+        </tr>
+        <tr>
+            <td>E</td>
+            <td>Exponent</td>
+            <td>8 bit</td>
+        </tr>
+        <tr>
+            <td>M</td>
+            <td>mantisa</td>
+            <td>23 bit</td>
+        </tr>
+        </tbody>
+    </table>
+    <img src="~/Pictures/Variables/IEEE_754_Single_Floating_Point_Format.png" class="bg-info img-fluid d-block mx-auto w-75">
+    
+
+    <div class="display-4 mt-3 mb-0">Znaménko S</div>
+    0 pro kladné číslo <br/>
+    1 pro záporné číslo <br /> <br /> 
+    (-1) na s
+    <br /> <br /> 
+    (-1) na 0 = 1 <br/>
+    (-1) na 1 = -1
+    
+    <div class="display-4 mt-3 mb-0">Exponent e</div>
+    Exponent je uložen záporně, což znamená, že na to abychom dostali hodnotu exponentu, musíme odečíst 127. Je to podobné jako u <a href="#dopln">doplňkového kódu.</a>
+    <br/><br/>
+    2 na E - 127
+    <br/>
+    <img src="~/Pictures/Variables/exponent.png" class="bg-info img-fluid d-block mx-auto w-75">
+    
+    <div class="display-4 mt-3 mb-0">Mantisa m</div>
+    Mantisa je vlastně to uložené číslo ke které se přičte 1. Ale narozdíl od normálního násobení s 2 na x budeme násobit 2 na -x, tudiž nám vznikne zlomek <br/> <br />
+    2⁻¹ = ½      <br />      2⁻² = ¼       <br />    2⁻³ = ⅛     <br />       2⁻⁴ = 1/16.... <br />
+    <img src="~/Pictures/Variables/Mantisa.png" class="bg-info img-fluid d-block mx-auto w-75">
+    
+    <div class="display-4 mt-3 mb-0">Finalní rovnice</div>
+    <img src="~/Pictures/Variables/Rovnice.png" class="bg-info img-fluid d-block mx-auto w-75">
+    <br /><br /><br />
+    je duležité si uvědomit, že tím jak se ukládá jako násobení není možné ukládat všechna čísla přesně. <br/> Obvyklý problem nastava třeba při uložení 0.1, protože 0.1 je 1/10 a 1/10 je 0.000
+
+    <div class="sha text-center">Více informací: <a href="https://cs.wikipedia.org/wiki/IEEE_754">Wikipedia</a></div>
+</div>
+
+<div id="hodDef" class="display-2">
+    Hodnotové a referenční
+</div>
+
+<div>
+    Proměnné jsou dva základní druhy proměnných v programování, které ovlivňují to, jak jsou data v paměti uložena a jak se s nimi pracováno.
+</div>
+<div class="d-block d-md-flex justify-content-around mt-3 gap-3">
+    <div class="background-text">
+        <div class="display-4  mb-0">Hodnotové</div>
+        <ul>
+            <li>Hodnotové proměnné ukládají konkrétní hodnotu přímo do své paměťové buňky.</li>
+            <li>Každá hodnotová proměnná obsahuje svou vlastní kopii dat. Změny v jedné proměnné nemají vliv na jiné proměnné</li>
+            <li>Hodnotové proměnné mají často přiřazený datový typ (int, float …), což omezuje typy hodnot, které mohou obsahovat.</li>
+            <li>Integer, float, char, boolean a struktury jsou často hodnotové typy.</li>
+        </ul>
+        <img src="~/Pictures/Variables/value-type-memory-allocation.png" class="bg-info img-fluid d-block mx-auto w-75">
+
+    </div>
+    <div class="background-text">
+        <div class="display-4  mb-0">Referenční</div>
+        <ul>
+            <li>Referenční proměnné ukládají odkaz nebo adresu paměti, kde jsou data skutečně uložena.</li>
+            <li>Více referenčních proměnných může ukazovat na stejná data. Změny provedené jedním ovlivní všechny ostatní odkazující proměnné.</li>
+            <li>Často jsou považovány v kontextu dynamické alokace paměti, kde je paměť alokována a uvolňována za běhu programu.</li>
+            <li>Ukazatele (pointers) v jazyce C, reference v jazyce C++, objekty a pole v některých jazycích (např. Python). Prakticky jakákoliv třída v c#. </li>
+        </ul>
+        <img src="~/Pictures/Variables/raference-type-memory-allocation.png" class="bg-info img-fluid d-block mx-auto w-75">
+    </div>
+</div>
+<div class="sha text-center">Více informací: <a href="https://www.tutorialsteacher.com/csharp/csharp-value-type-and-reference-type">TutorialsTeacher</a></div>
+
+<div id="platn" class="display-2">
+    Platnost proměných
+</div>
+
+<div>
+    základní vliv na platnost proměnné má její umístění v programu. Přesně řečeno její umístění vzhledem k begin a end ({ a }).<br/>
+    Tyto složené závorky neboli begin a end mají prostý význam. Označují vždy nějaký blok kódu a obecně platí, že deklarované proměnné platí pouze uvnitř tohoto a podřízených blocích tj. dalších blocích begin a end v něm vložených.<br/>
+    <br />
+    V jazycích máme něco čemu se řiká modifikátor přistupu, který určuje kdo může číst a kdo může měnit hodnotu proměnné. Pokud ho nenapíšeme zůstavá v základu private (v c#) <br/>
+    
+    <img src="~/Pictures/Variables/accessMod.png" class="bg-info img-fluid d-block mx-auto w-75">
+    
+    Například:
+    
+    <pre>
+    <code class="language-csharp">
+        // public class:
+        public class Tricycle
+        {
+            // protected method:
+            protected void Pedal() { }
+
+            // private field:
+            private int _wheels = 3;
+
+            // protected internal property:
+            protected internal int Wheels
+            {
+                get { return _wheels; }
+            }
+        }
+        </code>
+    </pre>
+    <div class="sha text-center">Více informací: <a href="https://learn.microsoft.com/cs-cz/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers">Learn.Microsoft</a></div>
+</div>
+
+<div id="operatory" class="display-2">
+    Operatory
+</div>
+
+<div class="background-text">
+    symbol používaný ve výrazech, který předepisuje provedení nějaké (nejčastěji matematické nebo logické) operace s hodnotami (operandy) zapsanými ve svém okolí.
+    <br/> <br/>
+    <div class="display-5  mb-2">Logické operátory</div>
+    <img src="~/Pictures/Variables/Operators.png" class="bg-info img-fluid d-block mx-auto w-75">
+    <img src="~/Pictures/Variables/orAndNor.png" class="bg-info img-fluid d-block mx-auto w-75">
+    <br/>
+    <div class="d-block d-md-flex">
+        <table>
+            <tbody>
+            <tr>
+                <td>== </td>
+                <td>rovná se</td>
+            </tr>
+            <tr>
+                <td>!=</td>
+                <td>nerovná se</td>
+            </tr>
+            <tr>
+                <td>&gt;</td>
+                <td>větší než</td>
+            </tr>
+            <tr>
+                <td>&lt;</td>
+                <td>menší než</td>
+            </tr>
+            <tr>
+                <td>&gt;=</td>
+                <td>větší nebo rovno</td>
+            </tr>
+            <tr>
+                <td>&lt;=</td>
+                <td>menší nebo rovno</td>
+            </tr>
+
+            </tbody>
+        </table>
+        <br/>
+        <table>
+            <tbody>
+            <tr>
+                <td>&&</td>
+                <td>and</td>
+            </tr>
+            <tr>
+                <td>||</td>
+                <td>or</td>
+            </tr>
+            <tr>
+                <td>!</td>
+                <td>not</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="display-5  mb-2">Bitové operátory</div>
+    <div class="sha">Ještě není...</div>
 </div>
 
 
+<div id="enums" class="display-2">
+    Enumy
+</div>
+
+<div class="background-text">
+    Enum je speciální "trída", která reprezentuje skupinu konstant.<br/>
+    Enumy jsou užitečné, když potřebujeme definovat soubor konstant, které jsou přiřazeny číselným hodnotám.<br/>
+    Například: <br/>
+    <table>
+        <tbody>
+        <tr>
+            <td>Ano</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Ne</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>
+                Možná
+            </td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>
+                nevim
+            </td>
+            <td>51</td>
+        </tr>
+        </tbody>
+    </table>
+    <pre>
+    <code class="language-csharp">
+        enum Odpovedi
+        {
+            Ano,         // 0
+            Ne,          // 1
+            Možná = 50,  // 50 Počítá dál..
+            nevim        // 51
+        }
+        </code>
+    </pre>
+    <div class="sha text-center">Více informací: <a href="https://www.w3schools.com/cs/cs_enums.php">w3schools</a></div>
+
+</div>
+
+<div id="PretizeniOperatoru" class="display-2">
+    Přetížení operátorů
+</div>
+
+<div class="background-text">
+    Chtěli jste někdy sčítat dvě instance vaší třídy? <br/>
+    Přetížení operátorů vám to umožní. <br/>
+    Musí být public a static. <br/>
+    <pre>
+    <code class="language-csharp">
+    public class Cube
+    {
+        public int Length { get; set; }
+        
+        public Cube(int length)
+        {
+            Length = length;
+        }
+
+        public static Cube operator -(Cube left, Cube right)
+        {
+            return new Cube() { Length = left.Length - right.Length };
+        }
+
+        public static int operator +(Cube left, Cube right)
+        {
+            return left.Length + right.Length;
+        }
+    }
+    public static void Main()
+    {
+        var a = new Cube(5);
+        var b = new Cube(1);
+        Console.WriteLine(a + b);  // vysledek: 5 + 1 = 6
+        Console.WriteLine(a - b);  // vysledek: new Cube(4)
+    }
+    </code>
+    </pre>
+    <div class="sha text-center">Více informací: <a href="https://www.tutorialspoint.com/csharp/csharp_operator_overloading.htm">TutorialSpot</a></div>
+</div>
 
 @await Html.PartialAsync("_Sources", 
     new SourcesModel(
@@ -225,5 +524,21 @@
         "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types",
         "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/builtin-types/char",
         "-Ukladani zapornych cisel:",
-        "https://programovaci-ucebnice.g6.cz/ucebnice/UcebniceJazykaJava/7_Cela_cisla.xhtml"
+        "https://programovaci-ucebnice.g6.cz/ucebnice/UcebniceJazykaJava/7_Cela_cisla.xhtml",
+        "-Ukladani desetinnych cisel:",
+        "https://cs.wikipedia.org/wiki/IEEE_754",
+        "-Hodnotové a referenční typy:",
+        "https://docs.google.com/document/d/1R8VgVP-ZeNHqAkt36xbOBoDwkBwfa55o",
+        "https://www.tutorialsteacher.com/csharp/csharp-value-type-and-reference-type",
+        "-Platnost proměných",
+        "https://docs.google.com/document/d/1R8VgVP-ZeNHqAkt36xbOBoDwkBwfa55o",
+        "https://learn.microsoft.com/cs-cz/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers",
+        "-Operátory",
+        "",
+        "-Enumy",
+        "https://www.w3schools.com/cs/cs_enums.php",
+        "-Přetížení operátorů",
+        "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/operators/operator-overloading",
+        "https://www.tutorialspoint.com/csharp/csharp_operator_overloading.htm"
+
     ))
