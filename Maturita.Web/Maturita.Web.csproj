@@ -23,4 +23,17 @@
     <None Include="compilerconfig.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\DataTypes.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Variables\DataTypes.cshtml" />
+  </ItemGroup>
+
 </Project>

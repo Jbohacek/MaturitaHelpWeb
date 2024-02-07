@@ -1,0 +1,229 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-1">
+    Proměné
+</div>
+
+<div class="background-text">
+    
+    <ul>
+        <li><a href="#DataSize">datové typy a velikosti</a></li>
+        <li><a href="#negativeNum">uložení záporných čísel (přímý, doplňkový kód)</a></li>
+        <li><a href="#decimal">desetinná čísla</a></li>
+        <li><a>hodnotové a referenční typy</a></li>
+        <li><a>platnost proměnných</a></li>
+        <li><a>enum a přetížení operátorů</a></li>
+    </ul>
+
+</div>
+
+
+<div class="background-text">
+    Proměnné v programování jsou pojmenovaná úložiště dat, která umožňují programům uchovávat a manipulovat s hodnotami během svého běhu. Každá proměnná má jméno a může obsahovat různé typy dat, jako jsou čísla, text nebo logické hodnoty.
+</div>
+
+<div class="display-2">
+    Velikosti datových typů
+</div>
+
+<div id="DataSize" class="background-text">
+    <table class="mb-3">
+        <thead>
+        <tr>
+            <th class="text-center fw-bold" colspan="4">Celočíselné hodnoty</th>
+        </tr>
+        <tr>
+            <th class="text-center">Název</th>
+            <th class="text-center">Rozsah</th>
+            <th class="text-center">Velikost</th>
+            <th class="text-center d-none d-md-table-cell">.NET</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>sbyte</td>
+            <td>-128 až 127</td>
+            <td>8 bitů</td>
+            <td class="d-none d-md-table-cell">System.SByte</td>
+        </tr>
+        <tr>
+            <td>byte</td>
+            <td>0 až 255</td>
+            <td>8 bitů</td>
+            <td class="d-none d-md-table-cell">System.Byte</td>
+        </tr>
+        <tr>
+            <td>short</td>
+            <td>-32 768 až 32 767</td>
+            <td>16 bitů</td>
+            <td class="d-none d-md-table-cell">System.Int16</td>
+        </tr>
+        <tr>
+            <td>ushort</td>
+            <td>0 až 65 535</td>
+            <td>16 bitů</td>
+            <td class="d-none d-md-table-cell">System.UInt16</td>
+        </tr>
+        <tr>
+            <td>int</td>
+            <td>-2 147 483 648 až 2 147 483 647</td>
+            <td>32 bitů</td>
+            <td class="d-none d-md-table-cell">System.Int32</td>
+        </tr>
+        <tr>
+            <td>uint</td>
+            <td>0 až 4 294 967 295</td>
+            <td>32 bitů</td>
+            <td class="d-none d-md-table-cell">System.UInt32</td>
+        </tr>
+        <tr>
+            <td>long</td>
+            <td>-9 223 372 036 854 775 808 až 9 223 372 036 854 775 807</td>
+            <td>64 bitů</td>
+            <td class="d-none d-md-table-cell">System.Int64</td>
+        </tr>
+        <tr>
+            <td>ulong</td>
+            <td>0 až 18 446 744 073 709 551 615</td>
+            <td>64 bitů</td>
+            <td class="d-none d-md-table-cell">System.UInt64</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="background-text">
+    <table class="mb-3">
+        <thead>
+        <tr>
+            <th class="text-center fw-bold" colspan="5">Číselné typy s plovoucí desetinnou čárkou</th>
+        </tr>
+        <tr>
+            <th class="text-center">Název</th>
+            <th class="text-center">Rozsah ±</th>
+            <th class="text-center">Přesnost</th>
+            <th class="text-center">Velikost</th>
+            <th class="text-center d-none d-md-table-cell">.NET</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>float</td>
+            <td>1,5 × 10^-45 až 3,4 × 10^38</td>
+            <td>7 číslic</td>
+            <td>32 bitů</td>
+            <td class="d-none d-md-table-cell">System.Single</td>
+        </tr>
+        <tr>
+            <td>double</td>
+            <td>5,0 × 10^-324 až 1,7 × 10^308</td>
+            <td>15 číslic</td>
+            <td>64 bitů</td>
+            <td class="d-none d-md-table-cell">System.Double</td>
+        </tr>
+        <tr>
+            <td>decimal</td>
+            <td>1,0 × 10^-28 až 7,9 × 10^28</td>
+            <td>28 číslic</td>
+            <td>128 bitů</td>
+            <td class="d-none d-md-table-cell">System.Decimal</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="background-text">
+    Velikosti proměných
+</div>
+
+
+<div class="background-text">
+    <table class="mb-3">
+        <thead>
+        <tr>
+            <th class="text-center fw-bold" colspan="4">Ostatní důležité typy</th>
+        </tr>
+        <tr>
+            <th class="text-center">Název</th>
+            <th class="text-center">Rozsah</th>
+            <th class="text-center">Velikost</th>
+            <th class="text-center d-none d-md-table-cell">.NET</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>boolean</td>
+            <td>true nebo false</td>
+            <td>1 bajt</td>
+            <td class="d-none d-md-table-cell">System.Boolean</td>
+        </tr>
+        <tr>
+            <td>char</td>
+            <td>0 až 65 535</td>
+            <td>16 bitů</td>
+            <td class="d-none d-md-table-cell">System.Char</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="negativeNum" class="display-2">
+    Uložení záporných čísel
+</div>
+<div class="background-text">
+    Existuji více možností, jak uložit záporné čísla. Nejčastěji se používá přímý kód (sign-magnitude) nebo doplňkový kód (two's complement).
+</div>
+
+<div  class="d-flex flex-column gap-2">
+    <div class="background-text col">
+        <div class="display-4 mb-0">Přímý kód</div>
+        <div class="background-text">
+            <p>
+                 Přímý kód je nejjednodušší způsob uložení záporných čísel.<br/>
+                 Nejvyšší bit je použit jako znaménko. Pokud je tento bit 0, je číslo kladné, pokud je 1, je číslo záporné.<br/> 
+                 Tento způsob má však několik nevýhod. Například nula má dva reprezentace: 0 a -0. <br/>
+                 Další nevýhodou je, že sčítání a odčítání je složité.
+            </p>
+            <img src="~/Pictures/Variables/signed.png" class="img-fluid d-block mx-auto w-50">
+        </div>
+
+    </div>
+    <div class="background-text col">
+        <div class="display-4 mb-0">Doplňkový kód</div>
+        <div class="background-text">
+            <p>
+                Doplňkový kod není složitý a jeho zapis je velmi podobný přímému.<br/>
+                Nejvyšší bit je použit jako znaménko. Pokud je tento bit 0, je číslo kladné, pokud je 1, je číslo záporné.<br./> 
+                Když je číslo kladné, chová se uplně stejně jako u přímého kodu, ovšem pokud je číslo negativní jeho hodnota je opačná<br/>
+                Opačnou hodnotou je na mysli, že vidíme <br/><br/><b>(max hodnota) - (uložená hodnota) = (to čislo co chceme)</b> <br/><br/>
+                Ukládáme to kolik musime odečíst od největšího čísla, abychom dostali naše číslo.<br/>
+            </p>
+            <img src="~/Pictures/Variables/doplnkovykod.png" class="bg-info img-fluid d-block mx-auto w-50">
+            <br/>
+            <div class="sha text-center">Více informací: <a href="https://programovaci-ucebnice.g6.cz/ucebnice/UcebniceJazykaJava/7_Cela_cisla.xhtml">Ucebnice</a></div>
+        </div>
+
+    </div>
+</div>
+
+<div id="decimal" class="display-2">
+    Uložení záporných čísel
+</div>
+
+
+
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+        "-Datove typy a velikosti:",
+        "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/builtin-types/integral-numeric-types",
+        "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types",
+        "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/builtin-types/char",
+        "-Ukladani zapornych cisel:",
+        "https://programovaci-ucebnice.g6.cz/ucebnice/UcebniceJazykaJava/7_Cela_cisla.xhtml"
+    ))

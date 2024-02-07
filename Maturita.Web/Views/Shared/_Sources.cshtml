@@ -5,9 +5,20 @@
     <ul>
         @foreach (string link in Model.GetLinks())
         {
-            <li style="word-break: break-all">
-                <a href="@link">@link</a>
-            </li>
+            @if (!link.Contains("https"))
+            {
+                <li style="word-break: break-all; list-style-type: none">
+                    <br />@link
+                </li>
+            }
+            else
+            {
+                <li style="word-break: break-all">
+                    <a href="@link">@link</a>
+                </li>
+            }
+
+            
         }
     </ul>
 </div>

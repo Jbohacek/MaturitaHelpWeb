@@ -31,7 +31,7 @@
 
 
 <div class="background-text">
-    Algorimy jde vyjádřit více způsoby
+    Algorimy jde vyjádřit více způsoby, avšak sami o sobě jsou jen myšlenka.
     <ul>
         <li class="mb-1"><b>Slovně</b>.<br /> jednotlivé kroky postupu jsou vyjádřeny větami v přirozeném jazyce</li>
         <li class="mb-1"><b>Graficky</b><br />  jednotlivé kroky jsou popsány grafickými značkami se slovním popisem, například pomocí tzv. vývojových diagramů</li>
@@ -69,7 +69,7 @@
     
     
     <div class="text-center mt-3 fs-1">O        Ω          Θ</div>
-    <div class="text-center mt-1 fs-1">Omikron Omega Theta </div>
+    <div class="text-center mt-1 fs-1 fw-light">Výpočet asymptotické složitosti </div>
     Každý algorimus má 3 časové složitosti které vyjadřují jejich třídní chování (průměrné), horní hranici (nejhorší), dolní hranici (nejlepší)
     <br/><br/>
     <b>O Omikron</b> - vyjdařuje horní hranici, tedy nejhorší možný scénář.
@@ -78,6 +78,20 @@
     <br/>
     <b>Θ Theta</b> - vyjadřuje průměrný scénář.
 </div>
+
+<div class="display-4">
+    Prostorová(paměťová) složitost algoritmů
+</div>  
+
+<div class="background-text">
+    Jedná se o to, kolik paměti algoritmus potřebuje. Tedy kolik paměti zabere.
+    <br/>
+    Značí se jako S(n), kde n udává maximální množství paměti použité strojem při výpočtech nad vstupy velikosti n.
+    <br/>
+    Prostorová složitost může být mnohdy o dost menší než časová složitost. Například u <a asp-action="InsertionSort">Insertion sortu</a> je Θ(n), zatímco časová složitost je Θ(n²).
+
+</div>
+
 
 <div class="display-4">
     Algoritmy v poli
@@ -149,7 +163,7 @@
             </div>
         </li>
     </ul>
-    <div>Po rozkliknuti se zobrazí kód</div>
+    <div class="sha">Po rozkliknuti se zobrazí kód</div>
 </div>
 
 <div class="display-4">
@@ -236,7 +250,7 @@
             <td>n log n</td>
             <td>n log n</td>
             <td>✅</td>
-            <td>✅</td>
+            <td>🚫</td>
                 <td class="d-none d-md-table-cell"><a class="btn btn-primary" style="color: #2b2d31 !important" asp-action="MergeSort">Více..</a></td>
         </tr>
         <tr>
@@ -259,7 +273,8 @@
 @await Html.PartialAsync("_Sources", 
     new SourcesModel(
         "https://popelka.ms.mff.cuni.cz/~lessner/mw/index.php/U%C4%8Debnice/Algoritmus/Co_je_to_algoritmus",
-        "https://www.itnetwork.cz/algoritmy/teorie/vypocet-casove-slozitosti-algoritmu"
+        "https://www.itnetwork.cz/algoritmy/teorie/vypocet-casove-slozitosti-algoritmu",
+        "https://www.cs.vsb.cz/sawa/uti/2020/slides/uti-12-cz.pdf"
         ))
 
 
