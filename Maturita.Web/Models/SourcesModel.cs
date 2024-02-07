@@ -15,7 +15,7 @@
 
         public List<string> GetLinks()
         {
-            foreach (var link in SourcesLink.Where(link => !link.Contains("https",StringComparison.CurrentCulture)))
+            foreach (var link in SourcesLink.Where(link => !link.Contains("https",StringComparison.CurrentCulture) && link != String.Empty))
             {
                 if (link.Substring(0, 1) == "-")
                 {
