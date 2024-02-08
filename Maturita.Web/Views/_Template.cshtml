@@ -1,0 +1,102 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "[Nadpis stránka]";
+    ViewBag.Author = "[Autor]";
+    ViewBag.Editor = "[Editor]";
+}
+
+
+
+
+@* Nadpisy *@
+<div class="display-1">
+    Velký nadpis
+</div>
+
+<div class="display-2">
+    Střední nadpis
+</div>
+
+<div class="display-3">
+    Menší nadpis
+</div>
+
+
+
+@* Text s pozadím  *@
+<div class="background-text">
+    
+    <br/> @* Enter *@
+    
+    <b>Tučně</b> @* tučně *@
+    
+    <i>Italic</i> @* Italic *@
+    
+    <u>Underline</u> @* Underline *@
+    
+    <span>Modrý text</span> @* udělá to modrý text na zvýraznění *@
+</div>
+
+
+@* 
+    Obrazek
+
+Velikost se mění sama, ale muže se ovlivnit třídou, v základu 50
+
+w-100 - 100% šířka
+w-75 - 75% šířka
+w-50 - 50% šířka
+w-25 - 25% šířka 
+
+*@
+
+<img src="~/Pictures/Variables/doplnkovykod.png" class="img-fluid d-block mx-auto w-50">
+
+@* Obrazek s pozadim, kvůli prohlednosti (bg-info)*@
+<img src="~/Pictures/Variables/doplnkovykod.png" class="bg-info img-fluid d-block mx-auto w-50">
+
+
+
+Kod
+Pro kod tu je highliht.js, který zvýrazní syntaxi
+
+<pre>
+    <code class="language-csharp">
+      public static void Main(string[] args)
+      {
+          Console.WriteLine("Hello, World!");
+      }
+    </code>
+</pre>
+
+@* Video
+Pro tu je to udělaný partial view, který se jmenuje _VideoPlayer.cshtml
+
+defualtni cesta je /wwwroot/Videos/ a musi to být mp4
+
+Při importu z youtube klikněte na tlačítko "Sdílet" a pak "Vložit" a zkopírujte html (<iframe>...</iframe>) 
+
+*@
+
+@await Html.PartialAsync("_VideoPlayer", new VideoModel("Sorts/BubbleSort.mp4", "https://www.youtube.com/watch?v=xli_FI7CuzA&t=2s"))
+
+@*       
+Zdroje
+Pro tu je to udělaný partial view, který se jmenuje _Sources.cshtml
+
+Pomlčka udělá z toho "nadpis".
+
+Nesmí obsahovat http !!!! 
+
+*@
+
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+        "-Datove typy a velikosti:",
+        "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/builtin-types/integral-numeric-types",
+        "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types",
+        "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/builtin-types/char",
+        "-Ukladani zapornych cisel:",
+        "https://programovaci-ucebnice.g6.cz/ucebnice/UcebniceJazykaJava/7_Cela_cisla.xhtml"
+    ))
