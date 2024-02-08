@@ -1,0 +1,244 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Procedury, Funkce";
+    Layout = "_Layout";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-1">
+    Procedury, Funkce
+</div>
+
+<div class="background-text">
+    Pro lidské oko je stravitelnější zdrojový kód členěný do menších úseků; 
+    <span>funkce</span> se podobně jako v matematice používají pro získání jedné návratové hodnoty
+    (a jejich volání tak může být výrazem), <span>procedury</span> jsou určeny pro ostatní účely
+    (jejich volání je příkazem); v každém případě se chod programu po vykonání funkce
+    a procedury vrací zpět k místu volání. 
+    
+    <br /> <br />
+
+    Mnoho tzv. <span>standardních</span> (vnitřních) funkcí a procedur je už
+    součástí programovacího jazyka. S volající programovou 
+    jednotkou procedura (vše platí i pro funkce) komunikuje 
+    jednak prostřednictvím svého <span>rozhraní</span>, tj.
+    svých <span>parametrů</span> (argumentů), jednak prostřednictvím
+    dat známých oběma jednotkám (<span>globálních dat</span>).
+    
+    <br /> <br />
+    
+    Data deklarovaná v proceduře jsou vně procedury nedostupná (<span>lokální data</span>).
+    Předání parametru proceduře se děje buď 
+    kopírováním datové hodnoty (<span>předání hodnotou</span>)
+    nebo poskytnutím její adresy, tj. ukazatele (<span>předání odkazem</span>).
+    
+    <br /> <br />
+    
+    Procedury odvolávající se na sebe se nazývají <span>rekurzivní</span> ,
+    procedury s týmž jménem, ale různým rozhraním se nazývají
+    <b>přetížené</b>. Procedury pro příbuzné účely se často sdružují
+    do <b>modulů</b> (knihoven).
+    <br /> <br />
+    <div class="sha">Knihovna je například entityFramework, boostrap</div>
+
+</div>
+
+<div class="display-2">
+    Motivace za vytvářením
+</div>
+
+<div class="background-text">
+    <ul>
+        <li style="list-style-type: disc">strukturované programování: návrh shora dolů, <span>stavebnicovost</span>, čitelnost </li>
+        <li style="list-style-type: disc"><span>opakování</span> částí programu  </li>
+        <li style="list-style-type: disc">rozmnožení <span>standardních</span> procedur a funkcí  </li>
+    </ul>
+</div>
+    
+<div class="display-2 mt-3">
+    Rozdíly
+</div>
+
+<div class="d-block d-md-flex gap-2">
+    <div>
+        <div class="display-4">Funkce</div>
+        <div class="background-text">
+            - Má definovanou návratovou hodnotu. Po vykonání funkce je vracena hodnota zpět do místa, odkud byla funkce volána.<br/>
+            - Často se používají pro výpočet hodnoty na základě vstupních parametrů. Mohou být součástí výrazů a jsou vhodné pro situace, kde potřebujete výsledek nějakého výpočtu.<br/>
+        </div>
+    </div>
+    <div>
+        <div class="display-4">Procedure</div>
+        <div class="background-text">
+            - Obvykle nemá návratovou hodnotu nebo může mít pouze vedlejší efekty, ale nevrací žádnou hodnotu explicitně.<br />
+            - Často se používají pro provádění určitých akcí nebo operací, které nevyžadují návrat hodnoty. <br/>
+        </div>
+    </div>
+</div>
+<div class="background-text">
+    V našem oblíbeném jazyce C# je možné vytvářet procedury a funkce. Ale není v nich žádný rozdíl, jelikož pokud chceme proceduru vracíme <span>void</span>, který 
+    vlastně prázdno.<br/>
+    Proto je nazýváme <span>metody</span>.
+</div>
+
+<div class="display-2">
+    Příklady
+</div>
+
+
+<img src="~/Pictures/ProceduryFunkce/methods-in-java.png" class="img-fluid d-block mx-auto w-75">
+
+
+<div class="d-block d-md-flex gap-2">
+    <div class="mt-0 mt-md-5">
+        <pre>
+            <code class="language-csharp">
+      public int GetKola(int pocetAut)
+      {
+            int pocetKolNaAuto = 4;
+            int pocetKol = pocetAut * pocetKolNaAuto;
+
+            return pocetKol
+      }
+
+            </code>
+        </pre>
+    </div>
+    <div class="mt-0 mt-md-5">
+        <div class="display-4">Výpočet kol</div>
+        <div class="background-text">
+            <span>public</span> - <a href="/Programovani/Variables/Index#modPrs">Modifikátor přístupu</a> <br />
+            <span>int</span> - <a href="/Programovani/Variables/Index#DataSize">Návratová proměnná</a> <br />
+            <span>GetKola</span> - Náš vlastní název (nesmí být systémový) <br />
+            <span>int pocetAut</span> - Náš jeden parametr, který vyžaduje int <br />
+            <div class="sha text-center">Více informací: <a href="https://www.w3schools.com/cs/cs_methods.php">w3Schools</a></div>
+
+        </div>
+    </div>
+</div>
+
+<div class="display-2">
+    Ukončení methody
+</div>
+<div class="background-text">
+    <div class="display-6"><span>return</span></div>
+    Nejlehčí způsob ukončení metody je pomocí klíčového slova <span>return</span>.<br/>
+    Vrátí to hodnotu zpět do místa, odkud byla metoda volána.<br/>
+    Pokud je návratová hodnota <span>void</span> tak se používá pro předčasné ukončení metody.<br/>
+    <br/>
+    <div class="display-6"><span>throw new</span></div>
+    Pokud chcete ukončit metodu a vyvolat výjimku, můžete použít klíčové slovo <span>throw</span>.<br/>
+    Toto je užitečné, pokud chcete zastavit metodu, pokud se vyskytne chyba. <br />
+    Lze vyrobit vlastní chybu pomocí kódu níže. Když budeme dědit z <span>SystemException</span> <br />
+    <pre class="mb-0">
+            <code class="language-csharp">
+                public class MacikToPo_ral : SystemException
+                {
+                    public MacikToPo_ral()
+                    {
+
+                    }
+
+                    public MacikToPo_ral(string zprava) : base(zprava)
+                    {
+
+                    }
+                }
+
+            </code>
+        </pre>
+    <div class="display-6"><span>continue, break</span></div>
+    continue se používá pro přeskočení kódu a pokračování v cyklu.<br/>
+    break se používá pro ukončení cyklu.<br/>
+    <br />
+    
+    <div class="display-6"><span>yield return</span></div>
+    pokud vracíme hodnotu z <span>foreach</span> cyklu, používáme <span>yield return</span>.<br/>
+    funguje pouze pokud vracíme <span>IEnumerator</span> nebo <span>IEnumerable</span>.<br/>
+    bude to jednoduše vracet hodnotu z cyklu.<br/>
+    <pre>
+        <code class="language-csharp">
+            public IEnumerable@("<int>") GetInt(int[] arr)
+            {
+                foreach (var i in arr)
+                {
+                    yield return i;
+                }
+            }
+
+            </code>
+        </pre>
+    <br />
+</div>
+
+<div class="display-2">
+    Ref / Out
+</div>
+<div class="background-text">
+    Rád bych začal tím, že je nikdy nepoužívejte. <br />
+    Pokud je to možné, vždy používejte návratovou hodnotu. Pokud ne tak jen <span>ref</span><br />
+    Obě hodnoty přidáváme vždy k parametru a při volání methody.<br />
+    Na první pohled fungují stejně, ale out se musí deklarovat, jinak bude chyba.<br />
+
+    <div class="display-6 mt-2"><span>ref</span></div>
+    <span>ref</span> se používá pro předání hodnoty odkazem.<br/>
+    <pre>
+    <code class="language-csharp">
+    static void AddFive(ref int num)
+    {
+        num += 5;
+
+    }
+
+    static void Main(string[] args)
+    {
+      int x = 10;
+      AddFive(ref x);
+      Console.WriteLine(x);
+    }
+
+    //Vysledek je 15
+
+            </code>
+        </pre>
+    <div class="display-6"><span>out</span></div>
+    <span>out</span> se používá pro předání hodnoty, která je inicializována v metodě.<br/>
+    <pre>
+    <code class="language-csharp">
+    static void SetFive(out int num)
+    {
+        num = 5;
+    }
+
+    static void Main(string[] args)
+    {
+      int x;
+      SetFive(out x);
+      Console.WriteLine(x);
+    }
+
+    //Vysledek je 15
+
+            </code>
+        </pre>
+    <div class="sha text-center">Více informací: <a href="https://www.w3schools.com/cs/cs_method_parameters.php">w3Schools</a></div>
+</div>
+
+<div class="display-2">
+    Doporučené informace
+</div>
+<div class="background-text">
+    <div class="display-6 mt-2">Přetížení method</div>
+    <a href="https://www.programiz.com/csharp-programming/method-overloading">www.programiz.com</a>
+    <div class="display-6 mt-2">Extension methody</div>
+    <a href="https://www.tutorialsteacher.com/csharp/csharp-extension-method#google_vignette">www.tutorialsteacher.com</a>
+</div>
+
+
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+            "https://www.w3schools.com/cs/cs_methods.php",
+            "https://www.w3schools.com/cs/cs_method_parameters.php"
+
+    ))

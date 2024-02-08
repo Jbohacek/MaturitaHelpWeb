@@ -1,7 +1,7 @@
 ﻿@model dynamic
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Proměnné";
     Layout = "_Layout";
     ViewBag.Author = "Jakub Boháček";
 }
@@ -332,7 +332,7 @@
     Platnost proměných
 </div>
 
-<div class="background-text">
+<div id="modPrs" class="background-text">
     základní vliv na platnost proměnné má její umístění v programu. Přesně řečeno její umístění vzhledem k begin a end ({ a }).<br/>
     Tyto složené závorky neboli begin a end mají prostý význam. Označují vždy nějaký blok kódu a obecně platí, že deklarované proměnné platí pouze uvnitř tohoto a podřízených blocích tj. dalších blocích begin a end v něm vložených.<br/>
     <br />

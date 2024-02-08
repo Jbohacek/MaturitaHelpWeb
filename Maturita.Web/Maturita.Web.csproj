@@ -28,12 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\DataTypes.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\ProceduryFunkce.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Programovani\Views\Variables\DataTypes.cshtml" />
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\ProceduryFunkce.cshtml" />
   </ItemGroup>
 
 </Project>

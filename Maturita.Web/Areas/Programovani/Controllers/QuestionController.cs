@@ -3,9 +3,10 @@
 namespace Maturita.Web.Areas.Programovani.Controllers
 {
     [Area("Programovani")]
-    public class VariablesController : Controller
+
+    public class QuestionController : Controller
     {
-        public IActionResult Index()
+        public IActionResult ProceduryFunkce()
         {
             return View();
         }
