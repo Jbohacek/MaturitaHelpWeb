@@ -10,5 +10,10 @@ namespace Maturita.Web.Areas.Programovani.Controllers
         {
             return View();
         }
+
+        public IActionResult GarbageCollector()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "_Layout"; 
+
+
+    ViewBag.Title = "Garbage collector";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+
+<div class="display-1">
+    Garbage collector
+</div>
+
+<div class="background-text">
+    Garbage collector (neboli sběratel) se pokouší vyhledat úseky paměti, které jsou obsazeny nepoužívanými „odpadky“, 
+    které už dále programem <span>nejsou využívány</span>.
+    Tyto úseky paměti jsou poté uvolňovány pro další použití. <br />
+    <br /><br />
+    V starších programovacích jazycích, 
+    jako je <span>C a C++</span>, musí vývojář <span>ručně</span> odstraňovat objekty
+    a uvolňovat paměť. Spoléhání na manuální procesy mohlo 
+    snadno vést k chybám v kódu, z nichž některé mohou mít 
+    vážné následky .
+    <br /><br />
+    <span>Memory leak (únik paměti)</span> je situace,
+    kdy program nesprávně spravuje alokace paměti 
+    tak, že paměť, která již není potřebná, není uvolněna.
+    K úniku paměti může dojít také tehdy, když je objekt uložen v paměti, ale kód, který běží, na něj nemá přístup (tj. nepřístupná paměť) 2.
+</div>
+
+<div class="display-2">
+    Metoda reference counter <span class="sha">(počítání referencí)</span>
+</div>
+
+<div class="background-text">
+    Tato metoda sleduje, kolik <span>odkazů (referencí)</span>  existuje na každý objekt v paměti. <br />
+    Každý objekt má <span>počítadlo referencí</span> , které se inkrementuje, když se na něj vytvoří nový odkaz, a dekrementuje, když odkaz zanikne (např. když proměnná přestane ukazovat na objekt). <br />
+    Když počet referencí klesne na <span>nulu</span>, objekt je považován za nepotřebný a může být uvolněn.
+    Tato metoda je jednoduchá, ale má problémy s <span>cyklickými referencemi</span> (když se objekty navzájem odkazují).
+</div>
+
+<div class="display-2">
+    Metoda mark-and-sweep <span class="sha">(označení a vyčištění)</span>
+</div>
+
+<div class="background-text">
+    Tato metoda je jedním z algoritmů pro sběr odpadu.<br />
+    Proces probíhá ve dvou fázích: <br />
+
+    <div class="display-4">Fáze označení (Mark)</div>
+    Vytvoříme graf všech <span>dosažitelných objektů</span>  (objektů, na které program může odkazovat).<br />
+    Procházíme graf a označujeme všechny dosažitelné objekty. <br />
+    Kořenový objekt (objekt přístupný přímo z lokální proměnné) slouží jako <span>vstupní bod</span> pro procházení grafu. <br />
+
+    <div class="display-4">Fáze vyčištění (Sweep)</div>
+    Procházíme <span>všechny</span> objekty v paměti.<br />
+    Objekty, které nejsou označeny jako dosažitelné, jsou uvolněny (jejich paměť je uvolněna).<br />
+    Označení dosažitelných objektů se resetuje, aby byly připraveny pro další sběr odpadu.<br />
+    V rámci sběru odpadu se paměť často dělí do několika <span>generací.</span>  <br />
+    Vzhledem k tomu, že procházíme všechny objekty, program zamrzne a stává se pomalým, opoti Reference counteru <br />
+
+    <br /><br />
+    Výhodou metody mark-and-sweep je, že se vyrovná i s cyklickými referencemi, aniž by upadla do nekonečné smyčky 1. Je to však pouze jedna z mnoha metod sběru odpadu, které se používají k efektivnímu uvolňování paměti v programovacích jazycích.
+
+    <div class="sha text-center">Více informací: <a href="https://www.geeksforgeeks.org/mark-and-sweep-garbage-collection-algorithm/">geeksforgeeks</a></div>
+
+</div>
