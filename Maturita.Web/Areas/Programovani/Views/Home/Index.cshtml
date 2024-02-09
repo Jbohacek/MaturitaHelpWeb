@@ -12,10 +12,29 @@
 
 <h2 class="display-1 mb-4">Programování maturita</h2>
 <div class="row gap-5">
-    <div class="col-md-6 background-text h-100">
-        Tento web slouží jako zápisky a přípava na maturitu z programování na <a href="https://www.sssvt.cz/">soukromé střední škole výpočetní techniky</a> a jsou zde zapsaný okruhy na ústní maturitní zkoušku a jejich vysvětlení.<br/>
-        Web byl vytvořený, protože jsem si chtěl všechny informace zapsat a mít je na jednom místě, kde se k nim mohu kdykoliv vrátit. Tím pádem jsem se rozhodl, že je zveřejním, protože by se mohli hodit i někomu jinému. <br /> <br />
-        Web vytvořil <b>Jakub Boháček</b> třída 4.A. ročník 23/24.
+    <div class="col-md-6  h-100">
+        <div class="background-text">
+            Tento web slouží jako zápisky a přípava na maturitu z programování na <a href="https://www.sssvt.cz/">soukromé střední škole výpočetní techniky</a> a jsou zde zapsaný okruhy na ústní maturitní zkoušku a jejich vysvětlení.<br/>
+            Web byl vytvořený, protože jsem si chtěl všechny informace zapsat a mít je na jednom místě, kde se k nim mohu kdykoliv vrátit. Tím pádem jsem se rozhodl, že je zveřejním, protože by se mohli hodit i někomu jinému. <br/> <br/>
+            Web vytvořil <b>Jakub Boháček</b> třída 4.A. ročník 23/24.
+        </div>
+        <div class="display-4">
+            Jak mohu pomoct?
+        </div>
+        <div class="background-text">
+            Pokud najdeš chybu neváhej a napiš na email <a href="mailto:chyby@jbohacek.cz">chyby@jbohacek.cz</a><br/><br/>
+            Pokud se chceš podílet na vývoji webu, tak neváhej a napiš na email <a href="mailto:chyby@jbohacek.cz">admin@jbohacek.cz</a>. Dostaneš přístup k <span>GITHUB repozitáři</span> a můžeš přispívat na webu.
+        </div>
+        <div class="display-4">
+            Poslední změny
+        </div>
+        
+        @* Prosím jen posledních 3 *@
+
+        <div class="background-text">
+            <span>9.2</span> - Garbage collector, přepsané modifikátory přístupu a změna Home page<br/>
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
     </div>
     <div class="background-text col-md">
         <div class="display-4 mb-3">Okruhy</div>
@@ -25,12 +44,40 @@
                 <li><a asp-controller="Variables" asp-action="Index">Proměnné, Datové typy</a></li>
                 <li><a asp-controller="Question" asp-action="ProceduryFunkce">Procedury, Funkce</a></li>
                 <li><a asp-controller="Question" asp-action="GarbageCollector">Garbage collector</a></li>
-                <li><a>Řídící struktury</a></li>
+                <li><a asp-controller="Question" asp-action="RidiciStruktury">Řídící struktury</a></li>
                 <li><a asp-area="Programovani" asp-controller="Algorithms" asp-action="Index">Algoritmy</a></li>
+                <li><a>Rekurze</a></li>
                 <li><a>Pole a kolekce</a></li>
                 <li><a>Řetězce</a></li>
                 <li><a>Datové struktury</a></li>
                 <li><a>Soubory a souborový systém</a></li>
+            </ul>
+            
+            <div style="font-weight: 300; font-size: 26px">2. Okruh</div>
+            <ul>
+                <li><a>Základy OOP</a></li>
+                <li><a>Dědičnost v OOP</a></li>
+                <li><a>Pokročilé prvky OOP</a></li>
+                <li><a>UML</a></li>
+                <li><a>Regulární výrazy (regex)</a></li>
+                <li><a>Formuláře - základ</a></li>
+                <li><a>Formuláře - DataGrid</a></li>
+                <li><a>Formuláře - Data validation</a></li>
+                <li><a>GDI grafika</a></li>
+                <li><a>Návrhové vzory GoF</a></li>
+            </ul>
+            <div style="font-weight: 300; font-size: 26px">3. Okruh</div>
+            <ul>
+                <li><a>Databáze</a></li>
+                <li><a>Teorie testování</a></li>
+                <li><a>Unit testy</a></li>
+                <li><a>Integrační testy</a></li>
+                <li><a>ASP.NET MVC základy</a></li>
+                <li><a>ASP.NET MVC View</a></li>
+                <li><a>ASP.NET MVC formuláře</a></li>
+                <li><a>REST API</a></li>
+                <li><a>Události a delegáty</a></li>
+                <li><a>Reflexe</a></li>
             </ul>
         </div>
     </div>

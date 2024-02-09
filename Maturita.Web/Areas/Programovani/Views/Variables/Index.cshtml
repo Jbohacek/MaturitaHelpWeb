@@ -329,17 +329,27 @@
 <div class="sha text-center">Více informací: <a href="https://www.tutorialsteacher.com/csharp/csharp-value-type-and-reference-type">TutorialsTeacher</a></div>
 
 <div id="platn" class="display-2">
-    Platnost proměných
+    Platnost proměných <br/>
+    Přístupové modifikátory
 </div>
 
 <div id="modPrs" class="background-text">
     základní vliv na platnost proměnné má její umístění v programu. Přesně řečeno její umístění vzhledem k begin a end ({ a }).<br/>
     Tyto složené závorky neboli begin a end mají prostý význam. Označují vždy nějaký blok kódu a obecně platí, že deklarované proměnné platí pouze uvnitř tohoto a podřízených blocích tj. dalších blocích begin a end v něm vložených.<br/>
     <br />
-    V jazycích máme něco čemu se řiká modifikátor přistupu, který určuje kdo může číst a kdo může měnit hodnotu proměnné. Pokud ho nenapíšeme zůstavá v základu private (v c#) <br/>
+    V jazyce C# existují <span>čtyři přístupové operátory</span>, které určují, jakým způsobem mohou být členy třídy přístupné z <span>jiných částí</span> programu <br /> <br/>
+    <ol>
+        <li><span>public</span> - Členy třídy s tímto modifikátorem jsou přístupné z jakéhokoli místa v programu.</li>
+        <li><span>private</span> - Členy třídy s tímto modifikátorem jsou přístupné pouze z této třídy.</li>
+        <li><span>protected</span> - Členy třídy s tímto modifikátorem jsou přístupné z této třídy a z odvozených tříd.</li>
+        <li><span>internal</span> - Členy třídy s tímto modifikátorem jsou přístupné pouze z těch částí programu, které jsou v rámci stejného sestavení (myšleno <span>namespace</span>).</li>
+    </ol>
+    <br/>
+    Přístupové operátory se používají k řízení přístupu k členům třídy, jako jsou proměnné, metody a vlastnosti. Přístupové operátory jsou důležité pro zachování <span>bezpečnosti a správného fungování programu</span> <br />
     
-    <img src="~/Pictures/Variables/accessMod.png" class="bg-info img-fluid d-block mx-auto w-75">
+    <iframe class="mx-auto d-block" width="560" height="315" src="https://www.youtube.com/embed/_TxOmmJTd98?si=ukloGWkOvZ69cIEP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     
+
     Například:
     
     <pre>

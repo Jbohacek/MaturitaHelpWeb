@@ -14,7 +14,7 @@
 <div class="background-text">
     Garbage collector (neboli sběratel) se pokouší vyhledat úseky paměti, které jsou obsazeny nepoužívanými „odpadky“, 
     které už dále programem <span>nejsou využívány</span>.
-    Tyto úseky paměti jsou poté uvolňovány pro další použití. <br />
+    Tyto úseky paměti jsou poté uvolňovány pro další použití.
     <br /><br />
     V starších programovacích jazycích, 
     jako je <span>C a C++</span>, musí vývojář <span>ručně</span> odstraňovat objekty
@@ -28,7 +28,7 @@
     K úniku paměti může dojít také tehdy, když je objekt uložen v paměti, ale kód, který běží, na něj nemá přístup (tj. nepřístupná paměť) 2.
 </div>
 
-<div class="display-2">
+<div class="display-2 my-3">
     Metoda reference counter <span class="sha">(počítání referencí)</span>
 </div>
 
@@ -37,9 +37,12 @@
     Každý objekt má <span>počítadlo referencí</span> , které se inkrementuje, když se na něj vytvoří nový odkaz, a dekrementuje, když odkaz zanikne (např. když proměnná přestane ukazovat na objekt). <br />
     Když počet referencí klesne na <span>nulu</span>, objekt je považován za nepotřebný a může být uvolněn.
     Tato metoda je jednoduchá, ale má problémy s <span>cyklickými referencemi</span> (když se objekty navzájem odkazují).
+    
+    <img src="~/Pictures/Garbage/reference.png" class="img-fluid d-block mx-auto w-75">
+
 </div>
 
-<div class="display-2">
+<div class="display-2 my-3">
     Metoda mark-and-sweep <span class="sha">(označení a vyčištění)</span>
 </div>
 
@@ -47,12 +50,12 @@
     Tato metoda je jedním z algoritmů pro sběr odpadu.<br />
     Proces probíhá ve dvou fázích: <br />
 
-    <div class="display-4">Fáze označení (Mark)</div>
+    <div class="display-4 my-3">Fáze označení (Mark)</div>
     Vytvoříme graf všech <span>dosažitelných objektů</span>  (objektů, na které program může odkazovat).<br />
     Procházíme graf a označujeme všechny dosažitelné objekty. <br />
     Kořenový objekt (objekt přístupný přímo z lokální proměnné) slouží jako <span>vstupní bod</span> pro procházení grafu. <br />
 
-    <div class="display-4">Fáze vyčištění (Sweep)</div>
+    <div class="display-4 my-3">Fáze vyčištění (Sweep)</div>
     Procházíme <span>všechny</span> objekty v paměti.<br />
     Objekty, které nejsou označeny jako dosažitelné, jsou uvolněny (jejich paměť je uvolněna).<br />
     Označení dosažitelných objektů se resetuje, aby byly připraveny pro další sběr odpadu.<br />
@@ -61,7 +64,96 @@
 
     <br /><br />
     Výhodou metody mark-and-sweep je, že se vyrovná i s cyklickými referencemi, aniž by upadla do nekonečné smyčky 1. Je to však pouze jedna z mnoha metod sběru odpadu, které se používají k efektivnímu uvolňování paměti v programovacích jazycích.
+    
+    
+    <img src="~/Pictures/Garbage/markAndSweep.gif" class="img-fluid d-block my-3 rounded-2 mx-auto w-75">
+
 
     <div class="sha text-center">Více informací: <a href="https://www.geeksforgeeks.org/mark-and-sweep-garbage-collection-algorithm/">geeksforgeeks</a></div>
 
 </div>
+
+
+<div class="display-2 my-3">
+    <span>c#</span> a <span>Garbage collector</span>
+</div>
+    
+<div class="background-text">
+    všechno funguje automaticky, nemusíme se o nic starat. <br />
+    Všechno běží v pozadí a uvolňuje paměť, kterou už nepotřebujeme. <br />
+    Není potřeba vědět více, ovšem nějaký kusy kódu můžeme napsat, abychom zjistili, kolik paměti je využito. <br />
+    
+    <div class="d-block ">
+        <div>
+            <div class="display-4 my-3">
+                Zjišťování paměti
+            </div>
+            
+            <pre class="mb-0">
+                <code class="language-csharp ">
+public static void Main(string[] args)
+{
+    // Maxinalní vytvořená generace
+    Console.WriteLine("The number of generations are: "
+    + GC.MaxGeneration);
+            
+    // Vypíše kolik paměti je využito
+    Console.WriteLine("Total Memory:"
+    + GC.GetTotalMemory(false));
+
+    // Vytvoří objekt
+    Demo obj = new Demo();
+            
+    // Vypíše generaci objektu
+    Console.WriteLine(
+        "The generation number of object obj is: "
+        + GC.GetGeneration(obj));
+                
+    // Vypíše kolik paměti je využito
+    Console.WriteLine("Total Memory:"
+        + GC.GetTotalMemory(false));
+}
+                </code>
+            </pre>
+            <span class="sha">Output:</span>
+            <pre class="mb-0">
+            <code class="language-csharp ">
+                The number of generations are: 2 <br /> <br />
+
+                Total Memory: 4197120 <br />
+                The generation number of object obj is: 0 <br />
+                Total Memory: 4204024 <br />
+                </code>
+            </pre>
+            
+
+        </div>
+        <div>
+            <div class="display-4 my-3">
+                Záměrné zahlcení paměti
+            </div>
+            <pre class="mb-0">
+                <code class="language-csharp ">
+public static void Main(string[] args)
+{
+        for (int i = 0; i < 1000000000000000; i++)
+        {
+            var obj = new object();
+        }
+}
+                </code>
+            </pre>
+            <br/>
+            V okně <span>Diagnostic tools</span> se bude objevova <span>žlutý pruh GC</span>, který nám ukáže, že paměť je zahlcena a GC zasáhl a vyčistil jí.
+    <img src="~/Pictures/Garbage/GCActive.png" class="img-fluid d-block my-3 rounded-2 mx-auto w-75">
+
+        </div>
+    </div>
+
+</div>
+
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+        "-Mark and sweep:",
+            "https://www.geeksforgeeks.org/mark-and-sweep-garbage-collection-algorithm/"
+    ))

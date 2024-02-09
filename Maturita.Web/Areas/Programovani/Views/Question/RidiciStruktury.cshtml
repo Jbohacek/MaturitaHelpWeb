@@ -1,0 +1,241 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    //Ani jedna z nich není nutná, nějaký stánky nemají Editora, tak to prostě nenapiště:
+
+    ViewBag.Title = "Řídící strukutury";
+    ViewBag.Author = "Jakub Boháček";
+}
+@* Nadpisy *@
+<div class="display-1">
+    Řídící strukutury
+</div>
+<div class="background-text">
+    Řídicí struktura je v informatice konstrukce pro zápis počítačového programu. Řídicí struktury jsou používány ve vyšších programovacích a skriptovacích jazycích. Rozhodují o dalším provádění programu: větví jeho běh, vytváří cykly nebo jinak <span>mění běh programu.</span> <br />
+    Dělí se: 
+    <ul>
+        <li><a href="#vetvene">Větvené</a> - if, switch</li>
+        <li><a href="#cykly">Cyklové</a> - while, foreach, for <span class="sha">,do-while, unless</span></li>
+    </ul>
+</div>
+
+
+<div id="vetvene" class="display-2">
+    Větvené
+</div>
+<div class="background-text">
+    <div class="">
+        <div class="display-3 my-3">IF <span class="sha">podmínka</span> </div>
+        Podmínky zapisujeme pomocí klíčového slova <span> if</span>, za kterým
+        následuje <span>logický výraz</span> . Pokud je výraz pravdivý, provede se následující
+        příkaz. Pokud ne, následující příkaz se přeskočí a pokračuje se až
+        pod ním.<br/>
+        Do <span>if</span> píšeme něco co se jmenuje <a href="https://en.wikipedia.org/wiki/Boolean_expression">Boolean expression</a>, což je výraz, který může být pravdivý nebo nepravdivý.<br/>
+        If se bude vyskytovat dále i v cyklech.
+        <br/><br/>
+        <table>
+            <tbody>
+            <tr>
+                <td>== </td>
+                <td>rovná se</td>
+            </tr>
+            <tr>
+                <td>!=</td>
+                <td>nerovná se</td>
+            </tr>
+            <tr>
+                <td>&gt;</td>
+                <td>větší než</td>
+            </tr>
+            <tr>
+                <td>&lt;</td>
+                <td>menší než</td>
+            </tr>
+            <tr>
+                <td>&gt;=</td>
+                <td>větší nebo rovno</td>
+            </tr>
+            <tr>
+                <td>&lt;=</td>
+                <td>menší nebo rovno</td>
+            </tr>
+
+            </tbody>
+        </table>
+        
+        <pre>
+            <code class="language-csharp">
+    if (Boolean expression (podmínka)) 
+    {
+      // blok kodu, který se vykoná
+    }
+            </code>
+        </pre>
+        Pokud se podmínka nesplní, můžeme použít klíčové slovo <span>else</span>, které se vykoná, pokud se podmínka nesplní.
+
+        <pre>
+        <code class="language-csharp">
+    if (Boolean expression (podmínka)) 
+    {
+      // blok kodu, který se vykoná
+    }
+    else
+    {
+      // blok kodu, který se vykoná, pokud se podmínka nesplní
+    }
+            </code>
+        </pre>
+            
+        Pokud chceme napsat více podmínek, můžeme použít klíčové slovo <span>else if</span>, které se vykoná, pokud se předchozí podmínka nesplní.
+        
+        <pre>
+        <code class="language-csharp">
+    if (Boolean expression (podmínka)) 
+    {
+      // blok kodu, který se vykoná
+    }
+    else if(Boolean expression (podmínka))
+    {
+      // blok kodu, který se vykoná, pokud se podmínka nesplní, ale jiná ano
+    }
+    else
+    {
+      // blok kodu, který se vykoná, pokud se ani jedna podmínka nesplní
+    }
+            </code>
+        </pre>
+        
+        Tímto způsobem můžeme zapsat kolik chceme podmínek.
+
+
+        <div style="margin: 20px; border-radius: 15px; ;padding: 15px; background-color: #2b2c31">
+            <div><span>Fun fact</span></div>
+            Celý dialog postav ve hře <span>Undertale</span> je udělaný else if a switch podmínkami. Takže pokud si myslíte, že váš kod stojí za nic. Tahle hra je jedná z nejlepších her všech dob.
+            <div class="sha text-center">Zdroj: <a href="https://www.reddit.com/r/YandereTechnique/comments/ufya27/apparently_undertale_has_a_1000_long_case_switch/">reddit</a></div>
+        </div>
+
+        <div class="sha text-center">Více informací: <a href="https://www.itnetwork.cz/csharp/zaklady/c-sharp-tutorial-podminky-vetveni-if-switch">itnetwork</a></div>
+        <div class="sha text-center">Nebo anglicky: <a href="https://www.w3schools.com/cs/cs_conditions.php">w3schools</a></div>
+    </div>
+</div>
+
+<div class="background-text">
+    
+    <div class="display-3 my-3">Switch </div>
+    Konstrukce <span>switch</span> je převzatá z jazyka C <span class="sha">(jako většina gramatiky C#)</span>. Umožňuje
+    nám zjednodušit <span class="sha">(relativně)</span> zápis více podmínek pod sebou.<br />
+    Switch je vyjimečný v tom, že muže porovnávat 2 typy <br />
+    <ul>
+        <li><span>Relační vzor</span> - porovnání výsledku výrazu s konstantou. </li>
+        <li><span>Konstantní vzor</span> - Otestujte, jestli se výsledek výrazu rovná konstantě.</li>
+    </ul>
+    
+    <br /><br />
+        
+
+    <pre>
+        <code class="language-csharp">
+    DisplayMeasurement(-4);  // Output: Measured value is -4; too low.
+    DisplayMeasurement(5);  // Output: Measured value is 5.
+    DisplayMeasurement(30);  // Output: Measured value is 30; too high.
+    DisplayMeasurement(double.NaN);  // Output: Failed measurement.
+
+    void DisplayMeasurement(double measurement)
+    {
+        switch (measurement)
+        {
+            case < 0.0: // Jeden případ, který existuje
+                Console.WriteLine($"Measured value is {measurement}; too low.");
+                break;
+
+            case > 15.0:
+                Console.WriteLine($"Measured value is {measurement}; too high.");
+                break;
+
+            case double.NaN:
+                Console.WriteLine("Failed measurement.");
+                break;
+
+            default: // Pokud nesplní ani jednu podmínku, tak se provede tohle
+                Console.WriteLine($"Measured value is {measurement}.");
+                break;
+        }
+    }
+            </code>
+        </pre>
+    Je možné spojit více case dohromady, pokud chceme, aby <span>měli stejný výsledek.</span>
+
+    <pre>
+        <code class="language-csharp">
+    DisplayMeasurement(-4);  // Output: Measured value is -4; out of an acceptable range.
+    DisplayMeasurement(50);  // Output: Measured value is 50.
+    DisplayMeasurement(132);  // Output: Measured value is 132; out of an acceptable range.
+
+    void DisplayMeasurement(int measurement)
+    {
+        switch (measurement)
+        {
+            case < 0:
+            case > 100:
+                Console.WriteLine($"Measured value is {measurement}; out of an acceptable range.");
+                break;
+
+            default:
+                Console.WriteLine($"Measured value is {measurement}.");
+                break;
+        }
+    }
+            </code>
+        </pre>
+    
+    <span>[Pokročilé]</span><br/>
+    Lze porovnávat i více prvnků najednou, avšak zápis je tročku složitější.
+    
+    <pre>
+        <code class="language-csharp">
+    DisplayMeasurements(3, 4);  // Output: First measurement is 3, second measurement is 4.
+    DisplayMeasurements(5, 5);  // Output: Both measurements are valid and equal to 5.
+
+    void DisplayMeasurements(int a, int b)
+    {
+        switch ((a, b))
+        {
+            case (> 0, > 0) when a == b:
+                Console.WriteLine($"Both measurements are valid and equal to {a}.");
+                break;
+
+            case (> 0, > 0):
+                Console.WriteLine($"First measurement is {a}, second measurement is {b}.");
+                break;
+
+            default:
+                Console.WriteLine("One or both measurements are not valid.");
+                break;
+        }
+    }
+            </code>
+        </pre>
+    
+
+    <div class="sha text-center">Více informací: <a href="https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/statements/selection-statements">learn.microsoft</a></div>
+    
+</div>
+
+
+<div id="cykly" class="display-2">
+    Větvené
+</div>
+
+    
+    
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+        "-Celkově",
+            "https://editit.wordpress.com/2016/05/05/4-programovani-ridici-struktury/",
+            "-If",
+            "https://en.wikipedia.org/wiki/Boolean_expression",
+            "https://www.itnetwork.cz/cecko/zaklady/cecko-tutroial-podminky-vetveni",
+            "https://www.itnetwork.cz/csharp/zaklady/c-sharp-tutorial-podminky-vetveni-if-switch", 
+            "-Switch",
+            "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/statements/selection-statements"
+    ))
