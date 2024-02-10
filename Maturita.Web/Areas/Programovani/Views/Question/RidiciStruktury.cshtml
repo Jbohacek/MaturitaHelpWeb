@@ -223,8 +223,106 @@
 
 
 <div id="cykly" class="display-2">
-    Větvené
+    Cykly
 </div>
+<div class="background-text">
+    Jak již slovo cyklus napoví, něco se bude opakovat. Když chceme v
+    programu něco udělat 100x, jistě <span>nebudeme psát</span> pod sebe 100x ten samý kód,
+    ale vložíme ho do cyklu. Cyklů máme několik druhů.
+</div>
+
+    
+<div class="background-text">
+    <div class="display-3 my-3">For</div>
+    Tento cyklus má <span>stanovený pevný počet opakování</span> a
+    hlavně obsahuje tzv.<span>řídící proměnnou</span>  <span class="sha">(celočíselnou)</span> , ve které se
+    postupně během běhu cyklu mění hodnoty. Syntaxe (zápis) cyklu for je
+    následující:
+
+    <pre>
+    <code class="language-csharp">
+    for (promenna; podminka; prikaz)
+    {
+        //Blok kodu, který se vykona
+    }
+            </code>
+        </pre>
+
+    <ul>
+        <li>
+            <span>promenna</span> - je řídící proměnná
+            cyklu, které nastavíme počáteční hodnotu (nejčastěji 0,
+            protože v programování vše začíná od nuly, nikoli od jedničky). Např.
+            tedy int i = 0. Samozřejmě si můžeme proměnnou i vytvořit
+            někde nad tím a už nemusíme psát slovíčko int, bývá ale
+            zvykem používat právě int i.
+        </li>
+        <li>
+            <span>podmínka</span> - je podmínka vykonání
+            dalšího kroku cyklu. Jakmile nebude platit, cyklus se ukončí. Podmínka
+            může být např (i < 10). Boolean expression
+        </li>
+        <li>
+            <span>příkaz</span> - nám říká, co se má v
+            každém kroku s řídící proměnnou stát. Tedy zda se má zvýšit nebo
+            snížit. K tomu využijeme speciálních operátorů ++ a
+            --, ty samozřejmě můžete používat i úplně běžně mimo
+            cyklus, slouží ke zvýšení nebo snížení proměnné o 1.
+        </li>
+    </ul>
+    <div class="sha text-center">Více informací: <a href="https://www.itnetwork.cz/csharp/zaklady/c-sharp-tutorial-cykly-for-while/">ItNetwork</a></div>
+
+</div>    
+    
+<div class="background-text">
+    <div class="display-3 my-3">While</div>
+    Cyklus while funguje jinak, jednoduše opakuje příkazy v
+    bloku, <span>dokud platí podmínka</span>. Syntaxe cyklu je následující:
+    <pre>
+    <code class="language-csharp">
+    while (podminka)
+    {
+        //Blok kodu, který se vykona
+    }
+            </code>
+        </pre>
+    
+    Cyklus <span>for</span> je vlastně speciální případ
+    <span>while</span> cyklu. Cyklus while se ale používá na trochu
+    jiné věci, často máme v jeho podmínce např. metodu vracející logickou
+    hodnotu true/false. Původní příklad z
+    for cyklu bychom udělali pomocí while
+    následovně:
+    
+    <pre>
+    <code class="language-csharp">
+    int i = 1;
+    while (i <= 10)
+    {
+        Console.Write("{0} ", i);
+        i++;
+    }
+    Console.ReadKey();
+            </code>
+        </pre>
+    
+    Lze to i opačne, z for na while.
+    
+    <pre>
+    <code class="language-csharp">
+    
+    for (;podminka;)
+    {
+        //Blok kodu, který se vykona
+    }
+    
+            </code>
+        </pre>
+    <div class="sha text-center">Více informací: <a href="https://www.itnetwork.cz/csharp/zaklady/c-sharp-tutorial-cykly-for-while/">ItNetwork</a></div>
+
+</div>
+
+
 
     
     
@@ -237,5 +335,7 @@
             "https://www.itnetwork.cz/cecko/zaklady/cecko-tutroial-podminky-vetveni",
             "https://www.itnetwork.cz/csharp/zaklady/c-sharp-tutorial-podminky-vetveni-if-switch", 
             "-Switch",
-            "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/statements/selection-statements"
+            "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/statements/selection-statements",
+            "-Cykly",
+            "https://www.itnetwork.cz/csharp/zaklady/c-sharp-tutorial-cykly-for-while-do-while"
     ))
