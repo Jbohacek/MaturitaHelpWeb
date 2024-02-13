@@ -20,5 +20,10 @@ namespace Maturita.Web.Areas.Programovani.Controllers
         {
             return View();
         }
+
+        public IActionResult Rekurze()
+        {
+            return View();
+        }
     }
 }
