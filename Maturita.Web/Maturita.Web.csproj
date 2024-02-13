@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\PoleAKolekce.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\ProceduryFunkce.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\Rekurze.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
@@ -39,6 +40,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\Rekurze.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\PoleAKolekce.cshtml" />
   </ItemGroup>
 
 </Project>

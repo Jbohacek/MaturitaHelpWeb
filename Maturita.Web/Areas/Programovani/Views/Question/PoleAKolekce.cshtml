@@ -1,0 +1,207 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Pole a Kolekce";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Pole a Kolekce
+</div>
+
+<div class="background-text">
+    <span>Kolekce</span> nebo <span>kontejner</span> je třída nebo abstraktní datový typ obsahující 
+    sadu hodnot jednoho nebo různých typů a umožňující přistupování k těmto hodnotám. Kolekce umožňuje
+    zapisovat do sebe hodnoty a získávat je. Cíl kolekce je sloužit jako úložiště objektů a zajišťovat
+    k nim přístup. Obvykle se kolekce používají pro uchovávání skupin objektů stejného typu podléhajících
+    stereotypnímu zpracování. Pro přistupování ke konkrétnímu elementu kolekce mohou používat různé metody
+    v závislosti na její logické organizaci. Implementace může připouštět provedení jednotlivých operací
+    na celé kolekce. Takové operace na celé kolekce mohou v mnoha případech podstatně usnadnit programování.<br />
+    <br/>
+    <span>Pole</span> s pevnou velikostí se obvykle nepovažuje za kolekci, protože uchovává pevné číslo položek, ačkoliv se pole/tabulky běžně používají při implementaci kolekcí. Pole s proměnnou velikostí se obyčejně považují za kolekci.
+</div>
+
+<div class="display-3">
+    Přehled
+</div>
+<div class="background-text">
+    Kolekce mohou být zkoumány ze třech hledisek:
+    <ol>
+        <li>z hlediska <span>přistupování</span> k prvkům kolekce</li>
+        <li>z hlediska <span>uchovávání</span> prvků kolekce</li>
+        <li>z hlediska <span>procházení</span>  prvků kolekce</li>
+    </ol>
+    Obvykle kolekce implementuje a může provádět následující operace:
+    <ul>
+        <li><span>oznamovat</span> jaký má počet objektů, které v sobě uchovává</li>
+        <li><span>odstraňovat všechny objekty</span> z kolekce</li>
+        <li><span>přidávat</span> nový objekt do kolekce</li>
+        <li><span>odstraňovat objekt</span> z kolekce</li>
+        <li><span>poskytovat přístup</span> k uchovávanému objektu</li>
+    </ul>
+</div>
+
+<div class="display-3">
+    Uložení v RAM
+</div>
+<div class="background-text">
+    Většina programovacích jazyků ukládá pole lineárně v paměti. To znamená, že prvky pole jsou uloženy za sebou jeden po druhém v paměti.<br/>
+    Každý prvek v poli má svůj index, který určuje jeho umístění v paměti. Indexování se může lišit v různých jazycích - některé jazyky začínají indexy od 0 (např. C, C++, Python), zatímco jiné mohou začínat od 1 (např. MATLAB).<br/>
+    Každý prvek pole má určitou velikost, která závisí na jeho datovém typu. Například v jazyce C# int zabírá obvykle 4 byty (32 bitů) paměti, zatímco double zabírá 8 bytů (64 bitů). <br/>
+    V některých jazycích jsou pole statické, což znamená, že jejich velikost je určena při kompilaci a nelze ji měnit za běhu programu. V jiných jazycích jsou pole dynamické a mohou se měnit za běhu programu.<br />
+    
+    <div class="sha text-center">Více informací: <a href="https://medium.com/justeattakeaway-tech/array-behind-the-scene-e098f42d4623">medium.com</a></div>
+
+</div>
+
+<div class="display-3">
+    2D a 3D pole
+</div>
+
+<div class="background-text">
+    <div class="display-4">2D pole</div>
+    Tato pole jsou pole, která mají dvě úrovně indexace. To znamená, že každý prvek v poli je identifikován dvojicí indexů. Lze si představit 2D pole jako matici, kde máte řádky a sloupce.
+    <pre>
+    <code class="language-csharp">
+        int[,] twoDArray = new int[3, 3]; // 2D pole s rozměry 3x3
+
+        int[,] pole = new int[,]
+        {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+    </code>
+    </pre>
+    <div class="display-4">3D pole</div>
+    Tato pole jsou pole, která mají tři úrovně indexace. Každý prvek v poli je identifikován trojicí indexů. Můžete si představit 3D pole jako například kostku, kde máte vrstvy, řádky a sloupce.
+    <pre>
+    <code class="language-csharp">
+        int[,,] threeDArray = new int[3, 3, 3]; // 3D pole s rozměry 3x3x3
+
+        int[,,] pole = new int[3, 3, 3] {
+            {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+            },
+            {
+                {10, 11, 12},
+                {13, 14, 15},
+                {16, 17, 18}
+            },
+            {
+                {19, 20, 21},
+                {22, 23, 24},
+                {25, 26, 27}
+            }
+        };
+        </code>
+    </pre>
+    <br/>
+    <div class="text-center sha">
+        Je možné vytvářet i více dimenzionální pole, ale to je již mimo rozsah maturitní otázky.
+
+    </div>
+    
+</div>
+
+<div class="display-3">
+    List
+</div>
+<div class="background-text">
+    představuje dynamickou datovou strukturu, která poskytuje flexibilní a efektivní způsob ukládání a manipulace s daty. List je součástí .NET core a je definován v knihovně <span>System.Collections.Generic</span> . <br/>
+    List je generický typ, což znamená, že může obsahovat prvky pouze jednoho určitého datového typu. To zajišťuje typovou bezpečnost a zabraňuje vložení neplatných dat.<br />
+    <br/>
+    Duležité metody:
+    <ul>
+        <li><span>Add</span> - přidá prvek na konec Listu</li>
+        <li><span>Remove</span> - odstraní první výskyt zadaného objektu z Listu</li>
+        <li><span>RemoveAt</span> - odstraní prvek na zadaném indexu</li>
+        <li><span>Clear</span> - odstraní všechny prvky z Listu</li>
+        <li><span>Contains</span> - určuje, zda List obsahuje konkrétní prvek</li>
+        <li><span>IndexOf</span> - vrátí index prvního výskytu zadaného objektu v Listu</li>
+    </ul>
+    <pre>
+<code class="language-csharp">
+        // Vytvoření nového Listu pro ukládání celých čísel
+        List@("<int>") cisla = new List@("<int>")();
+
+        // Přidání prvků do Listu
+        cisla.Add(10);
+        cisla.Add(20);
+        cisla.Add(30);
+
+        // Vypsání prvků Listu
+        foreach (int cislo in cisla)
+        {
+            Console.WriteLine(cislo);
+        }
+    </code>
+</pre>
+</div>
+
+
+
+<div class="display-3">
+    Dictionary
+</div>
+<div class="background-text">
+    představuje datovou strukturu, která uchovává data ve formě dvojic <span>klíč-hodnota</span>. Tato datová struktura umožňuje rychlý přístup k hodnotám na základě klíče a je optimalizována pro rychlé vyhledávání.<br/>
+    Podobně jako List, Dictionary je také generický typ, což znamená, že může obsahovat prvky pouze jednoho určitého datového typu. To zajišťuje typovou bezpečnost a zabraňuje vložení neplatných dat.<br/>
+    <br/>
+    Duležité metody:
+    <ul>
+        <li><span>Add</span> - přidá prvek s určeným klíčem a hodnotou do Dictionary</li>
+        <li><span>Remove</span> - odstraní prvek s určeným klíčem z Dictionary</li>
+        <li><span>Clear</span> - odstraní všechny prvky z Dictionary</li>
+        <li><span>ContainsKey</span> - určuje, zda Dictionary obsahuje určitý klíč</li>
+        <li><span>ContainsValue</span> - určuje, zda Dictionary obsahuje určitou hodnotu</li>
+
+    </ul>
+    
+    <pre>
+<code class="language-csharp">
+        // Vytvoření nového Dictionary pro ukládání jmen a věků
+        Dictionary@("<string, int>") lide = new Dictionary@("<string, int>")();
+
+        // Přidání hodnot do Dictionary
+        lide.Add("Alice", 30);
+        lide.Add("Bob", 25);
+        lide.Add("Charlie", 35);
+
+        // Přístup k hodnotám pomocí klíče
+        Console.WriteLine("Věk Alice je: " + lide["Alice"]);
+
+        // Vypsání všech klíč-hodnota párů
+        foreach (KeyValuePair@("<string, int>") pár in lide)
+        {
+            Console.WriteLine("Jméno: " + pár.Key + ", Věk: " + pár.Value);
+        }
+    </code>
+</pre>
+
+</div>
+
+<div class="display-3">
+    Lineární kolekce
+    <span class="sha"> Bonus</span>
+</div>
+<div class="background-text">
+    Mnoho kolekcí se chovají, jako kdyby uchovávali data do řady uspořádané nějakým způsobem s přístupem k jednomu nebo obou koncům. Skutečná datová struktura implementující takovou kolekci nemusí být lineární. Například prioritní fronta je často implementována jako halda, což je něco jako strom. Lineární kolekcí je:
+    <ul>
+        <li><a href="https://cs.wikipedia.org/wiki/Line%C3%A1rn%C3%AD_seznam">Lineární seznam</a></li>
+        <li><a href="https://cs.wikipedia.org/wiki/Pole_(datov%C3%A1_struktura)">Pole</a></li>
+        <li><a href="https://cs.wikipedia.org/wiki/Z%C3%A1sobn%C3%ADk_(datov%C3%A1_struktura)">Zásobník</a><span class="sha">(FILO, LIFO)</span></li>
+        <li><a href="https://cs.wikipedia.org/wiki/Fronta_(datov%C3%A1_struktura)">Fronta <span class="sha">(FILO, LIFO)</span></a></li>
+        <li><a href="https://cs.wikipedia.org/wiki/Prioritn%C3%AD_fronta">Prioritní fronta</a> <span class="sha">(často implementována jako Halda)</span></li>
+    </ul>
+</div>
+
+        
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+            "https://cs.wikipedia.org/wiki/Kolekce_(abstraktn%C3%AD_datov%C3%BD_typ)",
+                "https://medium.com/justeattakeaway-tech/array-behind-the-scene-e098f42d4623"
+    ))

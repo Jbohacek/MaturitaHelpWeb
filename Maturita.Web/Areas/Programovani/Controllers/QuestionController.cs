@@ -25,5 +25,10 @@ namespace Maturita.Web.Areas.Programovani.Controllers
         {
             return View();
         }
+
+        public IActionResult PoleAKolekce()
+        {
+            return View();
+        }
     }
 }
