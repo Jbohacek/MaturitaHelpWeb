@@ -11,11 +11,13 @@
 </div>
 
 <div class="background-text">
-    <span>Kolekce</span> nebo <span>kontejner</span> je třída nebo abstraktní datový typ obsahující 
+    <span>Kolekce</span> nebo <span>kontejner</span> je třída nebo <span>abstraktní datový typ</span> obsahující
     sadu hodnot jednoho nebo různých typů a umožňující přistupování k těmto hodnotám. Kolekce umožňuje
-    zapisovat do sebe hodnoty a získávat je. Cíl kolekce je sloužit jako úložiště objektů a zajišťovat
-    k nim přístup. Obvykle se kolekce používají pro uchovávání skupin objektů stejného typu podléhajících
-    stereotypnímu zpracování. Pro přistupování ke konkrétnímu elementu kolekce mohou používat různé metody
+    zapisovat do sebe hodnoty a získávat je. Cíl kolekce je sloužit jako <span>úložiště objektů</span> a zajišťovat
+    k nim přístup. <span>
+        Obvykle se kolekce používají pro uchovávání skupin objektů stejného typu podléhajících
+        stereotypnímu zpracování.
+    </span> Pro přistupování ke konkrétnímu elementu kolekce mohou používat různé metody
     v závislosti na její logické organizaci. Implementace může připouštět provedení jednotlivých operací
     na celé kolekce. Takové operace na celé kolekce mohou v mnoha případech podstatně usnadnit programování.<br />
     <br/>
@@ -46,8 +48,8 @@
     Uložení v RAM
 </div>
 <div class="background-text">
-    Většina programovacích jazyků ukládá pole lineárně v paměti. To znamená, že prvky pole jsou uloženy za sebou jeden po druhém v paměti.<br/>
-    Každý prvek v poli má svůj index, který určuje jeho umístění v paměti. Indexování se může lišit v různých jazycích - některé jazyky začínají indexy od 0 (např. C, C++, Python), zatímco jiné mohou začínat od 1 (např. MATLAB).<br/>
+    Většina programovacích jazyků ukládá pole <span>lineárně v paměti</span> . To znamená, že prvky pole <span>jsou uloženy za sebou jeden po druhém v paměti.</span> <br />
+    Každý prvek v poli má svůj <span>index</span> , který určuje jeho umístění v paměti. Indexování se může lišit v různých jazycích - <span>některé jazyky začínají indexy od 0</span>  (např. C, C++, Python, C#), zatímco jiné mohou začínat od 1 (např. MATLAB).<br />
     Každý prvek pole má určitou velikost, která závisí na jeho datovém typu. Například v jazyce C# int zabírá obvykle 4 byty (32 bitů) paměti, zatímco double zabírá 8 bytů (64 bitů). <br/>
     V některých jazycích jsou pole statické, což znamená, že jejich velikost je určena při kompilaci a nelze ji měnit za běhu programu. V jiných jazycích jsou pole dynamické a mohou se měnit za běhu programu.<br />
     
@@ -111,8 +113,8 @@
     List
 </div>
 <div class="background-text">
-    představuje dynamickou datovou strukturu, která poskytuje flexibilní a efektivní způsob ukládání a manipulace s daty. List je součástí .NET core a je definován v knihovně <span>System.Collections.Generic</span> . <br/>
-    List je generický typ, což znamená, že může obsahovat prvky pouze jednoho určitého datového typu. To zajišťuje typovou bezpečnost a zabraňuje vložení neplatných dat.<br />
+    představuje <span>dynamickou datovou strukturu</span> , která poskytuje flexibilní a efektivní způsob ukládání a manipulace s daty. List je součástí .NET core a je definován v knihovně <span>System.Collections.Generic</span> . <br />
+    List je <a href="https://www.itnetwork.cz/csharp/kolekce-a-linq/c-sharp-tutorial-uvod-do-kolekci-a-genericita">generický typ</a> , což znamená, že může obsahovat prvky pouze jednoho určitého datového typu. To zajišťuje typovou bezpečnost a zabraňuje vložení neplatných dat.<br />
     <br/>
     Duležité metody:
     <ul>
@@ -203,5 +205,6 @@
 @await Html.PartialAsync("_Sources", 
     new SourcesModel(
             "https://cs.wikipedia.org/wiki/Kolekce_(abstraktn%C3%AD_datov%C3%BD_typ)",
-                "https://medium.com/justeattakeaway-tech/array-behind-the-scene-e098f42d4623"
+                "https://medium.com/justeattakeaway-tech/array-behind-the-scene-e098f42d4623",
+                    "https://www.itnetwork.cz/csharp/kolekce-a-linq/c-sharp-tutorial-uvod-do-kolekci-a-genericita"
     ))
