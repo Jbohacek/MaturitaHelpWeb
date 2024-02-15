@@ -1,0 +1,231 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Retězce";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-1">
+    Retězce
+</div>
+<div class="background-text">
+    <span>Řetězce (Strings)</span> jsou základní datový typ v mnoha programovacích jazycích, 
+    včetně C, Java, Python a mnoha dalších. Řetězec je v <span>podstatě posloupnost znaků</span>.
+    
+    <div class="display-4 mt-2">Reprezentace řetězce v RAM</div>
+    V paměti <span>RAM</span> je řetězec reprezentován jako pole znaků. 
+    Každý znak v řetězci je uložen na samostatné adrese v paměti. 
+    Například řetězec “HELLO” by byl v paměti reprezentován 
+    jako pole pěti znaků: ‘H’, ‘E’, ‘L’, ‘L’, ‘O’, každý uložený na samostatné adrese.
+    
+    <div class="display-4 mt-2">Vztah mezi řetězcem a polem</div>
+    Jak již bylo zmíněno, řetězec je v podstatě pole znaků. To znamená, že operace, 
+    které můžete provést na poli, můžete obecně provést i na řetězci. 
+    Například můžete přistupovat k jednotlivým znakům řetězce stejně jako k prvkům pole.
+    
+    <div class="display-4 mt-2">Velikost řetězce</div>
+    
+    V jazyce C# je maximální délka řetězce 2³¹ znaků. To je proto, že <span>String.Length</span> je 32bitové celé číslo.<br/>
+    <br/>
+    Nicméně, skutečná velikost řetězce v paměti může být větší, protože každý znak v řetězci je reprezentován jako System.Char, 
+    což je 16bitový datový typ. To znamená, že řetězec “HELLO” by zabral v paměti 10 bajtů (5 znaků * 2 bajty/znak).
+    <br/> <br/>
+    Pokud chcete zjistit počet bajtů, které řetězec zabírá v paměti, můžete použít metodu <span>System.Text.Encoding.Unicode.GetByteCount(s)</span>
+
+</div>
+
+<div class="display-1">
+    Práce s řetězci
+</div>
+
+<div class="background-text">
+    V jazyce C# má třída <span>String</span> mnoho užitečných metod pro manipulaci s řetězci.
+
+    <div class="display-4">Split </div>
+    Metoda Split rozdělí řetězec na pole řetězců na základě zadaných oddělovačů.
+    <pre>
+    <code class="language-csharp">
+string s = "Hello, World!";
+string[] words = s.Split(',');
+// words[0] je "Hello" a words[1] je " World!"
+
+    </code>
+    </pre>
+    <div class="display-4">Substring </div>
+    Metoda Substring vrací podřetězec zadaného řetězce.
+    <pre>
+    <code class="language-csharp">
+string s = "Hello, World!";
+string sub = s.Substring(0, 5);
+// sub je "Hello"
+    </code>
+    </pre>
+    <div class="display-4">ToLower ToUpper </div>
+    Metody ToLower a ToUpper převedou všechny znaky řetězce na malá, resp. velká písmena.
+    <pre>
+    <code class="language-csharp">
+string s = "Hello, World!";
+string lower = s.ToLower();
+string upper = s.ToUpper();
+// lower je "hello, world!" a upper je "HELLO, WORLD!"
+    </code>
+    </pre>
+    <div class="display-4">Replace </div>
+    Metoda Replace nahradí všechny výskyty zadaného podřetězce jiným podřetězcem.
+    <pre>
+    <code class="language-csharp">
+string s = "Hello, World!";
+string replaced = s.Replace("World", "C#");
+// replaced je "Hello, C#!"
+    </code>
+    </pre>
+    <div class="display-4">Trim </div>
+    Metoda Trim odstraní bílé znaky na začátku a na konci řetězce. Například:
+    <pre>
+    <code class="language-csharp">
+string s = " Hello, World! ";
+string trimmed = s.Trim();
+// trimmed je "Hello, World!"
+    </code>
+    </pre>
+    <div class="display-4">PadLeft a PadRight </div>
+    Metody PadLeft a PadRight doplní řetězec na zadanou délku přidáním zadaných znaků na začátek, resp. na konec řetězce.
+    <pre>
+    <code class="language-csharp">
+string s = "Hello";
+string padded = s.PadRight(10, '.');
+// padded je "Hello....."
+    </code>
+    </pre>
+    
+
+</div>
+
+
+<div class="display-1">
+    Spojování řetězců
+</div>
+
+<div class="background-text">
+    V jazyce C# existují různé způsoby, jak spojit řetězce.
+    <div class="display-4">Operátor + </div>
+    Můžete použít operátor + pro spojení dvou řetězců.
+    <pre>
+    <code class="language-csharp">
+string s1 = "Hello";
+string s2 = "World";
+string s3 = s1 + ", " + s2;  // s3 je "Hello, World"
+
+    </code>
+    </pre>
+    <div class="display-4">Metoda Concat </div>
+    Metoda String.Concat spojí dva nebo více řetězců do jednoho.
+    <pre>
+    <code class="language-csharp">
+string s1 = "Hello";
+string s2 = "World";
+string s3 = String.Concat(s1, ", ", s2);  // s3 je "Hello, World"
+
+    </code>
+    </pre>
+    <div class="display-4">Metoda Join </div>
+    Metoda String.Join spojí pole nebo kolekci řetězců do jednoho řetězce, přičemž mezi ně vloží zadaný oddělovač.
+    <pre>
+    <code class="language-csharp">
+string[] words = { "Hello", "World" };
+string s = String.Join(", ", words);  // s je "Hello, World"
+
+    </code>
+    </pre>
+    <div class="display-4">StringBuilder </div>
+    Třída StringBuilder je nejefektivnější způsob, jak spojit velké množství řetězců. StringBuilder vytváří modifikovatelný objekt řetězce, který může být efektivně upravován bez vytváření nových řetězců.
+    <pre>
+    <code class="language-csharp">
+StringBuilder sb = new StringBuilder();
+sb.Append("Hello");
+sb.Append(", ");
+sb.Append("World");
+string s = sb.ToString();  // s je "Hello, World"
+
+    </code>
+    </pre>
+
+</div>
+
+<div class="display-1">
+    Specialní znaky
+</div>
+
+<div class="background-text">
+    <span>Bílé znaky</span> jsou znaky, které nejsou viditelné, ale slouží k formátování textu. Patří sem mezera ( ), tabulátor (\t), nový řádek (\n), návrat vozíku (\r) a další.
+    <br/><br/>
+    <span>Escape sekvence</span> jsou speciální znaky, které se v programovacích jazycích používají k reprezentaci určitých speciálních znaků, které by bylo jinak obtížné napsat.
+    
+    <ul>
+        <li><span>\n</span> - nový řádek</li>
+        <li><span>\t</span> - tabulátor</li>
+        <li><span>\\</span> - zpětné lomítko</li>
+        <li><span>\'</span> - apostrof</li>
+        <li><span>\"</span> nebo <span>"" ""</span> - uvozovky</li>
+        <li><span>\r</span> - návrat vozíku</li>
+        <li style="list-style-type: none"><span>Bonus:</span></li>
+        <li><span>\b</span> - zpětné tlačítko</li>
+        <li><span>\f</span> - nová stránka</li>
+        <li><span>\v</span> - vertikální tabulátor</li>
+        <li><span>\0</span> - nulový znak</li>
+    </ul>
+    
+    V C# můžete použít <span>@@</span> před řetězcem, aby jste vypnuli escape sekvence. To je užitečné, pokud chcete napsat řetězec, který obsahuje mnoho zpětných lomítek, jako jsou cesty k souborům. <br/>
+    V tomto případě @@ říká C#, že by měl řetězec path interpretovat doslova, takže \ nejsou považovány za escape sekvence.
+    <pre>
+    <code class="language-csharp">
+string path = @(@"@""C:\Users\JohnDoe\Documents""");
+    </code>
+    </pre>
+</div>
+
+<div class="display-1">
+    Interpolace řetězců
+</div>
+<div class="background-text">
+    V jazyce C# můžete použít <span>interpolaci řetězců</span> pro vložení hodnot proměnných přímo do řetězců. To se dělá pomocí zápisu $"...", kde ... je řetězec s vloženými proměnnými v složených závorkách {}. Například:
+    <pre>
+    <code class="language-csharp">
+string name = "John";
+string greeting = $"Hello, {name}!";
+// greeting je "Hello, John!"
+
+    </code>
+    </pre>
+    V tomto případě je hodnota proměnné name vložena přímo do řetězce greeting.
+    
+    <br/><br />
+    <span>String literal</span> je způsob zápisu řetězce, kde to co napišem tak tam bude, přesně jak string vypada v kodu, tak bude i vypsaný. <br/>
+    <span>POZOR!</span> tohle bylo přidáno nedávno (listopad 8. 2022) do c# a ještě není všude podporovaný a například samotné Microsoft docs nemají na to podporu.
+    <pre>
+    <code class="language-csharp">
+
+var singleLine = """This is a "raw string literal". It can contain characters like \, ' and ".""";
+
+var JSON = """
+    '{
+        "name":"John", 
+        "age":30, 
+        "car":null
+    }'
+        """;
+
+    </code>
+    </pre>
+    <div class="sha text-center">Více informací: <a href="https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/tokens/raw-string">learn.microsoft</a></div>
+
+     
+</div>
+
+
+@await Html.PartialAsync("_Sources",
+        new SourcesModel(
+                "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/tokens/raw-string",
+                    "https://josipmisko.com/posts/c-sharp-string-length",
+                        "https://stackoverflow.com/questions/4486261/does-c-sharp-string-have-a-length-limit"
+        ))
