@@ -32,6 +32,7 @@
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\ProceduryFunkce.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\Rekurze.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\Retezce.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\SouboryASouborovySystem.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
   </ItemGroup>
 
@@ -49,6 +50,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\Retezce.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\SouboryASouborovySystem.cshtml" />
   </ItemGroup>
 
 </Project>

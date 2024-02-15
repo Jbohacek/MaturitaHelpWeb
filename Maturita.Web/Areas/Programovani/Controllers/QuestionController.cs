@@ -35,5 +35,15 @@ namespace Maturita.Web.Areas.Programovani.Controllers
         {
             return View();
         }
+
+        public IActionResult DatoveStruktury()
+        {
+            return View();
+        }
+
+        public IActionResult SouboryASouborovySystem()
+        {
+            return View();
+        }
     }
 }

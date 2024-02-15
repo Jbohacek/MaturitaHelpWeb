@@ -1,0 +1,309 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Soubory a Souborový systém";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Soubory a Souborový systém
+</div>
+
+<div class="background-text">
+    V jazyce C# můžete pracovat se soubory a souborovým systémem pomocí tříd a metod v rámci knihovny System.IO
+    <br/><br/>
+    Cteni Souboru
+    <pre>
+    <code class="language-csharp">
+       
+using System.IO;        
+
+// Tato metoda načte celý soubor do paměti jako jeden řetězec.
+
+string text = File.ReadAllText("cesta_k_souboru");
+
+
+//Pokud chcete načíst soubor řádek po řádku, můžete použít metodu ReadLines nebo ReadAllLines:
+
+foreach (string line in File.ReadLines("cesta_k_souboru"))
+{
+    Console.WriteLine(line);
+}
+
+    </code>
+    </pre>
+    Zapis do Souboru
+    <pre>
+    <code class="language-csharp">
+        
+using System.IO;
+
+
+/*
+Tato metoda vytvoří nový soubor, zapíše zadaný řetězec do souboru a poté soubor uzavře. 
+Pokud soubor již existuje, je nahrazen.
+*/
+File.WriteAllText("cesta_k_souboru", "text k zapsání");
+
+
+//Pokud chcete přidat text k existujícímu souboru, můžete použít metodu AppendAllText:
+
+File.AppendAllText("cesta_k_souboru", "text k přidání");
+    </code>
+    </pre>
+    
+    Tyto metody jsou jednoduché a pohodlné, ale nejsou vhodné pro velké soubory, protože načítají celý soubor do paměti. 
+    Pro práci s velkými soubory je lepší použít <span>StreamReader</span> pro čtení a <span>StreamWriter</span> pro zápis.
+    Tyto třídy poskytují více kontroly a jsou efektivnější pro práci s velkými daty.
+
+</div>
+
+
+<div class="display-3">
+    Používání streamwriter a <br/> streamreader
+</div>
+
+<div class="background-text">
+    <div class="display-4">
+        streamreader
+    </div>
+    Tento kód otevře soubor, přečte ho řádek po řádku a vypíše každý řádek na konzoli. Použití using zajišťuje, že soubor se správně uzavře po dokončení čtení.
+    <pre>
+    <code class="language-csharp">
+using System.IO;
+
+using (StreamReader sr = new StreamReader("cesta_k_souboru"))
+{
+    string line;
+    while ((line = sr.ReadLine()) != null)
+    {
+        Console.WriteLine(line);
+    }
+}
+    </code>
+    </pre>
+    
+    <div class="display-4">
+        streamwriter
+    </div>
+    Tento kód otevře soubor a zapíše do něj řádek textu. Pokud soubor již existuje, je přepsán. Pokud chcete přidat text k existujícímu souboru, můžete použít konstruktor StreamWriter s parametrem true:
+    <pre>
+    <code class="language-csharp">
+using System.IO;
+
+// Přepsání
+
+using (StreamWriter sw = new StreamWriter("cesta_k_souboru"))
+{
+    sw.WriteLine("text k zapsání");
+}
+
+// Přidávání
+
+using (StreamWriter sw = new StreamWriter("cesta_k_souboru", true))
+{
+    sw.WriteLine("text k přidání");
+}
+
+    </code>
+    </pre>
+    <div class="sha text-center">Více informací: <a href="https://www.itnetwork.cz/csharp/soubory-a-sit/c-sharp-tutorial-prace-se-soubory-txt?all-comments=">It Network</a></div>
+
+</div>
+
+<div class="display-3">
+    file.Close() a .Flush()
+</div>
+
+<div class="background-text">
+    <span>File.Close()</span> Metoda Close se používá k uzavření souboru, který je otevřený pro čtení nebo zápis. Po zavolání metody Close již nelze provádět žádné další operace se souborem. Pokud se pokusíte provést další operaci se souborem po jeho uzavření, dojde k výjimce.
+    <pre>
+    <code class="language-csharp">
+StreamReader sr = new StreamReader("cesta_k_souboru");
+// čtení ze souboru
+sr.Close();
+    </code>
+    </pre>
+    <span>File.Flush()</span> Metoda Flush se používá k vyprázdnění vyrovnávací paměti (buffer) a zajištění, že všechna data byla zapsána do cílového souboru nebo proudu. Tato metoda je užitečná, pokud potřebujete zajistit, že všechna data byla zapsána, ale nechcete ještě soubor uzavřít.
+    <pre>
+    <code class="language-csharp">
+StreamWriter sw = new StreamWriter("cesta_k_souboru");
+// zápis do souboru
+sw.Flush();
+    </code>
+    </pre>
+    Při použití StreamWriter nebo StreamReader v bloku using se metody Close a Flush automaticky zavolají, když je blok using opuštěn. To je důvod, proč se často doporučuje používat blok using při práci se soubory v C#.
+    <div class="sha text-center">Více informací: <a href="https://stackoverflow.com/questions/2417978/what-is-the-difference-between-streamwriter-flush-and-streamwriter-close">StackOverflow</a></div>
+
+</div>
+
+<div class="display-3">
+    Další užitečné metody
+</div>
+
+<div class="background-text">
+    <div class="display-4">
+        File.Exists()
+    </div>
+    Tato metoda kontroluje, zda soubor existuje na dané cestě.
+    <pre>
+    <code class="language-csharp">
+bool exists = File.Exists("cesta_k_souboru");
+    </code>
+    </pre>
+    <div class="display-4">
+        Directory.CreateDirectory()
+    </div>
+    Tato metoda vytvoří nový adresář. Pokud adresář již existuje, nic se nestane.
+    <pre>
+    <code class="language-csharp">
+Directory.CreateDirectory("cesta_k_adresari");
+    </code>
+    </pre>
+    <div class="display-4">
+        Directory.Exists()
+    </div>
+    Tato metoda kontroluje, zda adresář existuje na dané cestě.
+    <pre>
+    <code class="language-csharp">
+bool exists = Directory.Exists("cesta_k_adresari");
+    </code>
+    </pre>
+    <div class="display-4">
+        File.Copy() a File.Move()
+    </div>
+    Tyto metody kopírují nebo přesouvají soubor z jedné cesty na druhou.
+    <pre>
+    <code class="language-csharp">
+File.Copy("cesta_zdrojoveho_souboru", "cesta_ciloveho_souboru");
+File.Move("cesta_zdrojoveho_souboru", "cesta_ciloveho_souboru");
+    </code>
+    </pre>
+    <div class="display-4">
+        File.Delete() a Directory.Delete()
+    </div>
+    Tyto metody odstraní soubor nebo adresář.
+    <pre>
+    <code class="language-csharp">
+File.Delete("cesta_k_souboru");
+Directory.Delete("cesta_k_adresari");
+    </code>
+    </pre>
+    <div class="display-4">
+        Directory.GetFiles() a Directory.GetDirectories()
+    </div>
+    Tyto metody vracejí seznam souborů nebo adresářů v daném adresáři.
+    <pre>
+    <code class="language-csharp">
+string[] files = Directory.GetFiles("cesta_k_adresari");
+string[] directories = Directory.GetDirectories("cesta_k_adresari");
+    </code>
+    </pre>
+</div>
+
+<div class="display-3">
+    CSV, XML a JSON
+</div>
+
+<div class="background-text">
+    <div class="display-4">
+        CSV
+    </div>
+    <span>CSV (Comma Separated Values)</span> soubory jsou jednoduché textové soubory, které obsahují tabulková data. Každý řádek v souboru představuje jeden záznam a jednotlivé hodnoty jsou odděleny čárkami.
+    <pre>
+    <code class="language-csharp">
+using System.IO;
+using System.Linq;
+
+var lines = File.ReadAllLines("cesta_k_souboru.csv");
+foreach (var line in lines)
+{
+    var values = line.Split(',');
+    // zpracování hodnot
+}
+    </code>
+    </pre>
+    <div class="display-4">
+        XML
+    </div>
+    <span>XML (eXtensible Markup Language)</span> je formát pro strukturovaná data. V C# můžete použít třídy v rámci System.Xml nebo System.Xml.Linq pro zpracování XML souborů.
+    <pre>
+    <code class="language-csharp">
+using System.Xml.Linq;
+
+var doc = XDocument.Load("cesta_k_souboru.xml");
+foreach (var element in doc.Descendants("nazev_elementu"))
+{
+    // zpracování elementu
+}
+
+    </code>
+    </pre>
+    <div class="display-4">
+        JSON
+    </div>
+    <span>JSON (JavaScript Object Notation)</span> je lehký formát pro výměnu dat. V C# můžete použít knihovnu Newtonsoft.Json pro zpracování JSON souborů.
+    <pre>
+    <code class="language-csharp">
+using Newtonsoft.Json;
+
+var obj = JsonConvert.DeserializeObject@("<MyClass>")(File.ReadAllText("cesta_k_souboru.json"));
+// zpracování objektu
+    </code>
+    </pre>
+    <div class="sha text-center">Více informací: <a href="https://myhalo.com.sg/blog/uncategorized/csv-vs-xml-vs-json-which-is-the-best-response-data-format/">myhalo.com</a></div>
+
+</div>
+
+<div class="display-3">
+    File info<br/>
+    DirectoryInfo<br/>
+    DriveInfo
+</div>
+<div class="background-text">
+    <div class="display-4">
+        FileInfo
+    </div>
+    poskytuje metody a vlastnosti pro manipulaci se soubory.
+    <pre>
+    <code class="language-csharp">
+FileInfo fi = new FileInfo("cesta_k_souboru");
+long size = fi.Length; // velikost souboru v bajtech
+DateTime creationTime = fi.CreationTime; // datum a čas vytvoření souboru (třeba)
+
+
+    </code>
+    </pre>
+    <div class="display-4">
+        DirectoryInfo
+    </div>
+    Třída DirectoryInfo poskytuje metody a vlastnosti pro manipulaci s adresáři. Například:
+    <pre>
+    <code class="language-csharp">
+DirectoryInfo di = new DirectoryInfo("cesta_k_adresari");
+DateTime creationTime = di.CreationTime; // datum a čas vytvoření adresáře
+FileInfo[] files = di.GetFiles(); // pole souborů v adresáři
+
+    </code>
+    </pre>
+    <div class="display-4">
+        DriveInfo
+    </div>
+    Třída DriveInfo poskytuje informace o jednotkách disku v systému. Například:
+    <pre>
+    <code class="language-csharp">
+DriveInfo di = new DriveInfo("C");
+long totalSpace = di.TotalSize; // celkový prostor na disku v bajtech
+long freeSpace = di.TotalFreeSpace; // volný prostor na disku v bajtech
+
+    </code>
+    </pre>
+</div>
+
+@await Html.PartialAsync("_Sources",
+    new SourcesModel(
+            "https://www.itnetwork.cz/csharp/soubory-a-sit/c-sharp-tutorial-prace-se-soubory-txt?all-comments=",
+            "https://stackoverflow.com/questions/2417978/what-is-the-difference-between-streamwriter-flush-and-streamwriter-close",
+            "https://myhalo.com.sg/blog/uncategorized/csv-vs-xml-vs-json-which-is-the-best-response-data-format/"
+    ))
