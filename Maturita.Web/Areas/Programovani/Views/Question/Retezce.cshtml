@@ -223,9 +223,9 @@ var JSON = """
 </div>
 
 
-@await Html.PartialAsync("_Sources",
-        new SourcesModel(
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
                 "https://learn.microsoft.com/cs-cz/dotnet/csharp/language-reference/tokens/raw-string",
                     "https://josipmisko.com/posts/c-sharp-string-length",
                         "https://stackoverflow.com/questions/4486261/does-c-sharp-string-have-a-length-limit"
-        ))
+    ))

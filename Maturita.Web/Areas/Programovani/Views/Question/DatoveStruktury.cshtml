@@ -1,0 +1,259 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Datové struktury";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Datové struktury
+</div>
+
+<div class="background-text">
+    Datové struktury v C# jsou způsoby, jakými můžete organizovat a ukládat data ve vašem programu.<br/>
+    Každá z těchto datových struktur má své vlastní výhody a nevýhody, a je důležité vybrat tu správnou strukturu pro vaši konkrétní úlohu
+</div>
+
+<div class="display-3">
+    Zásobník <span class="sha">(Stack)</span>
+</div>
+
+<div class="background-text">
+    Zásobník je datová struktura, která se řídí principem <span>LIFO (Last In, First Out)</span>, což znamená,
+    že poslední prvek, který byl do zásobníku vložen, bude jako první vyjmut. Zásobník je často používán v situacích,
+    kde potřebujeme dočasně uložit data a poté je zpracovat v opačném pořadí.<br/><br/>
+    Reálný příklad užití je např. funkce Undo (zpět), kde se jednotlivé
+    kroky (např. změny v nějakém editoru) ukládají do zásobníku a funkce
+    Undo nás vždy vrátí do toho posledního uloženého stavu. Dále se
+    používá k parsování matematických výrazů a spoustě dalších algoritmů.
+    <img src="~/Pictures/DatoveStruktury/Stack.png" class="img-fluid d-block w-75 my-3 mx-auto" />
+    <pre>
+    <code class="language-csharp">
+
+using System.Collection.Generic
+
+Stack@("<int>") myStack = new Stack@("<int>")();
+myStack.Push(1);
+myStack.Push(2);
+myStack.Push(3);
+myStack.Push(4);
+
+foreach (var item in myStack)
+{
+     Console.Write(item + ","); //prints 4,3,2,1, 
+}
+
+myStack.Contains(2); // returns true
+myStack.Contains(10); // returns false
+
+Console.WriteLine(myStack.Peek()); // prints 4
+Console.WriteLine(myStack.Peek()); // prints 4
+
+
+Console.Write("Number of elements in Stack: {0}", myStack.Count); // Number of elements in Stack: 4
+
+while (myStack.Count > 0)
+{
+     Console.Write(myStack.Pop() + ","); // prints 4,3,2,1,
+}
+
+Console.Write("Number of elements in Stack: {0}", myStack.Count); // Number of elements in Stack: 0
+
+    </code>
+</pre>
+    <div class="sha text-center">Více informací: <a href="https://www.tutorialsteacher.com/csharp/csharp-stack">tutorialsteacher</a></div>
+
+</div>
+
+
+<div class="display-3">
+    Fronta <span class="sha">(Queue)</span>
+</div>
+<div class="background-text">
+    Fronta je datová struktura, která se řídí principem <span>FIFO (First In, First Out)</span>
+    , což znamená, že první prvek, který byl do fronty vložen, 
+    bude jako první vyjmut. Fronta je často používána v situacích, 
+    kde potřebujeme spravovat data v pořadí, v jakém byla přijata<br/><br />
+    Realný příklad: když chci zamezit hromadnému přístupu lidí k zaplacení produktu. Tak po kliknuti na zaplaceni je poslu do queue a tam se postupne k tomu checkoutu dostavaj. (Sneaker botting).
+    
+    <img src="~/Pictures/DatoveStruktury/queue.png" class="img-fluid d-block w-75 my-3 mx-auto" />
+    <pre>
+    <code class="language-csharp">
+
+using System.Collection.Generic
+
+Queue@("<int>") callerIds = new Queue@("<int>")();
+callerIds.Enqueue(1);
+callerIds.Enqueue(2);
+callerIds.Enqueue(3);
+callerIds.Enqueue(4);
+
+foreach(var id in callerIds)
+{
+    Console.Write(id); //prints 1234
+}
+
+callerIds.Contains(2); // returns true
+callerIds.Contains(10); // returns false
+
+
+Queue@("<string>") strQ = new Queue@("<string>")();
+strQ.Enqueue("H");
+strQ.Enqueue("e");
+strQ.Enqueue("l");
+strQ.Enqueue("l");
+strQ.Enqueue("o");
+
+Console.WriteLine("Total elements: {0}", strQ.Count); //prints 5
+
+if(strQ.Count > 0){
+    Console.WriteLine(strQ.Peek()); //prints H
+    Console.WriteLine(strQ.Peek()); //prints H
+}
+
+Console.WriteLine("Total elements: {0}", strQ.Count); //prints 5
+
+
+Console.WriteLine("Total elements: {0}", strQ.Count); //prints 5
+
+while (strQ.Count > 0)
+{
+    Console.WriteLine(strQ.Dequeue()); //prints Hello
+}
+
+Console.WriteLine("Total elements: {0}", strQ.Count); //prints 0
+
+    </code>
+</pre>
+    <div class="sha text-center">Více informací: <a href="https://www.tutorialsteacher.com/csharp/csharp-queue">tutorialsteacher</a></div>
+</div>
+
+    
+<div class="display-3">
+    Single-Linked List <br/><span class="sha">(Jednosměrně zřetězený seznam)</span>
+</div>
+
+<div class="background-text">
+    Jednosměrně zřetězený seznam je <span>lineární datová</span> struktura,
+    kde každý prvek (uzel) obsahuje data a odkaz (ukazatel) na 
+    další uzel v seznamu. Tento seznam lze procházet pouze jedním směrem od počátečního prvku
+    <img src="~/Pictures/DatoveStruktury/Singlelinkedlist.png" class="img-fluid d-block w-75 my-3 mx-auto" />
+
+    <pre>
+    <code class="language-csharp">
+    // Vlastní linked list
+
+    public class Node {
+        public Node next;
+        public Object data;
+     }
+
+public class LinkedList
+{
+    public class Node
+    {
+        // link to next Node in list
+        public Node next = null;
+        // value of this Node
+        public object data;
+    }
+
+    private Node root = null;
+
+    public Node First { get { return root; } }
+
+    public Node Last 
+    {
+        get
+        {
+            Node curr = root;
+            if (curr == null)
+                return null;
+            while (curr.next != null)
+                curr = curr.next;
+            return curr;
+        }
+    }
+
+    public void Append(object value)
+    {
+        Node n = new Node { data = value };
+        if (root == null)
+            root = n;
+        else
+            Last.next = n;
+    }
+
+    public void Delete(Node n)
+    {
+        if (root == node) 
+        {
+            root = n.next;
+            n.next = null;
+        }
+        else
+        {
+            Node curr = root;
+            while (curr.next != null)
+            {
+                if (curr.next == n)
+                {
+                    curr.next = n.next;
+                    n.next = null;
+                    break;
+                }
+                curr = curr.next;
+            }
+        }
+    }
+}     
+
+    </code>
+</pre>
+    <div class="sha text-center">Více informací: <a href="https://stackoverflow.com/questions/20087194/c-sharp-singly-linked-list-implementation">stackoverflow.com</a></div>
+
+
+</div>
+
+<div class="display-3">
+    Double-Linked List <br/> <span class="sha">(Obousměrně zřetězený seznam)</span>
+</div>
+<div class="background-text">
+    Obousměrně zřetězený seznam je podobný jednosměrně zřetězenému seznamu, ale každý uzel obsahuje navíc odkaz na předchozí uzel. To umožňuje procházet seznam oběma směry.
+    <br/><br/>
+    Realný příklad využití: lze použít v navigačních systémech, kde je vyžadováno procházení vpřed i vzad.
+    <img src="~/Pictures/DatoveStruktury/Doublylinkedlist.png" class="img-fluid d-block w-75 my-3 mx-auto" />
+    <pre>
+    <code class="language-csharp">
+
+        using System.Collections.Generic;  
+
+        var listOfNames = new LinkedList();  
+        listOfNames.AddLast("Rigby Deirdre");  
+        listOfNames.AddLast("Cymone Ashlee");  
+        listOfNames.AddLast("Rylee Shelley");  
+        listOfNames.AddLast("Elaine Teresa");  
+        listOfNames.AddFirst("Emmanuel Kourtney");     //adding to the first index  
+
+        //   Retrieving list elements  
+        foreach (var name in listOfNames)  
+        {  
+           Console.WriteLine(name);  
+        } 
+    </code>
+</pre>
+    <div class="sha text-center">Více informací: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.linkedlist-1?view=net-8.0">learn.microsoft</a></div>
+</div>
+
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+        "-Linked list",
+            "https://www.geeksforgeeks.org/what-is-linked-list/",
+        "-Single linked list",
+            "https://www.geeksforgeeks.org/singly-linked-list-definition-meaning-dsa/",
+            "-Double linked list",
+                "https://www.geeksforgeeks.org/doubly-linked-list-meaning-in-dsa/?ref=ml_lbp"
+    ))
+    
+@*

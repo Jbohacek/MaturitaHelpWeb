@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\DatoveStruktury.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\PoleAKolekce.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\ProceduryFunkce.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\Rekurze.cshtml" />
@@ -54,6 +55,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\SouboryASouborovySystem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\DatoveStruktury.cshtml" />
   </ItemGroup>
 
 </Project>
