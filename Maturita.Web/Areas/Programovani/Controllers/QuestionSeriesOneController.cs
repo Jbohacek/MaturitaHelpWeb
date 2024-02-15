@@ -4,7 +4,7 @@ namespace Maturita.Web.Areas.Programovani.Controllers
 {
     [Area("Programovani")]
 
-    public class QuestionController : Controller
+    public class QuestionSeriesOneController : Controller
     {
         public IActionResult ProceduryFunkce()
         {

@@ -28,37 +28,37 @@
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\DatoveStruktury.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\PoleAKolekce.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\ProceduryFunkce.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\Rekurze.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\Retezce.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Question\SouboryASouborovySystem.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\DatoveStruktury.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\PoleAKolekce.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\ProceduryFunkce.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\Rekurze.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\Retezce.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\SouboryASouborovySystem.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\ProceduryFunkce.cshtml" />
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesOne\ProceduryFunkce.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\Rekurze.cshtml" />
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesOne\Rekurze.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\PoleAKolekce.cshtml" />
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesOne\PoleAKolekce.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\Retezce.cshtml" />
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesOne\Retezce.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\SouboryASouborovySystem.cshtml" />
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesOne\SouboryASouborovySystem.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Programovani\Views\Question\DatoveStruktury.cshtml" />
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesOne\DatoveStruktury.cshtml" />
   </ItemGroup>
 
 </Project>
