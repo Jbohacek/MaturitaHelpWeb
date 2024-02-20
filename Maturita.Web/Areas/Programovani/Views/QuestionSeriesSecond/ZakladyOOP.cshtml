@@ -1,0 +1,205 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "základy OOP";
+    ViewBag.Author = "David";
+    ViewBag.Editor = "Jakub Boháček";
+}
+
+<div class="display-1">
+    základy OOP
+</div>
+<div class="display-4 my-4">
+    Object Oriented Programming
+</div>
+
+<div class="background-text">
+    Jedná se o <span>moderní metodiku vývoje softwaru</span>, kterou podporuje většina programovacích jazyků jako jsou c#, c++.<br /><br />
+    <span>Mělo by se používat vždy</span>, ať už děláme malou utilitku nebo složitý databázový systém.
+
+</div>
+
+<div class="display-2">
+    Třída
+</div>
+
+<div class="background-text">
+    S pojmem třída jsme se již také setkali, chápali jsme ji jako soubor příkazů. 
+    Třída však umožňuje mnohem více. 
+    Třída je <span style="font-weight: bold">VZOR</span> , <span>podle kterého se objekty vytváří.
+        Definuje jejich vlastnosti a schopnosti</span>
+</div>
+
+<pre>
+<code class="language-csharp">
+public class Person
+{
+    // Vlastnosti
+    public int Age { get; set; }
+    public string Name { get; set; }
+
+    // Metoda
+    public void WhatsMyName()
+    {
+        Console.WriteLine("My name is " + Name);
+    }
+
+    // Konstruktor
+    public Person(string name,int age)
+    {
+        Name = name;
+        Age = age;
+    }
+}
+    </code>
+</pre>
+
+<div class="display-2">
+    Instance
+</div>
+
+<div class="background-text">
+    Objekt, který se vytvoří podle třídy, se nazývá <span>INSTANCE</span>. 
+    Instance mají stejné <span>rozhraní</span> jako třída, podle které se vytváří, ale navzájem se liší svými daty (atributy). <br/>
+    Jedná se datový typ, který je <span>referenční</span>.
+    
+    <br/><br/>
+    
+    Mějme příklad třídy Person, kterou jsme si definovali výše. Nyní si vytvoříme <span>dvě instance</span> této třídy. Josefa a Karela.
+</div>
+
+<img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/OOP/pic1.png"/>
+
+<pre>
+<code class="language-csharp">
+Person Josef = new Person("Josef", 15);
+Person Karel = new Person("Karel", 16);
+
+Console.WriteLine(Josef.Name); // Josef
+Console.WriteLine(Karel.Name); // Karel
+
+Console.WriteLine(Josef.Age); // 15
+Console.WriteLine(Karel.Age); // 16
+
+Person StejnyJosef = Josef; // Jedná se o referenci
+
+StejnyJosef.Age += 1; 
+
+Console.WriteLine(StejnyJosef.Name); // Josef
+Console.WriteLine(StejnyJosef.Age); 
+// 17, protože jsme přičetli 1 k referenci
+    </code>
+</pre>
+
+<div class="display-2">
+    Vlastnosti
+</div>
+
+<div class="background-text">
+    <span>Vlastnost je člen, který poskytuje flexibilní mechanismus pro čtení, zápis nebo výpočet hodnoty</span> privátního pole.
+    Vlastnosti se dají použít, jako by to byly veřejné datové členy, ale jedná se o speciální metody označované jako přístupové objekty. 
+    <span>Tato funkce umožňuje snadný přístup k datům a stále pomáhá podporovat bezpečnost a flexibilitu metod.</span>
+    
+</div>
+
+<pre>
+<code class="language-csharp">
+//Nejlepsi možný zápis
+public int Age { get; set; }
+
+
+//Delší zápis nejlepšího zápisu
+private int age;
+
+public int Age
+{
+    get
+    {
+        return age;
+    }
+    set
+    {
+        age = value;
+    }
+}
+
+// Dřívejší zápis proměnné (nepoužívat)
+private int _age;
+
+public void SetAge(int age)
+{
+    _age = age;
+}
+
+public int GetAge()
+{
+    return _age;
+}
+
+
+
+//Pouze čtení
+public int Age { get; private set; }
+
+//Pouze zápis
+public int Age { private get; set; }
+
+/*Init settery
+Nelze ji mimo konstruktor změnit ani ve třídě, kde je definována.
+Avšak lze ji měnit, když ji děláme jako Instanci třídy
+*/
+public int Age { get; init; }
+
+Person Jaromir = new Person()
+{
+    Age = 15
+};
+
+
+/*
+Pokud zapíšeme delším zápisem, můžeme udělat třeba nějakou kontrolu, nebo výpočet
+*/
+
+    
+public int Age
+{
+    get
+    {
+        return age;
+    }
+    set
+    {
+        if(value > 18)
+        {
+            Console.WriteLine("Nemůžeš mít víc jak 18 let");
+        }
+        else
+        {
+            age = value;
+        }
+        throw new Exception("Nemůžeš mít víc jak 18 let");
+    }
+}
+
+    </code>
+</pre>
+
+<div class="display-4">
+    Zapouzdření
+</div>
+
+<div class="background-text">
+    Způsob, jakým se <span>skrývají vnitřní členy</span> třídy před vnějším světem. <br /> Zabezpečuje, že vnější svět nemůže změnit stav objektu, aniž by bylo možné kontrolovat změnu. užitečné pro <span>bezpečnost</span> a <span>flexibilitu</span> kódu.
+    
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/OOP/Enc1.jpg"/>
+    
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/OOP/enc2.jpg"/>
+    
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/OOP/enc3.jpg" />
+
+
+</div>
+
+<div class="display-4">
+    Modifikátory přístupu
+</div>

@@ -1,3 +1,6 @@
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 namespace Maturita.Web
 {
     public class Program
@@ -40,6 +43,65 @@ namespace Maturita.Web
 
             app.Run();
 
+
+
+
+        }
+    }
+
+    public class Person
+    {
+        ////Nejlepsi možný zápis
+        //public int Age { get; set; }
+
+
+        ////Delší zápis nejlepšího zápisu
+        //private int age;
+
+        //public int Age
+        //{
+        //    get
+        //    {
+        //        return age;
+        //    }
+        //    set
+        //    {
+        //        age = value;
+        //    }
+        //}
+
+
+        //// Døívejší zápis promìné (nepoužívat)
+        //private int _age;
+
+        //public void SetAge(int age)
+        //{
+        //    _age = age;
+        //}
+
+        //public int GetAge()
+        //{
+        //    return _age;
+        //}
+        
+
+
+
+
+
+
+        public string Name { get; set; }
+        
+        //Metoda
+        public void WhatsMyName()
+        {
+            Console.WriteLine("My name is " + Name);
+        }
+
+        //Construktor
+        public Person(string name,int age)
+        {
+            Name = name;
 
 
 

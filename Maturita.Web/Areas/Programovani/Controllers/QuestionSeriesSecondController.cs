@@ -5,7 +5,7 @@ namespace Maturita.Web.Areas.Programovani.Controllers
     [Area("Programovani")]
     public class QuestionSeriesSecondController : Controller
     {
-        public IActionResult Index()
+        public IActionResult ZakladyOOP()
         {
             return View();
         }
