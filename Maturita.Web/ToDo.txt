@@ -1,0 +1,8 @@
+﻿https://www.h3xed.com/web-development/how-to-make-a-responsive-100-width-youtube-iframe-embed
+-Udělat partial view na zobrazení videa na youtube, aby to vypadalo hezky. Furt s tim sere David.
+
+-Přidat do... while(true) loop
+
+-Přidat decimal do variables
+
+-Dodělat OOP
