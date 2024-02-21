@@ -16,10 +16,27 @@
 <div class="background-text">
     Jedná se o <span>moderní metodiku vývoje softwaru</span>, kterou podporuje většina programovacích jazyků jako jsou c#, c++.<br /><br />
     <span>Mělo by se používat vždy</span>, ať už děláme malou utilitku nebo složitý databázový systém.
-
+    <br/>
+    <br />
+    <ol>
+        <li><a href="#1">Třída</a></li>
+        <li><a href="#2">Instance</a></li>
+        <li><a href="#3">Vlastnosti</a></li>
+        <li><a href="#4">Zapouzdření</a></li>
+        <li><a href="#5">Modifikátory přístupu</a></li>
+        <li><a href="#6">Konstruktor a destruktor</a>
+            <ul>
+                <li><a href="#Vychozi">Výchozí</a></li>
+                <li><a href="#Parametrizovany">Parametrizovaný</a></li>
+                <li><a href="#Kopirovaci">Kopírovací</a></li>
+                <li><a href="#Staticky">Statický</a></li>
+                <li><a href="#Soukromý">Soukromý</a></li>
+            </ul>
+            </li>
+    </ol>
 </div>
 
-<div class="display-2">
+<div class="display-2" id="1">
     Třída
 </div>
 
@@ -54,7 +71,7 @@ public class Person
     </code>
 </pre>
 
-<div class="display-2">
+<div class="display-2" id="2">
     Instance
 </div>
 
@@ -91,7 +108,7 @@ Console.WriteLine(StejnyJosef.Age);
     </code>
 </pre>
 
-<div class="display-2">
+<div class="display-2" id="3">
     Vlastnosti
 </div>
 
@@ -184,7 +201,7 @@ public int Age
     </code>
 </pre>
 
-<div class="display-4">
+<div class="display-4" id="4">
     Zapouzdření
 </div>
 
@@ -200,6 +217,218 @@ public int Age
 
 </div>
 
-<div class="display-4">
+<div class="display-4" id="5">
     Modifikátory přístupu
 </div>
+
+<div id="modPrs" class="background-text">
+    základní vliv na platnost proměnné má její umístění v programu. Přesně řečeno její umístění vzhledem k begin a end ({ a }).<br />
+    Tyto složené závorky neboli begin a end mají prostý význam. Označují vždy nějaký blok kódu a obecně platí, že deklarované proměnné platí pouze uvnitř tohoto a podřízených blocích tj. dalších blocích begin a end v něm vložených.<br />
+    <br />
+    V jazyce C# existují <span>čtyři přístupové operátory</span>, které určují, jakým způsobem mohou být členy třídy přístupné z <span>jiných částí</span> programu <br /> <br />
+    <ol>
+        <li><span>public</span> - Členy třídy s tímto modifikátorem jsou přístupné z jakéhokoli místa v programu.</li>
+        <li><span>private</span> - Členy třídy s tímto modifikátorem jsou přístupné pouze z této třídy.</li>
+        <li><span>protected</span> - Členy třídy s tímto modifikátorem jsou přístupné z této třídy a z odvozených tříd.</li>
+        <li><span>internal</span> - Členy třídy s tímto modifikátorem jsou přístupné pouze z těch částí programu, které jsou v rámci stejného sestavení</li>
+    </ol>
+    <br />
+    Přístupové operátory se používají k řízení přístupu k členům třídy, jako jsou proměnné, metody a vlastnosti. Přístupové operátory jsou důležité pro zachování <span>bezpečnosti a správného fungování programu</span> <br />
+
+    <iframe class="mx-auto d-block w-100" height="315" src="https://www.youtube.com/embed/_TxOmmJTd98?si=ukloGWkOvZ69cIEP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+    Například:
+
+    <pre>
+    <code class="language-csharp">
+        // public class:
+        public class Tricycle
+        {
+            // protected method:
+            protected void Pedal() { }
+
+            // private field:
+            private int _wheels = 3;
+
+            // protected internal property:
+            protected internal int Wheels
+            {
+                get { return _wheels; }
+            }
+        }
+        </code>
+    </pre>
+    <div class="sha text-center">Více informací: <a href="https://learn.microsoft.com/cs-cz/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers">Learn.Microsoft</a></div>
+</div>
+
+<div class="display-4" id="6">
+    Konstruktor a destruktor
+</div>
+
+<div class="background-text">
+    <span>Konstruktor</span> je metoda, která se volá, když je třída instancována. Konstruktor může mít parametry a může být více konstruktorů v jedné třídě. Konstruktor může mít modifikátory přístupu a výchozí je veřejný. Název konstruktoru je stejný jako název třídy.
+    <br /><br/>
+    <span>Destruktor</span> je metoda, která se volá, když objekt třídy přestane existovat. Destruktor nemůže mít parametry ani modifikátory přístupu. V jedné třídě může být pouze jeden destruktor. Název destruktoru je stejný jako název třídy, ale začíná tildou (~).
+    <pre>
+    <code class="language-csharp">
+class Member
+{
+    // Konstruktor
+    public Member()
+    {
+        Console.WriteLine("Default Constructor was called.");
+    }
+    
+    // Destruktor
+    ~Member()
+    {
+        Console.WriteLine("Destructor was called.");
+    }
+}
+        </code>
+    </pre>
+    
+    <div class="display-5 mb-3">
+        Typy konstruktorů
+    </div>
+    
+    <ol>
+        <li><a href="#Vychozi">Výchozí</a></li>
+        <li><a href="#Parametrizovany">Parametrizovaný</a></li>
+        <li><a href="#Kopirovaci">Kopírovací</a></li>
+        <li><a href="#Staticky">Statický</a></li>
+        <li><a href="#Soukromý">Soukromý</a></li>
+    </ol>
+    
+    <div class="display-6" id="Vychozi">
+        <span>Výchozí</span>
+    </div>
+    Konstruktor bez jakýchkoli parametrů se nazývá výchozí konstruktor. Pokud nevytvoříme konstruktor, třída automaticky zavolá výchozí konstruktor při vytváření objektu.
+    <pre>
+    <code class="language-csharp">
+public class Customer
+{
+    public string firstName;
+    public string lastName;
+
+    public Customer()
+    {
+        // Výchozí konstruktor
+    }
+}
+        </code>
+    </pre>
+    
+    <div class="display-6" id="Parametrizovany">
+        <span>Parametrizovaný</span>
+    </div>
+    Konstruktor s alespoň jedním parametrem se nazývá parametrizovaný konstruktor1.
+    <pre>
+    <code class="language-csharp">
+public class Customer
+{
+    public string firstName;
+    public string lastName;
+
+    public Customer(string firstName, string lastName)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    
+    /* Pretizeni konstruktoru s tim,
+     že se to pošle zpět do prvního konstruktoru 
+     s parametry firstName a "stepan"
+    */
+    public Customer(string firstName) : this(firstName, "stepan")
+    {
+
+    }
+
+    public Customer()
+    {
+    // Muže tu být kolik chce přetížených konstruktorů, ale musí mít jiný parametry 
+    }
+}
+        </code>
+    </pre>
+    
+    <div class="display-6" id="Kopirovaci">
+        <span>Kopírovací</span>
+    </div>
+    Konstruktor, který vytváří objekt kopírováním proměnných z jiného objektu, se nazývá kopírovací konstruktor.
+    <pre>
+    <code class="language-csharp">
+public class Customer
+{
+    public string firstName;
+    public string lastName;
+
+    public Customer(Customer customer)
+    {
+        this.firstName = customer.firstName;
+        this.lastName = customer.lastName;
+    }
+}
+        </code>
+    </pre>
+    
+    <div class="display-6" id="Staticky">
+        <span>Statický</span>
+    </div>
+Statický konstruktor je konstruktor, který inicializuje statické členy typu. Statické konstruktory jsou bezparametrové.
+
+    <pre>
+    <code class="language-csharp">
+public class Customer
+{
+    public static int customerCount;
+
+    static Customer()
+    {
+        // Statický konstruktor
+        customerCount = 0;
+    }
+}
+        </code>
+    </pre>
+    
+    <div class="display-6" id="Soukromý">
+        <span>Soukromý</span>
+    </div>
+    Soukromý konstruktor je konstruktor, který má soukromý modifikátor přístupu. Používá se k omezení vytváření instancí třídy (Například singlton).
+    <pre>
+    <code class="language-csharp">
+public class Singleton
+{
+    private static Singleton instance;
+
+    private Singleton()
+    {
+        // Soukromý konstruktor
+    }
+
+    public static Singleton GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+        </code>
+    </pre>
+
+    <div class="sha text-center">Více informací: <a href="https://www.c-sharpcorner.com/article/different-types-of-constructor-in-c-sharp/">Csharp corner</a></div>
+</div>
+
+    
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+        "-Konstruktory:",
+            "https://www.c-sharpcorner.com/article/different-types-of-constructor-in-c-sharp/",
+                "https://learn.microsoft.com/cs-cz/dotnet/csharp/programming-guide/classes-and-structs/constructors"
+
+    ))
