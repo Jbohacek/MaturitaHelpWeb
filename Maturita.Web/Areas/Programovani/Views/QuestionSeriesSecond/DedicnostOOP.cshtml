@@ -1,0 +1,384 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "dědičnost OOP";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Dědění OOP
+</div>
+<div class="background-text">
+    
+    Na pochopení dědičnost je potřeba znát <a asp-action="ZakladyOOP">základy</a>.
+    <br/><br/>
+
+
+    Dědičnost je jedním ze základních atributů objektově orientovaného programování. 
+    V kontextu jazyka C#, dědičnost umožňuje definovat třídu, která znovu použije (dědí), rozšíří nebo upraví chování nadřazené třídy
+
+    <br/><br>
+    <span>Základní třída</span> je třída, jejíž členy jsou zděděné. <span>Odvozená třída</span> je třída, která dědí členy základní třídy.
+    
+    <br/><br>
+    C# a .NET podporují pouze <span>jednoduchou dědičnost</span>, což znamená, že třída může dědit pouze z <span>jedné třídy</span>. 
+    Dědičnost je však tranzitivní, což umožňuje definovat hierarchii dědičnosti pro sadu typů
+    
+    <br><br>
+    Například, pokud máte základní třídu Animal, můžete mít odvozenou třídu <span>Mammal</span> a další odvozenou třídu <span>ReptileMammal</span> je <span>Animal</span> a <span>Reptile</span> je také <span>Animal</span>, 
+    ale každá odvozená třída představuje různé specializace základní třídy
+    
+    <pre>
+    <code class="language-csharp">
+// Základní třída
+public class Animal
+{
+    public void Eat() { /*...*/ }
+}
+
+// Odvozená třída
+public class Mammal : Animal
+{
+    public void Breathe() { /*...*/ }
+}
+    </code>
+</pre>
+    
+    <div class="display-5 my-3">Základní dědění </div>
+    Ve všech objektově orientovaných jazycích, včetně C#, existuje koncept základní třídy, ze které všechny ostatní třídy přímo či nepřímo dědí. V C# je touto základní třídou třída <span>object</span> 
+    <br/><br/>
+    Třída <span>object</span> je nejvyšší třídou v hierarchii dědičnosti v C#.
+    To znamená, že všechny ostatní třídy, ať už 
+    jsou definovány uživatelem nebo jsou součástí .NET 
+    Frameworku, jsou odvozeny od třídy <span>object</span>. 
+    To umožňuje považovat jakoukoli instanci jakékoliv třídy 
+    za instanci třídy <span>object</span> 
+    <br/><br/>
+    Třída <span>object</span> definuje několik metod, které jsou tedy dostupné pro všechny objekty v C#. Mezi tyto metody patří:
+    <ul>
+        <li><span>Equals(Object obj)</span> - Určuje, zda je aktuální instance rovna jinému objektu.</li>
+        <li><span>GetHashCode()</span> - Vrátí kód hash aktuální instance.</li>
+        <li><span>GetType()</span> - Vrátí typ aktuální instance.</li>
+        <li><span>ToString()</span> - Vrátí řetězec, který představuje aktuální objekt.</li>
+        <li><span>Finalize()</span> - Umožňuje objektu provést čistění před tím, než je uvolněn správcem paměti.</li>
+        <li><span>MemberwiseClone()</span> - Vytvoří kopii aktuálního objektu.</li>
+        <li><span>ReferenceEquals(Object objA, Object objB)</span> - Určuje, zda jsou dvě reference na objekty stejné.</li>
+    </ul>
+    Tyto metody poskytují základní funkčnost pro všechny objekty a mohou být přepsány pro konkrétní chování v odvozených třídách. Například přepsání ToString:
+    <pre>
+    <code class="language-csharp">
+public class Animal
+{
+    public string Name { get; set; }
+
+    public Animal(string name)
+    {
+        Name = name;
+    }
+
+    public override string ToString()
+    {
+        return $"Animal: {Name}";
+    }
+}
+
+public class Mammal : Animal
+{
+    public Mammal(string name) : base(name) { }
+
+    public override string ToString()
+    {
+        return $"Mammal: {Name}";
+    }
+}
+    </code>
+</pre>
+    <div class="display-5 my-3">Rozdíly mezi this/base </div>
+    Klíčová slova this a base v C# mají různé významy a použití, zejména v kontextu dědičnosti
+    <br><br>
+    <span>This</span> - Odkazuje na aktuální instanci třídy. Používá se k odkazování na členy aktuální třídy. Může být také použito k odkazování na aktuální objekt v rámci jeho metod.
+    <pre>
+    <code class="language-csharp">
+public class Example
+{
+    private int value;
+
+    public Example(int value)
+    {
+        this.value = value;  // 'this' odkazuje na aktuální instanci třídy
+    }
+}
+    </code>
+</pre>
+    <span>Base</span> - Odkazuje na základní třídu, ze které aktuální třída dědí. Používá se k volání konstruktorů nebo metod základní třídy.<br/><br/>
+    V tomto příkladu, když je metoda Print() volána na instanci třídy DerivedClass, nejprve se zavolá metoda Print() základní třídy BaseClass (díky base.Print()), a poté se zavolá metoda Print() třídy DerivedClass.
+
+    <pre>
+    <code class="language-csharp">
+public class BaseClass
+{
+    public virtual void Print()
+    {
+        Console.WriteLine("BaseClass Print Method");
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public override void Print()
+    {
+        base.Print();  // 'base' odkazuje na metodu základní třídy
+        Console.WriteLine("DerivedClass Print Method");
+    }
+}
+    </code>
+</pre>
+</div>
+
+<div class="display-3">
+    Konstruktory v dědičnosti
+</div>
+<div class="background-text">
+    Konstruktory jsou speciální metody v třídě, které se automaticky volají při vytváření nové instance třídy,<a href="/Programovani/QuestionSeriesSecond/ZakladyOOP#6"> vysvětleno zde</a>.
+    V kontextu dědičnosti v C# mají konstruktory několik důležitých vlastností:
+    
+    <br/><br/>
+    <span>Konstruktory se nedědí</span>: Ačkoli odvozená třída zdědí všechny veřejné a chráněné členy základní třídy, konstruktory se nedědí. 
+    To znamená, že odvozená třída musí definovat své vlastní konstruktory
+    <br/><br/>
+    <span>Volání konstruktoru základní třídy</span>: Pokud chcete v konstruktoru odvozené třídy zavolat konstruktor základní třídy, 
+    můžete použít klíčové slovo base. Toto je užitečné, pokud základní třída vyžaduje nějaké inicializační parametry.<br/>
+    V tomto příkladu konstruktor DerivedClass volá konstruktor BaseClass pomocí klíčového slova base.
+    <pre>
+    <code class="language-csharp">
+public class BaseClass
+{
+    public BaseClass(int value)
+    {
+        // Inicializace základní třídy
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public DerivedClass(int value) : base(value)
+    {
+        // Inicializace odvozené třídy
+    }
+}
+    </code>
+</pre>
+    <span>Implicitní volání konstruktoru základní třídy</span>: Pokud konstruktor odvozené třídy nevolá explicitně konstruktor
+    základní třídy pomocí klíčového slova base, C# automaticky zavolá bezparametrický konstruktor základní třídy
+    <br/>
+    V tomto příkladu, když je vytvořena instance DerivedClass, C# automaticky zavolá bezparametrický konstruktor BaseClass.
+    <pre>
+    <code class="language-csharp">
+public class BaseClass
+{
+    public BaseClass()
+    {
+        // Inicializace základní třídy
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public DerivedClass()
+    {
+        // Inicializace odvozené třídy
+    }
+}
+    </code>
+</pre>
+</div>
+
+<div class="display-3">
+    Polymorfismus
+</div>
+<div class="background-text">
+    Polymorfismus je klíčový koncept v objektově orientovaných programovacích jazycích, jako je C#. Popisuje vztah mezi základní a odvozenou sadou tříd1. Polymorfismus má dva hlavní aspekty
+    <ol>
+        <li>
+            <span>Za běhu mohou být objekty odvozené třídy považovány za objekty základní třídy</span> na místech, jako jsou parametry metody a kolekce nebo pole. Pokud dojde k tomuto polymorfismu, deklarovaný typ objektu již není identický s jeho typem za běhu
+        </li>
+        <li>
+            <span>Základní třídy mohou definovat a implementovat virtuální metody a odvozené třídy je mohou přepsat</span>, což znamená, že poskytují vlastní definici a implementaci2. Když kód klienta volá metodu za běhu, CLR vyhledá typ modulu runtime objektu a vyvolá, že přepíše virtuální metodu2
+        </li>
+    </ol>
+    Například, můžete mít základní třídu Shape a odvozené třídy Circle, Rectangle a Triangle. 
+    Každá z těchto tříd může mít metodu Draw(), která je implementována specificky pro daný tvar. 
+    Když voláte metodu Draw() na objektu typu Shape, může být skutečně vyvolána metoda Draw() jedné
+    z odvozených tříd, v závislosti na skutečném typu objektu.
+    <br/><br/>
+    V tomto příkladu, když je metoda Draw() volána na instanci třídy Shape, skutečná metoda, která je vyvolána, závisí na skutečném typu objektu. To je základní princip polymorfismu
+    <pre>
+    <code class="language-csharp">
+public class Shape
+{
+    public virtual void Draw()
+    {
+        Console.WriteLine("Drawing a shape");
+    }
+}
+
+public class Circle : Shape
+{
+    public override void Draw()
+    {
+        Console.WriteLine("Drawing a circle");
+    }
+}
+
+public class Rectangle : Shape
+{
+    public override void Draw()
+    {
+        Console.WriteLine("Drawing a rectangle");
+    }
+}
+
+public class Triangle : Shape
+{
+    public override void Draw()
+    {
+        Console.WriteLine("Drawing a triangle");
+    }
+}
+    </code>
+</pre>
+    <div class="sha text-center">Více informací: <a href="https://learn.microsoft.com/cs-cz/dotnet/csharp/fundamentals/object-oriented/polymorphism">Microsoft</a></div>
+
+</div>
+
+<div class="display-3">
+    Překrývání metod
+</div>
+<div class="background-text">
+    Překrývání metod, známé také jako přetížení metod, je koncept v objektově orientovaném programování, který umožňuje třídě mít více metod se stejným názvem, ale s různými parametry. Každá metoda může mít různý počet parametrů nebo různé typy parametrů
+    <br><br>
+    Při volání metody se používá koncept známý jako rozlišení přetížení (overload resolution), který určuje, která verze metody se má zavolat na základě argumentů poskytnutých při volání metody.
+    <br><br>
+    Například, můžete mít třídu s metodou Print(), která může přijmout string nebo int jako parametr:
+    <pre>
+    <code class="language-csharp">
+public class Example
+{
+    public void Print(string message)
+    {
+        Console.WriteLine($"Printing string: {message}");
+    }
+
+    public void Print(int number)
+    {
+        Console.WriteLine($"Printing number: {number}");
+    }
+}
+    </code>
+</pre>
+    V tomto příkladu, když zavoláte metodu Print() s string jako argumentem, bude zavolána první verze metody. Když zavoláte metodu Print() s int jako argumentem, bude zavolána druhá verze metody.
+    <br/><br/>
+    Překrývání metod umožňuje vašim třídám být flexibilnější a snadněji použitelné, protože metoda může přijmout různé typy dat a provést různé operace v závislosti na typu dat.
+
+    <div class="sha text-center">Více informací: <a href="https://www.dotnetportal.cz/blogy/12/Ondrej-Janacek/5372/C-Internals-Method-Overloading">dotnetportal.cz</a></div>
+</div>
+
+<div class="display-3">
+    Rozhraní <br/><span class="sha">Interface</span>
+</div>
+
+<div class="background-text">
+    Rozhraní v C# je návrh pro třídy, který definuje sadu metod, vlastností a událostí, které musí implementující třída implementovat1. Rozhraní poskytuje způsob, jak dosáhnout vícenásobné dědičnosti v C#, protože třída může implementovat více rozhraní.<br/><br>
+    
+    Rozhraní v jazyce C# obsahuje definice pro skupinu souvisejících funkcí, které musí implementovat ne abstraktní třída nebo struktura2. Určuje členy a jejich podpisy pro typ, který implementuje rozhraní.<br/><br>
+    
+    Rozhraní definujete pomocí klíčového slova interface, jak ukazuje následující příklad:
+    
+    <pre>
+    <code class="language-csharp">
+interface ISampleInterface
+{
+    void SampleMethod();
+}
+    </code>
+</pre>
+    Jakákoli třída nebo struktura, která implementuje ISampleInterface rozhraní, musí obsahovat definici pro metodu SampleMethod, která odpovídá podpisu, který rozhraní určuje.
+    <br/><br>
+    Rozhraní mohou obsahovat metody instancí, vlastnosti, události, indexery nebo libovolnou kombinaci těchto čtyř typů členů1. Rozhraní nemůže obsahovat pole instance, konstruktory instancí ani finalizátor<br/> <br>
+    
+    Členy rozhraní jsou ve výchozím nastavení veřejné a můžete explicitně zadat modifikátory přístupnosti, například public, protected, internal, private, protected internal nebo private protected<br/><br>
+    
+    Třída nebo struktura, která implementuje rozhraní, musí poskytovat implementaci pro všechny deklarované členy bez výchozí implementace poskytované rozhraním. <br/><br/>
+    
+    <div class="sha text-center">Více informací: <a href="https://www.w3schools.com/cs/cs_interface.php">w3schools</a></div>
+</div>
+
+<div class="display-3">
+    Abstraktní třída v C#
+</div>
+<div class="background-text">
+    Abstraktní třída v C# je speciální typ třídy, který nemůže být instancován a slouží jako základ pro odvozené třídy. Zde jsou klíčové body o abstraktních třídách.
+    <br/><br/>
+    Abstraktní třída je deklarována pomocí klíčového slova abstract. Například:
+    <pre>
+    <code class="language-csharp">
+public abstract class A 
+{ 
+    // Class members here. 
+}
+    </code>
+</pre>
+    Abstraktní třída může obsahovat jak abstraktní, tak neabstraktní metody, vlastnosti, indexery nebo události.
+
+    <br/>
+    <span>Abstraktní metody: </span> Abstraktní metody jsou deklarovány v abstraktní třídě a nemají žádnou implementaci v abstraktní třídě. Tyto metody musí být implementovány v odvozených třídách. Například:
+    <pre>
+    <code class="language-csharp">
+public abstract class A 
+{ 
+    public abstract void DoWork(int i); 
+}
+    </code>
+</pre>
+    Abstraktní třídy mohou být děděny a jejich abstraktní metody musí být implementovány v odvozených třídách. Nelze vytvořit instanci abstraktní třídy.
+    <br><br>
+    Hlavním účelem abstraktní třídy je poskytnout společnou definici základní třídy, kterou může sdílet více odvozených tříd.
+    <br><br>
+    Zde je jednoduchý příklad abstraktní třídy a její implementace:
+    
+    <pre>
+    <code class="language-csharp">
+public abstract class Shape
+{
+    public abstract double Area { get; }
+}
+
+public class Square : Shape
+{
+    private int side;
+    public Square(int side)
+    {
+        this.side = side;
+    }
+
+    public override double Area
+    {
+        get { return side * side; }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Square square = new Square(5);
+        Console.WriteLine($"Area of Square: {square.Area}"); // Area of Square: 25
+    }
+}
+
+    </code>
+</pre>
+    <div class="sha text-center">Více informací: <a href="https://askanydifference.com/cs/difference-between-abstract-class-and-interface-in-c/?utm_content=cmp-true">askanydifference</a></div>
+
+</div>

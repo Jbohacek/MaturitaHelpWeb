@@ -9,5 +9,15 @@ namespace Maturita.Web.Areas.Programovani.Controllers
         {
             return View();
         }
+
+        public IActionResult DedicnostOOP()
+        {
+            return View();
+        }
+
+        public IActionResult UML()
+        {
+            return View();
+        }
     }
 }
