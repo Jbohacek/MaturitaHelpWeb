@@ -58,25 +58,262 @@
     Diagram tříd (Class Diagram)
 </div>
 <div class="background-text">
-    je jedním z typů UML diagramů, který se používá k vizuálnímu zobrazení struktury a vztahů tříd v systému. Třídy jsou znázorněny jako boxy, které obsahují tři části: název třídy, atributy a metody.
+    Diagram tříd je diagram implementace. To je rozdíl oproti doménovému
+    modelu, který byl spíše náčrt systému. Class diagram je již naostro,
+    musí být úplný, když ho programátor přepíše do kódu, kód musí
+    fungovat. Budeme zde mít tedy všechny třídy, které aplikace bude obsahovat.
+    Třídy budou mít všechny atributy a také metody. Diagram je
+    platformově závislý, tedy specifický pro určitý
+    programovací jazyk. Mimo jiné to znamená, že se v identifikátorech již
+    nevyskytuje diakritika, atributy mají datové typy specifické pro daný jazyk
+    a podobně.
 
     <br/><br/>
-    Diagramy tříd zobrazují vztahy mezi třídami, jako jsou asociace, agregace, kompozice, dědičnost a závislosti. To pomáhá zainteresovaným stranám, včetně vývojářů, návrhářů a obchodních analytiků, pochopit, jak jsou různé komponenty systému propojeny.
-    <br/><br>
-    Diagramy tříd jsou užitečné v mnoha fázích návrhu systému. Poskytují jasný a stručný způsob komunikace mezi týmy, což šetří čas, když týmy mohou vizualizovat procesy, interakce uživatelů a statickou strukturu systému
+    Class diagram je návod pro programátora, ten by již neměl s naším
+    diagramem řešit žádné zásadní otázky ani problémy, jeho práce by měla
+    být (možná bohužel)
+    rutinní. Návrh systému mají na starosti zkušení programátoři a
+    analytici. Díky návrhu se potom samotné programování může předat i
+    méně zkušeným programátorům, kteří jsou mnohdy levnější. Diagram
+    tříd je dobré vytvořit však i v případě, že systém píšeme jen pro
+    sebe, donutí nás to nejprve přemýšlet v kontextu celého
+    systému a až potom programovat. Nestane se nám, že napíšeme
+    půlku systému a potom zjistíme, že to takhle nebude fungovat. Složitější
+    informační systémy již nelze vytvářet bez návrhu a i práce v týmu se
+    bez kvalitního návrhu neobejde. Diagram nám do budoucnosti poslouží i jako
+    dokumentace.
+    <br/><br />
+    Ukažme si ještě jednou grafickou notaci třídy v UML, tentokrát již
+    kompletní:
+    <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/class1.png"/>
     
-    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/OOP/UMLClass.png"/>
+    V první části obdélníku je opět název třídy, tentokrát již bez
+    diakritiky.
+    <br/><br/>
+    V druhé části jsou přítomny atributy s <span>datovými typy.</span>
+    Před každým atributem je uveden <span>modifikátor přístupu</span>.
+    Máme 4 možnosti:
+    <ul>
+        <li><span>- (mínus)</span> - Privátní atribut (private).</li>
+        <li><span>+ (plus)</span> - Veřejný atribut (public).</li>
+        <li><span># (hash kříž)</span> - Protected atribut (protected)</li>
+        <li><span>- (tilda)</span> -  Atribut viditelný v rámci balíku(package).</li>
+    </ul>
+    Význam prvních 3 určitě známe z <a asp-controller="QuestionSeriesSecond" asp-action="ZakladyOOP">objektově orientovaného programování</a>
+    , package atribut je atribut viditelný v rámci celého balíčku
+    tříd (tedy jmenného prostoru).
+    <br/><br />
+    Mezi název atributu a datový typ píšeme dvojtečku.
+    <br/><br />
+    Metody v posledním obdélníku jsou zapisovány podobně. Je možné
+    specifikovat ještě několik symbolů, ale to se v praxi příliš nepoužívá
+    a proto se tím nebudeme zabývat.
+  
+    <div class="display-4 my-3"><span>Vztahy</span></div>
     
-    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/OOP/uml-classdiagram.png"/>
-    
-    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/OOP/uml-classdiagram2.png"/>
+    <div class="display-5 my-2">Realizace (realization)</div>
+    Vztah realizace je mezi interface a třídou, která tento interface
+    implementuje. Třída reprezentující interface má tzv.
+    stereotyp. Ten se píše do dvojitých špičatých závorek,
+    stejně jako tomu je u vazby @("<<include>>") v Use Case
+    diagramu. Stereotyp umožňuje změnit význam určitého prvku v diagramu,
+    nyní měníme třídu na interface. Třída implementující interface je k
+    interface připojena vazbou podobnou dědičnosti, pouze je čára vykreslena
+    jako přerušovaná.
 
-    <div class="sha text-center">Více informací: <a href="https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-class-diagram-tutorial/">visual-paradigm.com</a></div>
+    <img class="img-fluid w-25 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/realization.png"/>
+    
+    <div class="display-5 my-2">Asociační třída (Association class)</div>
+    Asociační třída je třída, která zprostředkovává vztah mezi 2
+    entitami. Výhodou je to, že může vztahu dodat nějaké atributy. Často se
+    uvádí příklad tříd Osoba a Zajezd, kdy asociační třída Ucast
+    přiřazuje osobu na zájezd a dodává čas příjezdu a odjezdu. Dalším
+    příkladem je třeba Osoba a Hotel, kdy v hotelu není pevně stanovený čas
+    ubytování a objednává si ho konkrétní osoba. Podobná třída by mohla
+    ještě např. být mezi zaměstnancem a firmou, kde by definovala plat
+    zaměstnance. Dalším využitím může být možnost takto vytvořit vazbu
+    M:N, podobně, jako to funguje u databází. Asociační třída by tedy držela
+    kolekci referencí. Použití asociační třídy může být poněkud
+    zavádějící a pokud si nejste jistí, tak se ji raději vyhněte.
+    
+    <img class="img-fluid w-25 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/association_class.png" />
+
+    <div class="display-4 my-3"><span>Příklad</span></div>
+    
+    Přejděme k příkladu a vytvořme si Class diagram ITnetwork. Budeme
+    samozřejmě vycházet z předešlého doménového modelu.
+
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/class_diagram.png" />
+    
+    Vidíme, že oproti doménovému modelu zde máme úplně novou třídu
+    System. Ta drží instance aktuálního článku a aktuálního uživatele.
+    Dále drží kolekce článků, členů a sekcí. Doménový model pouze mapoval
+    důležité entity z hlediska business zadání a tedy ani nepřemýšlel nad
+    tím, jak systém bude uvnitř fungovat. Počet tříd se tedy prakticky vždy s
+    přechodem od doménového modelu k Class diagramu zvýší.
+    <br/><br />
+    Instance systému se vytváří s každým HTTP požadavkem, jak nám říká
+    poznámka ke třídě nalevo. Za povšimnutí stojí také výčtový typ
+    StavClanku, který je zde zakreslen jako třída a výčtový typ je z něj
+    vytvořen pomocí stereotypu @("<<enumerable>>"). Zbytek jsme si již
+    popsali, takže si diagram prohlédněte. Jako je to u všech diagramů, je to
+    jeden možný způsob, jak systém navrhnout, možností je nespočetně a i
+    těch správných je mnoho.
+
+    <div class="sha text-center">Zdroj: <a href="https://www.itnetwork.cz/navrh/uml/uml-class-diagram-tridni-model">itNetwork</a></div>
     
     
     
 
 </div>
 
-<div class="sha text-center">Více informací: <a href="https://www.itnetwork.cz/navrh/uml/uml-use-case-diagram">visual-paradigm.com</a></div>
+<div class="display-3">
+    Use Case (Případ užití)
+</div>
+<div class="background-text">
+    Use Case Diagram (česky diagram případů užití) zobrazuje
+    <span>chování systému</span> tak, <span>jak ho vidí
+        uživatel</span>. <span>Účelem diagramu je popsat
+        funkcionalitu systému</span>, tedy co od něj klient nebo my očekáváme.
+    Diagram vypovídá o tom,<span>co má systém umět</span> , ale
+    <span>neříká, jak to bude dělat</span>. Proto je to většinou první
+    diagram, který při návrhu informačního systému vytváříme. Je
+    důležité se nejprve shodnout na tom, co má náš systém (nebo aplikace,
+    hra, cokoli) umět. Až potom má smysl se ptát, jak to vlastně uděláme.
+    <br/><br />
+    Use Case diagram se skládá z případů užití (use case), dále aktérů
+    (actors) a vztahů mezi nimi.
+    <br/><br />
+    Případ užití (nebo zkráceně UC) je sada několika akcí, které vedou k
+    dosažení určitého cíle. Use Case může být přidání komentáře k
+    článku, registrování nového uživatele nebo např. vytisknutí dokumentu.
+    Definuje tedy jednu funkcionalitu, kterou by měl navrhovaný systém umět. Ta
+    v sobě obsahuje další akce, např. přidání komentáře bude obsahovat
+    ověření uživatele, validaci zadaných dat, zápis do databáze apod. To v
+    diagramu zachyceno již nebude. UML často hovoří o tzv. blackboxu (černé
+    skříňce), kde skryjeme vnitřní logiku a pracujeme pouze s komponentami.
+    Tento princip přesně využívá UC diagram.
+    <br /><br />
+    Use Case je nejčastěji zakreslován jako elipsa s jeho názvem uvnitř.
+    <img class="img-fluid w-25 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/usecase.png" />
+    Případy užití vychází ze zadání systému od našeho zákazníka
+    (pokud děláme systém pro sebe, tak z našich poznámek, co by měl umět).
+    Hovoříme o tzv.<span>mapování uživatelských požadavků na jednotlivé
+        Use Case</span> .
+
+    <div class="display-5 my-2">Actor (Aktér)</div>
+    
+    Aktér je role, která komunikuje s jednotlivými případy užití. V této
+    roli může být obsazen uživatel nebo externí systém. Aktérem tedy může
+    být např. Uživatel, Administrátor, SMS server nebo dokonce Čas. Aktér
+    inicializuje nějaký případ užití (např. Uživatel vloží příspěvek do
+    fóra). Zde bychom hovořili o tom, že je aktér aktivní. Aktér sám však
+    může být případem užití iniciován (např. externí SMS server je
+    iniciován případem užití Poslat SMS). V tomto případě hovoříme o
+    pasivním aktérovi a zakresluje ho v diagramu napravo.
+    <br/><br/>
+    Aktéry znázorňujeme jako postavu z čar s názvem napsaným pod ní.
+    <img class="img-fluid w-25 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/actor.png" />
+    Pojďme si nyní zkusit vytvořit ukázkový UC diagram, jelikož všichni
+    znáte ITnetwork, budeme navrhovat jemu podobný systém, jen značně
+    zjednodušený. Tento ukázkový systém nás bude provázet celým UML kurzem,
+    vlastně si celý ITnetwork navrhneme pomocí několika UML diagramů. Popis
+    jeho funkčnosti by vypadal pomocí Use Case diagramu takto:
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/usecase_diagram.png" />
+    Vidíme, že diagram není složité nakreslit. Navrhnout však případy
+    užití tak, aby jich byl rozumný počet a rovnoměrně pokrývaly
+    funkcionalitu systému již chce trochu praxe. Určitě je však lepší
+    nějaký než žádný, takže se ho nebojte používat 
+    <ul>
+        <li>Neregistrovaný uživatel může psát komentáře nebo se zaregistrovat.
+            Komunikace probíhá zleva doprava (pokud není šipkou naznačen jiný směr).
+            Aktéři jsou tedy propojeni s těmi případy užití, které se jich týkají.
+            Vazbě znázorněné jednoduchou čarou říkáme asociace.
+            Může mít specifikovanou násobnost i směr, ale tím se zde nebudeme ještě
+            zabývat.
+        </li>
+        <li>Člen může to samé, jako neregistrovaný uživatel, protože z něj
+            dědí. Tento vztah je znázorněn prázdnou uzavřenou šipkou směrem k
+            předkovi. Tuto vazbu nazýváme generalizace. Člen může
+            navíc ještě spravovat svůj profil a hodnotit články.
+        </li>
+        <li>Redaktor též umí to samé jako člen, ale navíc může články i
+            psát.
+        </li>
+        <li>Administrátor může oproti redaktorům opět spouštět několik
+            funkčností navíc. Zajímavá je vazba @("<<include>>").
+            Ta se používá v případě, že je nějaká funkcionalita důležitá
+            natolik, že ji chceme mít v diagramu místo toho, abychom ji jen prohlásili
+            součástí nějakého Use Case. Případ užití napojený pomocí vazby
+            @("<<include>>") se spustí vždy, když je
+            spuštěn případ, na který je napojen. Zde je tedy autor článku upomenut
+            při schválení a zamítnutí článku. Samotné upomenutí v sobě bude mít
+            další logiku, např. jestli emailem, SMS apod. My ho máme zabalený v jednom
+            případu užití. Kromě @("<<include>>") existuje ještě
+            vazba @("<<extend>>"), ale ta je velmi zavádějící a
+            příliš se nepoužívá, nebudeme se jí tedy zabývat.
+            </li>
+        <li>Posledním aktérem je Timer (čas), ten se v určitou dobu spustí a
+            provede odeslání aktualizací emailem. Aktéra čas zakreslujeme na pravou
+            stranu, ačkoli je v podstatě aktivní.
+        </li>
+    </ul>
+    <div class="sha text-center">Zdroj: <a href="https://www.itnetwork.cz/navrh/uml/uml-use-case-diagram">itNetwork</a></div>
+
+</div>
+
+<div class="display-3">
+    State diagram
+</div>
+<div class="background-text">
+    State Machine Diagram se používá k reprezentaci stavu systému nebo části systému v konečných okamžicích času.
+    Je to behaviorální diagram, který popisuje chování pomocí konečných stavových přechodů.
+    <br /><br />
+    Například:
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/State/A-State-Machine-Diagram-for-user-verification.jpg" />
+    State Machine Diagram zobrazuje různé stavy, ve kterých se nachází verifikační podsystém nebo třída v konkrétním systému. Tento diagram modeluje dynamické chování třídy v reakci na čas a změny vnějších podnětů.
+    
+    <div class="display-5 my-2">Základ</div>
+    Používáme tečku jako začátek
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/State/initial-State-(1).jpg" />
+    
+    <div class="display-5 my-2">Tranzice</div>
+    Používáme šipku, která ukazuje kam pujde dál kod a text nám řiká jak se nazývá event nebo methoda.
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/State/transition.jpg" />
+    
+    <div class="display-5 my-2">Status</div>
+    Používáme obdélník, který nám ukazuje jaký stav je v danou chvíli.
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/State/state.jpg" />
+    
+    <div class="display-5 my-2">Vidlice</div>
+    Používáme vidlici, která nám ukazuje že se stav rozděluje na více stavů. Něco jako if a else
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/State/fork-(1).jpg" />
+    
+    <div class="display-5 my-2">Finalni stav</div>
+    Používáme kruh, který nám ukazuje že je konec.
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/State/final-state-(1).jpg" />
+    
+    
+    <div class="display-5 my-2">Příklad</div>
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/State/state-machine-diagram-for-an-online-order.jpg" />
+    
+    State diagram je velmi podrobný, tohle je jen malý výsek z toho co všechno může obsahovat. Pan profesor nám toho moc neřekl, takže tohle je vše co budete potřebovat.
+
+    <div class="sha text-center">Více info: <a href="https://www.geeksforgeeks.org/unified-modeling-language-uml-state-diagrams/">geeksforgeeks</a></div>
+
+</div>
+
+<div class="display-3">
+    Sekvenční diagram
+</div>
+<div class="background-text">
+    Zachycuje časově uspořádanou posloupnost zasílání zpráv mezi objekty. Sekvenční diagram nejčastěji znázorňuje spolupráci několika vzorových objektů v rámci jednoho případu užití.
+    <br/><br />
+    Jednotlivé procesy či objekty zapojené do popisovaného případu užití jsou umístěn v horní části diagramu. Od nich pak vedou směrem dolů čáry (lifelines), které znázorňují běh času. Mezi čarami jsou pak zakresleny vodorovné šipky různých typů, které reprezentují zprávy posílané mezi objekty. Plné šipky značí volání, přerušované pak odpověď. Podlouhlé obdélníky na svislých čarách vyznačují dobu zpracovávání dané zprávy či čekání na odpověď.
+    
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/UML/UML_Sequence_diagram.jpg" />
+    
+    <iframe class="mx-auto d-block w-100" height="400" src="https://www.youtube.com/embed/pCK6prSq8aw?si=_XDYed7m__8mz6Rn" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+</div>
 
