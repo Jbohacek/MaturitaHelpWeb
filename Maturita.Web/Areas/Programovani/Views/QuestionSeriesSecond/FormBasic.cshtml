@@ -107,36 +107,91 @@ this.listbox.Items.add(new Person(){
     Lze tam i psat, ale to se dá vypnout přes vlastnost <span>DropDownStyle > list</span> <br />
     Lze brat data z datasource jako je například List nebo BindingList
 
+    <img class="img-fluid w-25 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/ComboBox.png"/>
+
 
 </div>
 
+<div class="display-4">
+    Události
+</div>
 <div class="background-text">
-     Prace s více forms
+    Každý control má <span>vlastní události</span>, které se volají, když se něco stane <br />
+    Pod ikonkou <span>blesku</span> najdeme <span>všechny</span> události <br />
+    Přes UI, lze nastavit pouze jednu událost, ale v kodu lze přidat více <br />
+    <pre>
+    <code class="language-csharp">
+this.Button_Preview.click += (s,e) => {
+// Sem anonynmní funkci
+}
 
-     this.dialog.Result = dialogResult.Ok; // Taky moznost
+// nebo
 
-     .showDialog() = zobrazi formular a nemuzeme hybat
+this.Button_Preview.click += NaseMetoda;
 
-     if(dialog result == OK)
-     bla bla bla
+public void NaseMetoda(object sender, EventArgs e)
+{
+// sem nasi funkci
+}
+    </code>
+</pre>
+    <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/Udalosti.png" />
 
-     Data musime vytahnout přes nějakou metodu
+</div>
 
-     Otevření monitoru na jiném
-     Windows start position na center parent = vecentrovaný na střed
+<div class="display-4">
+    Práce s více forms
+</div>
+
+<div class="background-text">
+    Pro vytvoření druhého formuláře, musíme vytvořit nový objekt <span>Form</span> <br />
+    Na to abychom zobrazily tento prvek, musíme použít <span>.Show()</span> nebo <span>.ShowDialog()</span> <br />
+    
+    <table>
+        <tbody>
+        <tr>
+            <td class="px-5">.Show()</td>
+            <td class="px-5">.ShowDialog()</td>
+        </tr>
+        <tr>
+            <td><ul>
+                <li>Umožnuje práci na obou formech</li>
+                <li>Hůře získáváme hodnoty</li>
+            </ul></td>
+            <td><ul>
+                <li>Neumožnuje práci na obou formech</li>
+                <li>Lepe ziskáme hodnoty přes dialog result</li>
+            </ul></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="d-none">
+        this.dialog.Result = dialogResult.Ok; // Taky moznost
+
+        .showDialog() = zobrazi formular a nemuzeme hybat
+
+        if(dialog result == OK)
+        bla bla bla
+
+        Data musime vytahnout přes nějakou metodu
+
+        Otevření monitoru na jiném
+        Windows start position na center parent = vecentrovaný na střed
 
 
-     Podívat se na změnu location.
+        Podívat se na změnu location.
 
-     .Show() umoznuje praci na více obrazovek
+        .Show() umoznuje praci na více obrazovek
 
 
-     frm.FormClosed += (s,e) => {
-         neco neco
-     }
+        frm.FormClosed += (s,e) => {
+        neco neco
+        }
 
-     Pokud budem používat .Show(), musime používat 
+        Pokud budem používat .Show(), musime používat 
 
+    </div>
+    
 
 
 </div>
