@@ -15,9 +15,16 @@ namespace Maturita.Web.Areas.Programovani.Controllers
             return View();
         }
 
+        public IActionResult PokrocilePrvkyOOP()
+        {
+            return View();
+        }
+
         public IActionResult UML()
         {
             return View();
         }
+
+
     }
 }
