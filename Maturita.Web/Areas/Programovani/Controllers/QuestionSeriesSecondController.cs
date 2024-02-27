@@ -25,6 +25,14 @@ namespace Maturita.Web.Areas.Programovani.Controllers
             return View();
         }
 
+        public IActionResult FormBasic()
+        {
+            return View();
+        }
 
+        public IActionResult FormAdvance()
+        {
+            return View();
+        }
     }
 }

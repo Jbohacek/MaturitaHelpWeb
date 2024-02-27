@@ -12,12 +12,12 @@
 
 
 <div class="display-3">
-    Statický metody
+    Static
 </div>
 
 <div class="background-text">
     Statický jsou vždy přístupny i když instance není nijak declarovaná. <br />
-    Jedná se o "čuňárnu" a jedná se všudepřístupné hodnoty, avšak s timto musíme velmi opratrně pracovat. <br />
+    Jedná se o "čuňárnu" a jedná se všudepřístupné hodnoty, avšak s timto musíme velmi opratrně pracovat. 
     <br /><br />
     Statický konstruktor se zavolá v momentě, když zavoláme <span>jakoukoliv</span> statickou
     <ul>
@@ -157,9 +157,8 @@ public class MyListInt@("<T>")
 public class MyList@("<TKey, TValue>") 
 
     // I na více mužeme definovat jejich typy
-    public class MyList@("<TKey, TValue>") where TKey : class, IDisposable
-                                           where TValue : new()
-
+public class MyList@("<TKey, TValue>") where TKey : class, IDisposable
+                                       where TValue : new()
 
     // hodnotovy typ
 public class MyList@("<T>") : where T : struct 
