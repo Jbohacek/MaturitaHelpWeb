@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Form zaklady";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Form zaklady
+</div>
+
+<div class="background-text">
+    Každá komponenta má název <span>Name</span> , idealně nechat prefix "button_" <br />
+    Každá komponenta má vlastní události, který se volají, když vznikně nějaká událost. <br />
+    <br />
+    Form je parial class, která dědí z <span>form</span> <br />
+    V <span>.desginer.cs </span> najdeme generovaný kod, který se tvoří, když předáváme prvky na form z nástrojů. <br />
+
+    <span>InitializeComponent()</span> inicializuje ten desginer a přidá prvky na form
+    Visualní controly nemusíme popisovat
+
+    <pre>
+    <code class="language-csharp">
+    MessageBox.Show("Cokoliv")
+    // Vyhodí text box
+    </code>
+</pre>
+
+button 
+checkbox 
+textbox 
+datagrid 
+listbox
+
+</div>
+<div class="background-text">
+    ListBox
+    Umožnuje obsahovat nějké prvky, takzvanou kolekci <span>items</span> do které můžeme přidávat hodnoty <br />
+
+    Ziskaní vybranné hodnoty, mužeme přes 
+    
+    this.listbox.SelectedIndex = vybranný index
+    this.listbox.Items[index]
+    pokud není nic vybranné = -1
+
+    this.listbox.SelectedItem = vybranou hodnotu hned
+    Pokud není nic vybranné, NULL
+
+
+    Lze přidávat více, než jen string, třeba i nějaký třídy.
+
+    public class Person{
+        public int Id {get;set;}
+        public string Name {get;set;}
+    }
+
+    this.listbox.Items.add(new Person(){
+        Id = 0,
+        Name = "Pepa"
+    })
+
+    Pokud se ted podíváme, tak dědí všechno z object a vola metodu <span>.ToString()</span>
+
+    Pro změnu musíme overridnout .ToString()
+
+    Lze kombinovat
+
+    Lze brat data z datasource
+
+</div>
+
+    <div class="background-text">
+        ComboBox
+
+        Je to kombinace listboxu s comboboxem
+
+        Lze tam i psat, ale to se dá vypnout přes vlastnost <span>DropDownStyle > list</span>
+    
+        
+        Lze brat data z datasource
+
+
+    </div>
+
+<div class="background-text">
+     Prace s více forms
+
+     this.dialog.Result = dialogResult.Ok; // Taky moznost
+
+     .showDialog() = zobrazi formular a nemuzeme hybat
+
+     if(dialog result == OK)
+     bla bla bla
+
+     Data musime vytahnout přes nějakou metodu
+
+     Otevření monitoru na jiném
+     Windows start position na center parent = vecentrovaný na střed
+
+
+     Podívat se na změnu location.
+
+     .Show() umoznuje praci na více obrazovek
+
+
+     frm.FormClosed += (s,e) => {
+         neco neco
+     }
+
+     Pokud budem používat .Show(), musime používat 
+
+
+
+</div>

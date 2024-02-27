@@ -96,6 +96,48 @@ public class Mammal : Animal
         return $"Mammal: {Name}";
     }
 }
+
+public class Vehicle
+{
+    public Vehicle()
+    {
+        Console.WriteLine("Vehicle");
+    }
+}
+
+public class Car : Vehicle
+{
+    public Car()
+    {
+        Console.WriteLine("Car");
+    }
+}
+
+public class Truck : Car
+{
+    public Truck()
+    {
+        Console.WriteLine("Truck")
+    }
+}
+
+
+Truck Nakladak = new Truck();
+
+/*
+
+: base() se vždy sám napiše
+
+Vypíše:
+
+Vehicle
+Car
+Truck
+
+*/
+
+
+
     </code>
 </pre>
     <div class="display-5 my-3">Rozdíly mezi this/base </div>
@@ -342,6 +384,11 @@ public abstract class A
 public abstract class A 
 { 
     public abstract void DoWork(int i); 
+
+    public void OtherWork()
+    {
+        // muže být i deklarovaná, oproti Interface
+    }
 }
     </code>
 </pre>

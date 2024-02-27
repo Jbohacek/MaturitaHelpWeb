@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Form datagrid";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Form Validation
+</div>
+
+<div class="background-text">
+    Jde provádět custom nebo systémova
+
+    blinkáni se da vypnout přes blink style
+
+    private bool IsValid()
+    {
+        bool valid = true;
+        this.errorprovider.Clear();
+
+
+        if(this.textbox.text == "")
+        {
+            valid = false
+            this.errorProvider.setError(this.textbox_Name, "Pole je povinné") // tohle automaticky vytvoři error
+        }
+        .. toto vicekrat
+    }
+
+
+
+    Nativní validace přes události
+
+    validated
+    validating
+
+    Validating
+
+    Nelze opustit komponentu, lze povolit na formuláři "AutoValidate" allow Focus change nebo disabled
+
+    private void textBox_Surname_Validating{
+        if(this.textbox.text == "")
+        {
+            e.cancel = true;
+            this.errorProvider.setError(this.textbox_Name, "Pole je povinné") // tohle automaticky vytvoři error
+        }
+    }
+
+    this.validateChildred() = vraci true nebo false na závislosti udalosti Validating a pokud maji e.cancel
+
+
+    Udalost validated, a vyvolá 
+
+
+</div>
