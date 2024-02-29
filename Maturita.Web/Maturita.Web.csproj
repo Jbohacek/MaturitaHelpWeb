@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesSecond\DedicnostOOP.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesSecond\Regex.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesSecond\ZakladyOOP.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\DatoveStruktury.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\PoleAKolekce.cshtml" />
@@ -69,6 +70,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesSecond\DedicnostOOP.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesSecond\Regex.cshtml" />
   </ItemGroup>
 
 </Project>
