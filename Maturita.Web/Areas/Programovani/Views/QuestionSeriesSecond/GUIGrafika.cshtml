@@ -1,0 +1,162 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Gui grafika";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Gui grafika
+</div>
+
+<div class="background-text">
+    Kreslí se na jakýkoliv control, primárně na picture box, jde i panel. <br/>
+    
+    Musí se vložit event paint, na kterým je evenhlander e, který nám umožnuje vykreslit
+    
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/Gui/paint.png"/>
+
+    Paint se vola vždy, když se potřebuje vykreslení, což je při změně rozlišení aplikace. Změnšování a zvětšování. <br/>
+
+        
+    graphics g = e.graphics 
+
+
+    // Vykreslí čáru od 10,10 do 100,200
+    
+    nebo na cizim k objektu
+    
+    graphics g = this.picturebox.createGraphics()
+
+    graphics mizí jakmile se změní rozlišení aplikace
+    
+    this.picturebox.refresh() spustí paint()
+    
+    g.smoothingMode = smoothingMode.HighQuality // Nemusime 
+
+</div>
+
+
+<div class="display-3">
+    Metody
+</div>
+
+<div>
+    
+
+    g.drawRectangle(pens.red, 10,10,100,200)
+    
+    Pozor na odszování
+    
+    g.fillElipse(Brushes.Green, 10,10,90,100)
+    
+    
+    Arc = oblouk
+    
+    bezier = 4 body a 
+    
+    curve = více bodů a zaoblí
+    
+    drawimage = obrazek
+    
+    drawLine = čara
+    
+    drawPie = pacman
+    
+    drawRectangle = obdelník
+
+    drawPolygon = trojuhelnik
+    
+    drawString = text
+
+
+</div>
+
+<div class="display-3">
+    Pen a brush
+</div>
+
+<div>
+    
+    Pens = na čary
+    brush = na kreslení
+    
+
+    pen p = new Pen(Color.Black, 10);
+
+
+    // Stačí solidBrush znát, ale je dobré vědět jen o nich
+    (abstraktni) Brush b = SolidBrush(Color.FromArgb(R,G,B,A))
+
+    A = pruhlednost
+
+    // napsat zde i pen
+
+    g.DrawString("Hello world", new Font("Arial",30), brushes.Blue, 100,200)
+
+
+
+</div>
+
+<div class="display-3">
+    DrawString
+</div>
+<div>
+    
+    g.drawString()
+
+    Vycentrovani textu,
+    
+    zjištění velikosti toho textu
+    
+    SizeF = g.MessureString("Hello string", new Font("Arial",30))
+    
+    
+    existují fonty - proporcialtilní font, kde každý písmenko je stejně velký
+    
+    například consolas
+
+</div>
+
+<div class="display-3">
+    Práce s obrázky
+</div>
+
+<div>
+    
+    Obrazky 
+    
+    g.drawImage(new bitmap(@@"C:/User/obrazek.png"), X,Y, widht, height)
+
+    prace s bitmapy ano
+    
+    bitmap bmp = new Bitmap(width,height);
+    
+    graphics g = Graphics.FromImage(bmp)
+    
+    // TedKreslim
+    
+    g.drawLine....
+    
+    
+    bmp.save(@@"C:/User/obrazek.png")
+
+</div>
+
+<div class="display-3">
+    Souřadnicový system
+</div>
+
+<div>
+    
+    g.translateTransofrm(50,100) - Posun stredu souradnicového systému
+    
+    g.rotateTransoform(30) - otačení o 30 stupňů středu souřadnicohé systému
+    
+    g.scaleTransofrm() - škálování souřadnicového systému násobení
+    Zoom například
+    
+    g.resetTransofrm() - resetuje
+
+</div>

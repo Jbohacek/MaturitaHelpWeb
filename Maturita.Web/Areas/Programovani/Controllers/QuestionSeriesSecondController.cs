@@ -39,5 +39,15 @@ namespace Maturita.Web.Areas.Programovani.Controllers
         {
             return View();
         }
+
+        public IActionResult GUIGrafika()
+        {
+            return View();
+        }
+
+        public IActionResult DesignPatterns()
+        {
+            return View();
+        }
     }
 }

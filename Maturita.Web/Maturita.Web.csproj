@@ -17,6 +17,7 @@
   <ItemGroup>
     <Folder Include="Areas\Programovani\Data\" />
     <Folder Include="Areas\Programovani\Models\" />
+    <Folder Include="wwwroot\Pictures\Gui\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +30,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesSecond\DedicnostOOP.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesSecond\DesignPatterns.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesSecond\Regex.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesSecond\ZakladyOOP.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\DatoveStruktury.cshtml" />
@@ -74,6 +76,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesSecond\Regex.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesSecond\DesignPatterns.cshtml" />
   </ItemGroup>
 
 </Project>
