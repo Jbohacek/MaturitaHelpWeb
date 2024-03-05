@@ -201,6 +201,11 @@ private void button_Send_Click(object sender, EventArgs e)
     this.DialogResult = DialogResult.OK;
     this.Close();
 }
+
+public string GetText()
+{
+    return textBox_Input.Text;
+}
 // * Request Form
 
 // Form1
@@ -222,7 +227,8 @@ else if (requestForm.DialogResult == DialogResult.OK)
 </pre>
 
         <span>Možnost 2: .show()</span><br/>
-        V tomhle momentě se spustí další form při běhu, takže není možné počkat na doběhnutí, takže je potřeba přidat metodu na event form closing
+        V tomhle momentě se spustí další form při běhu, takže není možné počkat na doběhnutí, takže je potřeba přidat metodu na event form closing <br/>
+        Pokud chcem nějakou hodnotu z form1 tak musime tak jednoduše přidat metodu getValue()
         <pre>
         <code class="language-csharp">
 
@@ -245,7 +251,10 @@ requestForm.FormClosed += (sender, e) => {
 // *Form1
 
 // Request Form
-//Stejný jako nahoře
+public string GetText()
+{
+    return textBox_Input.Text;
+}
 // * Request Form
 
 
