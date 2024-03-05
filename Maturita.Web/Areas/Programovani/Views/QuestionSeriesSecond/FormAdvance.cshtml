@@ -3,6 +3,7 @@
 
     ViewBag.Title = "Form datagrid";
     ViewBag.Author = "Jakub Boháček";
+    ViewBag.Editor = "David";
 
 }
 
@@ -10,76 +11,220 @@
     Form datagrid
 </div>
 <div class="background-text">
-    Neni potřeba databaze, je poteřeba jen suchy datagrid.
-
-    Sám o sobě má metody na přidávání uživatelem a pod, nedoporučuju (pridat obrazek)
-
-
-    1 prasácký ládování 
-
-    this.datagridView.Collums.Add("Name", "Jmeno")
-    this.datagridView.Collums.Add("Surname", "prijmeni")
-
-    this.datagridview.rows.add("Jakub","Bohajdo")
-
-
-    lze přidávat cokoliv přes UI, ale není to ochráněné, tudiž nebezpečné
-
-
-    <span>Prace s datasources</span>
-
-    List string data = new();
-
-    this.datagridView.datasource = this.data
-
-    Automaticky vytvoří soupečky
-
-    Data se nerefresuje automaticky, musí odpíchnout a zase připnout
-
-
-    Je poteřeba na automatickou obnovu používat binding list
-
-    Eventy
-    addingNew
-    ListChanged
-
-
-    <span>Zobrazovani</span>
-
-    atribute [browsable(false)] zakazuje výpis
-
-    atribute [DisplayName("Jmeno")] Změní název toho sloupečku
-
-    UI datapropertyName nám dáva možnost to udělat přes UI a změnit tak název
-
-    Sloupce, který nejsou na bindovany tak se tak vždy vypíšou
-
-    Musime v kodu
-    Před připojení datagridu mužeme nastavit vlastnost autogenerateCollums = false;
-
-    <span>Vybirani prvku</span>
-
-    Funguje vždy
-    this.datagriView.CurrentRow.Index
-
-    Funguje jen přes datasource
-    This.dataGridView.DataBoundItem 
-
-
-
-    <span>Implemetace vlastního</span>
-
-    Pokud přidáme interface IListSource
-    Má v sobě ten bindingList
-
-    Public IList GetList()
-    {
-        return data
-    }
-
-    (fotka v mobilu)
-
-
-    <span>Vystvetleni repository</span>
+    Data grid view slouší k zobrazení data třeba z nějaké kolekce. Vhodné je pro to používat list s názvem <span>BindingList</span> <br/>
+    Na tuhle otázku, není potřeba umět připojení k databazi, jedná se pouze o práci s datagridem.
+    <br/><br/> 
+    <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/dataGridView.png" />
+    Sám o sobě má metody na přidávání uživatelem a pod, doporučuju je vypnout (viz obrazek).
 
 </div>
+
+<div class="display-4">
+    Přidání collums
+</div>
+<div class="background-text">
+    <div class="d-flex gap-3">
+        <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/addCollums.png"/>
+        <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/addCollums2.png" />
+    </div>
+    Timto přidáme sloupec přes UI, převážně ta správná cesta, ovšem mužeme přidat atributy k vlastnostem třídy a automaticky se vytvoři<br/>
+    Za předpokladu že <span>AutoGenerateColumns = true</span> <br/>
+    <pre>
+    <code class="language-csharp">
+        [browsable(false)] public int Id {get;set;}  
+        // zakazuje výpis 
+
+        [DisplayName("Jméno")] public string Name {get;set;} 
+        // ukaže v tabulce název "Jméno" namísto Name
+    </code>
+</pre>
+    Přes <span>AutoSizeCollumnMode = fill</span> udělá hezčí zobrazení
+
+</div>
+
+
+<div class="display-4">
+    Přídávání hodnot ručně
+</div>
+<div class="background-text">
+    Nejlehčím způsobem, co jde tak je <span>rows.add()</span>, ale musime vedět, že v tomto případě přidáváme <span>params objektu</span> a jeden objekt je jedna buňka.
+    <pre>
+    <code class="language-csharp">
+Random rnd = new Random();
+
+this.dataGridView1.Rows.Add("Jakub", 50);
+this.dataGridView1.Rows.Add(new string("Adam"), rnd.Next(5,50) );
+this.dataGridView1.Rows.Add(Color.Black, Color.Black.A); // Object, takže jde vložit cokoliv
+    </code>
+</pre>
+    <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/datagridViewDataShow.png" />
+
+</div>
+
+<div class="display-4">
+    Přídávání hodnot přes datasource
+</div>
+<div class="background-text">
+    Do datagridu mužeme přidávat data přes datasource, což je například List a nebo preferovaně BindingList. Všechno musí dědit z <span>IListSource</span><br /> <br />
+
+    List nebo binding list nám umožnuje vypisovat vlastnosti z objektu, avšak musíme všechno správně připravit přidáváním collums. <br/>
+    Pokud přidáme collum, je potřeba vlastnost collumu <span>DataPropertyName</span> na název vlastnosti, kterou chceme vypsat. Pokud tak neuděláme a liší se názvy stane to co na obrázku.
+    Tuto hodnotu můžeme změnit v UI.
+    
+    <div class="d-flex gap-3 justify-content-around">
+        <div>
+            <div class="text-center">Zle</div>
+            <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/ListGridBad.png"/>
+        </div>
+        <div>
+            <div class="text-center">
+                Dobře
+            </div>
+            <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/ListGridGood.png"/>
+        </div>
+    </div>
+    
+    <div class="display-5 mb-3">
+        List nebo BindingList
+    </div>
+    <span>List</span> se pouze seznam, který se neobnovuje automaticky. Pro automatickou obnovu je poteřeba odebrat datasource a zase přidat.
+    
+    <pre>
+    <code class="language-csharp">
+dataSource = null;
+dataSource = NasList;
+    </code>
+</pre>
+    <span>BindingList</span> má event <span>addingNew</span> a <span>ListChanged</span> který mění hodntoy v datagridu.
+    <br/><br/>
+    <span>IListSource</span> je způsob jak udělat vlastní BindingList
+    <pre>
+    <code class="language-csharp">
+public class PersonDataModel : IListSource
+{
+    private BindingList@("<Person>") data = new BindingList@("<Person>")();
+
+    public bool ContainsListCollection => true;
+
+    public IList GetList()
+    {
+        return this.data;
+    }
+}
+    </code>
+</pre>
+
+</div>
+
+<div class="display-4">
+    Vybírání hodnot podle kliknutí
+</div>
+
+<div class="background-text">
+    Přidáme event <span>cellClick</span>, která má <span>sender</span> a <span>DataGridViewCellEventArgs</span>
+    <br/><br/>
+    sender - jedná se o datagridview
+    <br/>
+    DataGridViewCellEventArgs - jedná se hodnotu, která má dvě proměné <span>RowIndex</span> a <span>ColumnIndex</span>
+    
+    <br/><br/>
+    
+    Na získání hodnot jsou tyto věci.
+    <pre>
+    <code class="language-csharp">
+private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+{
+    var selectedItem = dataGridView1.SelectedCells[0].Value; 
+    // Vybere přesně tu hodnotu, na kterou se kliklo
+
+    var item = dataGridView1.Rows[e.RowIndex].DataBoundItem; 
+    // Vybere celý ten item na který se kliklo
+}
+    </code>
+</pre>
+    Pokud nebudeme mít dispozici <span>DataGridViewCellEventArgs</span>
+    
+    <pre>
+    <code class="language-csharp">
+private void button1_Click(object sender, EventArgs e)
+{
+    var selectedItem = dataGridView1.SelectedCells[0].Value;
+    // Vybere přesně tu hodnotu, na kterou se kliklo    
+
+    var selectedRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+    var item = dataGridView1.Rows[selectedRowIndex].DataBoundItem;
+    // Vybere celý ten item na který se kliklo
+}    
+
+    </code>
+</pre>
+</div>
+
+@* 
+1 prasácký ládování
+
+this.datagridView.Collums.Add("Name", "Jmeno")
+this.datagridView.Collums.Add("Surname", "prijmeni")
+
+this.datagridview.rows.add("Jakub","Bohajdo")
+
+
+lze přidávat cokoliv přes UI, ale není to ochráněné, tudiž nebezpečné
+
+
+<span>Prace s datasources</span>
+
+List string data = new();
+
+this.datagridView.datasource = this.data
+
+Automaticky vytvoří soupečky
+
+Data se nerefresuje automaticky, musí odpíchnout a zase připnout
+
+
+Je poteřeba na automatickou obnovu používat binding list
+
+Eventy
+addingNew
+ListChanged
+
+
+<span>Zobrazovani</span>
+
+atribute [browsable(false)] zakazuje výpis
+
+atribute [DisplayName("Jmeno")] Změní název toho sloupečku
+
+UI datapropertyName nám dáva možnost to udělat přes UI a změnit tak název
+
+Sloupce, který nejsou na bindovany tak se tak vždy vypíšou
+
+Musime v kodu
+Před připojení datagridu mužeme nastavit vlastnost autogenerateCollums = false;
+
+<span>Vybirani prvku</span>
+
+Funguje vždy
+this.datagriView.CurrentRow.Index
+
+Funguje jen přes datasource
+This.dataGridView.DataBoundItem
+
+
+
+<span>Implemetace vlastního</span>
+
+Pokud přidáme interface IListSource
+Má v sobě ten bindingList
+
+Public IList GetList()
+{
+return data
+}
+
+(fotka v mobilu)
+
+
+<span>Vystvetleni repository</span>
+ *@
