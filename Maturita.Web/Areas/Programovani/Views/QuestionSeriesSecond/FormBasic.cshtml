@@ -166,33 +166,158 @@ public void NaseMetoda(object sender, EventArgs e)
         </tr>
         </tbody>
     </table>
-    <div class="d-none">
-        this.dialog.Result = dialogResult.Ok; // Taky moznost
+    
+    <div class="display-4">
+        Přesouvání informací mezi forms
+    </div>
+    <div>
+        Máme 2 způsoby, jak to udělat a to je .show a .showDialog . Problém ale nastavá v tom, že ve ShowDialog zastaví kod a vrátí, kde jsme zavolali .show()
+        ovšem to má své výhody a nevýhody <br/>
+        <br/>
+        
+        Situace:<br/>
+        Máme 2 formy, jeden hlavní a druhý potvrzovací.
+        <div class="d-flex gap-2">
+            <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/Form1.png"/>
+            <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/request form.png"/>
+        </div>
+        
+        Request form se otevře a pak vyplní udaje v textuboxu v form1 <br/>
 
-        .showDialog() = zobrazi formular a nemuzeme hybat
+        <span>Možnost 1: .showDialog</span>
+        <pre>
+        <code class="language-csharp">
 
-        if(dialog result == OK)
-        bla bla bla
+// Request Form
 
-        Data musime vytahnout přes nějakou metodu
+private void button_Cancel_Click(object sender, EventArgs e)
+{
+    this.DialogResult = DialogResult.Abort;
+    this.Close();
+}
 
-        Otevření monitoru na jiném
-        Windows start position na center parent = vecentrovaný na střed
+private void button_Send_Click(object sender, EventArgs e)
+{
+    this.DialogResult = DialogResult.OK;
+    this.Close();
+}
+// * Request Form
+
+// Form1
+
+RequestForm requestForm = new RequestForm();
+requestForm.ShowDialog();
+
+if (requestForm.DialogResult == DialogResult.Abort)
+{
+    textBox_Show.Text = "Cancel";
+}
+else if (requestForm.DialogResult == DialogResult.OK)
+{
+    textBox_Show.Text = requestForm.GetText();
+}
+
+// *Form1
+    </code>
+</pre>
+
+        <span>Možnost 2: .show()</span><br/>
+        V tomhle momentě se spustí další form při běhu, takže není možné počkat na doběhnutí, takže je potřeba přidat metodu na event form closing
+        <pre>
+        <code class="language-csharp">
+
+// Form1
+RequestForm requestForm = new RequestForm();
+requestForm.Show();
+
+// anonymní funkce
+requestForm.FormClosed += (sender, e) => {
+    if (requestForm.DialogResult == DialogResult.Abort)
+    {
+        textBox_Show.Text = "Cancel";
+    }
+    else if (requestForm.DialogResult == DialogResult.OK)
+    {
+        textBox_Show.Text = requestForm.GetText();
+    }
+}
+
+// *Form1
+
+// Request Form
+//Stejný jako nahoře
+// * Request Form
 
 
-        Podívat se na změnu location.
+    </code>
+</pre>
+        
+        <span>Možnost 3: .show()</span><br />
+        Stejný jako možnost 2, ale přidáváme tam methodu oproti anonymní funkci, takže tam máme trošku větší
+        <pre>
+        <code class="language-csharp">
 
-        .Show() umoznuje praci na více obrazovek
+// Form1
+RequestForm requestForm = new RequestForm();
+requestForm.Show();
+
+// přidání methody k tomu
+
+requestForm.FormClosed += OnFormClosing;
+
+private void OnFormClosing(object sender, EventArgs e)
+{
+    RequestForm aa = sender as RequestForm;
+
+    if (aa.DialogResult == DialogResult.Abort)
+    {
+        textBox_Show.Text = "Cancel";
+    }
+    else if (aa.DialogResult == DialogResult.OK)
+    {
+        textBox_Show.Text = aa.GetText();
+    }
+}
+// *Form1
+
+// Request Form
+//Stejný jako nahoře
+// * Request Form
 
 
-        frm.FormClosed += (s,e) => {
-        neco neco
-        }
-
-        Pokud budem používat .Show(), musime používat 
+    </code>
+</pre>
 
     </div>
     
 
 
 </div>
+
+        
+        
+            
+     @*        
+this.dialog.Result = dialogResult.Ok; // Taky moznost
+
+.showDialog() = zobrazi formular a nemuzeme hybat
+
+if(dialog result == OK)
+bla bla bla
+
+Data musime vytahnout přes nějakou metodu
+
+Otevření monitoru na jiném
+Windows start position na center parent = vecentrovaný na střed
+
+
+Podívat se na změnu location.
+
+.Show() umoznuje praci na více obrazovek
+
+
+frm.FormClosed += (s,e) => {
+neco neco
+}
+
+Pokud budem používat .Show(), musime používat  *@
