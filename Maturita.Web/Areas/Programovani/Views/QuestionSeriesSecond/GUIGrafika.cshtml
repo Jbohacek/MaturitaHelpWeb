@@ -13,45 +13,85 @@
 <div class="background-text">
     Kreslí se na jakýkoliv control, primárně na picture box, jde i panel. <br/>
     
-    Musí se vložit event paint, na kterým je evenhlander e, který nám umožnuje vykreslit
+    Musí se vložit event <span>paint</span>, na kterým je evenhlander e, který má objekt "Graphics", který umožnuje kdekoliv kreslit
     
+    <br/><br/>
+    
+    <span>Graphics g = e.Graphics;</span>
+
     <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/Gui/paint.png"/>
 
     Paint se vola vždy, když se potřebuje vykreslení, což je při změně rozlišení aplikace. Změnšování a zvětšování. <br/>
-
-        
-    graphics g = e.graphics 
-
-
-    // Vykreslí čáru od 10,10 do 100,200
+    <span>this.picturebox.refresh()</span> spouští <span>paint()</span>
+    <br/>
     
-    nebo na cizim k objektu
+    Pokud chceme dostat graphics z controleru používáme :
+    <br/><br/>
+    <span>graphics g = this.picturebox.createGraphics()</span>
+    <br/><br/>
+    Ale vše co se nakreslí zmizí po změně rozlišení, jelikož není v <span>Paint</span> metodě
+    <br/><br/>
+    <span>* Bonus *</span><br/>
+    g.smoothingMode = smoothingMode.HighQuality - Zapne vykreslovaní<br/>
     
-    graphics g = this.picturebox.createGraphics()
-
-    graphics mizí jakmile se změní rozlišení aplikace
-    
-    this.picturebox.refresh() spustí paint()
-    
-    g.smoothingMode = smoothingMode.HighQuality // Nemusime 
-
+    <a href="https://learn.microsoft.com/en-us/dotnet/api/system.drawing.drawing2d.smoothingmode?view=dotnet-plat-ext-8.0">Více zde</a>
 </div>
-
 
 <div class="display-3">
     Metody
 </div>
 
 <div>
-    
+    Používá se souřadnicový systém, který je umístěn v 0,0 a to v levém horním rohu<br/>
+    Pozor na odsazování 
+    <ul>
+        <li><span>draw</span> - Obrys</li>
+        <li><span>fill</span> - Vylní</li>
+    </ul>
 
-    g.drawRectangle(pens.red, 10,10,100,200)
-    
-    Pozor na odszování
-    
-    g.fillElipse(Brushes.Green, 10,10,90,100)
-    
-    
+    Příklady:
+    <pre>
+    <code class="language-csharp">
+/* Vykreslí obrys obdelníku 
+
+    Obrys: Červeny
+
+    X: 10
+    Y: 10
+
+    Width: 100
+    Height: 200
+*/
+g.drawRectangle(pens.red, 10,10,100,200)
+
+/* Vykreslí plnou elipsu (kruh)
+
+    Vypln: zelený
+
+    X: 10
+    Y: 10
+
+    Width: 90
+    Height: 100
+*/
+
+g.fillElipse(Brushes.Green, 10,10,90,100)
+    </code>
+</pre>
+
+    <div class="display-5">
+        Další metody
+    </div>
+    <ul>
+        <li><a href="https://www.geeksforgeeks.org/graphics-drawarc-method-in-c-sharp-with-examples/">Arc</a> - </li>
+        <li><a href="https://www.c-sharpcorner.com/uploadfile/mahesh/drawing-splines-and-curves-in-gdi/">Curve</a></li>
+        <li><a>DrawImage</a> - </li>
+        <li><a href="https://www.c-sharpcorner.com/UploadFile/mahesh/drawing-lines-in-gdi/">DrawLine</a></li>
+        <li><a href="https://www.c-sharpcorner.com/UploadFile/9f4ff8/draw-a-pie-chart-in-C-Sharp/">DrawPie</a></li>
+        <li><a href="https://www.c-sharpcorner.com/uploadfile/mahesh/drawing-graphics-shapes/">DrawRectangle</a></li>
+        <li><a href="https://www.c-sharpcorner.com/uploadfile/mahesh/drawing-graphics-shapes/">DrawPolygon</a></li>
+        <li><a href="https://www.c-sharpcorner.com/UploadFile/mahesh/format-string-in-C-Sharp/">DrawString</a></li>
+    </ul>
     Arc = oblouk
     
     bezier = 4 body a 
