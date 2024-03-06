@@ -49,5 +49,10 @@ namespace Maturita.Web.Areas.Programovani.Controllers
         {
             return View();
         }
+
+        public IActionResult FormValidation()
+        {
+            return View();
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "_Layout"; // Nechat jak je
 
-    ViewBag.Title = "Form datagrid";
+    ViewBag.Title = "Form Validation";
     ViewBag.Author = "Jakub Boháček";
 
 }
@@ -11,6 +11,125 @@
 </div>
 
 <div class="background-text">
+    ve formech je možnost <span>verifikace dat</span> přes control s jménem errorProvider<br/>
+    Při práci s erroProviderem je potřeba znát pár věci.
+    
+    <div class="display-5 my-4">
+        SetError
+    </div>
+    <pre>
+    <code class="language-csharp">
+errorProvider.setError(this.textbox_Name, "Pole je povinné")
+
+/*
+Control - Na jaký prvek to má jít
+Info - jaký info k tomu bude napsaný, když uživatel použije kurzor
+*/
+
+errorProvider.setError([control], [info])
+    </code>
+</pre>
+    <div class="display-5 my-4">
+        Focus
+    </div> 
+    Při aktivaci erroru, nám nedá možnost z forms vyjít z controlu, které je nesprávný.
+    Na odstranění tohoto nechtěného prvku je potřeba změnit ve vlastnosti formu <br/>
+    <span>AutoValidate = EnableAllowFocusChange</span>
+    
+    <div class="display-5 my-4">
+        Vzhled
+    </div>
+    
+    Po aktivaci erroru se objeví blikající křížek, který přestane blikat po chvíli, tento vzhled se dá změnit se změnou vlastnosti na errorprovideru
+    <br/><span>BlinkStyle = NeverBlink</span>
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/Error.gif"/>
+
+</div>
+
+<div class="display-1">
+    Způsob verifikace
+</div>
+
+<div class="background-text">
+    Na verifikaci máme dva způsoby, Custom a systémový
+    <br/>
+    <br/>
+    <div class="display-5">
+        <span>Custom</span>
+    </div>
+    Jedná se o způsob kde si vytvoříme metodu která vrací boolean na základě toho zda je form správně vyplněný
+    <br/>
+    Naše uměla situace zahrnuje, že máme několik textboxu, který verfikujeme zda jsou správně vyplněné
+    <pre>
+    <code class="language-csharp">
+private bool IsValid()
+{
+// předpokládáme, že je vše správně
+    bool valid = true; 
+
+// Vymažeme všechny errory
+    this.errorprovider.Clear(); 
+
+    // 1.Kontrola
+    if(this.textbox.text == "")
+    {
+        valid = false
+
+        // tohle vytvoři error
+        this.errorProvider.setError(this.textbox_Name, "Pole je povinné") 
+    }
+    .. toto vicekrat
+
+    return valid;
+}
+    </code>
+</pre>
+    
+    <div class="display-5">
+        <span>Systémová</span>
+    </div>
+    Každý controller (s vijimkami) máji eventy <span>validating</span> a <span>validated</span>
+    <ul>
+        <li><span>validing</span> - Spoušti se po spuštení .Validate()</li>
+        <li><span>Validated</span> - Spouští se po kontrole .Validate()</li>
+    </ul>
+    Používejte validating
+    <br/><br/>
+    
+    Každý prvek má event <span>validating</span> a metodu <span>validate()</span>,
+    která na konkretním prvku vrací true nebo false na základě toho jak proběhl event <span>Validating</span>
+    <br/><br/>
+    Pokud chceme zkontrolovat více prvků najednou, musíme použít <span>ValidateChildren()</span>, která vyvolá metodu u věch její dětí<br/>
+    
+    Přes <span>e.Cancel = true</span> označíme, že validace neproběhla úspěně
+    <pre>
+    <code class="language-csharp">
+private void textBox1_Validating(object sender, CancelEventArgs e)
+{
+    if (this.textBox1.Text == "")
+    {
+        //Tímto označíme, že neproběhlo úspěšně
+        e.Cancel = true;
+        this.errorProvider1.SetError(this.textBox1, "Pole je povinné");
+    }
+}
+
+private void button1_Click(object sender, EventArgs e)
+{
+    bool vysledek = this.ValidateChildren();
+    if (vysledek == true)
+    {
+        errorProvider1.Clear();
+    }
+}
+    </code>
+</pre>
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/ErrorProviderTest.gif" />
+
+</div>
+
+
+<div class="background-text d-none">
     Jde provádět custom nebo systémova
 
     blinkáni se da vypnout přes blink style
