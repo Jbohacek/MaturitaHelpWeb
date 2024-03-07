@@ -59,6 +59,38 @@
 
     </ul>
     
+    <div class="display-5">
+        Regex option
+    </div>
+    
+    <div class="background-text">
+        Regex má vlástní možnosti jak funguje, například muže ignorovat velké nebo malé znaky a pod.. <br/>
+        Jedná se o Enum
+        <pre>
+        <code class="language-csharp">
+Regex Filetest = new Regex([regex],RegexOptions.[nastavení]);
+    </code>
+
+</pre>
+
+        <ul>
+            <li><span>IgnoreCase</span> - Ignoruje velké malé znaky</li>
+            <li><span>MultiLine</span> - Ignoruje \n, takzvaně nám dovoluje více řádku</li>
+        </ul>
+        <div class="text-center">
+            <a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-8.0">Více zde</a>
+        </div>
+Pokud chceme více nastavení musime mezi enumy dát |
+        <pre>
+        <code class="language-csharp">
+new Regex(@@"^(file_\w+)",RegexOptions.Multiline | RegexOptions.IgnoreCase);
+    </code>
+
+</pre>
+        
+
+    </div>
+
     <div class="display-4">
         MatchCollection
     </div>

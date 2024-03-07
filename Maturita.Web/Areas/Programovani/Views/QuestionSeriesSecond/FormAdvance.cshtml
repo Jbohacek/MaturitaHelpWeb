@@ -97,7 +97,7 @@ dataSource = NasList;
 </pre>
     <span>BindingList</span> má event <span>addingNew</span> a <span>ListChanged</span> který mění hodntoy v datagridu.
     <br/><br/>
-    <span>IListSource</span> je způsob jak udělat vlastní BindingList
+    <span>IListSource</span> je způsob jak udělat vlastní dataSource, nikoliv bindingList. Mužeme tam například i vložit array, ale musíme vracet, cokoliv co dědí z IList
     <pre>
     <code class="language-csharp">
 public class PersonDataModel : IListSource
