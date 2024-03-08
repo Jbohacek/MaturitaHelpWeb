@@ -40,6 +40,7 @@
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\Retezce.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\SouboryASouborovySystem.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Video\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -80,6 +81,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesSecond\DesignPatterns.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Video\Index.cshtml" />
   </ItemGroup>
 
 </Project>

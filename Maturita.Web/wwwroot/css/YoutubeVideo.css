@@ -1,0 +1,11 @@
+﻿.container-Video {
+    width: 100%;
+    float: left;
+}
+
+.your-centered-div {
+    max-width: 560px; /* you have to have a size or this method doesn't work */
+    max-height: 315px;
+    margin-right: auto;
+    margin-left: auto;
+}
