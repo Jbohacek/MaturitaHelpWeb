@@ -17,6 +17,7 @@
   <ItemGroup>
     <Folder Include="Areas\Programovani\Data\" />
     <Folder Include="Areas\Programovani\Models\" />
+    <Folder Include="Areas\Programovani\Pages\" />
     <Folder Include="wwwroot\Pictures\Gui\" />
   </ItemGroup>
 
@@ -29,6 +30,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Gof\Adapter.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Gof\Factory.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Gof\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Gof\Iterator.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Gof\Observer.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Gof\Singleton.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Gof\State.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesSecond\DedicnostOOP.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesSecond\DesignPatterns.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesSecond\Regex.cshtml" />
@@ -85,6 +93,34 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Video\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Gof\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Gof\Factory.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Gof\Singleton.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Gof\Observer.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Gof\Iterator.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Gof\State.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\Gof\Adapter.cshtml" />
   </ItemGroup>
 
 </Project>

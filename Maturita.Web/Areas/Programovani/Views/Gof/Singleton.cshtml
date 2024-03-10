@@ -1,0 +1,77 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Návrhové vzory";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-4">
+    <a asp-action="Index">Návrhové vzory</a>
+</div>
+
+<div class="display-2">
+    Singlton
+</div>
+
+<div class="background-text">
+    Singleton je návrhový vzor používaný při programování. Jeho hlavním účelem je zajistit, že v celém programu existuje pouze jedna instance určité třídy. 
+    Tento vzor také poskytuje globální přístupový bod k této instanci.
+    <br/><br/>
+    Podle autorů samotné knížky Design patterns je singlton disktutabilní, zda je opravdu dobrý.<br/>
+    Používáme například na 
+    <ul>
+        <li>Database repository</li>
+        <li><a asp-action="Factory">Factory</a></li>
+    </ul>
+    
+
+    Využíváme <a asp-action="Factory">Factory</a> na to, abychom to napsali.
+    <pre>
+    <code class="language-csharp">
+private static Game Instance = null;
+
+private Game()
+{
+
+}
+
+public static Game GetInstance()
+{
+    if(Instance == null)
+    {
+        Instance = new Game();
+    }
+    return Instance;
+
+}
+    </code>
+</pre>
+    
+    
+    Lepší způsob zápisu, který chrání proti multithreadingu:
+    
+    <pre>
+    <code class="language-csharp">
+private static Game Instance = null;
+private static readonly object padlock = new object();
+
+private Game()
+{
+
+}
+
+public static Game GetInstance()
+{
+    lock(padlock)
+    {
+        if(Instance == null)
+        {
+            Instance = new Game();
+        }
+        return Instance;
+    }
+}
+    </code>
+</pre>
+</div>
+

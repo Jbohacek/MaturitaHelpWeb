@@ -1,0 +1,236 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Návrhové vzory";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-4">
+    <a asp-action="Index">Návrhové vzory</a>
+</div>
+
+<div class="display-2">
+    Command
+</div>
+
+<div class="background-text">
+    Objekt, který dovoluje předat instrukce na provedení určité akce. Obsahuje všechny informace na provedení akce<br/>
+    
+    <br/>
+    Využití:
+    <ul>
+        <li>Gui přikazy</li>
+        <li>multiLevel undo/redo</li>
+        <li>macro recording</li>
+    </ul>
+    
+    Zkráceně vysvětleno Icomand je třída, která nám dělá nějaký akce s objekty, a zhledem k tomu, že se jedná o třídu, mužeme ukladat tyto Commandy do listu a tim nám vznikne sekvence commandu.
+    <br/>
+    
+    Na ukazku si vytvořme primitivní třídu BankAccount<br/>
+    Třídá má metody <span>deposit</span> a <span>withdraw</span>
+
+    <pre>
+    <code class="language-csharp">
+  public class BankAccount
+  {
+    private int balance;
+    private int overdraftLimit = -500; // Jak moc můžeme do mínusu
+
+    public void Deposit(int amount)
+    {
+      balance += amount;
+      WriteLine($"Deposited ${amount}, balance is now {balance}");
+    }
+    
+
+    public void Withdraw(int amount)
+    {
+      if (balance - amount >= overdraftLimit)
+      {
+        balance -= amount;
+        WriteLine($"Withdrew ${amount}, balance is now {balance}");
+      }
+    }
+
+    public override string ToString()
+    {
+      return $"{nameof(balance)}: {balance}";
+    }
+  }
+
+    </code>
+</pre>
+
+    Po té co máme Banků, tak si vytvoříme interface příkazu takzvaný "ICommand" s metodou call() nebo execute() je to jedno
+    
+    <pre>
+    <code class="language-csharp">
+  public interface ICommand
+  {
+    void Call();
+  }
+
+    </code>
+</pre>
+    
+    S interfaceme ICommand, mužeme nyní vytvořit příkaz pro <span>banku</span>. Bude obshaovat: 
+    <ul>
+        <li>Instanci bankAccount na kterou působí</li>
+        <li>Metodu, kterou vola v podobě enum</li>
+        <li>Samotnou metodu call, která příkaz zavolá</li>
+    </ul>
+    
+    <pre>
+    <code class="language-csharp">
+public class BankAccountCommand : ICommand
+{
+  private BankAccount account;
+
+  public enum Action
+  {
+    Deposit, Withdraw
+  }
+
+  private Action action;
+  private int amount;
+
+  public BankAccountCommand(BankAccount account, Action action, int amount)
+  {
+    this.account = account;
+    this.action = action;
+    this.amount = amount;
+  }
+
+  public void Call()
+  {
+    switch (action)
+    {
+      case Action.Deposit:
+        account.Deposit(amount);
+        break;
+      case Action.Withdraw:
+        account.Withdraw(amount);
+        break;
+      default:
+        throw new ArgumentOutOfRangeException();
+    }
+  }
+}
+    </code>
+</pre>
+    Nyní je jejich použití velmi snadné. v Mainu
+
+    <pre>
+    <code class="language-csharp">
+var ba = new BankAccount();
+var commands = new List@("<BankAccountCommand>");
+
+commands.Add(new BankAccountCommand(ba, BankAccountCommand.Action.Deposit, 100)); // přidej 100 $
+commands.Add(new BankAccountCommand(ba, BankAccountCommand.Action.Withdraw, 1000)); // přidej 1000 $
+
+WriteLine(ba); // Před provdení akcema
+
+foreach (var c in commands)
+{
+    c.Call();
+}
+
+WriteLine(ba); // Po provedení akcema
+
+    </code>
+</pre>
+    
+    Tohle je jednoduchý způsob zavedení Commandu.
+    
+    <div class="display-4">
+        Bonus
+    </div>
+    
+    Přidání metody undo, jak je nahoře napsáno, je možné používat command jako undo funkce. K implementaci undo do tohodle example je potřeba nejdříve přidat do interface metodu undo()
+
+    <pre>
+    <code class="language-csharp">
+public interface ICommand
+{
+    void Call();
+    void Undo();
+}
+    </code>
+</pre>
+    
+    Následné implementaci metody Undo i do <span>BankAccountCommand</span>
+    
+    <pre>
+    <code class="language-csharp">
+public void Undo()
+{
+  switch (action)
+  {
+    case Action.Deposit:
+      account.Withdraw(amount);
+      break;
+    case Action.Withdraw:
+      account.Deposit(amount);
+      break;
+    default:
+      throw new ArgumentOutOfRangeException();
+  }
+}
+    </code>
+</pre>
+    a v mainu zavolame příkazy obráceně    
+    <pre>
+    <code class="language-csharp">
+      WriteLine(ba);
+
+      foreach (var c in commands.Reverse())
+        c.Undo();
+
+      WriteLine(ba);
+    </code>
+</pre>
+</div>
+
+<div class="d-none">
+
+    Je to předchůdce lambda funkceme <br />
+
+    <pre>
+    <code class="language-csharp">
+public void Sort(List@("<int>") data, IComparator comparator)
+{
+    //Rezeni podle comparator
+}
+
+public void Sort(List@("<int>") data, Func@("<Person,Person,bool>") comparator) // Jak se to má dělat
+{
+    // Razeni
+}
+
+Sort(data,new NameComparator()) // seradi podle jmen
+
+public interface IComparator
+{
+    public bool Compare(Person a, person b) 
+}
+
+public Class NameComperator : IComparator
+{
+    public bool Compare(Person a, person b)
+    {
+        return a.Name.Lenght > b.name.Lenght
+    }
+}
+
+public Class AgeComperator : IComparator
+{
+    public bool Compare(Person a, person b)
+    {
+        return a.Age > b.Age
+    }
+}
+
+    </code>
+</pre>
+</div>

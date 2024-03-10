@@ -28,16 +28,7 @@
         <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/addCollums2.png" />
     </div>
     Timto přidáme sloupec přes UI, převážně ta správná cesta, ovšem mužeme přidat atributy k vlastnostem třídy a automaticky se vytvoři<br/>
-    Za předpokladu že <span>AutoGenerateColumns = true</span> <br/>
-    <pre>
-    <code class="language-csharp">
-        [browsable(false)] public int Id {get;set;}  
-        // zakazuje výpis 
 
-        [DisplayName("Jméno")] public string Name {get;set;} 
-        // ukaže v tabulce název "Jméno" namísto Name
-    </code>
-</pre>
     Přes <span>AutoSizeCollumnMode = fill</span> udělá hezčí zobrazení
 
 </div>
@@ -113,7 +104,16 @@ public class PersonDataModel : IListSource
 }
     </code>
 </pre>
+    Za předpokladu že <span>AutoGenerateColumns = true</span> (tyto hodnoty jsou ve tříde Person) <br />
+    <pre>
+    <code class="language-csharp">
+        [browsable(false)] public int Id {get;set;}  
+        // zakazuje výpis 
 
+        [DisplayName("Jméno")] public string Name {get;set;} 
+        // ukaže v tabulce název "Jméno" namísto Name
+    </code>
+</pre>
 </div>
 
 <div class="display-4">

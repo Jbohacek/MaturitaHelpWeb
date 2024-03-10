@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Návrhové vzory";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-4">
+    <a asp-action="Index">Návrhové vzory</a>
+</div>
+
+<div class="display-2">
+    Adapter
+</div>
+
+<div class="background-text">
+    Mezi vrstva, mezi dvěma třídama, programama.<br/>
+    Nekomunikujeme přímo mezi A a B. Ale přes A - komunikator - B
+    <br/>
+    <br/>
+    Příklad:<br/>
+    Máme klienta, který má zadat dopravcům nějaký úkol, aby něco někam převezli.<br/>
+    Máme DPD, která bere jen adresu a pak<br/>
+    Balikovnu, která bere i cenu a komu se má vydat balík, co má schovaný jako třídu
+    
+    <pre>
+    <code class="language-csharp">
+public class Client
+{
+    public void CreateOrder()
+    {
+        // Zde pujde slozitý if, který se nám nelíbí
+    }
+}
+
+public class carrierDPD
+{
+    public void Create(string adresa)
+    {
+    
+    }
+}
+
+public class carrierBalikovna
+{
+    public void Submit(PackpageInfo info)
+    {
+    }
+
+    public class PackpageInfo()
+    {
+        public int price;
+        public string Komu;
+        public string adresa;
+    }
+}
+
+    </code>
+</pre>
+    Nyní v clientovi, bychom dělali složitý if, na to kam co kdy pujde. Hodně podmínek a podobně. Proto si vytvoříme adapter
+    <br/>
+    Mezivstrtva
+    <pre>
+    <code class="language-csharp">
+public class Order
+{
+    public int Id {get;set;}
+    public string Street {get;set;}
+    public string Price {get;set;}
+}
+
+public Interface ICarrierAdapter
+{
+    public void Create(Order order)
+}
+
+public class CarrierDPDAdapter : ICarrierAdapter
+{
+    private carrierDPD carrier = new carrierDPD();
+
+
+    public void Create(Order order) 
+    {
+        carrier.Create(Order.Street)
+    }
+}
+public class CarrierBalikovnaAdapter : ICarrierAdapter
+{
+    private carrierBalikovna carrier = new carrierBalikovna();
+    public void Create(Order order) 
+    {
+        //....doplnit informace
+        Carrier.create(new PackpageInfo())
+    }
+}
+    </code>
+</pre>
+</div>
