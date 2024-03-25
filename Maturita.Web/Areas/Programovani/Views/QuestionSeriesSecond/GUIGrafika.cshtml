@@ -1,0 +1,263 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Gui grafika";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Gui grafika
+</div>
+
+<div class="background-text">
+    Kreslí se na jakýkoliv control, primárně na picture box, jde i panel. <br/>
+    
+    Musí se vložit event <span>paint</span>, na kterým je evenhlander e, který má objekt "Graphics", který umožnuje kdekoliv kreslit
+    
+    <br/><br/>
+    
+    <span>Graphics g = e.Graphics;</span>
+
+    <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Gui/paint.png"/>
+
+    Paint se vola vždy, když se potřebuje vykreslení, což je při změně rozlišení aplikace. Změnšování a zvětšování. <br/>
+    <span>this.picturebox.refresh()</span> spouští <span>paint()</span>
+    <br/><br/>
+    
+    Pokud chceme dostat graphics z controleru používáme :
+    <br/>
+    <span>graphics g = this.picturebox.createGraphics()</span>
+    <br/><br/>
+    Ale vše co se nakreslí zmizí po změně rozlišení, jelikož není v <span>Paint</span> metodě
+    <br/><br/>
+    <span>* Bonus *</span><br/>
+    g.smoothingMode = smoothingMode.HighQuality - Zapne vykreslovaní<br/>
+    
+    <a href="https://learn.microsoft.com/en-us/dotnet/api/system.drawing.drawing2d.smoothingmode?view=dotnet-plat-ext-8.0">Více zde</a>
+</div>
+
+<div class="display-3">
+    Metody
+</div>
+
+<div class="background-text">
+    Používá se souřadnicový systém, který je umístěn v 0,0 a to v levém horním rohu<br/>
+    Pozor na odsazování 
+    <ul>
+        <li><span>draw</span> - Obrys</li>
+        <li><span>fill</span> - Vylní</li>
+    </ul>
+
+    Příklady:
+    <pre>
+    <code class="language-csharp">
+/* Vykreslí obrys obdelníku 
+
+    Obrys: Červeny
+
+    X: 10
+    Y: 10
+
+    Width: 100
+    Height: 200
+*/
+g.drawRectangle(pens.red, 10,10,100,200)
+
+/* Vykreslí plnou elipsu (kruh)
+
+    Vypln: zelený
+
+    X: 10
+    Y: 10
+
+    Width: 90
+    Height: 100
+*/
+
+g.fillElipse(Brushes.Green, 10,10,90,100)
+    </code>
+</pre>
+
+    <div class="display-5">
+        Další metody
+    </div>
+    <ul>
+        <li><a href="https://www.geeksforgeeks.org/graphics-drawarc-method-in-c-sharp-with-examples/">Arc</a> - Vykreslí oblouk</li>
+        <li><a href="https://www.c-sharpcorner.com/uploadfile/mahesh/drawing-splines-and-curves-in-gdi/">Curve</a> - Dlouhá čára</li>
+        <li><a>DrawImage</a> - Vykreslí obrazek</li>
+        <li><a href="https://www.c-sharpcorner.com/UploadFile/mahesh/drawing-lines-in-gdi/">DrawLine</a> - Udělá přímku</li>
+        <li><a href="https://www.c-sharpcorner.com/UploadFile/9f4ff8/draw-a-pie-chart-in-C-Sharp/">DrawPie</a> - Kolač</li>
+        <li><a href="https://www.c-sharpcorner.com/uploadfile/mahesh/drawing-graphics-shapes/">DrawRectangle</a> - Obdelník</li>
+        <li><a href="https://www.c-sharpcorner.com/uploadfile/mahesh/drawing-graphics-shapes/">DrawPolygon</a> - trojúhelnik</li>
+        <li><a href="https://www.c-sharpcorner.com/UploadFile/mahesh/format-string-in-C-Sharp/">DrawString</a> - text</li>
+    </ul>
+
+</div>
+
+<div class="display-3">
+    Pen a brush
+</div>
+
+<div class="background-text">
+    
+    <span>Pen</span> = na čary <br/>
+    <span>Brush</span> = na kreslení<br/>
+    <br/>
+    Pokud napíšeme <span>pens</span> nebo <span>brushes</span> tak existují předpřipravené
+    
+    <div class="display-5">
+        Vlastní kreslení
+    </div>
+    
+    Pro vlastní barvy je zapotřebí si vytvořit vlastní barvu zapomoci ARGB, nebo HEX.
+    
+    <pre>
+    <code class="language-csharp">
+        
+// Vytvoří RGB barvu
+Color redColor = Color.FromArgb(255, 0, 0);
+
+// Z hex
+Color white = ColorTranslator.FromHtml("#fff");
+    </code>
+</pre>
+
+    Po vytvoření barvy, máme možnost udělat bud tužku(pen) nebo štětec(brush).
+    
+    <pre>
+    <code class="language-csharp">
+        
+// Vytvoří tužku o tloušce 10px s barvou černá
+Pen p = new Pen(Color.Black, 10);
+
+// Vytvoří brush s barvou černá, která je jen čistá černá barva
+Brush b = SolidBrush(Color.Black)
+
+
+/* 
+Brush je abstraktní třída, nelze vyvolat. 
+Musime používat instance, 
+které dětí z brush jako je například SolidBrush
+*/
+    </code>
+</pre>
+    Pamatujete, že Brush je na objekty který mají v nápisu <span>fill</span><br/>
+    a pen je na objekty, který májí v nápisu <span>draw</span>
+</div>
+
+<div class="display-3">
+    DrawString
+</div>
+<div class="background-text">
+    Přes <span>drawString</span> mužeme psát text na obrázky.<br/>
+    K tomu, abychom mohly zapisovat je potřeba vytvořit instanci <span>font</span><br/>
+    <br/>
+    Font potřebuje zadat jeho název a velikost v pixelech, která se udává jako float<br/>
+    Například font <span>"Arial"</span>
+
+    <pre>
+    <code class="language-csharp">
+Font ourFont = new Font("Arial", 30f);
+
+g.DrawString("Text", ourFont, Brushes.Black, 50, 50);
+    </code>
+</pre>
+
+    Bohužel při vykreslováním je jedna věc, která nám celkem ztěžuje práci se stringama v grafice <span>nevíme jak velký jsou</span>.<br/>
+    Abychom zjistili velikost daného stringu při vykreslení se nám nabízí více možností.
+    <div class="display-5 my-3">
+        Proporcionální font
+    </div>
+    Jedná se o font, který má každý znak stejně veliky, tudiž nám dovoluje odhadnout velikost stringu jen podle velikosti písma a délky stringu.<br/>
+    Příklady takých fontu:
+    <ul>
+        <li>Consolas</li>
+        <li>Andale Mono</li>
+    </ul>
+    <div class="text-center">
+        <a href="https://www.abclinuxu.cz/clanky/prehled-fontu-s-pevnou-sirkou#andale-mono">Více zde</a>
+    </div>
+
+    <div class="display-5 my-3">
+        g.MessureString
+    </div>
+    V grafice existuje metoda g.MessureString, která vráti <span>sizeF</span><br />
+    
+    SizeF znamená Size ve Float. Obsahuje vlastnosti <span>width</span> a <span>height</span>
+    <pre>
+    <code class="language-csharp">
+g.MeasureString("Text", ourFont);
+    </code>
+</pre>
+    
+    <div class="display-5 my-3">
+        Vycentrovani textu
+    </div>
+    Vycentrování textu se zda jako velmi obtížný úkol v GUI, jelikož bez hlubších vědomosti musime používat matematiku, ovšem tohle celý mužeme přeskočit s použitím <span>StringFormat</span>
+    <pre>
+    <code class="language-csharp">
+// Vytvoříme font
+Font ourFont = new Font("Arial", 15f);
+
+// Vytvoříme obedelník
+Rectangle obdelnik = new Rectangle(
+    x: 50, 
+    y: 50, 
+    width: 200, 
+    height: 100
+    );
+
+// Nakreslíme obedeník
+g.DrawRectangle(Pens.Black,obdelnik);
+
+// Format stringu
+StringFormat sr = new StringFormat();
+sr.Alignment = StringAlignment.Center;
+sr.LineAlignment = StringAlignment.Center;
+
+//Vykreslíme obdelník
+g.DrawString("Pokus",ourFont,Brushes.Black,obdelnik,sr);
+    </code>
+</pre>
+    <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/pokus.png" />
+
+</div>
+
+<div class="display-3">
+    Práce s obrázky
+</div>
+
+<div class="background-text">
+    v Gui máme možnost tvořit takzvané prázné plátna (alias bitmap), které nám dovolují nakreslit něco a pak následně uložit jako png nebo jpg.<br/>
+    Mužeme vytvořit jako prázné plátno (průhldné), nebo mužeme už začít od obrázku.
+    <pre>
+    <code class="language-csharp">
+
+// Vytvoříme plátno
+Bitmap bmp = new Bitmap(width,height);
+
+// Získáme grafiku
+Graphics g = Graphics.FromImage(bmp)
+
+// Uložíme obrázek
+bmp.save(@@"C:/User/obrazek.png")
+    </code>
+</pre>
+
+</div>
+
+<div class="display-3">
+    Souřadnicový system
+</div>
+
+<div class="background-text">
+    <ul>
+        <li><span>g.translateTransform(50,100)</span> - Posun stredu souradnicového systému</li>
+        <li><span>g.rotateTransoform(30)</span> - otačení o 30 stupňů středu souřadnicohé systému</li>
+        <li><span>g.scaleTransofrm()</span> - škálování souřadnicového systému násobení</li>
+        <li><span>g.resetTransofrm()</span> - resetuje</li>
+    </ul>
+</div>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZW1tMRSuwnY?si=QqlegWW3gsQkF4Al" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

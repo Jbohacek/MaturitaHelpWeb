@@ -19,12 +19,15 @@
     
     @* Video.js *@
     <link rel="stylesheet" href="~/lib/video-js-8.9.0/video-js.min.css"/>
+    <link rel="stylesheet" href="~/css/YoutubeVideo.css" />
 </head>
 <body>
     @* Highlight.js *@
     <script src="~/lib/HighLight/highlight.min.js"></script>
 
     <partial name="_NavBar"/>
+    
+    <div onclick="location.href = '/video'" id="ShowMore"></div>
 
     <div class="container">
         <main role="main" class="pb-3">

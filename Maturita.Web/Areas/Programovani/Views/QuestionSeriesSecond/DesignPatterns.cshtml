@@ -1,0 +1,169 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Design batterns";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Factory method
+</div>
+
+<div>
+    Omezeni tvorby instanci a určování vlastní způsob vytváření.
+    
+    zamezení new Objeckt() ale udělat na GetInstance();
+    
+    private Game()
+    {
+        
+    }
+    
+    public static Game GetInstnce()
+    {
+    return new Game();
+    }
+    
+
+
+    Funkce která generuje instance.
+    
+    Továrna je velká třída, která nám dá více
+    
+    Například Color.FromARGB
+
+</div>
+
+<div>
+    Singlton
+</div>
+
+<div>
+    
+
+    <pre>
+    <code class="language-csharp">
+public static Game Instance = null;
+
+private Game()
+{
+
+}
+
+public static Game GetInstnce()
+{
+    if(Instance == null)
+    {
+        Instance = new Game();
+    }
+    return Instance;
+
+}
+    </code>
+</pre>
+    
+
+</div>
+
+<div>
+    Command
+</div>
+
+<div>
+    Je to předchůdce lambda funkceme <br/>
+    
+    Standartizovana
+    <pre>
+    <code class="language-csharp">
+public void Sort(List@("<int>") data, IComparator comparator)
+{
+    //Rezeni podle comparator
+}
+
+public void Sort(List@("<int>") data, Func@("<Person,Person,bool>") comparator) // Jak se to má dělat
+{
+    // Razeni
+}
+
+Sort(data,new NameComparator()) // seradi podle jmen
+
+public interface IComparator
+{
+    public bool Compare(Person a, person b) 
+}
+
+public Class NameComperator : IComparator
+{
+    public bool Compare(Person a, person b)
+    {
+        return a.Name.Lenght > b.name.Lenght
+    }
+}
+
+public Class AgeComperator : IComparator
+{
+    public bool Compare(Person a, person b)
+    {
+        return a.Age > b.Age
+    }
+}
+
+    </code>
+</pre>
+
+
+</div>
+
+
+<div>
+    Observer
+</div>
+
+<div>
+    Nahrazuje nebo řeší události a hlídá na vzniklé stavy, používáme interface observer na to abychom zjistili když přišlo ke změně
+
+    Například shop ma reduce a sklád čeka na redukci, aby mohlo doplnit zásoby
+    
+    Až se něco stane, tak se stane něco jiného.
+    
+    Tohle je nahrazení eventů
+
+    <pre>
+    <code class="language-csharp">
+public class Shop
+{
+    private List@("<IShopObserver>") observers = new List@("<IShopObserver>");
+
+    public void RegisterObserver(IShopObserver observer)
+    {
+        observers.Add(observer);
+    }
+
+    public void ReduceProducet(string product, int price)
+    {
+        Console.WriteLine("Zlevneno");
+
+        foreach (var shopObserver in observers)
+        {
+            shopObserver.OnReduce(this, new ShopItem(product, price));
+        }
+    }
+}
+
+public interface IShopObserver
+{
+    public void OnReduce(Shop sender ,ShopItem e);
+}
+
+public class Stock : IShopObserver
+{
+    public void OnReduce(Shop sender ,ShopItem e)
+    {
+        throw new NotImplementedException();
+    }
+}
+    </code>
+</pre>
+
+</div>

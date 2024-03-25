@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Návrhové vzory";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-4">
+    <a asp-action="Index">Návrhové vzory</a>
+</div>
+
+<div class="display-2">
+    Memento
+</div>
+
+<div>
+    Smyslem mementa je uchování nebo zajištění verzí objektu. Zajištění <span>verzování objektů</span> . Pracuje s 3 pojmama
+    <ul>
+        <li><span>Originator</span> - původce verzi, objektu, který chceme verzovat</li>
+        <li><span>CareTaker</span> -  to co uchovává backupu při běhu programu</li>
+        <li><span>Memento</span> - verze toho objektu</li>
+    </ul>
+    
+    <pre>
+    <code class="language-csharp">
+// Orignator
+public class Article
+{
+    public string Title {get; set;}
+    
+    public string Content {get;set;}
+}
+    </code>
+</pre>
+    Memento - Backup
+    <pre>
+    <code class="language-csharp">
+// Memento
+public class BackupArticle
+{
+    public string Title {get; set;}
+    
+    public string Content {get;set;}
+}
+    </code>
+</pre>
+    
+    Přidáme vytváření backup do Article a restore metodu
+    <pre>
+    <code class="language-csharp">
+// Orignator
+public class Article
+{
+    public string Title {get; set;}
+
+    public string Content {get;set;}
+
+    public BackupArticle GetBackUp()
+    {
+        return new BackupArticle()
+        {
+            Title = Title,
+            Content = Content;
+        }
+    }
+
+    public void Restore(BackupArticle backup)
+    {
+        this.Title = backup.Title;
+        this.Content = backup.Content;
+    }
+}
+    </code>
+</pre>
+    
+    Následně můžeme využít funkce backup a restore v kodu.
+
+    <pre>
+    <code class="language-csharp">
+Article a = new Article() {Title = "Hello", Content = "World"}
+BackupArticle backup = a.Backup(); // Caretaker
+
+a.Title = "Foo";
+
+a.Restore(backup); // Tímto obnovíme
+    </code>
+</pre>
+</div>

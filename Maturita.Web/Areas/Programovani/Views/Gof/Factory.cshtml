@@ -1,0 +1,161 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Návrhové vzory";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-4">
+    <a asp-action="Index">Návrhové vzory</a>
+</div>
+
+<div class="display-2">
+    Factory
+</div>
+
+<div class="background-text">
+    
+    Metoda na vytvoření <span>celého</span> objektu nebo objektů <br/>
+    Nahrazuje contruktor nějakou metodou, kterou vytvoříme.<br/>
+    Důvody pro tvorbu
+    <ul>
+        <li>Construktor se musi jmenovat stejně jako třída, tudiž nemužume mít více typy konstruktorů podle jména</li>
+        <li>
+            Nemužeme <span>přetížit</span> constuktor stejným construktorem, který má stejný parametry, avšak s jinými jmény
+            <pre>
+    <code class="language-csharp">
+
+// NELZE !!
+
+public Sklad(int CelkovyPocetZbozi)
+{
+}
+public Sklad(int CelkovyPocetKategorii)
+{
+}
+    </code>
+</pre>
+        </li>
+        <li> "optional parameter hell" vznikne tolik dobrovolných hodnot, který se dají dát do konstruktor, že z toho vznikne peklo
+            <pre>
+    <code class="language-csharp">
+public Sklad(string jmeno,int pocetZbozi = 0,int CelkovyPocetZbozi = 0, double mena = 0, string JmenoNadrizeneho = "Joe", int pocetPokusuNaLogin = 3, params string Produkty)
+{
+}
+
+    </code>
+</pre>
+        </li>
+    </ul>
+    
+    Oproti <a>Builderu</a> tvoříme celý objekt <br/>
+    
+    Možné existence Factory Metodě:
+    
+    <ul>
+        <li>Metoda - Factory Method</li>
+        <li>Tvorba v jiné třídě, v takzvané factory - Factory</li>
+        <li>(Pokročile) heirchie abstraktních factory</li>
+    </ul>
+    
+    Systémový příklad je například <span>Color.FromARGB();</span><br />
+
+    <div class="display-4">Nejlehčí implementace:</div>
+
+    <pre>
+    <code class="language-csharp">
+    private Game()
+    {
+
+    }
+
+    public static Game GetInstnce()
+    {
+        return new Game();
+    }
+    </code>
+</pre>
+</div>
+
+<div class="display-3">
+    Realný příklad v životě
+</div>
+<div class="background-text">
+    Děláme souřadnicový system a potřebujeme vytvořit třídu <span>point</span>, tahle třída bude mít X a Y, 
+    avšak je nutné používat <span>kárteský souřadnicový systém</span> a <span>polární souřadnicový systém</span>
+    <br/>
+    Vytvoříme si tedy enum na tento problém.
+    
+    <pre>
+    <code class="language-csharp">
+public enum CoordinateSystem
+{
+    Cartesian,
+    Polar
+}
+    </code>
+</pre>
+
+    Vytvoříme si, lehce naší požadovanou třídu
+    
+    <pre>
+    <code class="language-csharp">
+public class Point
+{
+    private double X {get;set;}
+    private double Y {get;set;}
+    
+    // Vytváří point bud z Polar NEBO z Kartérského
+    public Point(double a, double b, CoordinateSystem system)
+    {
+        switch(system)
+        {
+            case CoordinateSystem.Cartesian:
+                X = a;
+                Y = b;
+                break;
+            case CoordinateSystem.Cartesian:
+                X = a * Math.Cos(b);
+                Y = b * Math.Sin(a);
+                break;
+        }
+    }
+}
+    </code>
+</pre>
+
+    třídá se zdá na první pohled naprosto v pořádku, ovšem tímto jsme udělali 2 věci, které šli napsat lépe
+    <ul>
+        <li>Každý kdo bude vytvářet třídu Point, musí být obeznámen, co znamená CoordinateSystem a jejich převod, pokud to nepřečte, vzniknou problémy</li>
+        <li>Je nutnost specifikovat o jaky souřadnicový systém se jedná</li>
+    </ul>
+
+    <pre>
+    <code class="language-csharp">
+public class Point
+{
+    private double X {get;set;}
+    private double Y {get;set;}
+
+    private Point(double x, double y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    public static Point NewCartesianPoint(double x, double y)
+    {
+        return new Point(x, y)    
+    }
+
+    public static Point NewPolarPoint(double rho, double theta)
+    {
+        return new Point(rho * Math.Cos(theta), theta * Math.Sin(rho))
+    }
+    </code>
+</pre>
+    
+    Třída je nyní velmi jednoduchá na používání, pokud uživatel chce Polar, 
+    tak zavolá <span>NewPolarPoint</span> a pokud kartenský tak zavolá <span>NewCartesianPoint</span>.
+    Tímto způsobem jsme vytvořili čitelný kod pro ostatní kolegy.
+</div>

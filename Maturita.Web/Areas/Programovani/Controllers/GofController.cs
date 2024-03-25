@@ -3,54 +3,54 @@
 namespace Maturita.Web.Areas.Programovani.Controllers
 {
     [Area("Programovani")]
-    public class QuestionSeriesSecondController : Controller
+    public class GofController : Controller
     {
-        public IActionResult ZakladyOOP()
+        public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult DedicnostOOP()
+        public IActionResult Factory()
         {
             return View();
         }
 
-        public IActionResult PokrocilePrvkyOOP()
+        public IActionResult Singleton()
         {
             return View();
         }
 
-        public IActionResult UML()
+        public IActionResult Command()
         {
             return View();
         }
 
-        public IActionResult FormBasic()
+        public IActionResult Observer()
         {
             return View();
         }
 
-        public IActionResult FormAdvance()
+        public IActionResult Iterator()
         {
             return View();
         }
 
-        public IActionResult Regex()
+        public IActionResult State()
         {
             return View();
         }
 
-        public IActionResult GUIGrafika()
+        public IActionResult Decorator()
         {
             return View();
         }
 
-        public IActionResult DesignPatterns()
+        public IActionResult Memento()
         {
             return View();
         }
 
-        public IActionResult FormValidation()
+        public IActionResult Adapter()
         {
             return View();
         }

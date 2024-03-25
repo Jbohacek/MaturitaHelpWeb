@@ -11,105 +11,322 @@
 </div>
 
 <div class="background-text">
-    Každá komponenta má název <span>Name</span> , idealně nechat prefix "button_" <br />
-    Každá komponenta má vlastní události, který se volají, když vznikně nějaká událost. <br />
+    Každá komponenta má název <span>Name</span> , idealně nechat prefix "[nazev prvku]_[jeho učel]" <br />
+    Visualní controly <span>nemusíme pojmenovavat</span>, jako jsou například labely a nějaký okrasný prvky. <br />
+    Každá komponenta má vlastní <span>události</span>, který se volají, když vznikně nějaká událost. <br />
     <br />
     Form je parial class, která dědí z <span>form</span> <br />
     V <span>.desginer.cs </span> najdeme generovaný kod, který se tvoří, když předáváme prvky na form z nástrojů. <br />
 
-    <span>InitializeComponent()</span> inicializuje ten desginer a přidá prvky na form
-    Visualní controly nemusíme popisovat
+    <span>InitializeComponent()</span> inicializuje designer a přidluje prvky na form <br />
+    <br/><br/>
+    <span class="sha">Pozor, zapisky zapisuju na windows 11, kde jejich vzhled lehce změnil oproti win10, ignorujte jiný vzhled, funkčnost je naprosto stejná</span>
+</div>
+<div class="display-4">
+    TextBox
+</div>
+<div class="background-text">
+    je určen pro práci s textem
+    <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/textBox.png"/>
+    Důležité vlastnosti:
+    <ul>
+        <li>Text - obsah textu vně</li>
+        <li>MaxLength - max delka textu</li>
+        <li>ReadOnly - zda se muže číst</li>
+        <li>UseSystemPasswordChar - každý znak bude *</li>
+        <li>TextAlign - jak se bude řadit</li>
+        <li>PlaceHolder - klasicky placeholder</li>
+        <li>MultiLine - Vice linek</li>
+    </ul>
+</div>
 
+<div class="display-4">
+    Button
+</div>
+<div class="background-text">
+    Tlačítko je prostě tlačítko
+    <ul>
+        <li>Text - obsah textu vně</li>
+    </ul>
+    Mužeme také zobrazit obrázek jako tlačítko a přitom to bude stále tlačítko.
+</div>
+
+<div class="display-4">
+    Listbox
+</div>
+<div class="background-text">
+    Umožnuje obsahovat prvky jako list, takzvanou kolekci <span>items</span> do které můžeme přidávat hodnoty <br />
+
+    Ziskaní vybranné hodnoty, mužeme přes 
     <pre>
     <code class="language-csharp">
-    MessageBox.Show("Cokoliv")
-    // Vyhodí text box
+this.listbox.SelectedIndex = vybranný index
+this.listbox.Items[index]
+//pokud není nic vybranné = -1
+
+this.listbox.SelectedItem = vybranou hodnotu hned
+//Pokud není nic vybranné, NULL    
+
+
     </code>
 </pre>
 
-button 
-checkbox 
-textbox 
-datagrid 
-listbox
+    Lze přidávat více, než jen string, třeba i nějaký třídy.
+    
+    
+    <pre>
+    <code class="language-csharp">
+public class Person{
+    public int Id {get;set;}
+    public string Name {get;set;}
+}
 
+this.listbox.Items.add(new Person(){
+    Id = 0,
+    Name = "Pepa"
+})
+    </code>
+</pre>
+
+    Na vypsání elementu tak volá vždy metodu <span>.ToString()</span>. <br/>
+    Pro změnu musíme overridnout <span>.ToString()</span>
+    <img class="img-fluid w-25 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/ListBox.png"/>
+    <div class="sha text-center">Jeden má .ToString(), druhy ale ne</div>
+
+    <br/><br/>
+    Data, která dáváme do items lze kombinovat <br />
+    Lze brat data z datasource jako je například List nebo BindingList
+
+</div>
+
+<div class="display-4">
+    ComboBox
 </div>
 <div class="background-text">
-    ListBox
-    Umožnuje obsahovat nějké prvky, takzvanou kolekci <span>items</span> do které můžeme přidávat hodnoty <br />
+    ComboList je podobný jako listbox, ale umožnuje vybrat jen jednu hodnotu <br />
+    Lze tam i psat, ale to se dá vypnout přes vlastnost <span>DropDownStyle > list</span> <br />
+    Lze brat data z datasource jako je například List nebo BindingList
 
-    Ziskaní vybranné hodnoty, mužeme přes 
-    
-    this.listbox.SelectedIndex = vybranný index
-    this.listbox.Items[index]
-    pokud není nic vybranné = -1
+    <img class="img-fluid w-25 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/ComboBox.png"/>
 
-    this.listbox.SelectedItem = vybranou hodnotu hned
-    Pokud není nic vybranné, NULL
-
-
-    Lze přidávat více, než jen string, třeba i nějaký třídy.
-
-    public class Person{
-        public int Id {get;set;}
-        public string Name {get;set;}
-    }
-
-    this.listbox.Items.add(new Person(){
-        Id = 0,
-        Name = "Pepa"
-    })
-
-    Pokud se ted podíváme, tak dědí všechno z object a vola metodu <span>.ToString()</span>
-
-    Pro změnu musíme overridnout .ToString()
-
-    Lze kombinovat
-
-    Lze brat data z datasource
 
 </div>
 
-    <div class="background-text">
-        ComboBox
+<div class="display-4">
+    Události
+</div>
+<div class="background-text">
+    Každý control má <span>vlastní události</span>, které se volají, když se něco stane <br />
+    Pod ikonkou <span>blesku</span> najdeme <span>všechny</span> události <br />
+    <pre>
+    <code class="language-csharp">
+this.Button_Preview.click += (s,e) => {
+// Sem anonynmní funkci
+}
 
-        Je to kombinace listboxu s comboboxem
+// nebo
 
-        Lze tam i psat, ale to se dá vypnout přes vlastnost <span>DropDownStyle > list</span>
+this.Button_Preview.click += NaseMetoda;
+
+public void NaseMetoda(object sender, EventArgs e)
+{
+// sem nasi funkci
+}
+    </code>
+</pre>
+    Přes UI, lze nastavit pouze jednu událost, ale v kodu lze přidat více <br />
+
+    <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/Udalosti.png" />
+
+</div>
+
+<div class="display-4">
+    Práce s více forms
+</div>
+
+<div class="background-text">
+    Pro vytvoření druhého formuláře, musíme vytvořit nový objekt <span>Form</span> <br />
+    Na to abychom zobrazily tento prvek, musíme použít <span>.Show()</span> nebo <span>.ShowDialog()</span> <br />
     
+    <table>
+        <tbody>
+        <tr>
+            <td class="px-5">.Show()</td>
+            <td class="px-5">.ShowDialog()</td>
+        </tr>
+        <tr>
+            <td><ul>
+                <li>Umožnuje práci na obou formech</li>
+                <li>Hůře získáváme hodnoty</li>
+            </ul></td>
+            <td><ul>
+                <li>Neumožnuje práci na obou formech</li>
+                <li>Lepe ziskáme hodnoty přes dialog result</li>
+            </ul></td>
+        </tr>
+        </tbody>
+    </table>
+    
+    <div class="display-4">
+        Přesouvání informací mezi forms
+    </div>
+    <div>
+        Máme 2 způsoby, jak to udělat a to je .show a .showDialog . Problém ale nastavá v tom, že ve ShowDialog zastaví kod a vrátí, kde jsme zavolali .show()
+        ovšem to má své výhody a nevýhody <br/>
+        <br/>
         
-        Lze brat data z datasource
+        Situace:<br/>
+        Máme 2 formy, jeden hlavní a druhý potvrzovací.
+        <div class="d-flex gap-2">
+            <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/Form1.png"/>
+            <img class="img-fluid w-50 d-block my-4 mx-auto rounded-2" src="~/Pictures/Forms/request form.png"/>
+        </div>
+        
+        Request form se otevře a pak vyplní udaje v textuboxu v form1 <br/>
 
+        <span>Možnost 1: .showDialog</span>
+        <pre>
+        <code class="language-csharp">
+
+// Request Form
+
+private void button_Cancel_Click(object sender, EventArgs e)
+{
+    this.DialogResult = DialogResult.Abort;
+    this.Close();
+}
+
+private void button_Send_Click(object sender, EventArgs e)
+{
+    this.DialogResult = DialogResult.OK;
+    this.Close();
+}
+
+public string GetText()
+{
+    return textBox_Input.Text;
+}
+// * Request Form
+
+// Form1
+
+RequestForm requestForm = new RequestForm();
+requestForm.ShowDialog();
+
+if (requestForm.DialogResult == DialogResult.Abort)
+{
+    textBox_Show.Text = "Cancel";
+}
+else if (requestForm.DialogResult == DialogResult.OK)
+{
+    textBox_Show.Text = requestForm.GetText();
+}
+
+// *Form1
+    </code>
+</pre>
+
+        <span>Možnost 2: .show()</span><br/>
+        V tomhle momentě se spustí další form při běhu, takže není možné počkat na doběhnutí, takže je potřeba přidat metodu na event form closing <br/>
+        Pokud chcem nějakou hodnotu z form1 tak musime tak jednoduše přidat metodu getValue()
+        <pre>
+        <code class="language-csharp">
+
+// Form1
+RequestForm requestForm = new RequestForm();
+requestForm.Show();
+
+// anonymní funkce
+requestForm.FormClosed += (sender, e) => {
+    if (requestForm.DialogResult == DialogResult.Abort)
+    {
+        textBox_Show.Text = "Cancel";
+    }
+    else if (requestForm.DialogResult == DialogResult.OK)
+    {
+        textBox_Show.Text = requestForm.GetText();
+    }
+}
+
+// *Form1
+
+// Request Form
+public string GetText()
+{
+    return textBox_Input.Text;
+}
+// * Request Form
+
+
+    </code>
+</pre>
+        
+        <span>Možnost 3: .show()</span><br />
+        Stejný jako možnost 2, ale přidáváme tam methodu oproti anonymní funkci, takže tam máme trošku větší
+        <pre>
+        <code class="language-csharp">
+
+// Form1
+RequestForm requestForm = new RequestForm();
+requestForm.Show();
+
+// přidání methody k tomu
+
+requestForm.FormClosed += OnFormClosing;
+
+private void OnFormClosing(object sender, EventArgs e)
+{
+    RequestForm aa = sender as RequestForm;
+
+    if (aa.DialogResult == DialogResult.Abort)
+    {
+        textBox_Show.Text = "Cancel";
+    }
+    else if (aa.DialogResult == DialogResult.OK)
+    {
+        textBox_Show.Text = aa.GetText();
+    }
+}
+// *Form1
+
+// Request Form
+//Stejný jako nahoře
+// * Request Form
+
+
+    </code>
+</pre>
 
     </div>
-
-<div class="background-text">
-     Prace s více forms
-
-     this.dialog.Result = dialogResult.Ok; // Taky moznost
-
-     .showDialog() = zobrazi formular a nemuzeme hybat
-
-     if(dialog result == OK)
-     bla bla bla
-
-     Data musime vytahnout přes nějakou metodu
-
-     Otevření monitoru na jiném
-     Windows start position na center parent = vecentrovaný na střed
-
-
-     Podívat se na změnu location.
-
-     .Show() umoznuje praci na více obrazovek
-
-
-     frm.FormClosed += (s,e) => {
-         neco neco
-     }
-
-     Pokud budem používat .Show(), musime používat 
-
+    
 
 
 </div>
+
+        
+        
+            
+     @*        
+this.dialog.Result = dialogResult.Ok; // Taky moznost
+
+.showDialog() = zobrazi formular a nemuzeme hybat
+
+if(dialog result == OK)
+bla bla bla
+
+Data musime vytahnout přes nějakou metodu
+
+Otevření monitoru na jiném
+Windows start position na center parent = vecentrovaný na střed
+
+
+Podívat se na změnu location.
+
+.Show() umoznuje praci na více obrazovek
+
+
+frm.FormClosed += (s,e) => {
+neco neco
+}
+
+Pokud budem používat .Show(), musime používat  *@

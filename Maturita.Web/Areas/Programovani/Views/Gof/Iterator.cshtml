@@ -1,0 +1,202 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Návrhové vzory";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-4">
+    <a asp-action="Index">Návrhové vzory</a>
+</div>
+
+<div class="display-2">
+    Iterator
+</div>
+
+<div class="background-text">
+    Prochází nějakou strukutru, například List nebo Array. Obsahuje dvě věci:
+    <ul>
+        <li>Referenci na aktualní object</li>
+        <li>Ví jak přejít na další objekt</li>
+    </ul>
+    
+    .Net má hodně nástrojů na práci s iteratorama.<br/>
+    
+    Vytvoříme si třídu <span>MyList</span> která bude mít array s 10 prvky a chceme aby dávkoval prvky uvnitř té třídy.
+    <pre>
+    <code class="language-csharp">
+public class MyList
+{
+    private int[] data = new int[] { 5,2,1,3,4,8,7,9,5,4,8,1,5};
+}
+    </code>
+</pre>
+    Následně si vytvoříme náš vlastní iterátor. MUSÍ Obsahovat dvě metody
+    <ul>
+        <li>public bool HasNext</li>
+        <li>public int GetNext</li>
+    </ul>
+    Jak je nahoře napsané 
+
+    <pre>
+    <code class="language-csharp">
+public class MyListIterator
+{
+    private int[] data;
+    private int current = 0;
+
+    public MyListIterator(int[] data)
+    {
+        this.data = data;
+    }
+
+    public bool HasNext()
+    {
+        return current < data.Length;
+    }
+    public bool GetNext()
+    {
+        return data[current++];
+    }
+}
+    </code>
+</pre>
+    Použíjeme tak, že získání iteratoru vložime do třídy <span>MyList</span>, přes který budeme následně získávat iterátor.
+
+    <pre>
+    <code class="language-csharp">
+public class MyList
+{
+    private int[] data = new int[] { 5,2,1,3,4,8,7,9,5,4,8,1,5};
+
+    public MyListIterator GetIterator()
+    {
+        return new MyListIterator(data);
+    }
+}
+
+// V mainu budeme procházet:
+
+MyList list = new MyList();
+
+MyListIterator iterator = list.GetIterator();
+
+while(iterator.HasNext())
+{
+    Console.WriteLine(iterator.GetNext());
+}
+
+    </code>
+</pre>
+    
+    Nyní jsme si napsali nás vlastní foreach přes while loop. Na to abychom mohly používat foreach, musime dědit z IEnumerator@("<>").
+    
+    <pre>
+    <code class="language-csharp">
+
+public class MyListEnumerator : IEnumerator@("<int>")
+{
+    public bool MoveNext() // Další prvek
+    {
+        throw new NotImplementedException();
+    }
+    
+    public void Reset() // Resetovani
+    {
+        throw new NotImplementedException();
+    }
+    
+    public int Current { get; }
+    
+    object IEnumerator.Current => Current;
+    
+    public void Dispose() //Na vymazani 
+    {
+        throw new NotImplementedException();
+    }
+}
+    </code>
+</pre>
+    
+    Kdybychom dosadily potřebne hodnoty, dostali bychom se ke stejnému výsledku jako u iterátoru, avšak máme pro toto lepší způsob.
+    Vytvoříme si novou metodu "GetEnumerator" v MyList
+    <pre>
+    <code class="language-csharp">
+public class MyList
+{
+    private int[] data = new int[] { 5,2,1,3,4,8,7,9,5,4,8,1,5};
+
+    public IEnumerator@("<int>") GetEnumerator()
+    {
+        for (int i = 0; i < count; i++)
+        {
+            yield return data[i];
+            // Virtualně pozastaví do každého prvku
+
+        }
+    }
+}
+
+// V mainu budeme procházet:
+
+MyList list = new MyList();
+
+IEnumerator@("<int>") en = list.GetEnumerator();
+
+
+while(en.MoveNext())
+{
+    int current = en.Current;
+    Console.WriteLine(current);
+}
+
+// Nebo
+// Pozor musí obsahovat se stejným názvem
+// "public IEnumerator@("<int>") GetEnumerator()"
+foreach (var cislo in list)
+{
+    Console.WriteLine(cislo);
+}
+
+    </code>
+</pre>
+    <div class="display-4">
+        Bonus
+    </div>
+    Procházení souboru iterátorem
+    
+    <pre>
+    <code class="language-csharp">
+public class IterableFile
+{
+    public string File { get; set; }
+
+    public IterableFile(string file)
+    {
+        File = file;
+    }
+
+    @("public IEnumerator<string> GetEnumerator()")
+    {
+        using (var reader = new StreamReader(File))
+        {
+            while (!reader.EndOfStream)
+            {
+                @("yield return reader.ReadLine();")
+            }
+        }
+    }
+}
+// V mainu
+
+IterableFile iterable = new IterableFile("Cesta")
+
+foreach(string text in iterable)
+{
+    Console.WriteLine(text);
+}
+
+    </code>
+</pre>
+
+</div>

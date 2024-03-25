@@ -1,0 +1,149 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Návrhové vzory";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-4">
+    <a asp-action="Index">Návrhové vzory</a>
+</div>
+
+<div class="display-2">
+    Decorator
+</div>
+
+<div class="background-text">
+    omezit množství tříd, který by mi vznikly z důvodu kombinace jednotlivých tříd, který, kde každá přidává drobnou funkcioalitu.
+    <br/>
+    
+    Máme text, který chceme obalovat do strongu, divu a nebo třeba p. A následnou kombinaci jich
+    <br/>
+    <br/>
+    Vytvoříme si základní třídu text
+    
+    <pre>
+    <code class="language-csharp">
+public class Text
+{
+    public string Value {get;set;}
+    public Text(string value)
+    {
+        Value = value;
+    }
+
+    public string Draw()
+    {
+        return this.Value;
+    }
+}
+    </code>
+</pre>
+    
+    Vyvtvoříme si interface IText, který bude mít vlastnost Draw
+    <pre>
+    <code class="language-csharp">
+
+public Interface IText
+{
+    public string Draw();
+}
+
+public class Text : IText
+{
+    public string Value {get;set;}
+    public Text(string value)
+    {
+        Value = value;
+    }
+
+    public string Draw()
+    {
+        return this.Value;
+    }
+}
+    </code>
+</pre>
+    
+    Ted už mužeme tvořit naše <span>decoratory</span>
+    
+    <pre>
+    <code class="language-csharp">
+
+public class Strong : IText
+{
+    public IText Text {get;set;}
+    
+    public Strong(IText text)
+    {
+        this.Text = text;
+    }
+
+
+    public string Draw()
+    {
+        return $"@("<strong>{this.Text.Draw()}<strong/>")";
+    }
+}
+
+public class Div : IText
+{
+    public IText Text {get;set;}
+
+    public Div(IText text)
+    {
+        this.Text = text;
+    }
+
+
+    public string Div()
+    {
+        return $"@("<Div>{this.Text.Draw()}<Div/>")";
+    }
+}
+    </code>
+</pre>
+    Mame tedy čim, mužeme obalovat. Takže ted stačí jen napsat
+    
+    <pre>
+    <code class="language-csharp">
+        IText text = new Text("Hello");
+        text = new Strong(text); //Obalime do strong
+        text = new Div(text);  // Obalime do Div
+
+        Console.WriteLine(text.Draw());
+    </code>
+</pre>
+    Tohle bylo zatim to uplně nejlehčí co jde, nyní mužeme se ještě podívat jak napsat takový list (ul). A takto můžeme obalovat věci do nekonečna.
+    
+    <pre>
+    <code class="language-csharp">
+    public class Ul : IText
+    {
+        private IText[] items;
+    
+        public Ul(params IText items)
+        {
+            this.items = items;
+        }
+
+        public string Draw()
+        {
+            string result = "@("<ul>")"
+
+            foreach(IText item in this.items)
+            {
+                result += $"@("<li>{item.Draw()}<li/>")"
+            }
+            
+            result += "@("<ul/>")";
+            
+            return result;
+        }
+    }
+
+
+
+    </code>
+</pre>
+</div>

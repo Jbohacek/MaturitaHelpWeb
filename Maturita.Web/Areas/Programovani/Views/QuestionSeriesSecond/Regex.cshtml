@@ -1,0 +1,129 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Regex";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Regex
+</div>
+<div class="background-text">
+    V C# je Regex <span class="sha">(Regulární výraz) </span> vzor, 
+    který se používá k <span>ověření</span>, zda daný 
+    řetězec odpovídá tomuto vzoru.
+    
+    <br /> <br/>
+    Zapisuje se <span>zvláštními znaky</span>, které nám udávají jak se mají vyskytovat. 
+    Avšak tento zápis je velmi <span>špatně čitelný</span> pro lidi. Pro stroj je to rychlé.
+    
+    <div class="text-center">
+        <img class="img-fluid w-75 d-block my-4 mx-auto rounded-2" src="~/Pictures/Regex/znaky.png"/>
+
+        <a href="https://www.regularnivyrazy.info/regularni-vyrazy-zaklady.html">Vysvětlení všech znaků zde</a>
+    </div>
+    
+
+    <br /> <br/>
+    Používání regexu nám velmi <span>usnadní praci</span>, při hledání nebo ověřování řetězců.
+    Avšak musí se používat s <span>rozumem</span>, jelikož muže zabírat velké množství paměti.
+    Je dobré psát efektivně regex.
+    
+    <br> <br>
+    
+    Samotný pattern se píše ve <span>stringu</span>, samotný string není regex pattern, ten musí počítač vytvořit při tvorbě regexu, 
+    avšak na tohle máme dva způsoby <br/>
+    <ul>
+        <li> <span>Statický</span>
+            <ul>
+                <li>
+                    Regex.IsMatch(input, pattern)
+                </li>
+                <li>
+                    Compliler si vezme pattern a vytvoří regex, který se použije na ověření stringu a následně si regex <span>uloží do mezipaměti </span>
+                    a pak ten regex používá na další ověřování
+                </li>
+                <li>
+                    Tento způsob si dokáže zapamatovat jen 15 různých complilovaných regexu najednou.
+                </li>
+            </ul>
+        </li>
+        <li><span>Instance</span>
+            <ul>
+                <li>Regex regex = new Regex(pattern);</li>
+                <li>Vždy se to complilure při vytváření</li>
+                <li>Rychlejší způsob</li>
+            </ul>
+        </li>
+
+    </ul>
+    
+    <div class="display-5">
+        Regex option
+    </div>
+    
+    <div class="background-text">
+        Regex má vlástní možnosti jak funguje, například muže ignorovat velké nebo malé znaky a pod.. <br/>
+        Jedná se o Enum
+        <pre>
+        <code class="language-csharp">
+Regex Filetest = new Regex([regex],RegexOptions.[nastavení]);
+    </code>
+
+</pre>
+
+        <ul>
+            <li><span>IgnoreCase</span> - Ignoruje velké malé znaky</li>
+            <li><span>MultiLine</span> - Ignoruje \n, takzvaně nám dovoluje více řádku</li>
+        </ul>
+        <div class="text-center">
+            <a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-8.0">Více zde</a>
+        </div>
+Pokud chceme více nastavení musime mezi enumy dát |
+        <pre>
+        <code class="language-csharp">
+new Regex(@@"^(file_\w+)",RegexOptions.Multiline | RegexOptions.IgnoreCase);
+    </code>
+
+</pre>
+        
+
+    </div>
+
+    <div class="display-4">
+        MatchCollection
+    </div>
+    
+    Jedná se o kolekci všech nalezených výskytů, které odpovídají patternu.
+    
+    <pre>
+    <code class="language-csharp">
+MatchCollection matches = Regex.Matches(input, pattern);
+
+foreach (Match match in matches)
+{
+    Console.WriteLine(match.Value); // vypíše všechny výskyty
+}
+    </code>
+</pre>
+
+</div>
+
+<div class="display-3">Jak se to naučit?</div>
+<div class="background-text">
+    Opakovanim. Jediná možnost je to našprtat do hlavy a pak následně jen <span>opakovat</span> na příkladech. Jelikož regex je <span>všeobecný</span>, tak funguje i na více jazyků jako je například javascript.<br/><br/>
+    
+    Webová stánka <a href=" https://regexlearn.com/learn">RegexLearn.com</a> je uplně, úžasná na naučení regexu.
+    
+    Další procvičení:
+    <ul>
+        <li><a href="https://regexone.com/lesson/introduction_abcs">Regexone.com</a> - Dalši stránka na naučení</li>
+        <li><a href="https://regex101.com/">regex101.com</a> - Velmi dobrý stránka na zkoužení</li>
+        <li><a href="https://regexr.com/">regexr.com</a> - Dobrá stránka na otestování</li>
+    </ul>
+    
+    Help <span class="sha">Kdybyste nevěděli</span>: 
+     <br/>
+    <a href="https://github.com/ziishaned/learn-regex">github.com/ziishaned/learn-regex</a>
+</div>

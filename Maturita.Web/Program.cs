@@ -51,44 +51,8 @@ namespace Maturita.Web
 
     public class Person
     {
-        ////Nejlepsi monı zápis
-        //public int Age { get; set; }
 
-
-        ////Delší zápis nejlepšího zápisu
-        //private int age;
-
-        //public int Age
-        //{
-        //    get
-        //    {
-        //        return age;
-        //    }
-        //    set
-        //    {
-        //        age = value;
-        //    }
-        //}
-
-
-        //// Døívejší zápis promìné (nepouívat)
-        //private int _age;
-
-        //public void SetAge(int age)
-        //{
-        //    _age = age;
-        //}
-
-        //public int GetAge()
-        //{
-        //    return _age;
-        //}
-        
-
-
-
-
-
+        public int Age { get; set; }
 
         public string Name { get; set; }
         

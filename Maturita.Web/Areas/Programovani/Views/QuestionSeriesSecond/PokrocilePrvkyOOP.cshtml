@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "_Layout"; // Nechat jak je
 
-    ViewBag.Title = "dědičnost OOP";
+    ViewBag.Title = "Pokročilé OOP";
     ViewBag.Author = "Jakub Boháček";
 
 }
@@ -12,31 +12,20 @@
 
 
 <div class="display-3">
-    Static
+    Static elementy
 </div>
 
 <div class="background-text">
     Statický jsou vždy přístupny i když instance není nijak declarovaná. <br />
-    Jedná se o "čuňárnu" a jedná se všudepřístupné hodnoty, avšak s timto musíme velmi opratrně pracovat. 
-    <br /><br />
-    Statický konstruktor se zavolá v momentě, když zavoláme <span>jakoukoliv</span> statickou
-    <ul>
-        <li>Metodu</li>
-        <li>Parametr</li>
-        <li>new (new Foo())</li>
-    </ul>
-    <span>zavolá se jen jednou</span> a nesmí mít žádné parametry
+    Jedná se <span>všudepřístupné hodnoty</span> , avšak s timto musíme velmi opratrně pracovat.
 
     <pre>
     <code class="language-csharp">
 
 // Dá se zavolat 
-// všechno zavolá statický konstrukor, ale pouze jednou.
-
 
 Foo.Xxx();
-Foo.Value();
-
+Foo.Value = 5;
 
 public class Foo
 {
@@ -52,14 +41,47 @@ public class Foo
 
     }
 
+
+}
+    </code>
+</pre>
+    
+    <div class="display-4">
+        Statický konstruktor
+    </div>
+    Statický konstruktor se spouští v momentě, když vyvoláme <span>jakoukoliv</span> statickou
+    <ul>
+        <li>Metodu</li>
+        <li>Parametr</li>
+        <li>novou instanci (new neco())</li>
+    </ul>
+    <span>zavolá se jen jednou</span> a nesmí mít žádné parametry
+    <pre>
+    <code class="language-csharp">
+
+// Dá se zavolat 
+// všechno zavolá statický konstrukor, ale pouze jednou.
+
+Foo.Xxx(); // zde se zavolá konstruktor
+Foo.Value = 5;
+
+public class Foo
+{
+    public static int Value;
+
     static Foo()
     {
 
     }
 
+    public static void Xxx()
+    {
+
+    }
 }
     </code>
 </pre>
+
 </div>
 
 
@@ -161,13 +183,13 @@ public class MyList@("<TKey, TValue>") where TKey : class, IDisposable
                                        where TValue : new()
 
     // hodnotovy typ
-public class MyList@("<T>") : where T : struct 
+public class MyList@("<T>") where T : struct 
 
     // bez parametrický konstrukor
-public class MyList@("<T>") : where T : new 
+public class MyList@("<T>") where T : new 
 
     // referenční typ
-public class MyList@("<T>") : where T : class 
+public class MyList@("<T>") where T : class 
 {
     private T[] data;
 
@@ -180,7 +202,7 @@ public class MyList@("<T>") : where T : class
 }
 
 // mužeme dělat i metodu, nemusíme se omezovat na classy
-public static void @("<T>")(List@("<T>") data, T Value) 
+public static void GetNazevAnicka@("<T>") (List@("<T>") Value1, T Value2) 
 {
 
 }

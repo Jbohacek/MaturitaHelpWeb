@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Návrhové vzory";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-4">
+    <a asp-action="Index">Návrhové vzory</a>
+</div>
+
+<div class="display-2">
+    State
+</div>
+
+<div class="background-text">
+    Přesnunout logiku, která je uvnitř toho objektu, zavislá na tom stavu, tak jí vyčlenit do samostatného objektu toho stavu.
+    <br/><br/>
+    Špatné zapsání:
+    <pre>
+    <code class="language-csharp">
+public class Car
+{
+    public string Rotation { get; set; } = "Left";
+
+    public void Draw()
+    {
+        if (Rotation == "left")
+        {
+            Console.WriteLine("left");
+        }else if (Rotation == "right")
+        {
+            Console.WriteLine("right");
+        }
+        else if (Rotation == "up")
+        {
+            Console.WriteLine("up");
+        }
+        else if (Rotation == "down")
+        {
+            Console.WriteLine("down");
+        }
+    }
+}
+    </code>
+</pre>
+    
+    Dobré zápsání:
+    <pre>
+    <code class="language-csharp">
+    public class Car
+    {
+        public IRotation Rotation { get; set; } = new LeftRotation();
+
+        public void Draw()
+        {
+            this.Rotation.Draw();
+        }
+    }
+
+    public interface IRotation
+    {
+        public void Draw();
+    }
+
+    public class UpRotation : IRotation
+    {
+        public void Draw()
+        {
+            Console.WriteLine("up");
+        }
+    }
+    public class LeftRotation : IRotation
+    {
+        public void Draw()
+        {
+            Console.WriteLine("left");
+        }
+    }
+    public class RightRotation : IRotation
+    {
+        public void Draw()
+        {
+            Console.WriteLine("right");
+        }
+    }
+    public class DownRotation : IRotation
+    {
+        public void Draw()
+        {
+            Console.WriteLine("down");
+        }
+    }
+    </code>
+</pre>
+
+
+</div>

@@ -1,0 +1,61 @@
+﻿@model dynamic
+@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Návrhové vzory";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+<div class="display-4">
+    <a asp-action="Index">Návrhové vzory</a>
+</div>
+
+<div class="display-2">
+    Observer
+</div>
+
+<div class="background-text">
+    Nahrazuje nebo řeší události a hlídá na vzniklé stavy, používáme interface observer na to abychom zjistili když přišlo ke změně <br/>
+
+    Například shop ma <span>reduce</span> a sklád čeka na redukci, aby mohlo doplnit zásoby <br/>
+    
+    Až se něco stane, tak se stane něco jiného. <br/>
+    
+    Tohle je nahrazení eventů <br/>
+    <pre>
+    <code class="language-csharp">
+public class Shop
+{
+    private List@("<IShopObserver>") observers = new List@("<IShopObserver>");
+
+    public void RegisterObserver(IShopObserver observer)
+    {
+        observers.Add(observer);
+    }
+
+    public void ReduceProducet(string product, int price)
+    {
+        Console.WriteLine("Zlevneno");
+
+        foreach (var shopObserver in observers)
+        {
+            shopObserver.OnReduce(this, new ShopItem(product, price));
+        }
+    }
+}
+
+public interface IShopObserver
+{
+    public void OnReduce(Shop sender ,ShopItem e);
+}
+
+public class Stock : IShopObserver
+{
+    public void OnReduce(Shop sender ,ShopItem e)
+    {
+        throw new NotImplementedException();
+    }
+}
+    </code>
+</pre>
+</div>
