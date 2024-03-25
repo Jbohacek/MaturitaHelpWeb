@@ -18,6 +18,7 @@
     <Folder Include="Areas\Programovani\Data\" />
     <Folder Include="Areas\Programovani\Models\" />
     <Folder Include="Areas\Programovani\Pages\" />
+    <Folder Include="wwwroot\doc\" />
     <Folder Include="wwwroot\Pictures\Gui\" />
   </ItemGroup>
 

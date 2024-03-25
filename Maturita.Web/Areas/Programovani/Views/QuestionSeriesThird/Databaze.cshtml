@@ -11,16 +11,253 @@
 </div>
 
 <div class="background-text">
-    Musime používat mysql
-    
-    následne je potřeba použít context
-    
-    návod najdeme v "U:\Sibrava\4.rocnik\pomocne-tridy\entity-framework\stare--core\how-to-install.docx"
-    
-    [collumn("Osoba_id")]
-    public int id
+    Entity framework mapuje objekty na objekty v databazi
+    <br/>
+    Pro propojení je potřeba nainstalovat nugetku <span>MySql.EntityFrameworkCore</span><br/>
+    Na dostaní se na litv MySql server je potřeba mít zaplou VPN a odkaz je: <a href="http://mysqlstudenti.litv.sssvt.cz/phpmyadmin/">http://mysqlstudenti.litv.sssvt.cz</a> <br/>
+    Nebo je možné spustit lokální mySql server kde stačí zapnout aplikaci s jménem xamp: potom adresa je localhost <br/><br/>
     
     
+    ORM = Objektově relační mapování = na každý objekt je třída <br/>
+    Lepší vysvětlení <a href="https://stackoverflow.com/a/1152323/20121417">zde</a>
+    <pre>
+    <code class="language-csharp">
+public class MyContext : DbContext
+{
+// Kolekce obsahujicí data, pracujeme s ní jako s listem
+// Hledá tabulku s názvem "Articles"
+    public DbSet@("<Articles>") Articles { get; set; } 
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseMySQL("server=mysqlstudenti.litv.sssvt.cz;database=yourdatabase;user=yourusername;password=yourpassword;SslMode=none");
+    }
+
+}
+
+    </code>
+</pre>
+    <a href="~/doc/EntityFrameworkHowTo.pdf">Návod v PDF od profesora</a>
+    <br/><br/>
     
+    Chce používat metodu database first a následně si vlastnoručně tabulky vytvořit.
+</div>
+<div class="display-3">
+    Tabulky
+</div>
+
+<div class="background-text">
+    Tabulka je vlastně jedna třída
+    
+    <pre>
+    <code class="language-csharp">
+        
+// Pokud máme jiný název tabulky
+[Table("tbArticles")]
+public class Article
+{
+    // Definujeme, že je primarní klíč (dobrovolný)
+    [Key]
+    public int Id {get;set;}
+
+    [Collumn("Nazev")] // Pokud chceme mame jiny nazev
+    public string Title {get;set;}
+    public string Content {get;set;}
+
+    public int CategoryId {get;set;}
+}
+
+// Pokud máme jiný název tabulky
+[Table("tbCategories")]
+public class Category
+{
+    // Definujeme, že je primarní klíč (dobrovolný)
+    [Key]
+    public int Id {get;set;}
+    
+// Pokud chceme mame jiny nazev
+    [Collumn("Nazev")] 
+    public string Title {get;set;}
+    
+    // Označíme na jaký Id to pasuje
+    [ForgeinKey("CategoryId")] 
+    public List@("<Article>") articles {get;set;}
+
+    
+}
+
+
+    </code>
+</pre>
+
+</div>
+
+<div class="display-3">
+    Práce s contextem
+</div>
+
+<div class="background-text">
+    
+    Nejlepší je používat repository, ale to zabere čas než se napíše.
+    
+
+    <div class="display-4">
+        Projetí všech objektů
+    </div>
+    <pre>
+    <code class="language-csharp">
+MyContext context = new MyContext();
+
+foreach(Article item in context.Articles)
+{
+    Console.WriteLine(item.Title)
+}
+
+
+//Pokud chceme načíst počet categorii na articles tak přes Include()
+
+foreach(Category item in context.Category.Include(x => x.articles))
+{
+    Console.WriteLine(item.articles.Count())
+}
+    </code>
+</pre>
+    Více na include <a href="https://learn.microsoft.com/cs-cz/ef/ef6/querying/related-data">zde</a>
+
+
+    <div class="display-4">
+        Hledání určitého objektu
+    </div>
+    
+    <pre>
+    <code class="language-csharp">
+MyContext context = new MyContext();
+
+//Najde prvni objekt (podle primárního klíče)
+Article a = context.Articles.Find(1);
+
+Console.WriteLine(a.Content)
+    </code>
+</pre>
+    
+    <div class="display-4">
+        Linq
+    </div>
+
+    Používání LinQ, entity framework optimalizuje<br/>
+    Pokud je problém s Linq a nedokážete ho pochopit, doporučuju <a href="https://www.tutorialsteacher.com/linq">TutorialsTeacher.com</a>
+    <pre>
+    <code class="language-csharp">
+MyContext context = new MyContext();
+
+foreach(Article item in context.Articles.Where(x => x.Id @('<') 2))
+{
+    Console.WriteLine(item.Title)
+}
+    </code>
+</pre>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/yClSNQdVD7g?si=UCQyxOvntZzb-pGe")
+
+
+
+    <div class="display-4">
+        Přidávání
+    </div>
+    
+    <pre>
+    <code class="language-csharp">
+MyContext context = new MyContext();
+
+context.Articles.Add(new Articles() {Title = "Test", Content = "xxxx"});
+
+// Je nutné uložit, jinak se nic nepropíše
+context.SaveChanges()
+    </code>
+</pre>
+
+    
+    <div class="display-4">
+        Odstranění
+    </div>
+    
+    <pre>
+    <code class="language-csharp">
+MyContext context = new MyContext();
+
+// Najit co chceme pryč
+Article a = context.Articles.Find(3);
+
+// Odstranit
+context.Articles.Remove(a);
+
+// Uložit
+context.SaveChanges()
+
+    </code>
+</pre>
+    
+    
+    <div class="display-4">
+        Změny
+    </div>
+    
+    Dokud je reference na ten daný objekt tak se po <span>saveChanges()</span> propojí do database<br/>
+    Vytáhnout > pozměnit > uložit
+    
+    <pre>
+    <code class="language-csharp">
+MyContext context = new MyContext();
+
+// Najit co chceme změnit
+Article a = context.Articles.Find(3);
+
+// uprava
+a.Title = "Změna";
+
+// Uložit
+context.SaveChanges()
+
+    </code>
+</pre>
+
+
+</div>
+
+    
+<div class="display-3">
+    Sql raw
+</div>
+
+
+<div class="background-text">
+    Je možné pouštět sql dotazy.
+    
+    <pre>
+    <code class="language-csharp">
+//Vratí list všechn articlů
+List@("<Articles>") articles = context.Articles.FromSqlRaw("select * from Articles").ToList();
+
+//Nebo jde taky spouštet sql commandy na serverový urovni
+context.FromSqlRaw("select * from sys.Tables")
+    </code>
+</pre>
+
+    <div class="display-4">
+       SQL injection
+    </div>
+    Jedná se o to, že muže uživat vkládat text do našeho sql query a tím uvádíme celou databázi do ohrožení. Například muže vložit "delete * from Articles". Za tohle je okamžitá 5, pokud to tam necháte
+    <pre>
+    <code class="language-csharp">
+
+// Velmi špatně !!!!!!,
+// uživatel muže předat příkazy přes toto
+// Například "', DELETE FROM Articles; -- "
+var title = Console.ReadLine();
+List@("<Articles>") articles = context.Articles.FromSqlRaw($"select * from Articles where Title = '{title}'").ToList();
+
+// Tohle je správné řešení:    
+List@("<Articles>") articles = context.Articles.FromSqlRaw("select * from Articles where Title = {0}", title).ToList();
+    </code>
+</pre>
 
 </div>
