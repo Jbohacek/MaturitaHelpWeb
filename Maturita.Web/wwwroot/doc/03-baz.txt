@@ -1,0 +1,19 @@
+21. Databáze - pøipojení k MySQL/MSSQL, ORM - entity framework, mapování tabulek, vazby, DbContext, DbSet, repository, LINQ
+
+22. Teorie testování - typy testù, blackbox/whitebox, test UI, usability testy, testy výkonu, profiler, Test Driven Development
+
+23. Unit testy - princip a využití unit testù, testovací tøídy, testovací metody, pre-testové a post-testové rutiny, testování formuláøù
+
+24. Integraèní testy - význam integraèních testù, zásady nahraditelnosti, mock objekt
+
+25. ASP.NET MVC základy - princip architektury Model-View-Controller, zpracování požadavku, smìrování, výchozí smìrování, HTTP protokol, controller, akce, parametry akce, návratový typ (ActionResult - View, Redirect)
+
+26. ASP.NET MVC View - princip tvorby dynamického view, Razor engine, layout, základní konstrukce ve View (výpis promìnné, cyklus, podmínka), tvorba odkazù, template, partial view, ViewComponents, pøedávání dat do view - (Model, ViewData, ViewBag)
+
+27. ASP.NET MVC formuláøe - definice a generování formuláøe, formuláøové prvky (label, textbox, checkbox,...), zpracování formuláøe, validace hodnot, session 
+
+28. REST API - HTTP metody (GET, POST, PUT, DELETE), mapovani na akce, response, JSON, XML, stavove kody (200, 201, 301, 302, 400, 401, 403, 404, 500), autentizace (JWT), REST - restful - formát adres (/users/:id), ASP.NET MVC API
+
+29. Události a delegáty, delegáty Action/Func/Predicate,  Observer, Lambda funkce, anonymní funkce/objekty, dynamické typy (var, dynamic)
+
+30. Reflexe - Type, PropertyInfo, MethodInfo, pøístup k private, tvorba instancí (volání konstruktoru), volání metod podle názvu (Invoke), Atributy (anotace)

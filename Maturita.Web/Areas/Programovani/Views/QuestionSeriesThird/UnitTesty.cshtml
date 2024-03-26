@@ -1,0 +1,141 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Unit testy";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Unit testy
+</div>
+
+<div class="background-text">
+    Testovaní je velmi důležitá část na kterou se často zapomíná. 
+    Eleminujeme riziko vzniku chyb, který vznikají v budoucnu při vývoji. 
+    Funguje to na principu dalšího projektu, který naše vytvořené věci testovat.
+    <br />
+    Na přidání unit testů do projektu je potřeba vytvořit separatní nový projekt s jménem <span>MSTest Test Project (.NET Core)</span>
+    
+    <img src="~/Pictures/UnitTesting/UnitTestCreateProject.gif" class="img-fluid d-block mx-auto w-50">
+    
+    Do projektu je také potřeba přidat referenci na náš projekt (ten hlavní), aby testovací projekt měl odkud brát třídy a zdroje.
+    <img src="~/Pictures/UnitTesting/UnitTestAddReference.gif" class="img-fluid d-block mx-auto w-50">
+
+</div>
+
+<div class="display-3">
+    Pracování s unitTesty
+</div>
+<div class="background-text">
+    Máme vytvořenou metodu <span>double Divide(int num1, int num2)</span>, která dělí čísla num1:num2 a vytvoříme na ní unit test.
+    <pre>
+    <code class="language-csharp">
+public class Calculator
+{
+    public static double Divide(int num1, int num2)
+    {
+        double result = Convert.ToDouble(num1) / Convert.ToDouble(num2);
+
+        return result;
+    }
+}
+    </code>
+</pre>
+    Nyní vytvoříme třídu <span>CalculatorTest</span> v projektu <span>MSTest Test Project (.NET Core)</span> s označením [TestClass] [TestMethod]
+    <pre>
+    <code class="language-csharp">
+// Označíme, že chceme testovat třídu
+[TestClass]
+public class CalculatorTest
+{
+    // Označíme, že chceme testovat tuto metodu
+    [TestMethod]
+    public void DivideTest()
+    {
+        //Definujeme hodnoty
+        int num1 = 10; 
+        int num2 = 2;
+
+        //Definujeme jaký by měl být výsledek
+        double expectedResult = 5;
+
+        //Dostaneme vysledek
+        double result = Calculator.Divide(10, 2);
+
+        //Porovnáme
+        Assert.AreEqual(expectedResult, result);
+    }
+}
+    </code>
+</pre>
+    Na základě výsledku nám vloží kladný nebo negativní výsledek, spouštění testu mužeme najít pod <span>View > Test Explorer</span>
+    <div class="display-4">
+        Testování více dat
+    </div>
+    Zde budeme testovat více čísel najednou přes DataRow, která nám umožní nacpat čísla do parametrů.
+    <pre>
+    <code class="language-csharp">
+[TestMethod]
+[DataRow(10,2,5)] // 10:2 = 5
+[DataRow(-30, -6, 5)] // 30:6 = 5
+[DataRow(-30, 2, -15)] // -30:2 = -15
+public void DivideTest(int num1, int num2, int expectedResult)
+{
+    //Dostaneme vysledek
+    double result = Calculator.Divide(num1, num2);
+
+    //Porovnáme
+    Assert.AreEqual(expectedResult, result);
+}
+    </code>
+</pre>
+    
+    <div class="display-4">
+        Pre-testové a Post-testové rutiny
+    </div>
+    Pokud dáme attribut <span>[TestInitialize]</span> metoda se spustí, vždy před daným testem <br />
+    Pokud dáme attribut <span>[TestCleanup]</span> metoda se spustí po ukončení testu <br /><br />
+    Užitečné je to v případě, když test zanechává za sebou nějaký zbytečný soubory
+    
+    <pre>
+    <code class="language-csharp">
+
+[TestClass]
+public class TestClass
+{
+    private int _poleProTest;
+
+    [TestInitialize]
+    public void InicializaceTestu()
+    {
+        // Inicializace proměnných a objektů pro každý test
+        _poleProTest = 10;
+    }
+
+    [TestMethod]
+    public void TestMetoda()
+    {
+        // Testování funkcionality s inicializovanými proměnnými
+        Assert.AreEqual(10, _poleProTest);
+
+        // ... další testovací kód ...
+    }
+
+    [TestCleanup]
+    public void UkonceniTestu()
+    {
+        // Uvolnění zdrojů a provedení úklidu po každém testu
+        _poleProTest = 0;
+    }
+}
+
+    </code>
+</pre>
+    
+    <div class="display-4">
+        Testování formulářů
+    </div>
+    
+    Jedná se čistě o uživatelský interface a to nelze testovat nijak. Jediný způsob je zkoumat chování uživatelů. Takzvaně UX design = <span>user experience</span>
+</div>

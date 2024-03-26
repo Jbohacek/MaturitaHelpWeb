@@ -113,8 +113,12 @@
     <div class="background-text col-md h-100">
         <div class="display-4 mb-3">Okruhy</div>
         <div class="ms-3">
+            <div class="text-center p-3 rounded" style="background-color: #595c66">
+                Otázky 25-27 <span class="link-underline">nebudou</span> vypracovaný, jelikož není dostatek času. Pomoc je vítaná
+            </div>
+
             <div style="font-weight: 300; font-size: 26px">1. Okruh</div>
-            <ul>
+            <ol start="1">
                 <li><a asp-controller="Variables" asp-action="Index">Proměnné, Datové typy</a></li>
                 <li><a asp-controller="QuestionSeriesOne" asp-action="ProceduryFunkce">Procedury, Funkce</a></li>
                 <li><a asp-controller="QuestionSeriesOne" asp-action="GarbageCollector">Garbage collector</a></li>
@@ -123,12 +127,12 @@
                 <li><a asp-controller="QuestionSeriesOne" asp-action="Rekurze">Rekurze</a></li>
                 <li><a asp-controller="QuestionSeriesOne" asp-action="PoleAKolekce">Pole a kolekce</a></li>
                 <li><a asp-controller="QuestionSeriesOne" asp-action="Retezce">Řetězce</a></li>
-                <li><a asp-controller="QuestionSeriesOne" asp-action="DatoveStruktury" >Datové struktury</a></li>
+                <li><a asp-controller="QuestionSeriesOne" asp-action="DatoveStruktury">Datové struktury</a></li>
                 <li><a asp-controller="QuestionSeriesOne" asp-action="SouboryASouborovySystem">Soubory a souborový systém</a></li>
-            </ul>
-            
+            </ol>
+
             <div style="font-weight: 300; font-size: 26px">2. Okruh</div>
-            <ul>
+            <ol start="11">
                 <li><a asp-controller="QuestionSeriesSecond" asp-action="ZakladyOOP">Základy OOP</a></li>
                 <li><a asp-controller="QuestionSeriesSecond" asp-action="DedicnostOOP">Dědičnost v OOP</a></li>
                 <li><a asp-controller="QuestionSeriesSecond" asp-action="PokrocilePrvkyOOP">Pokročilé prvky OOP</a></li>
@@ -139,12 +143,12 @@
                 <li><a asp-controller="QuestionSeriesSecond" asp-action="FormValidation">Formuláře - Data validation</a></li>
                 <li><a asp-controller="QuestionSeriesSecond" asp-action="GUIGrafika">GDI grafika</a></li>
                 <li><a asp-area="Programovani" asp-controller="Gof" asp-action="Index">Návrhové vzory GoF</a></li>
-            </ul>
+            </ol>
             <div style="font-weight: 300; font-size: 26px">3. Okruh</div>
-            <ul>
+            <ol start="21">
                 <li><a asp-controller="QuestionSeriesThird" asp-action="Databaze">Databáze</a></li>
-                <li><a>Teorie testování</a></li>
-                <li><a>Unit testy</a></li>
+                <li><a >Teorie testování</a></li>
+                <li><a asp-controller="QuestionSeriesThird" asp-action="UnitTesty">Unit testy</a></li>
                 <li><a>Integrační testy</a></li>
                 <li><a>ASP.NET MVC základy</a></li>
                 <li><a>ASP.NET MVC View</a></li>
@@ -152,7 +156,9 @@
                 <li><a>REST API</a></li>
                 <li><a>Události a delegáty</a></li>
                 <li><a>Reflexe</a></li>
-            </ul>
+            </ol>
         </div>
+        
     </div>
+
 </div>

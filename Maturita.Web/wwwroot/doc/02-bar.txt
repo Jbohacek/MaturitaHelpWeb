@@ -1,0 +1,19 @@
+11. základy OOP - tøída, instance, vlastnosti, metody, zapouzdøení, modifikátory pøístupu, konstruktor
+
+12. dìdiènost v OOP - dìdiènost, konstruktory, polymorfismus, pøekrývání metod, rozhraní, abstraktní tøída
+
+13. pokroèilé prvky OOP - statické vlastnosti a metody, statický konstruktor, vnitøní tøídy, generické tøídy, generické metody
+
+14. UML - popis UML, základní diagramy, Class diagram (diagram tøíd) a význam jednotlivých symbolù v kódu, UseCase diagram (diagram pøípadù užití) , State diagram, Sequence diagram (sekvenèní diagram)
+
+15. regulární výrazy - význam jednotlivých speciálních znakù (výèet, opakování, povinnost, zaèátek/konec, ...), jejich praktické využití
+
+16. formuláøe - základní práce s formuláøovými prvky (textbox, button, listbox, combobox), události, otevírání formuláøù a zpracování hodnot, Show/ShowDialog
+
+17. formuláøe - datagrid - práce s komponentou datagrid, pøipojení DataSource, napojení DataModelu na souborové/databázové repository
+
+18. formuláøe - validace vstupních hodnot, validace na úrovni formuláøe a položky, ErrorProvider, aplikace regulárních výrazù
+
+19. GDI grafika - kreslení jednoduchých objektù - èára, kružnice, obdélník, práce s barvami, definice štìtce a pera, objekt Graphics, událost Paint, kreslení obrázkù, textù, export do JPG, transformace SS
+
+20. návrhové vzory GoF - Tovární metoda (Factory Method), Jedináèek (Singleton), Pøíkaz (Command), Pozorovatel (Observer), Iterator, State, Decorator, Memento, Adapter
