@@ -17,10 +17,10 @@
     <br />
     Na přidání unit testů do projektu je potřeba vytvořit separatní nový projekt s jménem <span>MSTest Test Project (.NET Core)</span>
     
-    <img src="~/Pictures/UnitTesting/UnitTestCreateProject.gif" class="img-fluid d-block mx-auto w-50">
+    <img src="~/Pictures/UnitTesting/UnitTestCreateProject.gif" class="img-fluid d-block mx-auto w-100">
     
     Do projektu je také potřeba přidat referenci na náš projekt (ten hlavní), aby testovací projekt měl odkud brát třídy a zdroje.
-    <img src="~/Pictures/UnitTesting/UnitTestAddReference.gif" class="img-fluid d-block mx-auto w-50">
+    <img src="~/Pictures/UnitTesting/UnitTestAddReference.gif" class="img-fluid d-block mx-auto w-100">
 
 </div>
 
@@ -138,4 +138,99 @@ public class TestClass
     </div>
     
     Jedná se čistě o uživatelský interface a to nelze testovat nijak. Jediný způsob je zkoumat chování uživatelů. Takzvaně UX design = <span>user experience</span>
+</div>
+
+<div class="display-3">
+    Další možný příklady s Assert
+</div>
+<div class="background-text">
+    <pre>
+    <code class="language-csharp">
+[TestMethod]
+public void Assert_AreEqual_Numbers()
+{
+    // Arrange
+    var expected = 10;
+    var actual = 10;
+
+    // Act
+    Assert.AreEqual(expected, actual);
+}
+
+[TestMethod]
+public void Assert_AreNotEqual_Numbers()
+{
+    // Arrange
+    var expected = 10;
+    var actual = 15;
+
+    // Act
+    Assert.AreNotEqual(expected, actual);
+}
+
+[TestMethod]
+public void Assert_IsTrue_Boolean()
+{
+    // Arrange
+    var isTrue = true;
+
+    // Act
+    Assert.IsTrue(isTrue);
+}
+
+[TestMethod]
+public void Assert_IsFalse_Boolean()
+{
+    // Arrange
+    var isFalse = false;
+
+    // Act
+    Assert.IsFalse(isFalse);
+}
+
+[TestMethod]
+public void Assert_IsNotNull_Object()
+{
+    // Arrange
+    var obj = new object();
+
+    // Act
+    Assert.IsNotNull(obj);
+}
+
+[TestMethod]
+public void Assert_IsNull_Object()
+{
+    // Arrange
+    object obj = null;
+
+    // Act
+    Assert.IsNull(obj);
+}
+
+[TestMethod]
+public void Assert_IsInstanceOfType_Object()
+{
+    // Arrange
+    var obj = new String("Test");
+
+    // Act
+    Assert.IsInstanceOfType(obj, typeof(string));
+}
+
+[TestMethod]
+public void Assert_ThrowsException_Method()
+{
+    // Arrange
+    void MethodThatThrowsException()
+    {
+        throw new Exception("Test Exception");
+    }
+
+    // Act
+    Assert.ThrowsException@("<Exception>")(MethodThatThrowsException);
+}
+    </code>
+</pre>
+
 </div>

@@ -2,7 +2,128 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Styles
+{
+    <style>
+        .box {
+            padding: 20px;
+            border: #3a3e46 solid;
+            border-radius: 16px;
+            margin: 15px 0;
+            text-decoration: none;
+            font-size: 40px;
+        }
+    </style>
+}
+
+<div class="">
+    <h1 class="display-1 text-center">Vítej</h1>
+    <h1 class="display-4 text-center">Zde najdeš vše co potřebuješ na maturitu!</h1>
+    
+    <div class="text-center d-flex flex-lg-row flex-column justify-content-around">
+        <a asp-area="Programovani" asp-controller="Home" class="box"><i class="bi bi-code-slash"></i><br />Programování</a>
+        <a class="box"><i class="bi bi-database"></i><br />Database</a>
+        <a asp-area="ProgramoveVybaveni" asp-controller="Home" class="box"><i class="bi bi-pc-display"></i><br />Programové vybavení</a>
+    </div>
+    
+    <div class="background-text mt-4">
+        Tento web slouží jako zápisky a přípava na maturitu z programování na <a href="https://www.sssvt.cz/">soukromé střední škole výpočetní techniky</a> a jsou zde zapsané okruhy na ústní maturitní zkoušku a jejich vysvětlení.<br />
+        Web byl vytvořený, protože jsem si chtěl všechny informace zapsat a mít je na jednom místě, kde se k nim mohu kdykoliv vrátit. Tím pádem jsem se rozhodl, že je zveřejním, protože by se mohli hodit i někomu jinému. <br /> <br />
+        Web vytvořil <b>Jakub Boháček</b> třída 4.A. ročník 23/24.
+    </div>
+    <div class="display-4">
+        Jak mohu pomoct?
+    </div>
+    <div class="background-text">
+        Pokud najdeš chybu neváhej a napiš na email <a href="mailto:chyby@jbohacek.cz">chyby@jbohacek.cz</a><br /><br />
+        Pokud se chceš <span>podílet na vývoji webu</span>, tak neváhejte a přidejte více informací přes <a href="https://github.com/Jbohacek/MaturitaHelpWeb">Github</a>! <br /><br />
+        Pokud netušíš jak github funguje a chceš pomoct, napiš na email <a href="mailto:admin@jbohacek.cz">admin@jbohacek.cz</a> a my ti rádi pomůžeme.<br /> <span class="sha">Fakt to není težké, je to jen HTML :)</span>
+    </div>
+    <div class="display-4">
+        Poslední změny
+    </div>
+
+
+    <div style="overflow: auto; height: 400px;">
+        
+        <div class="background-text">
+            <span>3.4</span> - Lepší web a rozdělení do více sekcí
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>25.3</span> - Database
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>16.3</span> - Všechny otázky z 2 baličku
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>7.3</span> - Gui
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>6.3</span> - Validation
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>5.3</span> - Forms advance
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>29.2</span> - Regex
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>27.2</span> - Pokročilé prvky OOP<br />a rozpracovany forms základy a datagrid
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>23.2</span> - UML<br />
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>22.2</span> - Dědičnost OOP<br />
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>21.2</span> - Základy OOP<br />
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>19.2</span> - Opravena šiřka youtube videií na mobilní zobrazení<br /> <span class="sha">PS: už mě s tím neštvi :)</span><br />
+            <div class="text-end sha">NAX</div>
+        </div>
+
+
+        <div class="background-text">
+            <span>18.2</span> - Opravena gramtika "ř" a "zjistit"<br />
+            <div class="text-end sha">Mace</div>
+        </div>
+
+        <div class="background-text">
+            <span>15.2</span> - Řetěžce, Souborový system, Datove struktury<br />
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
+        <div class="background-text">
+            <span>13.2</span> - Rekurze, Pole a kolekce<br />
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+        <div class="background-text">
+            <span>9.2</span> - Garbage collector, Řídící struktury, přepsané modifikátory přístupu a změna Home page<br />
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+    </div>
 </div>

@@ -20,6 +20,10 @@
     @* Video.js *@
     <link rel="stylesheet" href="~/lib/video-js-8.9.0/video-js.min.css"/>
     <link rel="stylesheet" href="~/css/YoutubeVideo.css" />
+    
+    @await RenderSectionAsync("Styles", required: false)
+    
+
 </head>
 <body>
     @* Highlight.js *@

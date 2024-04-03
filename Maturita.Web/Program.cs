@@ -34,38 +34,11 @@ namespace Maturita.Web
                 pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
-                name: "Main",
-                pattern: "{area=Programovani}/{controller=Home}/{action=Index}/{id?}");
-
-            app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
 
-
-
-
-        }
-    }
-
-    public class Person
-    {
-
-        public int Age { get; set; }
-
-        public string Name { get; set; }
-        
-        //Metoda
-        public void WhatsMyName()
-        {
-            Console.WriteLine("My name is " + Name);
-        }
-
-        //Construktor
-        public Person(string name,int age)
-        {
-            Name = name;
 
 
 
