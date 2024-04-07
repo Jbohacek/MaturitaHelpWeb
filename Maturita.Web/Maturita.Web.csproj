@@ -18,7 +18,7 @@
   <ItemGroup>
     <Folder Include="Areas\Database\Data\" />
     <Folder Include="Areas\Database\Models\" />
-    <Folder Include="Areas\Database\Views\" />
+    <Folder Include="Areas\Database\Pages\" />
     <Folder Include="Areas\Programovani\Data\" />
     <Folder Include="Areas\Programovani\Models\" />
     <Folder Include="Areas\Programovani\Pages\" />
@@ -40,6 +40,8 @@
   </ItemGroup>
 
   <ItemGroup>
+
+    <_ContentIncludedByDefault Remove="Areas\Database\Views\Mssql\Replication.cshtml" />
 
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\Databaze.cshtml" />
 
@@ -147,6 +149,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesThird\IntegracniTesty.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Database\Views\Mssql\Replication.cshtml" />
   </ItemGroup>
 
 </Project>

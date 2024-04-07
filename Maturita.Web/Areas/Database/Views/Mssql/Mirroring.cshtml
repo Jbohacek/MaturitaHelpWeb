@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Mirroring";
+    ViewBag.Author = "Jakub Boháček";
+
+    //Ani jedna z nich není nutná, nějaký stánky nemají Editora, tak to prostě nenapiště:
+
+}
+
+
+@* Nadpisy *@
+<div class="display-1">
+    Mirroring
+</div>
+<div class="background-text">
+    V MS SQL je Mirroring (Zrcadlení) funkce, která umožňuje vytvořit kopii databáze (zrcadlovou databázi) na jiném serveru. 
+    Tato zrcadlová databáze se průběžně synchronizuje s hlavní databází, což znamená, 
+    že všechny změny provedené v hlavní databázi se replikují do zrcadlové databáze. 
+    Toho je dosaženo pomocí transakčního replikačního modelu, který zajišťuje, 
+    že zrcadlová databáze zůstává aktuální.
+    <br/><br/>
+    Hlavní výhodou Mirroringu je možnost zajištění vysoké dostupnosti databáze.
+    Pokud dojde k výpadku hlavního serveru, lze rychle přepnout na zrcadlový server a minimalizovat 
+    tak dobu výpadku služby. Zrcadlová databáze pak může převzít úlohu hlavní databáze a uživatelé 
+    mohou pokračovat v práci s minimálním přerušením.
+    <div class="display-4">
+        Existují dva režimy Mirroringu
+    </div>
+    
+    <ul>
+        <li><span>Synchronní režim (Synchronous) </span><br/> V tomto režimu se transakce musí zapsat na 
+            hlavní databázi i na zrcadlovou databázi, než se považuje za dokončenou. 
+            To zajišťuje nejvyšší úroveň datové integrity, ale může mít vliv na výkon.</li>
+        <li><span>Asynchronní režim (Asynchronous) </span><br/>V tomto režimu se transakce zapíší na hlavní databázi a 
+            poté se asynchronně replikují na zrcadlovou databázi. 
+            To může zlepšit výkon, ale existuje možnost ztráty dat v případě výpadku hlavního serveru před dokončením replikace na zrcadlo.</li> 
+    </ul>
+    
+    Mirroring je účinná funkce pro zajištění vysoké dostupnosti databáze v MS SQL, ale je třeba pečlivě zvážit, který režim je pro vaše potřeby vhodnější.
+    
+    <div class="sha text-center">Více informací: <a href="https://learn.microsoft.com/cs-cz/sql/database-engine/database-mirroring/database-mirroring-sql-server?view=sql-server-ver16">learn.microsoft.com</a></div>
+
+</div>
+@await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/KUJtVrcCrss?si=hiyhiYF9QRqzv1ER")
+@await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/C_npQPAI1Yo?si=pe9sfeVPNUvdzfWd")

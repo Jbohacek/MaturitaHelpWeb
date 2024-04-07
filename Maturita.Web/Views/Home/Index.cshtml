@@ -22,7 +22,7 @@
     
     <div class="text-center d-flex flex-lg-row flex-column justify-content-around">
         <a asp-area="Programovani" asp-controller="Home" class="box"><i class="bi bi-code-slash"></i><br />Programování</a>
-        <a class="box"><i class="bi bi-database"></i><br />Database</a>
+        <a asp-area="Database" asp-controller="Home" asp-action="Index" class="box"><i class="bi bi-database"></i><br />Databáze</a>
         <a asp-area="ProgramoveVybaveni" asp-controller="Home" class="box"><i class="bi bi-pc-display"></i><br />Programové vybavení</a>
     </div>
     
@@ -46,6 +46,11 @@
 
     <div style="overflow: auto; height: 400px;">
         
+        <div class="background-text">
+            <span>7.4</span> - Teorie testování, Integrační testy, mirroring, replication a přidané témata na mssql
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
+
         <div class="background-text">
             <span>4.4</span> - Ikona
             <div class="text-end sha">Jakub Boháček</div>

@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "_Layout";
+
+
+    ViewBag.Title = "Replication";
+    ViewBag.Author = "Jakub Boháček";
+}
+
+
+<div class="display-1">
+    Replication
+</div>
+
+<div class="background-text">
+    Replikace v MS SQL Serveru je funkce, která umožňuje udržovat kopie dat synchronizované mezi několika servery.
+    To znamená, že změny provedené v jedné databázi (zdrojové) se 
+    automaticky replikují do jedné nebo více dalších databází (cílových).
+    <br/><br/>
+    Existuje několik důvodů, proč byste mohli chtít používat replikaci v MS SQL:
+    <br/>
+    <ul>
+        <li><span>Vysoká dostupnost</span> Můžete replikovat data na sekundární server, aby byla k dispozici v případě výpadku primárního serveru.</li>
+        <li><span>Z reporting a analýza</span> Můžete replikovat data do samostatné databáze pro reporting a analýzu, aniž byste ovlivnili výkonnost produkčního serveru.</li>
+        <li><span>Geografické rozložení dat</span> Můžete replikovat data do geograficky vzdálených umístění a snížit tak latenci pro místní uživatele.</li>
+    </ul>
+    Existuje několik různých typů replikace v MS SQL, z nichž každý je vhodný pro různé scénáře. Typy replikace jsou:
+    <ul>
+        <li><span>Snímková replikace</span> Vytvoří se úplná kopie zdrojové databáze a poté se periodicky aktualizují pouze změny.</li>
+        <li><span>Transakční replikace</span> Změny v zdrojové databázi se průběžně replikují do cílových databází.</li>
+        <li><span>Merge replikace</span> Umožňuje obousměrnou synchronizaci dat mezi zdrojovou a cílovou databází.</li>
+    </ul>
+    <div class="sha text-center">Více informací: <a href="https://learn.microsoft.com/cs-cz/sql/relational-databases/replication/sql-server-replication?view=sql-server-ver16">learn.microsoft.com</a></div>
+
+</div>
+
+<div class="display-1">
+    Nastavení replikace
+</div>
+
+<div class="background-text">
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/6_7JY7JPymY?si=GAMbxiyph3L4xT0z"))
+    
+    <img src="~/Pictures/_Database/Replication.png" class="bg-info img-fluid d-block mx-auto w-50">
+    
+    <div class="display-3">
+        Postup v textu:
+    </div>
+    
+    <div class="display-4">1. Navrhněte topologii replikace:</div>
+    
+    <ul>
+        <li>Určete, které databáze budou replikovány.</li>
+        <li>Vyberte typ replikace, který chcete použít.</li>
+        <li>Určete, kolik sekundárních serverů bude replikováno.</li>
+        <li>Nakonfigurujte síťové propojení mezi servery.</li>
+    </ul>
+
+    <div class="display-4">2. Nakonfigurujte replikaci na zdrojovém serveru:</div>
+    
+    <ul>
+        <li>Vytvořte publikace pro databáze, které chcete replikovat.</li>
+        <li>Nakonfigurujte agenta publikování.</li>
+    </ul>
+
+    <div class="display-4">3. Nakonfigurujte replikaci na cílovém serveru:</div>
+    
+    <ul>
+        <li>Vytvořte předplatné pro publikace.</li>
+        <li>Nakonfigurujte agenta předplatného.</li>
+    </ul>
+    
+    
+    
+    <div class="display-4">4. Spusťte replikaci:</div>
+    
+    <ul>
+        <li>Spusťte agenta publikování na zdrojovém serveru.</li>
+        <li>Spusťte agenta předplatného na cílovém serveru.</li>
+    </ul>
+    
+    
+</div>

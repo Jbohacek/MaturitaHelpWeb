@@ -1,0 +1,78 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model dynamic
+
+@{
+    ViewBag.Title = "Database";
+    Layout = "_Layout";
+}
+
+<h2 class="display-1 mb-4"><i class="bi bi-database"></i> Database</h2>
+<div class="row gap-5">
+    <div class="col-md-6 h-100">
+        <div class="background-text">
+            Zde najdeš všechny okruhy z čeho je maturitní zkoušení a praxe.
+        </div>
+        <div class="display-4">
+            Jak si mohu procvičit?
+        </div>
+        <div class="background-text">
+            Nemám nic, pokud možno zaslat na <a href="mailto:admin@jbohacek.cz">admin@jbohacek.cz</a>
+        </div>
+        <div style="overflow: auto; height: 400px;">
+            
+        </div>
+    </div>
+    <div class="background-text col-md h-100">
+        <div class="display-4 mb-3">Okruhy</div>
+        <div class="ms-3">
+            <div style="font-weight: 300; font-size: 26px">Práce s databazí</div>
+            <ul>
+                <li><a>Návrh databáse</a></li>
+                <li><a>Vytváření databaze</a></li>
+            </ul>
+            
+            <div style="font-weight: 300; font-size: 26px">Práce s tabulky</div>
+            <ul>
+                <li><a>Základní modifikace dat</a></li>
+                <li><a>Dotazy - select</a></li>
+                <li><a>Pohledy - views</a></li>
+                <li><a>Dočasné tabulky - temporary tables</a></li>
+                <li><a>Procedury a funkce - procedures & functions</a></li>
+                <li><a>Triggery - Triggers</a></li>
+                <li><a>Kurzory - cursors</a></li>
+                <li><a>Tok programu - If,While,Case,Declare,set</a></li>
+            </ul>
+            
+            <div style="font-weight: 300; font-size: 26px">Práce s daty</div>
+            <ul>
+                <li><a>Import data - CSV,Excel,TXT, Access</a></li>
+                <li><a>Import data - SSIS</a></li>
+                <li><a>Dělení dat - Partitioning</a></li>
+                <li><a>Zasílání protokolu - Log shipping</a></li>
+                <li><a>Zálohování dat - Backup</a></li>
+                <li><a>Obnova dat - Restore</a></li>
+            </ul>
+            
+            <div style="font-weight: 300; font-size: 26px">Zabezpečení serveru/dat</div>
+            <ul>
+                <li><a>Audit akcí - Audit</a></li>
+                <li><a>Šifrování dat - Encryption</a></li>
+                <li><a>uživatelé a servrové role - User and Database roles</a></li>
+                <li><a>uživatelé a práva - users and permissions</a></li>
+            </ul>
+
+            <div style="font-weight: 300; font-size: 26px">Data mezi servery</div>
+            <ul>
+                <li><a asp-controller="Mssql" asp-action="Replication">Replikace</a></li>
+                <li><a asp-controller="Mssql" asp-action="Mirroring">Mirroring</a></li>
+            </ul>
+
+        </div>
+        
+    </div>
+
+</div>
