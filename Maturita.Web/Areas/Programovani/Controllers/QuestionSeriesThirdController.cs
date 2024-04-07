@@ -22,5 +22,12 @@ namespace Maturita.Web.Areas.Programovani.Controllers
         {
             return View();
         }
+
+        //23
+
+        public IActionResult IntegracniTesty()
+        {
+            return View();
+        }
     }
 }

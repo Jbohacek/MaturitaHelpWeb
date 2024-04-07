@@ -1,0 +1,135 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Integrační testy";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Integrační testy
+</div>
+
+<div class="background-text">
+    Integrační testy jsou typem softwarového testování, které ověřuje, zda <span> různé komponenty softwarového systému správně spolupracují</span>.
+    Tyto testy se provádějí po dokončení testování jednotlivých komponent a před spuštěním systémových testů.
+</div>
+
+<div class="display-2">
+    Zásady nahraditelnosti integračních testů
+</div>
+<div class="background-text">
+    V kontextu integračních testů se principy nahraditelnosti zaměřují na to, 
+    do jaké míry lze testovací komponenty nahradit jinými implementacemi 
+    bez ovlivnění celkové integrity testů.
+    <br/>
+    <br/>
+    Každý integrační test by měl být izolovaný od ostatních, 
+    aby se minimalizoval vliv změn v jedné komponentě 
+    na testy jiných komponent. Toho lze dosáhnout pomocí technik jako:
+    <ul>
+        <li><span>Mocking:</span> Nahrazení závislostí testované komponenty mock objekty, které simulují chování skutečných závislostí.</li>
+        <li><span>Stubs:</span> Implementace jednoduchých verzí závislostí, které poskytují pouze základní funkce potřebné pro testování.</li>
+    </ul>
+    
+    <div class="display-4">
+        Příklad:
+    </div>
+    Představte si integrační test, který testuje interakci mezi webovou aplikací a backendovou službou. 
+    Test může používat mock objekt backendové služby, aby se izoloval od skutečné backendové služby. 
+    To umožňuje testovat webovou aplikaci bez ohledu na dostupnost backendové služby. 
+    Pokud je backendová služba nahrazena jinou implementací, test by měl stále fungovat, 
+    pokud rozhraní mezi webovou aplikací a backendovou službou zůstane zachováno.
+</div>
+
+<div class="display-2">
+    Příklad mock objektu
+</div>
+<div class="background-text">
+    Příklad mock objektu, který čte CSV soubory
+    
+    <div class="display-5">
+        Mock objekt
+    </div>
+    Níže je uveden příklad mock objectu v C#, který simuluje chování rozhraní IFileReader:
+    <pre>
+    <code class="language-csharp">
+public class FileReaderMock : IFileReader
+{
+    public string ReadFile(string filePath)
+    {
+        // Simulace čtení dat z CSV souboru
+        if (filePath == "data.csv")
+        {
+            return "Jméno,Příjmení,Věk\nJan,Novák,25\nPetr,Svoboda,30";
+        }
+
+        throw new FileNotFoundException($"Soubor '{filePath}' nenalezen.");
+    }
+}
+    </code>
+</pre>
+    Tento mock object implementuje rozhraní IFileReader a poskytuje implementaci metody ReadFile. 
+    Tato metoda simuluje čtení dat z CSV souboru. Pokud je cesta k souboru "data.csv",
+    metoda vrátí obsah souboru. V opačném případě vyvolá výjimku FileNotFoundException.
+    <div class="display-5">
+        CSV soubor
+    </div>
+    Níže je uveden příklad CSV souboru s názvem "data.csv", který obsahuje data o lidech:
+    <pre>
+    <code class="language-csharp">
+Jméno,Příjmení,Věk
+Jan,Novák,25
+Petr,Svoboda,30
+    </code>
+</pre>
+    <div class="display-5">
+        Použití Mock Objectu
+    </div>
+    Mock object můžeme použít v unit testech k simulaci chování závislostí. 
+    Níže je uveden příklad unit testu, který testuje funkcionalitu třídy UserService, 
+    která používá rozhraní IFileReader:
+    <pre>
+    <code class="language-csharp">
+[TestClass]
+public class UserServiceTests
+{
+    [TestMethod]
+    public void GetUsers_ShouldReturnUsersFromCsvFile()
+    {
+        // Vytvoření mock objectu
+        var fileReaderMock = new FileReaderMock();
+
+        // Vložení mock objectu do UserService
+        var userService = new UserService(fileReaderMock);
+
+        // Získání uživatelů
+        var users = userService.GetUsers();
+
+        // Ověření, že počet uživatelů je 2
+        Assert.AreEqual(2, users.Count);
+
+        // Ověření, že uživatelé jsou správně načteni
+        Assert.AreEqual("Jan", users[0].FirstName);
+        Assert.AreEqual("Novák", users[0].LastName);
+        Assert.AreEqual(25, users[0].Age);
+
+        Assert.AreEqual("Petr", users[1].FirstName);
+        Assert.AreEqual("Svoboda", users[1].LastName);
+        Assert.AreEqual(30, users[1].Age);
+    }
+}
+
+    </code>
+</pre>
+    V tomto unit testu vytvoříme mock object FileReaderMock a vložíme ho do konstruktoru UserService. 
+    Poté zavoláme metodu GetUsers na UserService a ověříme, že vrátí dva uživatele s správnými daty.
+    <div class="display-3">
+        Výhody Mock objektů
+    </div>
+    <ol>
+        <li><span>Simulace chování závislostí:</span> Mock objecty nám umožňují simulovat chování závislostí bez ohledu na jejich skutečnou implementaci.</li>
+        <li><span>Izolace testů:</span> Mock objecty nám umožňují izolovat testy od skutečných závislostí, čímž se testy stávají robustnějšími a odolnějšími vůči změnám.</li>
+        <li><span>Zjednodušení testování:</span> Mock objecty nám umožňují zjednodušit testy a zaměřit se na testování specifické funkcionality.</li>
+    </ol>
+</div>

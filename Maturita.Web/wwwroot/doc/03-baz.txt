@@ -7,11 +7,14 @@
 -- usability testy, 
 -- testy výkonu, 
 -- profiler, 
-Test Driven Development
+-- Test Driven Development
 
 23. Unit testy - princip a využití unit testù, testovací tøídy, testovací metody, pre-testové a post-testové rutiny, testování formuláøù
 
-24. Integraèní testy - význam integraèních testù, zásady nahraditelnosti, mock objekt
+24. Integraèní testy - 
+význam integraèních testù, 
+zásady nahraditelnosti, 
+mock objekt
 
 25. ASP.NET MVC základy - princip architektury Model-View-Controller, zpracování požadavku, smìrování, výchozí smìrování, HTTP protokol, controller, akce, parametry akce, návratový typ (ActionResult - View, Redirect)
 
