@@ -1,6 +1,13 @@
 21. Databáze - pøipojení k MySQL/MSSQL, ORM - entity framework, mapování tabulek, vazby, DbContext, DbSet, repository, LINQ
 
-22. Teorie testování - typy testù, blackbox/whitebox, test UI, usability testy, testy výkonu, profiler, Test Driven Development
+22. Teorie testování - 
+--typy testù, 
+-- blackbox/whitebox, 
+-- test UI, 
+-- usability testy, 
+-- testy výkonu, 
+-- profiler, 
+Test Driven Development
 
 23. Unit testy - princip a využití unit testù, testovací tøídy, testovací metody, pre-testové a post-testové rutiny, testování formuláøù
 

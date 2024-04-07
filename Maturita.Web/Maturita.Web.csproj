@@ -61,6 +61,7 @@
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\Rekurze.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\Retezce.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\SouboryASouborovySystem.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\TeorieTestovani.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Video\Index.cshtml" />
   </ItemGroup>
@@ -137,6 +138,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Programovani\Views\Gof\Adapter.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesThird\TeorieTestovani.cshtml" />
   </ItemGroup>
 
 </Project>

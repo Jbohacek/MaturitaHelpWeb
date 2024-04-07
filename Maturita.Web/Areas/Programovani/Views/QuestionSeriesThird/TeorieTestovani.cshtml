@@ -1,0 +1,204 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Databaze";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Teorie testování
+</div>
+
+<div class="background-text">
+    <div class="display-5">
+        Proč testovat?
+    </div>
+    Testování se určitě řadí mezi <span> dobré praktiky vývoje
+        softwaru
+    </span> (best practices). Další takovou praktikou je např.
+    programovat objektově, používat vícevrstvou architekturu a podobně.
+    Některé praktiky bychom měli dodržovat opravdu ortodoxně, např. pro psaní
+    neobjektového kódu existuje opravdu jediný důvod a tím je neznalost
+    programátora.
+
+    <div class="display-5">
+        Kdy testovat?
+    </div>
+    
+    Testování je <span>velmi
+        důležité
+    </span> a v určité části projektu dokonce
+    <span>nepostradatelné</span>. Na druhou stranu, <span>v prvních fázích
+        projektu
+    </span>(a to zejména u start-upů), kdy se hraje na čas,
+    funkčnosti aplikace se často mění, a je třeba aplikaci co nejdříve
+    spustit, <span>není</span> vůbec <span>dobrý nápad testy</span>
+    psát.
+</div>
+
+<div class="display-2">
+    Typy testů
+</div>
+
+<div class="background-text">
+    Zaměřme se nyní na to, co na aplikaci testujeme. Typů
+    testů je hned několik. Obvykle nepokrývají úplně všechny možné
+    scénáře (všechen kód). Hovoříme o procentuálním pokrytí testy (code
+    coverage), většinou kritických částí aplikace.
+    <span>Čím větší aplikace je,
+        tím více typů testů potřebuje</span>
+    
+    
+    <div class="display-4">
+        <span>Jednotkové testy (Unit testy)</span>
+    </div>
+    Obvykle testují
+    univerzální knihovny, nepíšeme je pro kód specifický pro
+    danou aplikaci. Jednotkové testy testují třídy, přesněji
+    jejich metody, jednu po druhé. Předávají jim různé vstupy
+    a zkouší, zda jsou jejich výstupy korektní
+    
+    <div class="display-4">
+        <span>Akceptační testy</span>
+    </div>
+    Tento typ testů je naopak úplně
+    odstíněn od toho, jak je aplikace uvnitř naprogramovaná, jsou to tedy
+    <span>blackbox testy</span> (nevidíme dovnitř). Každý test obvykle
+    testuje určitou <span>funkčnost</span>, např. test pro psaní článků
+    by testoval jednotlivé use cases s tím spojené (předat článek ke
+    schválení, schválit článek, zamítnou článek, publikovat článek jako
+    administrátor...).
+    
+    <div class="display-4">
+        <span>Integrační testy</span>
+    </div>
+    V dnešní době dosahují aplikace
+    již poměrně vysoké komplexnosti a velmi často bývají rozdělené do
+    několika služeb, které spolu komunikují a jsou vyvíjené zvlášť. Právě
+    integrační testy dohlíží na to, aby do sebe vše správně zapadalo.
+
+    <div class="display-4">
+        <span>Systémové testy</span>
+    </div>
+    
+    I když aplikace funguje dobře, na
+    produkčním prostředí podléhá dalším vlivům, se kterými musíme
+    rovněž počítat. Např. že by měla zvládat obsluhovat tisíc uživatelů v
+    jeden okamžik. To bychom provedli <span>zátěžovým testem</span>, který
+    spadá mezi systémové testy.
+
+</div>
+
+<div class="display-2">
+    Blackbox & whitebox
+</div>
+
+<div class="background-text">
+    <div class="display-4">
+        <span>Black box</span>
+    </div>
+    Jako černou skříňku (black box) označujeme stav, kdy informace
+    dostupné testerovi spočívají ve znalosti vstupů do aplikace
+    a znalosti očekávaných výstupů. Tester nezná vnitřní logiku aplikace a
+    jeho pohled je z velké části uživatelský. Testování se v tomto případě nejčastěji opírá o
+    uživatelské požadavky, obvykle zpracované do určité formy business analýzy. Smyslem testů je ověřit,
+    že očekávané chování (definované právě vstupy a výstupy) odpovídá chování skutečnému.
+    
+    <div class="display-4">
+        <span>White box</span>
+    </div>
+    Bílá skříňka (white box) znamená, že tester má přístup ke všem informacím včetně zdrojového kódu. 
+    Testování v tomto případě z větší části spočívá na testování právě samotného zdrojového kódu. 
+    To může být až na úrovni čisté revize kódu bez toho, že by aplikace byla spuštěna. 
+    Znalost vnitřní logiky aplikace dává testerovi možnost otestovat i situace, které 
+    nejsou z vnějšího pohledu patrné. Jinka řečeno mnohem lépe se pokrývá testy podmínkový 
+    strom, který jako tester vidím v konkrétní podobě než když mám o něm jen nejasnou 
+    představu danou definovanými výstupy.
+</div>
+
+<div class="display-2">
+    Test UI
+</div>
+
+<div class="background-text">
+    Musí testovat člověk, nejde převést na člověka.
+</div>
+
+<div class="display-2">
+    Usability testy
+</div>
+<div class="background-text">
+    Usability test, nebo chcete-li testování použitelnosti, 
+    patří do kategorie testů typu black box. Bohužel jen málokdo jej umí zrealizovat. <br/><br/>
+    Usability testing je v podstatě způsob, jakým dokážeme ověřit výsledek svojí práce na reálných uživatelích
+</div>
+
+<div class="display-2">
+    Testy výkonu
+</div>
+<div class="background-text">
+    Testování výkonu, někdy zkráceně “perf testing”, 
+    je proces prováděný za účelem zjištění, zda určitý 
+    produkt bude dobře vykonávat očekávané procesy při 
+    různém pracovním zatížení. To může mít podobu testování 
+    výkonnosti webových stránek nebo testování výkonnosti při
+    testování softwaru, v závislosti na daném produktu.
+    <br/><br/>
+    Testování výkonnosti je určeno především k 
+    odhalení chybných parametrů výrobku, které lze 
+    změnit již v počáteční fázi životního cyklu výrobku, 
+    aby se předešlo větším problémům v budoucnu. To se často 
+    označuje jako hledání úzkých míst, což je jedna složka, která brzdí celkový výkon softwaru.
+    <br/>
+    <br/>
+    Testy výkonu webu jsou nezbytné, aby vývojáři mohli zúčastněným stranám poskytnout spolehlivé informace 
+    o výkonu aplikace a předpovědět, jak bude aplikace reagovat na různé úrovně provozu.
+    <div class="sha text-center">Více informací: <a href="https://www.zaptest.com/cs/co-je-testovani-vykonu-hluboky-ponor-do-typu-postupu-nastroju-vyzev-a-dalsich-veci">www.zaptest.com</a></div>
+
+</div>
+
+<div class="display-2">
+    Profiler
+</div>
+<div class="background-text">
+    Profiler je nástroj, který se používá k analýze výkonu programu. 
+    Shromažďuje data o tom, jak program běží, včetně informací o tom, 
+    jak dlouho trvá spuštění jednotlivých funkcí, kolik paměti program 
+    používá a jak často se používají různé části kódu. Tato data lze poté 
+    použít k identifikaci úzkých míst v programu a ke zlepšení jeho výkonu.
+    <div class="d-block d-md-flex">
+        <img src="~/Pictures/UnitTesting/profilerPic1.png" class="img-fluid d-block mx-auto w-75">
+        <img src="~/Pictures/UnitTesting/profilerPic2.png" class="img-fluid d-block mx-auto w-75">
+    </div>
+    Takhle to vypadá ve visual studiu
+</div>
+
+<div class="display-2">
+    Test Driven Development
+</div>
+<div class="background-text">
+    Test-Driven Development (TDD) je přístup k vývoji software, který klade důraz 
+    na psaní testů před samotným psaním kódu. Jde o iterativní proces, který se dá 
+    shrnout do těchto kroků:
+    <ol>
+        <li>Napsat test</li>
+        <li>Spustit test</li>
+        <li>Napsat kod</li>
+        <li>Spustit testy</li>
+        <li>Refakterovat kod</li>
+        <li>Opakovat</li>
+    </ol>
+    Tento cyklus psaní testů, psaní kódu a refaktorování pomáhá zajistit,
+    aby kód byl dobře navržený, testovatelný a splňoval požadavky.
+</div>
+
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+        "https://www.zaptest.com/cs/co-je-testovani-vykonu-hluboky-ponor-do-typu-postupu-nastroju-vyzev-a-dalsich-veci",
+        "https://www.itnetwork.cz/csharp/testovani/uvod-do-testovani-softwaru-v-csharp-net/?all-comments",
+        "https://www.ackee.cz/blog/uzivatelske-testovani-pouzitelnosti",
+        "https://www.zaptest.com/cs/co-je-testovani-uzivatelskeho-rozhrani-softwaru-hloubkovy-ponor-do-typu-procesu-nastroju-a-implementace"
+
+
+    ))

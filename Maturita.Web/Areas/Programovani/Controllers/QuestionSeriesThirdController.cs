@@ -15,7 +15,7 @@ namespace Maturita.Web.Areas.Programovani.Controllers
         //22
         public IActionResult TeorieTestovani()
         {
-            return Json("pokus");
+            return View();
         }
 
         public IActionResult UnitTesty()
