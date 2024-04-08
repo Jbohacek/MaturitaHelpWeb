@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProjectModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<ProjectModel>
+		<Name>Známky žáků</Name>
+		<Description>Vytvořit databasi na známky kolegů</Description>
+		<Difficulty>1</Difficulty>
+		<Category>Access</Category>
+		<FileExercise>Cvičení č. 1.zip</FileExercise>
+	</ProjectModel>
+</ArrayOfProjectModel>

@@ -1,6 +1,9 @@
 ﻿using Maturita.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Maturita.Web.Managers;
+using Maturita.Web.Models.Data;
+using Maturita.Web.Models.Functional;
 
 namespace Maturita.Web.Controllers
 {
@@ -15,6 +18,8 @@ namespace Maturita.Web.Controllers
 
         public IActionResult Index()
         {
+
+
             return View();
         }
 

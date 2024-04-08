@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProjectModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectModel>
+    <Name>Servisni formular</Name>
+    <Description>Vytvořit servisni formulář</Description>
+    <Difficulty>3</Difficulty>
+    <Category>Forms</Category>
+    <FileExercise>01-servisni-protokol.zip</FileExercise>
+    <FileSolution>ServisniProtokol.zip</FileSolution>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+  <ProjectModel>
+    <Name>Sbírka uloh</Name>
+    <Description>Ulohy..</Description>
+    <Difficulty>2</Difficulty>
+    <Category>Forms</Category>
+    <FileExercise>02-sbirka-uloh.zip</FileExercise>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+  <ProjectModel>
+    <Name>e-shop</Name>
+    <Description>vytvořit web e-shop</Description>
+    <Difficulty>4</Difficulty>
+    <Category>Asp</Category>
+    <FileExercise>03-eshop.zip</FileExercise>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+  <ProjectModel>
+    <Name>Unit testovani</Name>
+    <Description>Vytvořit unit testy</Description>
+    <Difficulty>1</Difficulty>
+    <Category>Unit</Category>
+    <FileExercise>04-unit-testy.zip</FileExercise>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+  <ProjectModel>
+    <Name>Jízdní řád</Name>
+    <Description>Vytvořit mhd jízdní řád</Description>
+    <Difficulty>4</Difficulty>
+    <Category>Forms</Category>
+    <FileExercise>05-jizdni-rad.zip</FileExercise>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+  <ProjectModel>
+    <Name>Online diskuze</Name>
+    <Description>Vytvořit online diskuzi s uživately</Description>
+    <Difficulty>2</Difficulty>
+    <Category>Asp</Category>
+    <FileExercise>06-online-diskuze.zip</FileExercise>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+  <ProjectModel>
+    <Name>Graf</Name>
+    <Description>Vytvořit posuvný graf</Description>
+    <Difficulty>3</Difficulty>
+    <Category>Forms</Category>
+    <FileExercise>07-graf.zip</FileExercise>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+  <ProjectModel>
+    <Name>Datatables</Name>
+    <Description>Vytvořit asp tabulku CRUD</Description>
+    <Difficulty>2</Difficulty>
+    <Category>Asp</Category>
+    <FileExercise>https://datatables.net/examples/api/select_row.html</FileExercise>
+    <IsUrl>true</IsUrl>
+  </ProjectModel>
+  <ProjectModel>
+    <Name>Evidence známek</Name>
+    <Description>Vytvořte program určený k práci s databází studentů</Description>
+    <Difficulty>2</Difficulty>
+    <Category>Forms</Category>
+    <FileExercise>09-evidence-znamek.pdf</FileExercise>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+  <ProjectModel>
+    <Name>Realitní web</Name>
+    <Description>Vytvoř asp web na realitní makléře</Description>
+    <Difficulty>5</Difficulty>
+    <Category>Asp</Category>
+    <FileExercise>10-realitni-server.pdf</FileExercise>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+  <ProjectModel>
+    <Name>Regex ulohy 2</Name>
+    <Description>Spln regexy</Description>
+    <Difficulty>1</Difficulty>
+    <Category>Unit</Category>
+    <FileExercise>11-regex-ulohy.pdf</FileExercise>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+  <ProjectModel>
+    <Name>Validace letenky</Name>
+    <Description>Validuj letenku přes regex na formu</Description>
+    <Difficulty>2</Difficulty>
+    <Category>Forms</Category>
+    <FileExercise>12-validace-letenky.pdf</FileExercise>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+</ArrayOfProjectModel>

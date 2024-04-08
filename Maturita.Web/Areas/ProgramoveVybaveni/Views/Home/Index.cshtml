@@ -3,6 +3,8 @@
 *@
 @{
 }
+@using Maturita.Web.Managers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model dynamic
 
 @{
@@ -22,9 +24,9 @@
         <div class="background-text">
             Nemám nic, pokud možno zaslat na <a href="mailto:admin@jbohacek.cz">admin@jbohacek.cz</a>
         </div>
-        <div style="overflow: auto; height: 400px;">
-            <partial name="Projekty/_PvyProjekty" />
-        </div>
+        
+        @await Component.InvokeAsync("ExercisesComponent", new { type = ProjectManager.ProjectType.Pvy })
+        
     </div>
     <div class="background-text col-md h-100">
         <div class="display-4 mb-3">Okruhy</div>

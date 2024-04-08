@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProjectModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectModel>
+    <Name>dbTrafika</Name>
+    <Description>Tvorba databaze dbTrafika</Description>
+    <Difficulty>2</Difficulty>
+    <Category>Mssql</Category>
+    <FileExercise>dbTrafika.zip</FileExercise>
+    <IsUrl>false</IsUrl>
+  </ProjectModel>
+</ArrayOfProjectModel>

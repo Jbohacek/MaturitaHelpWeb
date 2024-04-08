@@ -3,6 +3,8 @@
 *@
 @{
 }
+@using Maturita.Web.Managers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model dynamic
 
 @{
@@ -23,9 +25,9 @@
             Stačí udělat <span>všechny projekty</span>, který nalezneš níže a měl bys být připravený na <span>všechno</span>.
             Doporučuju neopoužívat na řešení internet a zkusit si podarit pouze s <span>dokumentací.</span>
         </div>
-        <div style="overflow: auto; height: 400px;">
-            <partial name="Projekty/_ProgramovaniProjekty" />
-        </div>
+        
+        @await Component.InvokeAsync("ExercisesComponent", new { type = ProjectManager.ProjectType.Prg })
+        
     </div>
     <div class="background-text col-md h-100">
         <div class="display-4 mb-3">Okruhy</div>

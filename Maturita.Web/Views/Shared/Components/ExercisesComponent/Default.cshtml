@@ -1,0 +1,43 @@
+﻿@model List<IGrouping<string, Maturita.Web.Models.Data.ProjectModel>>
+
+<div style="overflow: auto; height: 600px;">
+    
+    @foreach (var x in Model)
+    {
+        <div class="display-5">@x.Key</div>
+        @foreach (var item in x)
+        {
+            <div class="background-text py-3">
+                <div class="d-flex justify-content-between">
+                    <a href="~/Projects/@item.GetPathExercise()">@item.Name</a>
+                    @if (item.HasSolution())
+                    {
+                        <a href="~/Projects/@item.GetPathSolution()">>řešení</a>
+                    }
+                </div>
+                @switch (item.Difficulty)
+                {
+                    case 1:
+                        <div>Obtížnost: <i class="text-info bi bi-1-circle-fill"></i></div>
+                        break;
+                    case 2:
+                        <div>Obtížnost: <i class="text-primary bi bi-2-circle-fill"></i></div>
+                        break;
+                    case 3:
+                        <div>Obtížnost: <i class="text-white bi bi-3-circle-fill"></i></div>
+                        break;
+                    case 4:
+                        <div>Obtížnost: <i class="text-warning bi bi-4-circle-fill"></i></div>
+                        break;
+                    case 5:
+                        <div>Obtížnost: <i class="text-danger bi bi-5-circle-fill"></i></div>
+                        break;
+                    default:
+                        break;
+                }
+            </div>
+        }
+    
+    }
+
+</div>

@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Projects\Dbo\**" />
+    <Content Remove="wwwroot\Projects\Dbo\**" />
+    <EmbeddedResource Remove="wwwroot\Projects\Dbo\**" />
+    <None Remove="wwwroot\Projects\Dbo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
 
@@ -30,7 +37,12 @@
     <Folder Include="wwwroot\doc\" />
     <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\Pictures\Gui\" />
-    <Folder Include="wwwroot\Projects\Dbo\" />
+    <Folder Include="wwwroot\Projects\Dbs\Exercises\" />
+    <Folder Include="wwwroot\Projects\Dbs\Solutions\" />
+    <Folder Include="wwwroot\Projects\Prg\Exercises\" />
+    <Folder Include="wwwroot\Projects\Prg\Solutions\" />
+    <Folder Include="wwwroot\Projects\Pvy\Exercises\" />
+    <Folder Include="wwwroot\Projects\Pvy\Solutions\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,6 +80,7 @@
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\IntegracniTesty.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\TeorieTestovani.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\Components\ExercisesComponent\Default.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Video\Index.cshtml" />
   </ItemGroup>
 
@@ -155,6 +168,16 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Database\Views\Mssql\Replication.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\Components\ExercisesComponent\Default.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\Projects\Dbs\Exercises\dbTrafika.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

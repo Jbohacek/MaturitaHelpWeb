@@ -1,4 +1,4 @@
-namespace Maturita.Web.Models
+namespace Maturita.Web.Models.Functional
 {
     public class ErrorViewModel
     {
