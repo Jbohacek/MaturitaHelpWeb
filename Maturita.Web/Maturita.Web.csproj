@@ -32,7 +32,6 @@
     <Folder Include="Areas\Programovani\Pages\" />
     <Folder Include="Areas\ProgramoveVybaveni\Data\" />
     <Folder Include="Areas\ProgramoveVybaveni\Models\" />
-    <Folder Include="Areas\ProgramoveVybaveni\Pages\" />
     <Folder Include="Areas\ProgramoveVybaveni\Views\Nest\" />
     <Folder Include="wwwroot\doc\" />
     <Folder Include="wwwroot\lib\" />
@@ -80,6 +79,7 @@
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\IntegracniTesty.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\TeorieTestovani.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\ProgramoveVybaveni\Views\Excel\Obecne.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Shared\Components\ExercisesComponent\Default.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Video\Index.cshtml" />
   </ItemGroup>
@@ -178,6 +178,10 @@
     <Content Update="wwwroot\Projects\Dbs\Exercises\dbTrafika.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\ProgramoveVybaveni\Views\Excel\Obecne.cshtml" />
   </ItemGroup>
 
 </Project>

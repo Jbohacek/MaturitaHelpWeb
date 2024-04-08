@@ -1,0 +1,142 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Excel - obecné";
+    ViewBag.Author = "Daniel Panáček";
+    ViewBag.Editor = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Excel, obecné informace
+</div>
+
+<div class="background-text">
+    <span>1. Listy (Worksheets)</span><br/>
+    Excelový sešit může obsahovat více listů, z nichž každý je jako samostatná "karta" s vlastním pracovním prostorem.<br /><br/>
+    
+    <span>2. Buňky (Cells)</span><br/>
+    Buňky jsou základními jednotkami dat v Excelu. Umisťují se do řádků (horizontálně) a sloupců (vertikálně). Každá buňka má svou vlastní adresu (např. A1, B2 atd.).<br/><br/>
+    
+    <span>3. Rozsahy (Ranges)</span><br/>
+    Skupiny buněk mohou být označeny jako rozsahy. To může být jednoduchý obdélník nebo složitější selekce buněk.<br/><br/>
+    
+    <span>4. Formule a funkce (Formulas and Functions): </span><br />
+    Excel umožňuje vytvářet vzorce a používat funkce pro výpočty a manipulaci s daty. Tyto formule mohou být zadány přímo do buněk.
+    <br/><br/>
+    
+    <span>5. Hlavičky sloupců a řádků (Column and Row Headers)</span><br />
+    Sloupce jsou označeny písmeny (A, B, C, ...) a řádky jsou označeny čísly (1, 2, 3, ...). Tyto hlavičky umožňují snadnou orientaci a navigaci v tabulce.
+    <br/><br/>
+
+    <span>6. Nástrojové panely a lišty (Toolbars and Ribbons): </span><br />
+    Excel nabízí širokou škálu nástrojů a funkcí, které jsou organizovány do různých nástrojových panelů a lišt. Tyto panely poskytují přístup k různým operacím a funkcím programu.
+    <br /><br />
+    <span>7. Nabídka (Menu): </span><br />
+    Nabídka poskytuje přístup k různým funkcím a možnostem Excelu, včetně možností formátování, úprav a analýz dat.
+    <br /><br />
+    
+    <img src="~/Pictures/Excel/PopisObecne.png" class="img-fluid d-block mx-auto w-100">
+    
+    
+
+</div>
+
+<div class="display-2">
+    Buňky
+</div>
+
+<div class="background-text">
+    <span>Čísla:</span><br />
+    To může být celé číslo nebo desetinné číslo. Excel umožňuje provádět různé matematické operace s těmito čísly.
+    <br/><br/>
+    
+    <span>Text:</span><br />
+    Textové řetězce mohou obsahovat libovolný znak, včetně písmen, číslic, interpunkčních znamének a speciálních znaků.
+    <br /><br />
+
+    <span>Datum a čas:</span><br />
+    Excel umožňuje vkládat datum a čas a provádět s nimi různé operace, jako je například výpočet rozdílu mezi dvěma daty nebo převod na jiný formát.
+    <br /><br />
+
+    <span>Formule:</span><br />
+    Do buněk lze vkládat výpočetní formule, které obsahují různé operace, reference na jiné buňky a funkce.
+    <br /><br />
+
+    <span>Funkce:</span><br />
+    Excel poskytuje širokou škálu vestavěných funkcí pro různé výpočty a analýzy dat, které mohou být vloženy přímo do buněk.
+    <br /><br />
+
+    <span>Odkazy na jiné buňky:</span><br />
+    Buňky mohou obsahovat odkazy na jiné buňky v téže nebo jiné části sešitu, což umožňuje propojení dat a automatické aktualizace hodnot.
+    <br /><br />
+
+</div>
+
+<div class="display-2">
+    Adresování
+</div>
+
+<div class="background-text">
+    Adresa buňky v Excelu je jednoznačný identifikátor, který určuje umístění buňky v tabulce. Adresa se skládá z názvu sloupce a čísla řádku, například "A1". Existují různé typy adres, včetně absolutních adres, relativních adres a smíšených adres.<br/><br/>
+    <span>Absolutní adresa:</span> Absolutní adresa je pevná adresa, která se nezmění při kopírování nebo přesouvání buňky. Je označena s "$" před názvem sloupce a/nebo číslem řádku. Příklad: "$A$1". <br /><br />
+    <span>Použití:</span> Absolutní adresa se často používá ve vzorcích, kde je nutné zachovat referenci na konkrétní buňku, například při sčítání hodnot z pevně určené buňky.<br /><br />
+    <span>Relativní adresa:</span> Relativní adresa se mění v závislosti na tom, kde je buňka umístěna ve vztahu k buňce obsahující vzorec. Relativní adresy neobsahují symbol "$". Příklad: "A1".<br /><br />
+    <span>Použití:</span> Relativní adresy jsou vhodné pro vztahování se k sousedním buňkám nebo při kopírování vzorců, když chcete, aby se vzorec přizpůsobil novému umístění.<br /><br />
+    <span>Smíšená adresa:</span> Smíšená adresa kombinuje vlastnosti absolutní a relativní adresy pro sloupec a řádek. Například "$A1" nebo "A$1".<br /><br />
+    <span>Použití:</span> Smíšené adresy se používají, když chcete, aby se buď sloupec nebo řádek zachovaly jako pevné reference, zatímco druhá složka adresy je relativní. Například, při kopírování vzorce do nového sloupce chcete, aby se vždy odkazoval na sloupec "A", ale řádek by se měl měnit podle pozice kopírované buňky.<br /><br />
+
+</div>
+
+<div class="display-2">
+    Vzorce
+</div>
+
+<div class="background-text">
+    V Excelu se vzorec používá k provádění výpočtů nebo manipulaci s daty. Vzorec je vlastně výraz, který obsahuje různé operátory, funkce, reference na buňky a hodnoty.
+    
+    <br/><br/>
+    <span>Kde lze vzorce napsat:</span><br/>
+    <ul>
+        <li>Vzorec lze zapsat přímo do buňky v Excelu.</li>
+        <li>Může být součástí formuláře nebo funkce.</li>
+        <li>Lze je také použít v nástrojích analýzy dat nebo jako součást podmíněného formátování</li>
+    </ul>
+    
+    Mužeme zde využívat operátory stejně jako u <a href="/Programovani/Variables#operatory">programování</a><br/><br/>
+    
+    Specialní případy:<br/>
+    <span>Kontrakce & </span>: Slouží ke spojování textových řetězců <br/><br/>
+    <span>Dvojtečka : </span>: Vytváří rozsah adres buněk, například A1:B5. <br /><br />
+    <span>Tečka . </span>: Slouží k referencování prvků v tabulkách nebo objektech. <br /><br />
+    
+    Různé způsoby adresace při kopírování vzorců mohou mít vliv na to, jak se vzorec chová v nových buňkách. Zde je několik příkladů:<br/><br/>
+    
+    <span>Absolutní adresa</span><br />
+    Předpokládejme, že máme vzorec ve tvaru "=$A$1+$B$1" v buňce C1. Pokud tento vzorec zkopírujeme z buňky C1 do buňky D2, obě části adresy zůstanou pevné, a nový vzorec v buňce D2 bude stejný jako ve zdrojové buňce, tedy "=$A$1+$B$1".
+    <br/><br/>
+    
+    <span>Relativní adresa</span><br />
+    Mějme vzorec "=A1+B1" v buňce C1. Pokud tento vzorec zkopírujeme z buňky C1 do buňky C2, relativní adresy zajistí, že vzorec se přizpůsobí nové pozici, a nový vzorec v buňce C2 bude "=A2+B2".
+    <br /><br />
+    
+    <span>Smíšená adresa</span><br />
+    Předpokládejme, že máme vzorec ve tvaru "=$A$1+B1" v buňce C1. Pokud tento vzorec zkopírujeme z buňky C1 do buňky D2, první část adresy (sloupec) zůstane pevná, zatímco druhá část adresy (řádek) se změní podle nové pozice. Takže nový vzorec v buňce D2 bude "=$A$1+B2".
+    <br /><br />
+</div>
+
+<div class="display-2">
+    Ostatní objekty
+</div>
+
+<div class="background-text">
+    V Excelu je možné vkládat do listu nejen data do buněk, ale také další objekty, které nelze umisťovat přímo do buněk. Některé z těchto objektů zahrnují:
+    <br/><br/>
+    <ul>
+        <li><span>Obrázky:</span> Uživatelé mohou vkládat obrázky přímo do listu Excelu. Obrázky mohou být fotografie, ilustrace, loga atd. Tyto obrázky lze umístit kamkoli na listu a upravit jejich velikost a pozici.</li>
+        <li><span>Grafy a diagramy:</span> Excel nabízí možnost vytvářet různé druhy grafů a diagramů, jako jsou sloupcové grafy, liniové grafy, koláčové grafy, histogramy a mnoho dalších. Tyto grafy a diagramy mohou být vloženy přímo do listu a umístěny vedle dat, která vizualizují.</li>
+        <li><span>Ovládací prvky formulářů:</span> Excel poskytuje různé ovládací prvky formulářů, jako jsou tlačítka, zaškrtávací políčka, seznamy, rozbalovací seznamy a další. Tyto ovládací prvky mohou být vloženy na list a použity k interakci s uživatelem nebo k ovládání vzorců a funkcí.</li>
+        <li><span>Tabulátory:</span> Tabulátory jsou objekty podobné listům, které umožňují organizovat a strukturovat data na listu Excelu. Každý tabulátor má svůj vlastní prostor pro data a může mít vlastní formátování a nastavení.</li>
+        <li><span>Kompletní grafické objekty:</span> Mimo obrázky je možné do Excelu vkládat i jiné grafické objekty, jako jsou tvary, čáry, šipky, textové rámečky atd. Tyto objekty mohou být použity pro označení a zdůraznění určitých částí dat nebo pro vytváření vlastních diagramů.</li>
+    </ul>
+</div>
