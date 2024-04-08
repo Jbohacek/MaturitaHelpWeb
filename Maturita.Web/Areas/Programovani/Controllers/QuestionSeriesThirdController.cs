@@ -29,5 +29,11 @@ namespace Maturita.Web.Areas.Programovani.Controllers
         {
             return View();
         }
+
+        //24
+        public IActionResult MVCZaklady()
+        {
+            return View();
+        }
     }
 }

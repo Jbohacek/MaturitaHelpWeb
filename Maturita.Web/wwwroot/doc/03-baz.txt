@@ -16,7 +16,16 @@ význam integraèních testù,
 zásady nahraditelnosti, 
 mock objekt
 
-25. ASP.NET MVC základy - princip architektury Model-View-Controller, zpracování požadavku, smìrování, výchozí smìrování, HTTP protokol, controller, akce, parametry akce, návratový typ (ActionResult - View, Redirect)
+25. ASP.NET MVC základy - 
+-- princip architektury Model-View-Controller, 
+-- zpracování požadavku, 
+-- smìrování, 
+-- výchozí smìrování, 
+-- HTTP protokol, 
+-- controller, 
+-- akce, 
+-- parametry akce, 
+-- návratový typ (ActionResult - View, Redirect)
 
 26. ASP.NET MVC View - princip tvorby dynamického view, Razor engine, layout, základní konstrukce ve View (výpis promìnné, cyklus, podmínka), tvorba odkazù, template, partial view, ViewComponents, pøedávání dat do view - (Model, ViewData, ViewBag)
 

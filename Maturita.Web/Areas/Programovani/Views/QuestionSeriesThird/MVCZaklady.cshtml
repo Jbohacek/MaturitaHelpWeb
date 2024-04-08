@@ -1,0 +1,167 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "MVC základy";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+<div class="display-1">
+    Teorie testování
+</div>
+
+<div class="background-text">
+    Celá aplikace je rozdělena na komponenty 3 typů, hovoříme o Modelech,
+    View (pohledech) a Controllerech (kontrolerech), od toho MVC. Označení pohled
+    se budu snažit vyhýbat, protože mi přijde matoucí, že takto přeložené
+    nekoresponduje s označením V. Neexistuje žádná striktní definice
+    architektury a tak se můžete setkat s více výklady. My se zaměříme na ten
+    nejrozšířenější.
+    <br/>
+    <div class="display-5 mt-2">
+        Model
+    </div>
+    Model obsahuje <span>logiku</span> a vše, co do ní
+    spadá. Mohou to být výpočty, databázové dotazy, validace a podobně. Pro
+    nás to znamená, že modely jsou klasické C# třídy, jako jsme je znali
+    doposud. Model <span>vůbec neví o výstupu</span>. Jeho funkce spočívá
+    v přijetí parametrů zvenku a vydání dat ven. Zdůrazněme, že parametry
+    nemyslíme URL adresu ani žádné jiné parametry od uživatele, ale parametry
+    metod ve třídě modelu.<span>Model neví, odkud data v parametrech přišla
+        a ani jak budou výstupní data zformátována</span> a vypsána.
+    <br/>
+    <div class="display-5 mt-2">
+        View
+    </div>
+    Pohled (View) se stará o <span>zobrazení výstupu
+        uživateli
+    </span>. Jedná se o <span>HTML šablonu</span>, obsahující
+    HTML stránku a <span>tagy speciálního jazyka</span>, který umožňuje do
+    šablony vkládat proměnné, případně provádět iterace (cykly) a
+    podmínky. Pohled Uzivatel.cshtml tedy vypíše detaily o
+    uživateli, pohled Clanek.cshtml vypíše obsah článku.
+    <br/><br/>
+    <span>View není jen šablona, ale zobrazovač výstupu</span>. Obsahuje
+    tedy minimální množství logiky, která je pro výpis nutná (např.
+    kontrola, zda si uživatel vyplnil přezdívku před jejím vypsáním nebo
+    cyklus s komentáři, které se vypisují).
+    <br/><br/>
+    View podobně jako Model <span>vůbec neví, odkud mu data
+        přišla</span> , stará se jen o jejich zobrazení uživateli.
+    
+    <div class="display-5 mt-2">
+        Controller
+    </div>
+    Controller je nyní onen chybějící prvek, který osvětlí
+    funkčnost celého vzoru. Jedná se o jakéhosi <span>prostředníka</span>,
+    se kterým komunikuje uživatel, model i view. Drží tedy celý systém
+    pohromadě a komponenty <span>propojuje</span>. Jeho funkci pochopíme z
+    ukázky životního cyklu stránky. Nejčastěji má každá entita jeden
+    controller, máme tedy UzivatelController,
+    ClanekController a tak podobně.
+    <img src="~/Pictures/ASP/Zaklady/mvc.png" class="img-fluid d-block mx-auto w-75">
+    <div class="text-center">Zpracování požadavku</div>
+    <br/><br/>
+    
+
+    <div class="sha text-center">Více informací: <a href="https://www.itnetwork.cz/csharp/asp-net-core/zaklady/uvod-do-mvc-architektury-v-aspnet-core">ItNetwork</a></div>
+
+</div>
+
+<div class="display-2">
+    Routování
+</div>
+
+<div class="background-text">
+    <img src="~/Pictures/ASP/Zaklady/How-Routing-work-in-asp.net-mvc.png" class="img-fluid d-block mx-auto w-75">
+    Nejdříve jde <span>jméno server</span>, pak následně <span>controler</span> a pak dodatečné <span>jméno akce</span>
+    <br/><br/>
+    <span>serverUrl/Controller/Action/</span>
+    <br/><br/>
+    nebo je možnost přidat id?, která je ovšem dobrovolná
+    <br/><br/>
+    <span>serverUrl/Controller/Action/id</span>
+</div>
+
+<div class="display-2">
+    Http protokol
+</div>
+<div class="background-text">
+    <img src="~/Pictures/asp/Zaklady/httpRequest.png" class="img-fluid d-block mx-auto w-75">
+    HTTP je internetový protokol používaný k přenosu souborů mezi serverem a tzv. klientem, kterým bývá nejčastěji webový prohlížeč, ale může jím být také třeba crawler vyhledávače.<br/><br/>
+    HTTP také říká bezstavový protokol, protože funguje na principu dotaz → odpověď. Například kliknete na nějaký odkaz a váš prohlížeč zašle pomocí HTTP protokolu požadavek s příslušnou adresou na odpovídající server. Zároveň s tím pošle i tzv. HTTP hlavičku. Server následně, opět s pomocí HTTP protokolu, pošle zpět HTML soubor, společně se stavovým kódem a odlišnou HTTP hlavičkou odpovědi.
+
+    <div class="sha text-center">Více informací: <a href="https://www.strafelda.cz/http">strafelda.cz</a></div>
+
+</div>
+
+<div class="display-2">
+    Controller
+</div>
+<div class="background-text">
+    <img src="~/Pictures/asp/Zaklady/controller.png" class="img-fluid d-block mx-auto w-75">
+    Controller odpovídá za odpovědi, které jsou poslané na server. Logiku do nich dáváme slabou, odkazujeme se na modely a další třídy, které si vytvoříme. Vytváříme je pomocí <span>Přidat > Controller > prázdný controller</span>
+</div>
+
+<div class="display-2">
+    Akce (metody) v controlleru
+</div>
+<div class="background-text">
+    Vytvářime metody, který vracejí zpět <span>IActionResult</span>, který muže vrátit hodně věcí, jelikož je to interface. Možné příklady jsou:
+    <ul>
+        <li><span>View(string? viewName)</span><br/>Vraci View se stejným jménem jako je akce, pokud ovšem do parametrů napíšeme jiné jméno, tak zobrazí jiný view</li>
+        <li><span>RedirectToAction(string jmenoAkce)</span><br />Zavolá to jinou metodu uvnitř toho controlleru</li>
+        <li><span>Redirect(string urlcesta)</span><br />Zavola to tam kam napíeme v cestě, muže kamkoliv avšak musime psát přesně</li>
+        <li><span>JSON(object toconaJSON)</span><br />Vraci html view, ale jsou tam jen informace o objektu co jsme vložily</li>
+    </ul>
+    
+    Pokud chceme v metodě nějaký parametry tak využíváme querystring například:
+    <pre>
+    <code class="language-csharp">
+        
+
+public class HomeController : Controller
+{
+    // localhost/Home/Get?pocet=5&jmeno=Pavel
+    public IActionResult Get(int pocet, string jmeno)
+    {
+        /*Dostaneme 
+        pocet = 5
+        jmeno = "Pavel"
+        */
+        return View();
+    }
+
+    // localhost/Home/Get/5
+    public IActionResult GetCar(int id)
+    {
+        /*Dostaneme 
+        id = 5
+
+        Tohle platí, protože int id je nepovinný attribut
+        */
+        return View();
+    }
+
+    // localhost/Home/Get?id=10
+    public IActionResult GetHumans(int id)
+    {
+        /*Dostaneme 
+        id = 10
+
+        Tohle platí, protože int id je attribut
+        */
+        return View();
+    }
+
+}
+    </code>
+</pre>
+</div>
+
+@await Html.PartialAsync("_Sources", 
+    new SourcesModel(
+            "https://www.itnetwork.cz/csharp/asp-net-core/zaklady/uvod-do-mvc-architektury-v-aspnet-core",
+            "https://www.strafelda.cz/http"
+
+    ))

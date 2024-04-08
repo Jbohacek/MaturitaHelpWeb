@@ -77,6 +77,7 @@
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\Retezce.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesOne\SouboryASouborovySystem.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\IntegracniTesty.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\MVCZaklady.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\TeorieTestovani.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\ProgramoveVybaveni\Views\Excel\Obecne.cshtml" />
@@ -182,6 +183,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\ProgramoveVybaveni\Views\Excel\Obecne.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesThird\MVCZaklady.cshtml" />
   </ItemGroup>
 
 </Project>
