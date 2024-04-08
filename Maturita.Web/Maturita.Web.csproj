@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +28,7 @@
     <Folder Include="Areas\ProgramoveVybaveni\Pages\" />
     <Folder Include="Areas\ProgramoveVybaveni\Views\Nest\" />
     <Folder Include="wwwroot\doc\" />
+    <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\Pictures\Gui\" />
     <Folder Include="wwwroot\Projects\Dbo\" />
   </ItemGroup>
