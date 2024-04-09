@@ -4,18 +4,31 @@
     src: url(../Font/NotoSans.ttf);
 }
 
+@font-face {
+    font-family: Montserrat;
+    src: url(../Font/Montserrat.ttf);
+}
+
+@font-face {
+    font-family: Montserrat_med;
+    src: url(../Font/Montserrat-Medium.ttf);
+}
+
+
 
 body {
     font-size: 22px;
     font-family: NotoSans !important;
 }
+h1, h2, h3, h4, h5, h6 {
+    font-family: Montserrat !important;
+}
+
+
+
 .container {
-    padding: 5vh 5vw;
+    padding: 14vh 5vw;
     border-radius: 0 0 15px 15px;
-    background-color: #2b2d31;
-    -webkit-box-shadow: 0px 0px 7px 10px rgba(0,0,0,0.33);
-    -moz-box-shadow: 0px 0px 7px 10px rgba(0,0,0,0.33);
-    box-shadow: 0px 0px 7px 10px rgba(0,0,0,0.33);
     min-height: 100vh;
 }
 nav {
@@ -24,7 +37,7 @@ nav {
 }
 
 body {
-    background-color: #393E46;
+    background-color: #171717;
     color: #EEEEEE;
 }
 
@@ -66,9 +79,11 @@ main a:any-link {
     color: #00ADB5 !important;
     text-decoration: none;
 }
-main a:hover {
-    text-decoration: solid underline;
-}
+    main a:hover {
+
+        text-decoration: solid underline;
+
+    }
 
 .mail-Link {
     color: #00ADB5 !important;
@@ -96,4 +111,12 @@ main a:hover {
     bottom: 0;
     right: 0;
                       
+}
+
+
+.background-text {
+    background-color: #262626;
+    padding: 2vh;
+    border-radius: 10px;
+    margin-bottom: 25px;
 }

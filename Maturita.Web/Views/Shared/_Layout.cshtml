@@ -14,7 +14,11 @@
     @* Custom CSS *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Sort/MainSort.css" asp-append-version="true" />
-    
+    <link rel="stylesheet" href="~/css/NavBar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ScrollBar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Spacers.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Scroll.css" asp-append-version="true" />
+
     @* Highlight.js *@
     <link rel="stylesheet" href="~/lib/highlight.js/styles/atom-one-dark.min.css">
     
@@ -44,6 +48,8 @@
             <div class="writer text-center">Upravil: <span class="text-primary">@ViewData["Editor"]</span></div>
         }
     </div>
+    
+    <div class="spacer down-spacer"></div>
 
     @* Jquery *@
     <script src="~/lib/jquery/jquery.min.js"></script>
@@ -63,6 +69,7 @@
 
     @* Custom JS *@
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/ScrollAnimate.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
     
     <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="Jbohacek" data-description="Support me on Buy me a coffee!" data-message="Ahoj, pracuji na tomto webu už čtyři měsíce. Byl bych moc vděčný za příspěvek. Děkuji! 💖" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>

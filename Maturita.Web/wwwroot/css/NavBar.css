@@ -1,0 +1,37 @@
+﻿header nav {
+    background-color: #222222 !important;
+    font-family: Montserrat_med !important;
+}
+
+
+header nav div {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.nav-my-item {
+    font-size: 25px;
+    margin-top: 7px; 
+    border-radius: 25px;
+    padding: 5px 20px !important;
+    transition: transform 100ms ease-in-out;
+}
+
+.nav-my-item:hover {
+    background-color: #818da2;
+    transform: scale(1.05);
+    }
+
+.nav-my-logo {
+    transition: border-bottom 100ms ease-in-out;
+    border-bottom: solid 0px;
+}
+
+    .nav-my-logo:hover {
+        border-bottom: solid 5px #818da2;
+    }
+
+
+.no-link {
+
+}
