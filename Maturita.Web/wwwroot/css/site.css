@@ -121,3 +121,10 @@ main a:any-link {
     margin-bottom: 25px;
     margin-top: 10px;
 }
+
+.mini-header {
+    position: relative;
+    bottom: -4vh;
+    font-weight: 300;
+    letter-spacing: 2px;
+}

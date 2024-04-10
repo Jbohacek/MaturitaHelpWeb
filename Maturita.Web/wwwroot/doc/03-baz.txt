@@ -27,7 +27,16 @@ mock objekt
 -- parametry akce, 
 -- návratový typ (ActionResult - View, Redirect)
 
-26. ASP.NET MVC View - princip tvorby dynamického view, Razor engine, layout, základní konstrukce ve View (výpis promìnné, cyklus, podmínka), tvorba odkazù, template, partial view, ViewComponents, pøedávání dat do view - (Model, ViewData, ViewBag)
+26. ASP.NET MVC View - 
+-- princip tvorby dynamického view, 
+-- Razor engine,
+-- layout, 
+-- základní konstrukce ve View (výpis promìnné, cyklus, podmínka), 
+-- tvorba odkazù,
+template, ??
+-- partial view, 
+-- ViewComponents, 
+-- pøedávání dat do view - (Model, ViewData, ViewBag)
 
 27. ASP.NET MVC formuláøe - definice a generování formuláøe, formuláøové prvky (label, textbox, checkbox,...), zpracování formuláøe, validace hodnot, session 
 

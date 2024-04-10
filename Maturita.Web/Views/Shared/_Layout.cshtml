@@ -1,33 +1,42 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VD765VFTKL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-VD765VFTKL');
+    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"]</title>
-    
+
     <link rel="icon" type="image/png" href="~/WebIcon.ico" sizes="64x64">
 
     @* Boostrap *@
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css"/>
-    
+
     @* Custom CSS *@
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Sort/MainSort.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/NavBar.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/ScrollBar.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Spacers.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Scroll.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/Sort/MainSort.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/NavBar.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/ScrollBar.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/Spacers.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/Scroll.css" asp-append-version="true"/>
 
     @* Highlight.js *@
     <link rel="stylesheet" href="~/lib/highlight.js/styles/atom-one-dark.min.css">
-    
+
     @* Video.js *@
     <link rel="stylesheet" href="~/lib/video.js/video-js.min.css"/>
-    <link rel="stylesheet" href="~/css/YoutubeVideo.css" />
-    
+    <link rel="stylesheet" href="~/css/YoutubeVideo.css"/>
+
     @await RenderSectionAsync("Styles", required: false)
-    
+
 
 </head>
 <body>
@@ -37,6 +46,10 @@
 
     <div class="container">
         <main role="main" class="pb-3">
+            @if (!string.IsNullOrEmpty(ViewBag.Category))
+            {
+                <div class="mini-header">@Html.Raw(ViewBag.Category)</div>
+            }
             @RenderBody()
         </main>
         @if (ViewData["Author"] != null)

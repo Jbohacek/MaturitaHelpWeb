@@ -10,6 +10,7 @@
 @{
     ViewBag.Title = "Programování";
     Layout = "_Layout";
+    ViewBag.Category = "";
 }
 
 <h2 class="display-1 mb-4"><i class="bi bi-code-slash"></i> Programování</h2>
@@ -70,12 +71,14 @@
                 <li><a asp-controller="QuestionSeriesThird" asp-action="UnitTesty">Unit testy</a></li>
                 <li><a asp-controller="QuestionSeriesThird" asp-action="IntegracniTesty">Integrační testy</a></li>
                 <li><a asp-controller="QuestionSeriesThird" asp-action="MVCZaklady">ASP.NET MVC základy</a></li>
-                <li><a>ASP.NET MVC View</a></li>
+                <li><a asp-controller="QuestionSeriesThird" asp-action="MVCViews">ASP.NET MVC View</a></li>
                 <li><a>ASP.NET MVC formuláře</a></li>
                 <li><a>REST API</a></li>
                 <li><a>Události a delegáty</a></li>
                 <li><a>Reflexe</a></li>
             </ol>
+            
+            <div>@ViewBag.Neco</div>
         </div>
         
     </div>

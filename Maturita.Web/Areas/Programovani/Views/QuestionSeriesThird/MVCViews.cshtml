@@ -1,0 +1,362 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "MVC Views";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+
+
+<div class="display-1">
+    MVC Views
+</div>
+
+<div class="background-text">
+    <a asp-action="MVCZaklady">Navazuju na základy</a><br/>
+    Při zavolání metody <span>View()</span> se vrátí uživately .cshtml soubor se stejným názevem jako je akce kontroleru. Bude hledat v souborech:
+    <ul>
+        <li><span>\Views\[Jmeno controlleru]\[jmeno Akce].cshtml</span></li>
+        <li><span>\Views\Shared\[jmeno Akce].cshtml</span></li>
+    </ul>
+    <span>Poznámka: Jakýkoliv view, který má být sdílený pro všechny kontrollery, ve složce share, by měl začínat na _</span>
+
+    <br/> <br />
+    Pokud chceme, aby vrátil jiný view s jiným jménem tak stačí vložit jméno view jako parametr do view. Například ->
+    <pre>
+    <code class="language-csharp">
+
+return View();
+/* Vrátí view v
+\Views\[Jmeno controlleru]\[jmeno Akce].cshtml
+nebo
+\Views\Shared\[jmeno Akce].cshtml
+*/
+
+return View("Priklad");
+/* Vrátí view Priklad.cshtml
+\Views\[Jmeno controlleru]\Priklad.cshtml
+nebo
+\Views\Shared\Priklad.cshtml
+*/
+    </code>
+</pre>
+    Každý <span>view</span> obsahuje takzvaný model. Model je podle čeho se bude stánka vytvářet a řídit. <br/>
+    Obvyklou praxí je vytvořit ke každému view nějaký model který bude mít koncovku *page.cs. Příklad: <br/> <br/>
+    
+    Potřebujeme vytvořit webovou stánku na ukazování logu
+    
+    <pre>
+    <code class="language-csharp">
+public class Log
+{
+    public string Action { get; set; }
+
+    public string Message { get; set; }
+
+    public DateTime Date { get; set; }
+}
+    </code>
+</pre>
+    
+    Těchto logu máme hodně v databázi a potřebujeme ukázat všechny, vezeme si data z databaze a vložíme do view (v kontrolleru)
+    
+    <pre>
+    <code class="language-csharp">
+public IActionResult Vypislogu()
+{
+    List@("<Log>") logy = context.tbLogs.ToList();
+
+    return View(logy);
+
+    /*
+    Poznámka:
+    Pokud vkládáme do View typ objekt a 
+    nikoliv string, bere se to jako model nikoliv jako název .cshtml
+
+    Pokud chceme zobrazit jiný view tak 
+    musíme uvést model jako sekundarní parametr
+    */
+
+    return View("Vypislogu",logy);
+    //Vratí View "Vypislogu.cshtml" s modelem List@("<Log>")
+}
+    </code>
+</pre>
+    
+    Tohle je <span>nejlehčí</span> uvedení dat do view (později ukažu view),
+    ale správný postup by byl, že si vytvořit třídu "LogPage.cs", která bude mít v sobě List@("<Log>").<br/><br/>
+    Je to kvůli tomu, že nyní jsme limitovaný na to co všechno dokáže List udělat. 
+    Nemužeme pak předat do view například od kdy do kdy se brali logy.<br/><br/>
+    Dalším důvod muže být taky to, že databázový objekty musí mít bezparametrický konstruktor, 
+    avšak page muže mít konstruktor a tudiž specifikujeme co je potřeba na vykreslení stránky.<br/>
+    <span>Jedná se však čístě o Design pattern a může být nahrazený viewbagama (později vysvětleno)</span>
+    
+    <pre>
+    <code class="language-csharp">
+public class Log
+{
+    public string Action { get; set; }
+
+    public string Message { get; set; }
+
+    public DateTime Date { get; set; }
+}
+
+public class LogPage
+{
+    public List@("<Log>") Logs { get; set; }
+
+    public DateTime EndTime { get; set; } 
+    // Určujeme do jaký doby jsme sbírali logy
+
+    public LogPage(List@("<Log>") logs, DateTime endTime)
+    {
+        Logs = logs;
+        EndTime = endTime;
+    }
+}
+
+public IActionResult Vypislogu()
+{
+    List@("<Log>") logy = context.tbLogs.ToList();
+
+    return View(new LogPage(logy, DateTime.Now()));
+
+}
+    </code>
+</pre>
+
+</div>
+
+<div class="display-2">
+    View
+</div>
+
+<div class="background-text">
+    Nyní si vytvoříme cshtml(view) na cestě <span>\Views\[Controller]\Vypislogu.cshtml</span><br />
+    Tímto vytváříme takzvaný <span>razor page</span>, který nám dovoluje kombinovat .html a c# dohromady.<br/><br/>
+    Pokud napíšeme specialní znak "@@" tak nám dovoluje interagovat se c# kódem. Pokud chceme napsat jen zavináč tak musíme napsat dva @@@@<br/>
+    Po vytvoření view se nám vytvoří prázdný html, která se vloží na pozici <span>@@RenderBody()</span>. 
+    Tuto metodu mužeme najít v souboru <span>\Views\Shared\_Layout.cshtml</span> a funguje takto:
+    
+    <img src="~/Pictures/ASP/View/Layout.png" class="img-fluid d-block mx-auto w-100">
+    
+    Veškerý .cshtml co napíšeme ve view se propíše přesně tam, kde se nachází @@RenderBody();<br/><br/>
+    Hlavička html, css linky a js scripty se budou nacházet vždy v _Layout jelikož se musí zobrazit vždy.
+    <br/><br/>
+    Na začátku .cshtml definujeme @@Model, aby view vědělo s čím pracujeme. Musíme napsat uplnou cestu. 
+    Nebo můžeme přidat <span>using</span> do souboru <span>\Views\_ViewImports.cshtml</span>
+    <pre>
+    <code class="language-csharp">
+@@Model LogPage
+    
+// Uplna cesta
+@@Model [NazevProjekt].[Slozka kde se nachazi].[třída]
+
+// Příklad
+@@Model MaturitaWeb.Models.PageLog
+
+// Pokud chceme nějakou hodnotu napsat do view
+// Používáme model s malým m
+@@model.EndTime.ToShortDateString()
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Lze kombinovat html a c#, napříkad:
+
+@("<div>\n\tPosledni log v datu: @model.EndTime.ToShortTimeString()\n<div/>")
+    
+==
+
+@("Posledni log v datu: " + DateTime.Now.ToShortTimeString())
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Pokud potřebujeme něco složitějšího, tak stačí dát do závorek
+
+@("<div>\n\tPosledni log v datu: @(model.EndTime.ToShortDateString() + \" v evropském čase\" )\n<div/>")
+    
+==
+
+@("Posledni log v datu: " + DateTime.Now.ToShortTimeString() +  " v evropském čase")
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// pokud chceme vložit CELY html element tak musímě použít metodu Html.Raw
+
+@("@Html.Raw(\"<div>\n\tPosledni log v datu: @(model.EndTime.ToShortDateString() + \" v evropském čase\" )\n<div/>\")")
+
+==
+
+@("Posledni log v datu: " + DateTime.Now.ToShortTimeString() + " v evropském čase")
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Lze používat i komplikovanější metody jako jsou
+
+@@foreach
+@@while
+@@for
+@@if
+@@switch
+
+// Například:
+
+@@foreach(var log in model.Logs)
+{
+    @("\t<div>\n\t\tAkce: @(\"Sudo \" + log.Action)\n\t<div/>")
+    @("\t<div>\n\t\tText: @log.Message\n\t<div/>")
+}
+
+==
+Akce: Sudo Pokus
+Text: Pokud o pokus Pokus
+Akce: Sudo neco
+Text: Proste neco
+...
+
+
+    </code>
+</pre>
+    
+    <div class="display-3">Asp tributy</div>
+    
+    Razor engine nám dovoluje používat specialní atributy (většinou začínají na asp) v html tagách<br/> 
+    na vytvoření odkazu nemusíme specifikovat přesnou cestu, ale můžeme používat asp cesty
+
+    <pre>
+    <code class="language-csharp">
+
+// Tímto se dostaname na controller Home a na akci VypisLogu
+@("<a asp-controller=\"Home\" asp-action=\"Vypislogu\"></a>")
+    </code>
+</pre>
+</div>
+
+
+<div class="display-2">
+    Partial view
+</div>
+
+<div class="background-text">
+    Tímto mužeme vložit .cshtml stánku do .cshtml stránky. Partial view hledá vždy v <span>\Views\Shared\[jmeno].cshtml</span>
+    
+    <pre>
+    <code class="language-html">
+@("<partial name=\"_PartialName\" />")
+Nebo mužeme úvést úplnou cestu
+@("<partial name=\"~/Pages/Folder/_PartialName.cshtml\" />")
+    </code>
+</pre>
+    
+    Ovšem nejlepší způsob na volání .cshtml partial je 
+    <pre>
+    <code class="language-csharp">
+@@await Html.PartialAsync("_PartialName")
+    </code>
+</pre>
+    Tohle vytvoři asynchroně (složité), zkráceně je to lepší pro web
+
+    <div class="sha text-center">Více informací: <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-8.0">learn.microsoft.com</a></div>
+
+</div>
+
+<div class="display-2">
+    Partial view
+</div>
+
+<div class="background-text">
+    Tímto mužeme vložit .cshtml stánku do .cshtml stránky, ale před vložením se spustí Invoke metoda na serveru. Takže je možné dotáhnout potřebné data a použít jiný model na vykreslení.
+    <br/><br/>
+    je potřeba vytvořit třídu [jmeno]Component.cs, která bude dědit z viewComponent
+    <pre>
+    <code class="language-csharp">
+
+// LogComponent.cs
+public class LogComponent : ViewComponent
+{
+    // Musí se jmenovat Invoke, jelikož se vždy spouští metoda invoke
+    public IViewComponentResult Invoke(Log log)
+    {
+        //Vracíme view, který se bude nacházat v
+        // \Views\Shared\Components\LogComponent\Default.cshtml
+        // Musi se jmenovat default.cshtml a musí být přesně na tomto místě
+        return View(log);
+    }
+}
+
+
+
+// Vypislogu.cshtml
+
+// Vyvoláme v kodu takto
+@@foreach(var log in model.Logs)
+{
+    //Vytváříme pro každy 
+    @("Component.InvokeAsync(\"ExercisesComponent\",log)")
+}
+
+// \Views\Shared\Components\LogComponent\Default.cshtml
+
+@@Model Log
+
+@("<div>\n\tAkce: @(\"Sudo \" + model.Action)\n<div/>")
+@("<div>\n\tAkce: @model.Message\n<div/>")
+            
+// = Docílily jsme uplně toho samého jako s foreachem, 
+ale nyní mužeme ještě třeba do logu něco přidat.
+
+// Vypislogu.cshtml
+==
+Akce: Sudo Pokus
+Text: Pokud o pokus Pokus
+Akce: Sudo neco
+Text: Proste neco
+...
+
+
+    </code>
+</pre>
+</div>
+    
+
+<div class="display-2">
+    ViewBag ViewData
+</div>
+
+<div class="background-text">
+    Viewbag a ViewData nám umožnuje ukládat cs objekt do nějaké proměné, kterou mužeme zobrazit na webu.<br/>
+    Oba dělají uplně to stejný, ale mají jiný zápis
+    <pre>
+    <code class="language-csharp">
+
+// HomeController
+
+public IActionResult Vypislogu()
+{
+    List@("<Log>") logy = context.tbLogs.ToList();
+        
+    ViewData["PocetLogu"] = logy.Count;
+
+    ViewBag.PocetLogu = logy.Count;
+
+    return View(new LogPage(logy, DateTime.Now()));
+
+}
+
+// Vypislogu()
+
+@("<div>@ViewData[\"PocetLogu\"]<div/>")
+                
+@("<div>@ViewBag.PocetLogu<div/>")
+    
+==
+
+2
+
+2
+
+
+// Uplně stejný výsledek
+    </code>
+</pre>
+    <div class="sha text-center">Více informací: <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/overview?view=aspnetcore-8.0">learn.microsoft.com (dole)</a></div>
+
+</div>
