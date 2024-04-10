@@ -1,0 +1,29 @@
+﻿.spacer {
+    aspect-ratio: 16/9;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+
+}
+
+.header-spacer {
+    background-image: url("../Pictures/waves.svg");
+    z-index: -1;
+    position: absolute;
+}
+
+.down-spacer {
+    background-image: url("../Pictures/bricks.svg");
+    z-index: -1;
+    position: absolute;
+    height: 400px;
+    background-position: bottom;
+}
+
+@media(max-width: 570px) {
+    .container {
+        padding-top: 3vh;
+        padding-bottom: 0vh;
+    }
+}

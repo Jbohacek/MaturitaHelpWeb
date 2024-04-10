@@ -1,26 +1,38 @@
-﻿<header>
-    <nav class="navbar navbar-dark navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow" style="background-color: #1e1f22 !important">
+﻿
+<header>
+    <nav class="navbar navbar-dark navbar-expand-sm navbar-toggleable-sm box-shadow">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1 text-white">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Programovani" asp-controller="Home" asp-action="Index"><i class="bi bi-code-slash"></i> Programování</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Database" asp-controller="Home" asp-action="Index" ><i class="bi bi-database"></i> Databáze</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="ProgramoveVybaveni" asp-controller="Home" asp-action="Index"><i class="bi bi-pc-display"></i> Programové vybavení</a>
-                    </li>
+                <ul class="navbar-nav text-white w-100">
+                    <a class="nav-link text-white fw-bold fs-3 nav-my-logo" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="~/Pictures/Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        Maturita Help
+                    </a>
+                    
+                    <div class="d-md-flex d-block ms-md-auto me-md-auto justify-content-around ">
+                        <a class="nav-link nav-my-item" asp-area="Programovani" asp-controller="Home" asp-action="Index"><i class="bi bi-code-slash"></i> Programování</a>
+                        <a class="nav-link nav-my-item" asp-area="Database" asp-controller="Home" asp-action="Index"><i class="bi bi-database"></i> Databáze</a>
+                        <a class="nav-link nav-my-item" asp-area="ProgramoveVybaveni" asp-controller="Home" asp-action="Index"><i class="bi bi-pc-display"></i> Programové vybavení</a>
+                    </div>
 
-                    @*                     <li class="nav-item dropdown">
+                </ul>
+                <ul class="navbar-nav text-center" style="width: 150px">
+                    <a  class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact"><i class="bi bi-box-arrow-up-left"></i> Kontakt</a>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="spacer header-spacer"></div>
+
+
+@*                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sort Methody
                         </a>
@@ -35,30 +47,3 @@
                             <li><a class="dropdown-item" asp-area="Programovani" asp-controller="Algorithms" asp-action="HeapSort">HeapSort</a></li>
                         </ul>
                     </li> *@
-                </ul>
-                <ul class="navbar-nav">
-                    <button data-bs-target="#ContactModal" data-bs-toggle="modal" class="nav-link"><i class="bi bi-box-arrow-up-left"></i> Kontakt</button>
-                    <!-- Modal -->
-                    <div class="modal fade " id="ContactModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" >
-                            <div class="modal-content bg-dark">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Kontakt</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body fs-3">
-                                    <i class="bi bi-envelope"></i> <a href="mailto:chyby@@jbohacek.cz"> chyby@@jbohacek.cz</a><br/>
-                                    <i class="bi bi-discord"></i> jbohacek <br/>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-

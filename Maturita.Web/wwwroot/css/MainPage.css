@@ -1,0 +1,15 @@
+﻿.box {
+    padding: 20px;
+    border: #3a3e46 solid;
+    border-radius: 16px;
+    margin: 15px 0;
+    text-decoration: none;
+    font-size: 40px;
+    transition: background-color 200ms;
+    transition: transform 200ms;
+}
+
+    .box:hover {
+        background-color: #262626;
+        transform: scale(1.1);
+    }

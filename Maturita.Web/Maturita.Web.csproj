@@ -176,6 +176,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\Font\Montserrat.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\Projects\Dbs\Exercises\dbTrafika.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -4,26 +4,18 @@
 
 @section Styles
 {
-    <style>
-        .box {
-            padding: 20px;
-            border: #3a3e46 solid;
-            border-radius: 16px;
-            margin: 15px 0;
-            text-decoration: none;
-            font-size: 40px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/MainPage.css" asp-append-version="true" />
+
 }
 
 <div class="">
-    <h1 class="display-1 text-center">Vítej</h1>
-    <h1 class="display-4 text-center">Zde najdeš vše co potřebuješ na maturitu!</h1>
+    <h1 class="display-1 text-center hidden">Vítej</h1>
+    <h1 class="display-4 text-center hidden">Zde najdeš vše co potřebuješ na maturitu!</h1>
     <h1 class="display-6 fs-4 background-text text-center">Pokud potřebuješ udělat <span>určité téma</span>, tak přispěj a vlož do popisku téma.<br/> Téma bude <span>přednostně udělané</span> !</h1>
     <div class="text-center d-flex flex-lg-row flex-column justify-content-around">
-        <a asp-area="Programovani" asp-controller="Home" class="box"><i class="bi bi-code-slash"></i><br />Programování</a>
-        <a asp-area="Database" asp-controller="Home" asp-action="Index" class="box"><i class="bi bi-database"></i><br />Databáze</a>
-        <a asp-area="ProgramoveVybaveni" asp-controller="Home" class="box"><i class="bi bi-pc-display"></i><br />Programové vybavení</a>
+        <a asp-area="Programovani" asp-controller="Home" class="box hidden"><i class="bi bi-code-slash"></i><br />Programování</a>
+        <a asp-area="Database" asp-controller="Home" asp-action="Index" class="box hidden"><i class="bi bi-database"></i><br />Databáze</a>
+        <a asp-area="ProgramoveVybaveni" asp-controller="Home" class="box hidden"><i class="bi bi-pc-display"></i><br />Programové vybavení</a>
     </div>
     
     <div class="background-text mt-4">
@@ -44,9 +36,16 @@
     </div>
 
 
-    <div style="overflow: auto; height: 400px;">
+    <div style="overflow: auto; height: 800px;">
         
-
+        <div class="background-text">
+            <span>9.4</span> <br/>
+            - Finální úprava grafiky webu (doufám) <br/>
+            - Opraveno mobilní zobrazení na:  Okruhy > zadani <span>ze</span> zadani > okruhy (lépe se čte a naviguje) <br/>
+            - Přidaná karta <a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a><br />
+            - Přidaná animace na scroll, snad libí.
+            <div class="text-end sha">Jakub Boháček</div>
+        </div>
 
         <div class="background-text">
             <span>8.4</span> <br/>
