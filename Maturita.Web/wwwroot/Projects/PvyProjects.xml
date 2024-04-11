@@ -7,4 +7,17 @@
 		<Category>Access</Category>
 		<FileExercise>Cvičení č. 1.zip</FileExercise>
 	</ProjectModel>
-</ArrayOfProjectModel>                              
+	<ProjectModel>
+		<Name>Kontigenční Tabulky</Name>
+		<Description>Vytvořit kontigenční tabulku</Description>
+		<Difficulty>3</Difficulty>
+		<Category>Excel</Category>
+		<FileExercise>kontigenčníTabulky_Cvičení.xlsx</FileExercise>
+	</ProjectModel>
+</ArrayOfProjectModel>
+
+
+
+
+
+
