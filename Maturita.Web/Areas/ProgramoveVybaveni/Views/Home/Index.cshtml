@@ -54,7 +54,11 @@
                 <li>Excel<br/>
                     <ul>
                         <li><a asp-controller="Excel" asp-action="Obecne">Obecně</a></li>
-                        <li><a>Kontigenční tabulky</a></li>
+                        <li><a asp-area="" 
+                            asp-controller="Redirect"
+                            asp-action="Index" 
+                            asp-route-url="https://www.itnetwork.cz/ms-office/excel/kontingencni-tabulky-v-aplikaci-excel"
+                        >Kontigenční tabulky</a></li>
                         <li><a>Funkce</a></li>
                     </ul>
                 </li>

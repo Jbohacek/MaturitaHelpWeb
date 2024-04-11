@@ -1,0 +1,19 @@
+﻿@model RedirectModel
+
+
+@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Přesměrování";
+
+}
+
+<div class="display-1">
+    Přesměrování
+</div>
+
+
+<div class="background-text text-center">
+    <div class="text-center display-3">Informace jsou na jiné webové stánce</div>
+    <a class="" href="@Model.Url">@Model.Url</a>
+</div>
