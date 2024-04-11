@@ -45,27 +45,4 @@ namespace Maturita.Web
 
         }
     }
-
-    public class Log
-    {
-        public string Action { get; set; }
-
-        public string Message { get; set; }
-
-        public DateTime Date { get; set; }
-    }
-
-    public class LogPage
-    {
-        public List<Log> Logs { get; set; }
-        public DateTime EndTime { get; set; }
-
-        public LogPage(List<Log> logs, DateTime endTime)
-        {
-            Logs = logs;
-            EndTime = endTime;
-
-            
-        }
-    }
 }

@@ -1,0 +1,329 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "MVC Forms";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+
+
+
+<div class="display-1">
+    MVC Formuláře
+</div>
+
+<article>
+    Formuláře v ASP.NET MVC <span>slouží k zachycení 
+        dat od uživatele
+    </span> a jejich <span>odeslání na server</span> pro zpracování.
+    Jsou klíčovou součástí webových aplikací, 
+    které umožňují uživatelům interaktivně komunikovat 
+    s webem a zadávat různé informace.
+    
+    <br/>
+</article>
+
+<div class="display-2">Generování formuláře</div>
+<article>
+    <div class="display-5">
+        <span>1. Vytvoření databáze</span>
+    </div>
+    <a href="~/Projects/Prg/Exercises/ExerciseFormWeb.zip">Zde stahnout projekt ExerciseWebForm</a>
+    <br/><br/>
+
+    Generování formuláře jde přes entityframework a je potřeba mít v projektu context.<br/> 
+    Pokud chcete následovat návod, zde je jak vytvořit rychle databázi
+    <br/><br/>
+    Vytvořte databázi se jménem <span>ExerciseDatabase</span> v Mssql
+    <pre>
+    <code class="language-sql">
+
+USE [ExerciseDatabase]
+GO
+
+/****** jednoduchá tabulka ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+DROP TABLE [dbo].[Person];
+
+
+GO
+CREATE TABLE [dbo].[Person] (
+    [Id]        INT          NOT NULL,
+    [FirstName] VARCHAR (50) NOT NULL,
+    [LastName]  VARCHAR (50) NOT NULL,
+    [Age]       INT          NOT NULL
+);
+
+    </code>
+</pre>
+    
+    Do projektu vložte tyto Nuget balíčky se správnou verzi (první číslo ve verzi balíčku odpovídá .Net core verzi)<br/>
+    Používám .Net 7 > hledám balíčky, které začínaji na 7 (třeba 7.0.18)
+    <ul>
+        <li><a href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/6.0.29?_src=template">Microsoft.EntityFrameworkCore</a></li>
+        <li><a href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/6.0.29?_src=template">Microsoft.EntityFrameworkCore.Design</a></li>
+        <li><a href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/6.0.29?_src=template">Microsoft.EntityFrameworkCore.SqlServer</a></li>
+        <li><a href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/6.0.29?_src=template">Microsoft.EntityFrameworkCore.Tools</a></li>
+    </ul>
+    
+    Následně otevřete "Package Manager Console"
+    <img src="~/Pictures/ASP/Forms/Package Manager Console.png" class="img-fluid d-block mx-auto w-100">
+    
+    a použijete tento příkaz
+    
+    <pre>
+    <code class="language-sql">
+
+Scaffold-DbContext 
+"Sem connection string" 
+Microsoft.EntityFrameworkCore.SqlServer 
+-OutputDir DbModels 
+-ContextDir DbContext 
+    </code>
+</pre>
+
+    Příkaz vygeneruje Context a modely databáze, které tam vložíte
+    <ul>
+        <li>DbModels - se budou nacházet tabulky, které jsou v databázi</li>
+        <li>DbContext - bude context</li>
+    </ul>
+    
+    <div class="sha text-center">Podrobnější návod zde: <a href="https://learn.microsoft.com/en-us/ef/core/cli/powershell">learn.microsoft</a></div>
+    
+    <div class="display-5">
+        <span>2. Vygenerování</span>
+    </div>
+    <img src="~/Pictures/ASP/Forms/HowToGenerate.gif" class="img-fluid d-block mx-auto w-100">
+    
+    <ol>
+        <li>Kliknout na controller a přidat controller with views using entityFramework</li>
+        <li>Vyplnit údaje</li>
+        <li>Počkat</li>
+        <li>Vše by se mělo udělat</li>
+    </ol>
+
+</article>
+
+    
+<div class="display-2">Formulářové prvky</div>
+<article>
+    <div class="display-4">Label</div>
+    <pre>
+    <code class="language-html">
+@("<label asp-for=\"FirstName\" class=\"control-label\"></label>")
+    </code>
+</pre>
+    <span>asp-for</span> dává do innerhtml, neboli textu, název té proměné<br/>
+    Pokud chceme v kodu změnit co ukazuje používáme attribut <span>[DisplayName("Jméno")]</span>. Tohle změní co se napíše ve formu v labelu
+    
+    <div class="display-4">Input</div>
+    <pre>
+    <code class="language-html">
+@("<input asp-for=\"FirstName\" class=\"form-control\" />")
+    </code>
+</pre>
+    Prostě políčko pro vyplnění honoty. <br/> 
+    ASP je dostatečně chytré a dokáže rozpoznat typ a následně poskytne input type samo od sebe.<br/>
+    String > type="Text"
+    Int > type="Number"
+    
+    <div class="display-4">Button - submit</div>
+    <pre>
+    <code class="language-html">
+@("<input type=\"submit\" value=\"Save\" class=\"btn btn-primary\" />")
+    </code>
+</pre>
+    Slouží pro odeslání modelu na server
+</article>
+
+<div class="display-2">Zpracování formuláře</div>
+<article>
+    Po kliknutí tlačíka submit, odešle se Pouze Model do metody<br/>
+    Pro určetní jak do jaké akce se má poslat, musíme určit v <span>@("<form>")</span> tagu
+    <pre>
+    <code class="language-html">
+@("<form asp-action=\"Edit\">")
+    </code>
+</pre>
+    Následně takovou metodu edit, musíme označit atributem <span>[HttpPost]</span> protože přijmá odeslané data. <br/>
+    
+    <pre>
+    <code class="language-csharp">
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task@("<IActionResult>") Edit(int id, [Bind("Id,FirstName,LastName,Age")] Person person)
+
+/*
+Pokud vycházíte z vygenerované části, tak takto vypadá edit
+*/
+
+
+[HttpPost]
+public IActionResult Edit(Person person)
+
+/*
+Tohle je uplně stejný zápis, 
+ale má jinou funkčnost na pozadí, ale data dostanete stejný
+*/
+
+    </code>
+</pre>
+    
+    Vysvětlení:<br/>
+    <ul>
+        <li><span>[HttpPost]</span><br /> 
+            - Označujeme, že přijmá data z formuláře, nebo z akce označené jako Post</li>
+        <li><span>[ValidateAntiForgeryToken]</span><br /> 
+            - slouží k ochraně proti útokům typu Cross-Site Request Forgery (CSRF). 
+            Tyto útoky se pokoušejí zneužít přihlášení uživatele k webové aplikaci k 
+            odesílání požadavků na server bez jeho vědomí.</li>
+        <li><span>async Task@("<IActionResult>")</span><br/> 
+            - Tohle děla metodu asynchroní, 
+            v realné případě je to nutnost, protože asp server je jedno thredový, 
+            takže řeší akce postupně. Tohle mu dáva možnost dělat každou akci zároveň.
+            V důsledku toho prostě stihne dělat věci najednou. <span>NENI nutné, při dělání malých webů</span>
+            <img src="~/Pictures/ASP/Forms/AsynchroniVsSynchroní.png" class="img-fluid d-block mx-auto w-75">
+        </li> (viz. obrázek)
+
+        <li><span>[Bind("Id,FirstName,LastName,Age")]</span><br/>
+            - není opět potřeba, ale slouží ke zvýšení zabezpečenosti a výkonu. 
+            jednoduše váže atributy Person na to co se dosatalo z Post</li>
+    </ul>
+    Následně je jednoduchá práce s databázi na CRUD operace.
+
+</article>
+
+            
+<div class="display-2">Validace hodnot</div>
+<article>
+    Pro validaci hodnot, musíme stanovit kritéria, podle kterých se bude řídit validace. Validace je automaticky vytvořená na základě těchto atributů.
+    <pre>
+    <code class="language-csharp">
+public class Person
+{
+    [Required]
+    public string Jméno { get; set; }
+
+    [Range(18, 100)]
+    public int Věk { get; set; }
+
+    [RegularExpression("[a-zA-Z]+")]
+    public string Příjmení { get; set; }
+    
+    // Zde také mužeme určit od do
+    [MaxLength(50)]
+    [MinLength(25)]
+
+    // nebo, jen délku do
+    [StringLength(50)]
+    public string Adresa { get; set; }
+    
+    [EmailAddress]
+    public string Email { get; set; }
+
+    [Phone]
+    public string Telefon { get; set; }
+
+}
+    </code>
+</pre>
+    
+    Jako sekundární parametr, těchto atributů je <span>Error message</span>, která se vypíše při vložení špatné hodnoty. Vkládáme jako<br/><br/>
+    
+    ErrorMessage = "Text"
+    <pre>
+    <code class="language-csharp">
+public class Person
+{
+    [Required(ErrorMessage = "Je nutne")]
+    public string Jméno { get; set; }
+
+    [Range(5,10,ErrorMessage = "Rozsah je spatny")]
+    public int Věk { get; set; }
+
+    // nebo, jen délku do
+    [StringLength(50)]
+    public string Adresa { get; set; }
+    
+    [EmailAddress(ErrorMessage = "Spatný mail")]
+    public string Email { get; set; }
+
+    // Funguje u všech
+}
+    </code>
+</pre>
+    
+    <div class="display-4">Validace na html stránce</div>
+    Za validaci hodnot odpovída tento kód
+    <ul>
+        <li><span>asp-validation-for="FirstName"</span><br/>Tohle odpovídá za konkrétní validaci parametru</li>
+        <li><span>@("<div asp-validation-summary=\"ModelOnly\" class=\"text-danger\"></div>")</span><br/> - tohle odpovídá za validaci všeho</li>
+    </ul>
+    
+    <pre>
+    <code class="language-html">
+@("        " +
+"<form asp-action=\"Edit\">\r\n" +
+"            <div asp-validation-summary=\"ModelOnly\" class=\"text-danger\"></div>\r\n" +
+"            <input type=\"hidden\" asp-for=\"Id\" />\r\n" +
+"            <div class=\"form-group\">\r\n" +
+"                <label asp-for=\"FirstName\" class=\"control-label\"></label>\r\n " +
+"               <input asp-for=\"FirstName\" class=\"form-control\" />\r\n" +
+"                <span asp-validation-for=\"FirstName\" class=\"text-danger\"></span>\r\n " +
+"           </div>\r\n            <div class=\"form-group\">\r\n " +
+"               <label asp-for=\"LastName\" class=\"control-label\"></label>\r\n " +
+"               <input asp-for=\"LastName\" class=\"form-control\" />\r\n   " +
+"             <span asp-validation-for=\"LastName\" class=\"text-danger\"></span>\r\n    " +
+"        </div>\r\n            <div class=\"form-group\">\r\n        " +
+"        <label asp-for=\"Age\" class=\"control-label\"></label>\r\n   " +
+"             <input asp-for=\"Age\" class=\"form-control\" />\r\n     " +
+"           <span asp-validation-for=\"Age\" class=\"text-danger\"></span>\r\n     " +
+"       </div>\r\n            <div class=\"form-group\">\r\n         " +
+"       <input type=\"submit\" value=\"Save\" class=\"btn btn-primary\" />\r\n   " +
+"         </div>\r\n     " +
+"   </form>")
+    </code>
+</pre>
+
+    Následně můžeme kontrolovat ještě model v c#, přes <span>ModelState.IsValid</span> vrací <span>true</span>, pokud není chyba. Vrací <span>false</span> pokud je chyba.<br />
+    TIP: přes debugger, mužeme zjistit, co je zle. Obsahuje to <span>ModelState</span>
+</article>
+
+<div class="display-2">Session </div>
+<article>
+    Session slouží k uchování dat na straně serveru  
+    po dobu trvání relace uživatele. Na rozdíl od proměnných 
+    view, které existují pouze během zpracovávání jednoho požadavku, 
+    session umožňuje ukládat a načítat data napříč různými požadavky od 
+    stejného uživatele.<br/><br/>
+    
+    Pro spovoznění sessions je potřeba přidat kod do program.cs
+    
+    <pre>
+    <code class="language-csharp">
+builder.Services.AddSession(); 
+// Musíme přidat před metodou .Build();
+
+var app = builder.Build();
+
+app.UseSession();
+    </code>
+</pre>
+    
+    <pre>
+    <code class="language-csharp">
+// Uložíme
+HttpContext.Session.SetString("key", "Hodnota");
+
+// Načteme
+HttpContext.Session.GetString("key");
+
+// Jde udělat pouze v controlerech, jelikož dědí z Controlleru
+    </code>
+</pre>
+</article>

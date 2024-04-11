@@ -122,6 +122,16 @@ main a:any-link {
     margin-top: 10px;
 }
 
+article {
+    margin: 0;
+    padding: 0;
+    background-color: #262626;
+    padding: 2vh;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
 .mini-header {
     position: relative;
     bottom: -4vh;

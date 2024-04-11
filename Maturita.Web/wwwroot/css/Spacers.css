@@ -4,17 +4,50 @@
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
-
+    z-index: -1;
+    position: absolute;
+    filter: blur(0px);
+    opacity: 0.8;
+    transition: all 800ms ease-out;
 }
 
-.header-spacer {
+/*.header-spacer {
     background-image: url("../Pictures/waves.svg");
     z-index: -1;
     position: absolute;
 }
+*/
+.old-spacer {
+    background-image: url("../Pictures/Haikei/Oldwaves.svg");
+}
+
+.main-spacer {
+    background-image: url("../Pictures/Haikei/mainWave.svg");
+}
+
+.prg-spacer {
+    background-image: url("../Pictures/Haikei/prgWaves.svg");
+}
+.dbs-spacer {
+    background-image: url("../Pictures/Haikei/dbsWaves.svg");
+}
+.pvy-spacer {
+    background-image: url("../Pictures/Haikei/pvyWaves.svg");
+}
+.ces-spacer {
+    background-image: url("../Pictures/Haikei/cesWaves.svg");
+}
+
+.hidden-spacer {
+    opacity: 0.3;
+    filter: blur(10px);
+    transform: translateY(-10%);
+}
+
+
 
 .down-spacer {
-    background-image: url("../Pictures/bricks.svg");
+    background-image: url("../Pictures/Haikei/bricks.svg");
     z-index: -1;
     position: absolute;
     height: 400px;

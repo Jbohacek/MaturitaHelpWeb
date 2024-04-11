@@ -145,21 +145,21 @@ public IActionResult Vypislogu()
     Veškerý .cshtml co napíšeme ve view se propíše přesně tam, kde se nachází @@RenderBody();<br/><br/>
     Hlavička html, css linky a js scripty se budou nacházet vždy v _Layout jelikož se musí zobrazit vždy.
     <br/><br/>
-    Na začátku .cshtml definujeme @@Model, aby view vědělo s čím pracujeme. Musíme napsat uplnou cestu. 
+    Na začátku .cshtml definujeme @@model, aby view vědělo s čím pracujeme. Musíme napsat uplnou cestu. 
     Nebo můžeme přidat <span>using</span> do souboru <span>\Views\_ViewImports.cshtml</span>
     <pre>
     <code class="language-csharp">
-@@Model LogPage
+@@model LogPage
     
 // Uplna cesta
-@@Model [NazevProjekt].[Slozka kde se nachazi].[třída]
+@@model [NazevProjekt].[Slozka kde se nachazi].[třída]
 
 // Příklad
-@@Model MaturitaWeb.Models.PageLog
+@@model MaturitaWeb.Models.PageLog
 
 // Pokud chceme nějakou hodnotu napsat do view
-// Používáme model s malým m
-@@model.EndTime.ToShortDateString()
+// Používáme model s velkým M
+@@Model.EndTime.ToShortDateString()
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // Lze kombinovat html a c#, napříkad:
@@ -173,7 +173,7 @@ public IActionResult Vypislogu()
 //////////////////////////////////////////////////////////////////////////////////////////////
 // Pokud potřebujeme něco složitějšího, tak stačí dát do závorek
 
-@("<div>\n\tPosledni log v datu: @(model.EndTime.ToShortDateString() + \" v evropském čase\" )\n<div/>")
+@("<div>\n\tPosledni log v datu: @(Model.EndTime.ToShortDateString() + \" v evropském čase\" )\n<div/>")
     
 ==
 
@@ -182,7 +182,7 @@ public IActionResult Vypislogu()
 //////////////////////////////////////////////////////////////////////////////////////////////
 // pokud chceme vložit CELY html element tak musímě použít metodu Html.Raw
 
-@("@Html.Raw(\"<div>\n\tPosledni log v datu: @(model.EndTime.ToShortDateString() + \" v evropském čase\" )\n<div/>\")")
+@("@Html.Raw(\"<div>\n\tPosledni log v datu: @(Model.EndTime.ToShortDateString() + \" v evropském čase\" )\n<div/>\")")
 
 ==
 
@@ -199,7 +199,7 @@ public IActionResult Vypislogu()
 
 // Například:
 
-@@foreach(var log in model.Logs)
+@@foreach(var log in Model.Logs)
 {
     @("\t<div>\n\t\tAkce: @(\"Sudo \" + log.Action)\n\t<div/>")
     @("\t<div>\n\t\tText: @log.Message\n\t<div/>")
@@ -259,11 +259,11 @@ Nebo mužeme úvést úplnou cestu
 </div>
 
 <div class="display-2">
-    Partial view
+    ViewComponents
 </div>
 
 <div class="background-text">
-    Tímto mužeme vložit .cshtml stánku do .cshtml stránky, ale před vložením se spustí Invoke metoda na serveru. Takže je možné dotáhnout potřebné data a použít jiný model na vykreslení.
+    Tímto mužeme vložit .cshtml stánku do .cshtml stránky, ale před vložením se spustí Invoke metoda na serveru. Takže je možné dotáhnout potřebné data a použít jiný Model na vykreslení.
     <br/><br/>
     je potřeba vytvořit třídu [jmeno]Component.cs, která bude dědit z viewComponent
     <pre>
@@ -287,7 +287,7 @@ public class LogComponent : ViewComponent
 // Vypislogu.cshtml
 
 // Vyvoláme v kodu takto
-@@foreach(var log in model.Logs)
+@@foreach(var log in Model.Logs)
 {
     //Vytváříme pro každy 
     @("Component.InvokeAsync(\"ExercisesComponent\",log)")
@@ -297,8 +297,8 @@ public class LogComponent : ViewComponent
 
 @@Model Log
 
-@("<div>\n\tAkce: @(\"Sudo \" + model.Action)\n<div/>")
-@("<div>\n\tAkce: @model.Message\n<div/>")
+@("<div>\n\tAkce: @(\"Sudo \" + Model.Action)\n<div/>")
+@("<div>\n\tAkce: @Model.Message\n<div/>")
             
 // = Docílily jsme uplně toho samého jako s foreachem, 
 ale nyní mužeme ještě třeba do logu něco přidat.

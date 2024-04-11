@@ -31,7 +31,16 @@
     </nav>
 </header>
 
-<div class="spacer header-spacer"></div>
+@if (!string.IsNullOrEmpty(ViewBag.Waves))
+{
+    @Html.Raw($"<div class=\"spacer {ViewBag.Waves}-spacer hidden-spacer\"></div>")
+}
+else
+{
+    <div class="spacer main-spacer hidden-spacer"></div>
+}
+
+
 
 
 @*                     <li class="nav-item dropdown">

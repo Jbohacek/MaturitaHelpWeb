@@ -12,7 +12,7 @@
     <h1 class="display-1 text-center hidden">Vítej</h1>
     <h1 class="display-4 text-center hidden">Zde najdeš vše, co potřebuješ na maturitu!</h1>
     <h1 class="display-6 fs-4 background-text text-center">Pokud potřebuješ udělat <span>určité téma</span>, tak přispěj a vlož do popisku téma.<br/> Téma bude <span>přednostně udělané</span> !</h1>
-    <div class="text-center d-flex flex-lg-row flex-column justify-content-around">
+    <div class="text-center d-flex flex-lg-row flex-column flex-wrap justify-content-center gap-3">
         <a asp-area="Programovani" asp-controller="Home" class="box hidden"><i class="bi bi-code-slash"></i><br />Programování</a>
         <a asp-area="Database" asp-controller="Home" asp-action="Index" class="box hidden"><i class="bi bi-database"></i><br />Databáze</a>
         <a asp-area="ProgramoveVybaveni" asp-controller="Home" class="box hidden"><i class="bi bi-pc-display"></i><br />Programové vybavení</a>
@@ -45,13 +45,23 @@
     <div style="overflow: auto; height: 800px;">
         
         <div class="background-text">
+            <span>11.4</span> <br/>
+            - Přidána kategorie <a asp-area="Cestina" asp-controller="Home" asp-action="Index">Čeština</a> <br/>
+            - Opravený obrázky a přidan projekt "Kontigenční Tabulky" na Pvy <br />
+            - Přidán <a asp-area="Programovani" asp-controller="QuestionSeriesThird" asp-action="MVCForms">Asp forms</a> <br/>
+            - Opravený chybky v <a asp-area="Programovani" asp-controller="QuestionSeriesThird" asp-action="MVCViews">Asp views</a> <br/>
+            - Přidaný unikátní vlny na každou stránku <br/>
+            <div class="text-end sha">Jakub Boháček & Daniel Panáček</div>
+        </div>
+
+        <div class="background-text">
             <span>10.4</span> <br/>
             - Přidán mini header na každé téma <br/>
             - Přidán <a asp-area="Programovani" asp-controller="QuestionSeriesThird" asp-action="MVCViews">Asp views</a> <br />
             - Přidán varování text<br/>
             - Upraveny header a font <span>(diky NAX)</span><br/>
             - Opravena gramatika <span>(díky Vanish)</span><br/>
-            <div class="text-end sha">Jakub Boháček</div>
+            <div class="text-end sha">Jakub Boháček </div>
         </div>
 
         <div class="background-text">

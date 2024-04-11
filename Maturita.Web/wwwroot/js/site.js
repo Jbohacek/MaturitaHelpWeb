@@ -1,4 +1,7 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const spacer = document.querySelector('.spacer');
 
-// Write your JavaScript code.
+setTimeout(RevealSpacer, 10);
+
+function RevealSpacer() {
+    spacer.classList.remove('hidden-spacer');
+}

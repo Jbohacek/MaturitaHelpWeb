@@ -38,7 +38,12 @@ template, ??
 -- ViewComponents, 
 -- pøedávání dat do view - (Model, ViewData, ViewBag)
 
-27. ASP.NET MVC formuláøe - definice a generování formuláøe, formuláøové prvky (label, textbox, checkbox,...), zpracování formuláøe, validace hodnot, session 
+27. ASP.NET MVC formuláøe - 
+-- definice a generování formuláøe, 
+-- formuláøové prvky (label, textbox, checkbox,...),
+-- zpracování formuláøe, 
+-- validace hodnot, 
+-- session 
 
 28. REST API - HTTP metody (GET, POST, PUT, DELETE), mapovani na akce, response, JSON, XML, stavove kody (200, 201, 301, 302, 400, 401, 403, 404, 500), autentizace (JWT), REST - restful - formát adres (/users/:id), ASP.NET MVC API
 
