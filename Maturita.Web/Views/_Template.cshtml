@@ -19,14 +19,30 @@
     Velký nadpis
 </div>
 
+
+@* Je potřeba na vygenerování jednoduchého seznamu *@
 <div class="display-2">
-    Střední nadpis
+    Podnadpisz
 </div>
 
+@* Tohle vkládat do article *@
 <div class="display-3">
     Menší nadpis
 </div>
 
+
+@* Text s pozadím *@
+<article>
+    <br/> @* Enter *@
+    
+    <b>Tučně</b> @* tučně *@
+    
+    <i>Italic</i> @* Italic *@
+    
+    <u>Underline</u> @* Underline *@
+    
+    <span>Modrý text</span> @* udělá to modrý text na zvýraznění *@
+</article>
 
 
 @* Text s pozadím  *@
@@ -63,15 +79,18 @@ w-25 - 25% šířka
 
 
 
-Kod
+@* Kod
 Pro kod tu je highliht.js, který zvýrazní syntaxi
+
+language-csharp c#
+language-sql 
+language-html
+
+*@
 
 <pre>
     <code class="language-csharp">
-      public static void Main(string[] args)
-      {
-          Console.WriteLine("Hello, World!");
-      }
+
     </code>
 </pre>
 
@@ -80,12 +99,14 @@ Pro tu je to udělaný partial view, který se jmenuje _VideoPlayer.cshtml
 
 defualtni cesta je /wwwroot/Videos/ a musi to být mp4
 
-Při importu z youtube klikněte na tlačítko "Sdílet" a pak "Vložit" a zkopírujte html (<iframe>...</iframe>) 
+
 
 *@
 
 @await Html.PartialAsync("_VideoPlayer", new VideoModel("Sorts/BubbleSort.mp4", "https://www.youtube.com/watch?v=xli_FI7CuzA&t=2s"))
 
+
+@* Při importu z youtube klikněte na tlačítko "Sdílet" a pak "Vložit" a zkopírujte link na video v <iframu> *@
 @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/kKbLDqUJ3gY?si=0Hn66eA6o-KJHAko")
 
 
@@ -110,16 +131,22 @@ Nesmí obsahovat http !!!!
     ))
     
 @*
+    
+
 Více na...
     *@
 <div class="sha text-center">Více informací: <a href="https://www.itnetwork.cz/csharp/zaklady/c-sharp-tutorial-cykly-for-while/">ItNetwork</a></div>
 
 
+
+@* Redirect na jinou stránku *@
 <li>
     <a asp-area=""
        asp-controller="Redirect"
        asp-action="Index"
        asp-route-url="https://www.itnetwork.cz/ms-office/excel/kontingencni-tabulky-v-aplikaci-excel">
         @*Zde změnit pouze odkaz*@
-       Kontigenční tabulky</a>
+        Kontigenční tabulky</a>
 </li>
+
+    
