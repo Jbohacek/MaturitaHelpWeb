@@ -83,6 +83,8 @@
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\MVCZaklady.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\TeorieTestovani.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\ProgramoveVybaveni\Views\Access\Dotazy.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\ProgramoveVybaveni\Views\Access\ImportExport.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\ProgramoveVybaveni\Views\Excel\Obecne.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Shared\Components\ExercisesComponent\Default.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Video\Index.cshtml" />
@@ -193,6 +195,14 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesThird\MVCZaklady.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\ProgramoveVybaveni\Views\Access\Dotazy.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\ProgramoveVybaveni\Views\Access\ImportExport.cshtml" />
   </ItemGroup>
 
 </Project>

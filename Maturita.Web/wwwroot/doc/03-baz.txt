@@ -45,7 +45,16 @@ template, ??
 -- validace hodnot, 
 -- session 
 
-28. REST API - HTTP metody (GET, POST, PUT, DELETE), mapovani na akce, response, JSON, XML, stavove kody (200, 201, 301, 302, 400, 401, 403, 404, 500), autentizace (JWT), REST - restful - formát adres (/users/:id), ASP.NET MVC API
+28. REST API - 
+HTTP metody (GET, POST, PUT, DELETE), 
+mapovani na akce, 
+response, 
+JSON, 
+XML, 
+stavove kody (200, 201, 301, 302, 400, 401, 403, 404, 500), 
+autentizace (JWT), 
+REST - restful - formát adres (/users/:id), 
+ASP.NET MVC API
 
 29. Události a delegáty, delegáty Action/Func/Predicate,  Observer, Lambda funkce, anonymní funkce/objekty, dynamické typy (var, dynamic)
 

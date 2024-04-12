@@ -1,24 +1,21 @@
-﻿@{
+﻿@* /////////////////////////////////////////// *@
+@{
     Layout = "_Layout"; // Nechat jak je
 
     ViewBag.Title = "[Nadpis stránka]";
     ViewBag.Author = "[Autor]";
-    ViewBag.Editor = "[Editor]";
+    ViewBag.Editor = "[Editor]"; // Pokud není, tak vymazat
 
-    //Ani jedna z nich není nutná, nějaký stánky nemají Editora, tak to prostě nenapiště:
-
-    ViewBag.Title = "[Druha stránka]";
-    ViewBag.Author = "[Druhy autor]";
+    ViewBag.GenerateContent = false; 
+    /*
+     * false = Negeneruje se obsah
+     * true / nic = generuje se obsah
+     */
 }
-
-
-
-
-@* Nadpisy *@
 <div class="display-1">
-    Velký nadpis
+    @ViewBag.Title
 </div>
-
+@* /////////////////////////////////////////// *@
 
 @* Je potřeba na vygenerování jednoduchého seznamu *@
 <div class="display-2">
@@ -29,6 +26,11 @@
 <div class="display-3">
     Menší nadpis
 </div>
+
+@* Pokud má <a> "disabled" tak se link zneplatní. Stačí smazat a bude fungovat *@
+
+<a asp-controller="Access" asp-action="TabulkyARelace" disabled>Tabulky a relace</a> @* Nefunkční *@
+<a asp-controller="Access" asp-action="TabulkyARelace">Tabulky a relace</a> @* Funkční *@
 
 
 @* Text s pozadím *@
