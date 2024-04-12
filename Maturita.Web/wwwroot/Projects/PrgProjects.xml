@@ -37,7 +37,7 @@
     <Name>Jízdní řád</Name>
     <Description>Vytvořit mhd jízdní řád</Description>
     <Difficulty>4</Difficulty>
-    <Category>Forms</Category>
+    <Category>Asp</Category>
     <FileExercise>05-jizdni-rad.zip</FileExercise>
     <IsUrl>false</IsUrl>
   </ProjectModel>
