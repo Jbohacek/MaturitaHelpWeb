@@ -43,8 +43,11 @@ namespace Maturita.Web.Areas.Programovani.Controllers
 
         public IActionResult MVCForms()
         {
+            return View();
+        }
 
-
+        public IActionResult RestApi()
+        {
             return View();
         }
     }

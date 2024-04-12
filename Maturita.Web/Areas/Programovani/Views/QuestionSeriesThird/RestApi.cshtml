@@ -1,0 +1,243 @@
+﻿@{
+    Layout = "_Layout"; 
+
+    ViewBag.Title = "Rest Api";
+    ViewBag.Author = "Jakub Boháček";
+
+}
+<div class="display-1">
+    @ViewBag.Title
+</div>
+
+<article>
+    Architektonický styl pro návrh webových služeb.<br/>
+    Zaměřuje se na data a využívá metod HTTP (GET, POST, PUT, DELETE) pro manipulaci s daty.<br/>
+    Klienty (jako jsou mobilní aplikace, webové aplikace) komunikují se servery pomocí těchto metod a datových formátů (často JSON nebo XML).<br/>
+    
+    <img src="~/Pictures/ASP/Rest/Project.png" class="img-fluid d-block mx-auto w-100">
+    
+    Vytváříme <span>ASP.NET Core web API</span>, tohle nám vytvoří API, které nám dá možnost posílat na webový server http požadavky a vracet nějaké informace.<br/>
+    <img src="~/Pictures/ASP/Rest/Vysvětlení.png" class="img-fluid d-block mx-auto w-100"><br />
+    Funguje je to uplně stejně jako v MVC, máme controllery, který vrací data místo zobrazení.
+    <br/><br/>
+    
+    Controller vytváříme trošičku jinak..
+    <img src="~/Pictures/ASP/Rest/HowToCreate.gif" class="img-fluid d-block mx-auto w-100">
+    Podobný controller, můžeme užít i v MVC projektu<br/><br/>
+    
+
+    Máme http request metody
+    <img src="~/Pictures/ASP/Rest/RequestMethody.png" class="img-fluid d-block mx-auto w-100">
+    
+    Když posíláme na server, musíme poslat
+    <ul>
+        <li>Http metodu</li> - Post, Get, Put, Delete
+        <li>Body</li> - zde jsou podrobnější data, jako je třeba objekt v JSON, logicky v Get nebudeme posílat žádná data
+    </ul>
+</article>
+
+<div class="display-2">
+    Mapovani na akce
+</div>
+<article>
+    Každý API kontroller by měl mít attributy [Route("api/[controller]")] a <span>[ApiController]</span>. Route nám řiká kam se musíme doptávat, abychom dostali request.
+    <br/>
+    Například:<br/><br/>
+    
+    Máme API controller <span>PeopleController</span> a jeho routa je <span>[Route("api/[controller]")]</span>.
+    Takže pro aktivaci bude potřeba napsat <span>api/People/[jakákoliv akce]</span>
+    
+    <br/><br/>
+    Příklad 2:<br/>
+    Máme API controller <span>realEstatesController</span> a jeho routa je <span>[Route("houses/expensive/[controller]")]</span>.
+    Takže pro aktivaci bude potřeba napsat <span>houses/expensive/realEstates/[jakákoliv akce]</span>
+    
+    
+    <br/><br/>
+    Každá metoda by měla mít svoje <span>označení o jakou http metodu se jedná. </span>
+    Do závorky té metody vkládáme jaké informace potřebuje její query string<br/>
+    Napříkad:
+    
+    <pre>
+    <code class="language-csharp">
+// Tímto jsme přidali nutnost přidat číslo na konec url 
+// GET api/@("<ValuesController>")/5
+[HttpGet("{id}")]
+public string Get(int id)
+{
+    return "value";
+}
+
+//Opět to samé, ale nyní musi být v těle string
+// PUT api/@("<ValuesController>")/5
+[HttpPut("{id}")]
+public void Put(int id, [FromBody] string value)
+{
+}
+    </code>
+    </pre>
+</article>
+
+<div class="display-2">
+    Response
+</div>
+<article>
+    Dá se vrátit prakticky skoro všechno, co má nějaký jednoduchý datový typ. Třeba struct, nebo jednoduchá třída nebo-li model.
+    <pre>
+    <code class="language-csharp">
+return Json("nějaky objekt") // Vrací Json objekt
+
+//XML vracíme jako string
+
+return Ok("Nějaký objekt") //  http kodem 200
+
+return Unauthorized("nějaky objekt") // http kodem 400
+
+return List@("<string>") 
+    // mužeme vrace i jednoduše list věci, von je změní na json
+
+
+return "Ahoj";
+    </code>
+</pre>
+</article>
+
+<div class="display-2">
+    JSON a XML
+</div>
+
+<article>
+    <div class="display-3">Json</div>
+    <ul>
+        <li>Lehký textový formát pro výměnu dat.</li>
+        <li>Strukturovaná data v podobě klíč-hodnota, pole a objekty.</li>
+        <li>Čitelný pro člověka i stroje, snadno se analyzuje a generuje.</li>
+    </ul>
+    <pre>
+    <code class="language-json">
+{
+  "jméno": "Jan",
+  "příjmení": "Novák",
+  "věk": 30,
+  "adresa": {
+    "město": "Praha",
+    "PSČ": "100 00"
+  },
+  "zájmy": ["programování", "sport"]
+}
+
+        </code>
+    </pre>
+    <div class="text-center display-6">Newtonsoft.Json</div>
+    <pre>
+    <code class="language-csharp">
+// Serializace objektu do JSON
+var osoba = new Osoba { Jméno = "Jan", Příjmení = "Novák", Věk = 30 };
+var json = JsonConvert.SerializeObject(osoba);
+Console.WriteLine(json); // Vytiskne JSON řetězec
+
+// Deserializace JSON do objektu
+string jsonText = "{\"Jméno\":\"Jan\",\"Příjmení\":\"Novák\",\"Věk\":30}";
+var deserializovanáOsoba = JsonConvert.DeserializeObject@("<Osoba>")(jsonText);
+Console.WriteLine(deserializovanáOsoba.Jméno); // Vytiskne "Jan"
+
+        </code>
+    </pre>
+    <div class="display-3">XML</div>
+    <ul>
+        <li>Označovací jazyk pro strukturovaná data..</li>
+        <li>Hierarchická struktura s tagy a atributy.</li>
+        <li>Čitelný pro člověka, pro stroje vyžaduje parsování.</li>
+    </ul>
+    <pre>
+    <code class="language-xml">
+@("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<osoba>\r\n  <jméno>Jan</jméno>\r\n  <příjmení>Novák</příjmení>\r\n  <věk>30</věk>\r\n  <adresa>\r\n    <město>Praha</město>\r\n    <PSČ>100 00</PSČ>\r\n  </adresa>\r\n  <zájmy>\r\n    <zájem>programování</zájem>\r\n    <zájem>sport</zájem>\r\n  </zájmy>\r\n</osoba>")
+        </code>
+    </pre>
+    <div class="text-center display-6">System.Xml.Serialization</div>
+    <pre>
+    <code class="language-csharp">
+// Serializace objektu do XML
+var osoba = new Osoba { Jméno = "Jan", Příjmení = "Novák", Věk = 30 };
+var xml = XmlSerializer.Serialize(osoba, typeof(Osoba));
+Console.WriteLine(xml); // Vytiskne XML řetězec
+
+// Deserializace XML do objektu
+string xmlText = @("\"<osoba><jméno>Jan</jméno><příjmení>Novák</příjmení><věk>30</věk></osoba>\"");
+var deserializovanáOsoba = XmlSerializer.Deserialize(new StringReader(xmlText), typeof(Osoba)) as Osoba;
+Console.WriteLine(deserializovanáOsoba.Jméno); // Vytiskne "Jan"
+        </code>
+    </pre>
+</article>
+
+<div class="display-2">
+    Stavové kódy HTTP
+</div>
+
+<article>
+    Stavové kódy HTTP informují klienta (např. webový prohlížeč) o 
+    výsledku jeho požadavku na server. Každý kód má specifický význam a
+    sděluje, zda byl požadavek úspěšný, zda nastala chyba, nebo zda je 
+    nutné provést další akci.
+    <ul>
+        <li><span>200 OK</span> : Požadavek byl úspěšně zpracován a server odesílá požadovaný zdroj.</li>
+        <li><span>201 Vytvořeno</span> : Požadavek byl úspěšně splněn a na serveru byl vytvořen nový zdroj.</li>
+        <li><span>301 Trvale přesměrováno</span> : Požadovaný zdroj byl trvale přesunut na jinou adresu URL. Klient by měl automaticky přesměrovat na novou adresu.</li>
+        <li><span>302 Nalezeno</span> : Požadovaný zdroj byl dočasně přesunut na jinou adresu URL. Klient by měl přesměrovat na novou adresu.</li>
+        <li><span>400 Špatná žádost</span> : Požadavek klienta byl nesprávně formulován. Server nerozumí, co klient chce.</li>
+        <li><span>401 Neoprávněno</span> : Klient se nepokusil ověřit (např. zadáním uživatelského jména a hesla) a nemá přístup k požadovanému zdroji.</li>
+        <li><span>403 Zakázáno</span> : Klient má ověření, ale nemá oprávnění k přístupu k požadovanému zdroji.</li>
+        <li><span>404 Nenalezeno</span> : Požadovaný zdroj neexistuje na serveru.</li>
+        <li><span>500 Vnitřní chyba serveru</span> : Na serveru došlo k neočekávané chybě a nemohl zpracovat požadavek klienta.</li>
+    </ul>
+    
+    Stavové kódy HTTP jsou důležitou součástí komunikace mezi klientem a serverem. 
+    Pochopení jejich významu vám pomůže při ladění webových aplikací a 
+    diagnostice problémů s připojením.
+</article>
+
+<div class="display-2">
+    Jwt Token
+</div>
+<article>
+    JWT (JSON Web Token) je kompaktní a bezpečný formát pro reprezentaci identity a
+    autorizačních informací mezi dvěma stranami. Často se používá v webových aplikacích a API
+    pro autentizaci uživatelů a autorizaci přístupu k chráněným zdrojům.
+    <ol>
+        <li>Klient (např. webová aplikace) odešle požadavek na server s <span>přihlašovacími údaji</span> (uživatelské jméno a heslo).</li>
+        <li>Server <span>ověří přihlašovací údaje</span> klienta.</li>
+        <li>Pokud je ověření úspěšné, server <span>vygeneruje a podepíše JWT token</span>.</li>
+        <li>Server odešle JWT token klientovi.</li>
+        <li>Klient uloží JWT token do <span>zabezpečeného úložiště</span> (např. localStorage v prohlížeči).</li>
+        <li>Při každém dalším požadavku na server klient <span>zahrne JWT token do hlavičky HTTP</span>.</li>
+        <li>Server <span>ověří JWT token</span> a na základě informací v tokenu určí identitu a oprávnění klienta.</li>
+        <li>Server na základě <span>oprávnění klienta</span> rozhodne, zda má klient přístup k požadovanému zdroji.</li>
+    </ol>
+    <div class="sha text-center">Více informací: <a href="https://jwt.io/">jwt.io</a></div>
+
+</article>
+
+<div class="display-2">
+    REST 
+</div>
+
+<article>
+    <p>REST je architektonický styl pro návrh webových služeb, který se zaměřuje na reprezentaci dat a využívá protokoly HTTP (GET, POST, PUT, DELETE) pro manipulaci s daty. Klienty (např. mobilní aplikace, webové stránky) komunikují se servery pomocí těchto metod a datových formátů (často JSON nebo XML).</p>
+
+    <div class="display-3">RESTful formáty adres</div>
+    <p>RESTful formáty adres jsou URL adresy, které se řídí principy REST a usnadňují klientovi pochopení struktury a manipulace s daty.</p>
+
+    <h3>Vlastnosti RESTful formátů adres:</h3>
+    <ul>
+        <li><span>Hierarchická struktura:</span> Adresy odrážejí hierarchii dat na serveru. Například `/users/:id` by se dalo použít pro přístup k uživatelskému profilu s daným ID.</li>
+        <li><span>Smysluplné názvy:</span> Názvy v adresách by měly jasně popisovat, co daný zdroj reprezentuje. Například `/users` by se dalo použít pro získání seznamu všech uživatelů.</li>
+        <li><span>Použití metod HTTP:</span> Různé metody HTTP (GET, POST, PUT, DELETE) se používají pro různé operace s daty. Například GET se používá pro získání dat, POST pro vytvoření dat, PUT pro aktualizaci dat a DELETE pro smazání dat.</li>
+        <li><span>Formáty dat:</span> Data se obvykle přenáší ve formátech JSON nebo XML.</li>
+    </ul>
+
+    <div class="display-3">Příklad: Formát adresy /users/:id</div>
+    <p>
+        * `/users/` - Tato část adresy indikuje, že klient chce přistupovat k kontrolleru "uživatelé".<br>
+        * `:id` - Tato část adresy je zástupný symbol pro ID uživatele. Klient by ho nahradil skutečným ID uživatele, ke kterému chce přistupovat. Například `/users/123` by znamenalo přístup k profilu uživatele s ID 123.
+    </p>
+</article>
