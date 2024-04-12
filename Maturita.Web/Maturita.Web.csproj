@@ -35,6 +35,7 @@
     <Folder Include="Areas\ProgramoveVybaveni\Data\" />
     <Folder Include="Areas\ProgramoveVybaveni\Models\" />
     <Folder Include="Areas\ProgramoveVybaveni\Views\Nest\" />
+    <Folder Include="!ToDo\" />
     <Folder Include="wwwroot\doc\" />
     <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\Pictures\Gui\" />
