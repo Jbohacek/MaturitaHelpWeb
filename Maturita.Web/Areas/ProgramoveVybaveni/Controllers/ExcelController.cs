@@ -9,5 +9,9 @@ namespace Maturita.Web.Areas.ProgramoveVybaveni.Controllers
         {
             return View();
         }
+        public IActionResult funkce()
+        {
+            return View();
+        }
     }
 }
