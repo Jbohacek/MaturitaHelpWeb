@@ -61,7 +61,8 @@
             <div class="writer text-center">Upravil: <span class="text-primary">@ViewData["Editor"]</span></div>
         }
     </div>
-    
+    <a href="#" id="GoUp" class="go-up go-up-notActive"><i class="bi bi-chevron-up"></i></a>
+
     <div class="spacer down-spacer"></div>
 
     @* Jquery *@
@@ -83,6 +84,10 @@
     @* Custom JS *@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/ScrollAnimate.js" asp-append-version="true"></script>
+    @if (ViewBag.GenerateContent == true)
+    {
+        <script src="~/js/ContentWriter.js" asp-append-version="true"></script>
+    }
     @await RenderSectionAsync("Scripts", required: false)
     
     <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="Jbohacek" data-description="Support me on Buy me a coffee!" data-message="Ahoj, pracuji na tomto webu už čtyři měsíce. Byl bych moc vděčný za příspěvek. Děkuji! 💖" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>

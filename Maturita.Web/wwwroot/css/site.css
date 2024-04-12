@@ -138,3 +138,31 @@ article {
     font-weight: 300;
     letter-spacing: 2px;
 }
+
+.content-header-list {
+    list-style-type: "-  ";
+}
+
+.go-up {
+    position: fixed;
+    bottom: 2%;
+    left: 2vw;
+    font-size: 35px;
+    cursor: pointer;
+    opacity: 0.6;
+    padding: 2px 10px;
+    margin: 0;
+    transition: all 200ms ease-in-out;
+    color: white;
+}
+
+    .go-up:hover {
+        opacity: 0.9;
+        background-color: #262626;
+        border-radius: 500px;
+        transition: all 200ms ease-in-out;
+    }
+
+.go-up-notActive {
+    opacity: 0;
+}
