@@ -9,5 +9,9 @@ namespace Maturita.Web.Areas.Cestina.Controllers
         {
             return View();
         }
+        public IActionResult PsaniMekkeNeboTvrde()
+        {
+            return View();
+        }
     }
 }

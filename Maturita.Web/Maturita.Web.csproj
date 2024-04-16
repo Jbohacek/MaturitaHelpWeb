@@ -57,6 +57,8 @@
 
   <ItemGroup>
 
+    <_ContentIncludedByDefault Remove="Areas\Cestina\Views\Home\PsaniMekkeNeboTvrde.cshtml" />
+
     <_ContentIncludedByDefault Remove="Areas\Database\Views\Mssql\Replication.cshtml" />
 
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\Databaze.cshtml" />
@@ -208,6 +210,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Programovani\Views\QuestionSeriesThird\RestApi.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Cestina\Views\Home\PsaniMekkeNeboTvrde.cshtml" />
   </ItemGroup>
 
 </Project>
