@@ -59,6 +59,10 @@
 
     <_ContentIncludedByDefault Remove="Areas\Cestina\Views\Home\PsaniMekkeNeboTvrde.cshtml" />
 
+    <_ContentIncludedByDefault Remove="Areas\Database\Views\DatabaseCreate\Design.cshtml" />
+
+    <_ContentIncludedByDefault Remove="Areas\Database\Views\SqlTables\TokProgramu.cshtml" />
+
     <_ContentIncludedByDefault Remove="Areas\Database\Views\Mssql\Replication.cshtml" />
 
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\Databaze.cshtml" />
@@ -214,6 +218,14 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Cestina\Views\Home\PsaniMekkeNeboTvrde.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Database\Views\SqlTables\TokProgramu.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Database\Views\DatabaseCreate\Design.cshtml" />
   </ItemGroup>
 
 </Project>
