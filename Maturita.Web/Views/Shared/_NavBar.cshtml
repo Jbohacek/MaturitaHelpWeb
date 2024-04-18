@@ -8,23 +8,31 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav text-white w-100">
-                    <a class="nav-link text-white fw-bold fs-3 nav-my-logo" asp-area="" asp-controller="Home" asp-action="Index">
+                    <a class="nav-link text-white fw-bold fs-3 nav-my-logo d-lg-block d-none" asp-area="" asp-controller="Home" asp-action="Index">
                         <img src="~/Pictures/Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                         Maturita Help
                     </a>
                     
-                    <div class="d-md-flex d-block ms-md-auto me-md-auto justify-content-around ">
+                    <div class="d-xl-flex d-block ms-sm-auto me-sm-auto justify-content-around ">
+                        <a class="nav-link text-white fw-bold fs-3 nav-my-logo d-lg-none d-block" asp-area="" asp-controller="Home" asp-action="Index">
+                            <img src="~/Pictures/Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                            Maturita Help
+                        </a>
+
                         <a class="nav-link nav-my-item" asp-area="Programovani" asp-controller="Home" asp-action="Index"><i class="bi bi-code-slash"></i> Programování</a>
                         <a class="nav-link nav-my-item" asp-area="Database" asp-controller="Home" asp-action="Index"><i class="bi bi-database"></i> Databáze</a>
                         <a class="nav-link nav-my-item" asp-area="ProgramoveVybaveni" asp-controller="Home" asp-action="Index"><i class="bi bi-pc-display"></i> Programové vybavení</a>
                         <a class="nav-link nav-my-item" asp-area="Cestina" asp-controller="Home" asp-action="Index"><i class="bi bi-book"></i> Čeština</a>
-
+                        <hr class="d-xl-none"/>
+                        <a class="nav-link nav-my-item d-xl-none " href="https://app.loopedin.io/maturita-web#/roadmap"><i class="bi bi-map"></i> Roadmap</a>
+                        <a class="nav-link nav-my-item d-xl-none " asp-area="" asp-controller="Home" asp-action="Contact"><i class="bi bi-box-arrow-up-left"></i> Kontakt</a>
                     </div>
 
                 </ul>
-                <ul class="navbar-nav text-center" style="width: 150px">
-                    <a  class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact"><i class="bi bi-box-arrow-up-left"></i> Kontakt</a>
-                    
+                <ul class="navbar-nav text-center d-xl-flex d-none " style="width: 15vw">
+                    <a class="nav-link" href="https://app.loopedin.io/maturita-web#/roadmap"><i class="bi bi-map"></i> Roadmap</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact"><i class="bi bi-box-arrow-up-left"></i> Kontakt</a>
+
                 </ul>
             </div>
         </div>
