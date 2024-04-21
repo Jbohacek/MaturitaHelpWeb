@@ -34,6 +34,7 @@
     <Folder Include="Areas\Programovani\Pages\" />
     <Folder Include="Areas\ProgramoveVybaveni\Data\" />
     <Folder Include="Areas\ProgramoveVybaveni\Models\" />
+    <Folder Include="Areas\ProgramoveVybaveni\Pages\" />
     <Folder Include="Areas\ProgramoveVybaveni\Views\Nest\" />
     <Folder Include="!ToDo\" />
     <Folder Include="wwwroot\doc\" />
@@ -90,6 +91,7 @@
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\RestApi.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\QuestionSeriesThird\TeorieTestovani.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Programovani\Views\Variables\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\ProgramoveVybaveni\Views\MicrosoftApps\Word.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\ProgramoveVybaveni\Views\Access\Dotazy.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\ProgramoveVybaveni\Views\Access\ImportExport.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\ProgramoveVybaveni\Views\Excel\Obecne.cshtml" />
@@ -226,6 +228,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Database\Views\DatabaseCreate\Design.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\ProgramoveVybaveni\Views\MicrosoftApps\Word.cshtml" />
   </ItemGroup>
 
 </Project>

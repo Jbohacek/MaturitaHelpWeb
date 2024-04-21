@@ -1,0 +1,172 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Word";
+    ViewBag.Author = "Jakub Šimůnek";
+    ViewBag.Editor = "Jakub Boháček";
+
+}
+
+@* Nadpisy *@
+<div class="display-1">
+    @ViewBag.Title
+</div>
+<div class="display-2">Formátování písma </div>
+<article>
+    Písmo v MS Wordu lze formátovat na kartě Domů v sekci Písmo. 
+    Základní formátování se aplikuje na označený text i na text psaný po provedení formátování. 
+    V tabulce písma lze konfigurovat základní formáty, jako je velikost, barva a efekt písma. 
+    Hlavní funkcí je však tlačítko pro rozbalení tabulky <b>(1)</b>, které umožňuje hlubší úpravy, jako jsou různé styly přeškrtnutí.
+    V záložce <span>Upřesnit</span> lze nastavit velikost mezer,
+    výšku posazení znaků a podrobnější nastavení efektů, 
+    jako je velikost a barva stínování, přechodová barva
+    v písmu a mnoho dalšího. Vše lze buď aplikovat na vybraný text kliknutím na tlačítko OK, 
+    nebo nastavit jako výchozí <b>(2)</b> formátování pro veškerý text, včetně již napsaného
+    
+
+    <img src="~/Pictures/MicrosoftApps/WordFormatPisma.png" class="img-fluid d-block mx-auto w-100">
+
+</article>
+<div class="display-2">Formátování odstavců </div>
+<article>
+    <p>Formátování odstavců se vždy vztahuje na jeden odstavec (duh). 
+        Odstavec je definován jako text ukončený stisknutím klávesy Enter.
+        Pokud chceme vložit nový řádek bez vytvoření dalšího odstavce, můžeme stisknout kombinaci Shift + Enter.
+        Vytvoří se tak tzv. "return", zobrazený jako "&#9166" v režimu "Zobrazit vše"
+        (aktivovaném stisknutím tlačítka ¶ na kartě Odstavec v tabulce Domů).
+        V tomto režimu je odstavec reprezentován symbolem ¶, tabulátor symbolem "→" a mezera symbolem "•".</p>
+    <p>V sekci Odstavec dále najdeme nástroje pro práci s odrážkami a číslováním. 
+        Odrážky používají předem definované symboly pro označení bodů a podbodů. 
+        Číslování automaticky přiřazuje bodům čísla (vždy o jedno se zvyšující) nebo písmena abecedy. 
+        Podbody se zobrazují v jiném stylu. 
+        Seznamy kombinují číslování s textem pro označení podbodů.</p>
+    <p>Samozřejmě je možné definovat i vlastní styly odrážek a číslování.
+        To provedeme vložením znaků po kliknutí na tlačítko "&#937;".
+        Je nutné vybrat úroveň a pro ni definovat požadovaný znak. 
+        Dále můžeme nastavit odsazení podbodů od nadřazených bodů.</p>
+    <br/><br/>
+
+    <img src="~/Pictures/MicrosoftApps/wordSymboly.png" class="img-fluid d-block mx-auto w-100">
+    <p>
+        Další dvě ikony slouží k zmenšení a zvětšení <span>odsazení</span> odstavce.
+        Detailnější nastavení nalezneme v kartě Rozložení v sekci Odsavec, 
+        kde můžeme definovat odsazení celého odstavce.</p>
+    <p>Pro detailnější nastavení odsazení celého dokumentu se musíme přesunout do karty Zobrazení a sekce Zobrazit. 
+        Tam zaškrtneme políčko <span>Pravítko</span>. Pomocí pravítka můžeme:
+    </p>
+    <ol>
+        <li>Upravit odsazení prvního řádku v odstavci, podobně jako v knihách.</li>
+        <li>Nastavit odsazení z levé strany všech ostatních řádků v odstavci.</li>
+        <li>Upravit odsazení konce řádku textu.<br/>
+            Při držení klávesy Alt a tažení pravítkem můžeme sledovat přesnou vzdálenost v centimetrech.
+        </li>
+        <li>Šedá oblast pravítka znázorňuje okraje stránky. 
+            Tyto okraje můžeme upravit přesněji v kartě Rozložení v sekci Vzhled stránky pod tlačítkem Okraje.</li>
+    </ol>
+    <img src="~/Pictures/MicrosoftApps/WordPravitko.png" class="img-fluid d-block mx-auto w-100">
+    
+    <p>Další funkcí v sekci Odstavec na kartě Domů je <span>Seřazení</span>. Tato funkce umožňuje seřadit odstavce vybraného textu podle zadaných kritérií, například podle nalezených čísel.</p>
+    <p>Funkce <span>Zarovnání</span> slouží k úpravě začínání řádků v odstavci. Můžeme zvolit zarovnání zleva, zprava, na střed nebo do bloku (rovnoměrné roztažení textu do nastavených okrajů).</p>
+    <p><span>Řádkování</span> umožňuje zvětšit mezeru mezi jednotlivými řádky v odstavci.</p>
+    <p><span>Stínování</span> obarví pozadí celého odstavce vybranou barvou.</p>
+    <p>Poslední důležitou funkcí je <span>Ohraničení</span>. Předvybrané možnosti ohraničení nám dovolují dělat hranice mezi jednotlivými odstavci. Po rozbalení této funkce můžeme najít možnost vložení vodorovné čáry, která se vloží pod odstavec a zaplní celou šíři stránky.</p>
+    <p>Pomocí funkcí <span>Ohraničení</span> a <span>Stínování</span> lze vkládat specifikované ohraničení odstavců a také vlastní ohraničení stránek, které se vztahuje na všechny stránky dokumentu, další podobné funkce lze najít v kartě <span>Návrh</span> v sekci <span>Pozadí stránky</span>, kde lze upravit její barvu a přidat vodoznak. Naposledy zde lze vložit <span>tabulku</span>, ale to je jednodušší dělat v kartě <span>Vložit</span>.</p>
+    
+    <img src="~/Pictures/MicrosoftApps/WordSeřazení.png" class="img-fluid d-block mx-auto w-100">
+
+</article>
+
+<div class="display-2">Formátování oddílů</div>
+<article>
+    <p>Oddíly vkládáme na kartě <span>Rozložení</span> v sekci <span>Vzhled stránky</span>. Po rozkliknutí menu <span>Konce</span> vybereme v sekci <span>Konce oddílů</span> buď <span>Další stránka</span>, která vynechá zbytek stránky a posune nás na další stránku a začne nový oddíl, nebo <span>Průběžné</span>, která ukončí oddíl a posune nás na další řádek jako odstavec.</p>
+    <p>V kartě <span>Rozložení</span> lze také nastavit <span>číslování řádků</span>. Volba <span>Každý oddíl zvlášť</span> nám umožňuje zobrazit rozdělení oddílů.</p>
+    <p>Je důležité si uvědomit, že nastavení v sekci <span>Vzhled stránky</span> se vztahuje pouze na aktuální oddíl. Pokud tedy začneme nový oddíl a přepneme orientaci stránky na <span>vodorovnou</span>, budou všechny stránky v novém oddílu vodorovné, zatímco stránky v předchozích oddílech zůstanou <span>vertikální</span>.</p>
+    
+    <img src="~/Pictures/MicrosoftApps/WordOddily.png" class="img-fluid d-block mx-auto w-100">
+    <p>Oddíly můžeme také zobrazit v zápatí a záhlaví stránek, ale nemají na ně žádný vliv. Vložit záhlaví nebo zápatí můžeme buď na kartě Vložit, nebo dvojklikem na horní nebo spodní okraj stránky. Zobrazí se nové menu, pomocí kterého můžeme nastavit číslování stránek, informace o autorovi nebo datum napsání. Toto nastavení se vztahuje na všechny stránky v dokumentu, s výjimkou případu, kdy zaškrtneme políčko Jiné na první stránce.</p>
+    <img src="~/Pictures/MicrosoftApps/WordZahlaviAZapati.png" class="img-fluid d-block mx-auto w-100">
+
+</article>
+
+<div class="display-2">Formátování stylů</div>
+<article>
+    <p><span>Styly</span> nalezneme na kartě <span>Domů</span>. Jedná se o předdefinované formáty písma (jako je <span>barva</span>, <span>velikost</span> atd.) a vzhledu odstavců (např. <span>zarovnání</span> a <span>řádkování</span>), které se aplikují na celý odstavec. Styly tak v sobě kombinují funkce karet <span>Písmo</span> a <span>Odstavec</span>.</p>
+    <p>Můžeme využívat jak předefinované styly, tak vytvářet vlastní. Vlastní styl můžeme založit na již existujícím a upravit jeho vlastnosti. Dále můžeme nastavit, jaký styl bude automaticky přidělen odstavci následujícímu po odentrování (tj. po zahájení nového odstavce). To je užitečné zejména pro <span>nadpisové styly</span>.</p>
+    <img src="~/Pictures/MicrosoftApps/WordFormatovaniStylu.png" class="img-fluid d-block mx-auto w-100">
+
+</article>
+
+<div class="display-2">Karta Vložit</div>
+<article>
+    <p>Kartu <span>Vložit</span> najdeme pravděpodobně jako druhou nejdůležitější ve Wordu. Umožňuje vkládat různé prvky do dokumentu, jako byly již zmíněná <span>záhlaví</span>, <span>zápatí</span> a <span>čísla stránek</span>. Dále nabízí vkládání <span>obrázků</span>, <span>textových polí</span> a dalších <span>ilustrací</span>, které mají důležitou funkci <span>Možnosti rozložení</span>, které určují, jak budou vložené ilustrace interagovat s okolním textem.</p>
+    <p>Lze také vkládat i <span>tabulky</span>, buď importovat data z <span>Excelu</span> nebo si navrhnout vlastní. Pohyb v tabulce usnadňuje klávesa <span>Tab</span>. Pokud se nacházíme na posledním řádku v poslední buňce a stiskneme <span>Tab</span>, automaticky se vytvoří nový řádek tabulky. Automaticky se nám otevře karta <span>Návrh tabulky</span>, pomocí které tabulku můžeme intuitivně upravovat.</p>
+    <img src="~/Pictures/MicrosoftApps/WordVložit.png" class="img-fluid d-block mx-auto w-100">
+
+</article>
+<div class="display-2">Osnova</div>
+<article>
+    <p><span>Osnova</span> je pohled na strukturu dokumentu, lze ji najít v kartě <span>Zobrazení</span> v sekci <span>Zobrazení</span>. Lze pomocí ní vkládat do dokumentu další dokumenty, uživatel si může zobrazit pouze různé úrovně textu (H1, H2…) jako <span>nadpisy</span> nebo pouze <span>první řádky textu</span> pro zorientování.</p>
+    <p>V tomto režimu lze také prohazovat různé části textu, odstavce nižší úrovně se vztahují na odstavec vyšší úrovně. To znamená, že pokud máme nadpis a s <span>podnadpisem</span> pod ním a <span>nadpis</span> vezmeme a dáme na konec dokumentu, přesune se s ním i <span>podnadpis</span>.</p>
+    <img src="~/Pictures/MicrosoftApps/wordVelkyData.png" class="img-fluid d-block mx-auto w-100">
+
+</article>
+
+<div class="display-2">Rejstřík</div>
+<article>
+    <p><span>Rejstřík</span> (Index) je podobný jako ten, který můžeme najít v knize, v němž jsou stránky vybraných (klíčových) slov. V Wordu se nachází v kartě <span>Reference</span> v sekci <span>Rejstřík</span>. Nejprve musíme označit slova, které chceme indexovat. Pro zjednodušení můžeme kliknout na <span>označit vše</span>, což označí všechny slova odpovídající názvu hlavní položky v dokumentu.</p>
+    <p>Potom, co o-indexujeme požadovaná slova, můžeme vložit rejstřík, ve kterém bude vždy o-indexované slovo a stránka, na které se nachází. Můžeme také nastavit rozsah stránek.</p>
+    <img src="~/Pictures/MicrosoftApps/WordRejstřik.png" class="img-fluid d-block mx-auto w-100">
+
+</article>
+
+<div class="display-2">Obsah</div>
+<article>
+    <p><span>Obsah</span>, který také můžeme nalézt v kartě <span>Reference</span>, je podobný obsahu v knize, seřazený nadpisy a podnadpisy pro snadnou navigaci v textu. Lze vložit již předdefinovaný (automatický) obsah nebo vytvořit vlastní, kde si následně můžeme vybrat, zda se budou zobrazovat čísla stránek a podobně.</p>
+
+    <img src="~/Pictures/MicrosoftApps/WordObsah.png" class="img-fluid d-block mx-auto w-100">
+
+</article>
+
+<div class="display-2">Seznam obrázku</div>
+<article>
+    <p><span>Seznamy obrázků</span> fungují podobně jako <span>rejstřík</span>. Nachází se v kartě <span>Reference</span> v sekci <span>Titulky</span>. Nejdříve musíme vždy u obrázku <span>Vložit titulek</span>, kde napíšeme jméno obrázku.</p>
+    <p>Pak můžeme vložit <span>seznam obrázků</span>, který nám následně vyznačí všechny otitulkované obrázky v dokumentu.</p>
+    <p>V této sekci se také nachází položka <span>Křížový dotaz</span>, pomocí níž lze vložit obrázek, který se v dokumentu již vyskytuje, nebo odkaz na titulek v dokumentu. Po stisknutí <span>Ctrl + levé tlačítko myši</span> na odkaz se dostanete na část dokumentu, kde se tento nadpis nachází.</p>
+    <img src="~/Pictures/MicrosoftApps/WordSeznamObrazku.png" class="img-fluid d-block mx-auto w-100">
+
+</article>
+
+<div class="display-2">Hromadná korespondence</div>
+<article>
+    <p>Existuje způsob, jak v <span>Wordu</span> navrhnout mnoho stránek s proměnnými vlastnostmi. Nachází se v kartě <span>Korespondence</span>.</p>
+    <p>Za prvé musíme <span>korespondenci</span> spustit, kde si vybereme typ korespondence, kterou budeme vytvářet (např. <span>dopis připravený k tisku</span>).</p>
+    <p>Dále si vybereme příjemce buď z <span>externího seznamu</span>, nebo vytvoříme vlastní.</p>
+    <p>Následně můžeme do dokumentu vložit <span>slučovací pole</span>. Jedná se o odkazy na jednotlivé proměnné vlastnosti, které se do korespondence propisují z našeho seznamu.</p>
+    <p>Po dokončení <span>sloučení</span> se korespondence automaticky vygeneruje stránka po stránce.</p>
+    
+    <img src="~/Pictures/MicrosoftApps/WordHradnaKorespondece.png" class="img-fluid d-block mx-auto w-100">
+
+
+</article>
+
+<div class="display-2">Šablony</div>
+<article>
+    <p>Jsou to <span>předpřipravené šablony dokumentů</span>, které slouží k tvorbě nových dokumentů. Některé předpřipravené můžeme najít po kliknutí na kartu <span>Soubor</span>.</p>
+    <img src="~/Pictures/MicrosoftApps/WordŠablony1.png" class="img-fluid d-block mx-auto w-100">
+    <p>Můžeme také vytvářet <span>vlastní šablony</span> s <span>dynamickým obsahem</span>, pokud je uložíme jako <span>šablona</span>.</p>
+    <img src="~/Pictures/MicrosoftApps/WordŠablony2.png" class="img-fluid d-block mx-auto w-100">
+
+</article>
+
+<div class="display-2">Formuláře</div>
+<article>
+    <p><span>Formuláře v MS Wordu</span> jsou interaktivní dokumenty, které uživatelům umožňují zadávat informace do strukturovaných polí. Tyto informace se pak můžou automaticky ukládat a zpracovávat.</p>
+    <p>Nejprve je nutné mít odemčenou kartu <span>Vývojář</span>. Toho lze dosáhnout tím, že v kartě <span>Soubor</span> v možnostech <span>Přizpůsobit pás karet</span> zaklikneme kartu <span>Vývojář</span>.</p>
+    <img src="~/Pictures/MicrosoftApps/WordVyvojařské.png" class="img-fluid d-block mx-auto w-100">
+    <p>V sekci <span>Ovládací prvky</span> můžeme přidávat <span>doplňující se textové pole</span> nebo různé další jiné prvky.</p>
+    <p>Pak musíme <span>omezit úpravy</span>, ale musíme povolit <span>Vyplňování formuláře</span>. Následně dokument <span>uzamkneme</span>, aby již nebylo možné jej upravovat, kromě našich ovládacích prvků.</p>
+    <img src="~/Pictures/MicrosoftApps/WordVyvojařské2.png" class="img-fluid d-block mx-auto w-100">
+    <p>Opět uložíme jako <span>Šablonu</span>.</p>
+    <img src="~/Pictures/MicrosoftApps/WordVyvojařské3.png" class="img-fluid d-block mx-auto w-100">
+
+</article>
