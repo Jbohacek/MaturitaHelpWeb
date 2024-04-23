@@ -3,19 +3,24 @@
 namespace Maturita.Web.Areas.Database.Controllers
 {
     [Area("Database")]
-    public class MssqlController : Controller
+    public class MsSqlSecurityController : Controller
     {
-        public IActionResult Replication()
+        public IActionResult LoginAndUser()
         {
             return View();
         }
 
-        public IActionResult Mirroring()
+        public IActionResult Audit()
         {
             return View();
         }
 
-        public IActionResult Transaction()
+        public IActionResult Backup()
+        {
+            return View();
+        }
+
+        public IActionResult Encryption()
         {
             return View();
         }

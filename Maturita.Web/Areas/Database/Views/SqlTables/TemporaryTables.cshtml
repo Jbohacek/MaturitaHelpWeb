@@ -11,3 +11,70 @@
     @ViewBag.Title <br/>
     <span class="sha">Temporary tables</span>
 </div>
+
+<article>
+    <h2>Dočasné tabulky</h2>
+
+    <p>Temporary tables, nebo dočasné tabulky, jsou v MS SQL speciální typy tabulek, které jsou určeny pro krátkodobé uchovávání dat v rámci jedné relace nebo v rámci trvání jedné instance programu. Tyto tabulky jsou užitečné pro dočasné ukládání a zpracování dat během doby trvání relace nebo procedury. Existují dva typy dočasných tabulek v MS SQL:</p>
+
+    <h3>Local Temporary Tables (Lokální dočasné tabulky)</h3>
+    <ul>
+        <li>Označují se symbolem # před názvem tabulky (např. <code>#temp_table</code>).</li>
+        <li>Jsou viditelné a přístupné pouze v rámci relace, ve které byly vytvořeny.</li>
+        <li>Tabulka je automaticky odstraněna, když relace končí (např. když se ukončí program nebo uživatel odpojí).</li>
+        <li>Lokální dočasné tabulky jsou užitečné pro dočasné uchovávání dat v rámci konkrétní relace nebo operace.</li>
+    </ul>
+
+    <p>Příklad:</p>
+    <pre><code class="language-sql">CREATE TABLE #temp_table (
+    column1 INT,
+    column2 VARCHAR(50)
+);
+
+INSERT INTO #temp_table (column1, column2)
+VALUES (1, 'value1'), (2, 'value2');
+
+SELECT * FROM #temp_table;
+</code></pre>
+
+    <h3>Global Temporary Tables (Globální dočasné tabulky)</h3>
+    <ul>
+        <li>Označují se symbolem ## před názvem tabulky (např. <code>##temp_table</code>).</li>
+        <li>Jsou viditelné a přístupné v rámci všech relací na serveru.</li>
+        <li>Tabulka je automaticky odstraněna, když poslední relace, která používá tabulku, končí.</li>
+        <li>Globální dočasné tabulky jsou užitečné pro sdílení dočasných dat mezi více relacemi.</li>
+    </ul>
+
+    <p>Příklad:</p>
+    <pre><code class="language-sql">CREATE TABLE ##temp_table (
+    column1 INT,
+    column2 VARCHAR(50)
+);
+
+INSERT INTO ##temp_table (column1, column2)
+VALUES (1, 'value1'), (2, 'value2');
+
+SELECT * FROM ##temp_table;
+</code></pre>
+
+    <p>Temporary tables poskytují dočasné a efektivní řešení pro práci s daty, které nepotřebujete dlouhodobě ukládat do databáze. Jsou obzvláště užitečné pro mezivýpočty, manipulaci s daty v rámci procedur nebo relací a pro dočasné úlohy, kde potřebujete oddělit a izolovat data.</p>
+</article>
+<div class="display-2">Ukládání dočasných tabulek na serveru</div>
+<article>
+
+    <p>Dočasné tabulky v SQL Serveru jsou obvykle uloženy v systému <em>tempdb</em>, což je speciální databáze určená pro uchovávání dočasných dat a objektů, jako jsou dočasné tabulky, dočasné indexy a další.</p>
+
+    <p>Názvy dočasných tabulek mají zvláštní strukturu a často bývají velmi dlouhé, protože SQL Server automaticky přidává unikátní identifikátor na konec názvu dočasné tabulky. Tento identifikátor je důležitý, protože umožňuje SQL Serveru odlišit mezi různými dočasnými tabulkami, které mohou mít stejný název, ale byly vytvořeny v různých relacích nebo kontextech.</p>
+
+    <h3>Dlouhé názvy dočasných tabulek slouží k:</h3>
+    <ul>
+        <li><span>Identifikaci relace:</span> SQL Server může identifikovat, která relace vytvořila konkrétní dočasnou tabulku, díky přidanému identifikátoru.</li>
+        <li><span>Zajištění jedinečnosti:</span> Identifikátor pomáhá zaručit, že názvy dočasných tabulek jsou jedinečné, i když různé relace nebo programy vytvářejí dočasné tabulky se stejnými základními názvy.</li>
+    </ul>
+
+    <p><span>Příklad názvu lokální dočasné tabulky s identifikátorem:</span></p>
+    <p>Pokud vytvoříte lokální dočasnou tabulku s názvem <code>#temp_table</code>, může být skutečný název tabulky v databázi <em>tempdb</em> něco jako <code>#temp_table______________________0000000000000013</code>.</p>
+
+    <p>SQL Server používá tento dlouhý a složitý název k tomu, aby jednoznačně rozlišil mezi různými instancemi dočasných tabulek a zajistil, že relace nepřepisují nebo neovlivňují dočasné tabulky jiných relací.</p>
+
+</article>

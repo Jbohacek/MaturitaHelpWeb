@@ -2,11 +2,211 @@
     Layout = "_Layout"; // Nechat jak je
 
     ViewBag.Title = "Procedůry a funkce";
-    ViewBag.Author = "";
-    ViewBag.Editor = "[Editor]"; // Pokud není, tak vymazat
+    ViewBag.Author = "Jakub Boháček";
 
     ViewBag.GenerateContent = true;
 }
 <div class="display-1">
-    @ViewBag.Title
+    Funkce
 </div>
+
+<article>
+    <p>V <span>MS SQL</span> (Microsoft SQL Server) jsou funkce nástrojem, který umožňuje definovat opakovaně použitelné kusy kódu. Funkce jsou užitečné pro zpracování dat, provádění výpočtů a manipulaci s daty v databázi. Existuje několik typů funkcí v <span>MS SQL</span>:</p>
+
+    <ul>
+        <li>
+            <span>Scalar Functions:</span> Tyto funkce vracejí jednu hodnotu na základě vstupních argumentů. Může to být hodnota typu <em>INT</em>, <em>VARCHAR</em>, <em>DATE</em>, nebo jiný datový typ. Funkce se volá s použitím klíčového slova <span>RETURN</span> pro vrácení hodnoty.
+            <pre><code class="language-sql">
+CREATE FUNCTION dbo.FunctionName(@@parameter INT)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @@result INT;
+    -- Provádějte operace a přiřaďte hodnotu do @@result
+    SET @@result = @@parameter * 2;
+    RETURN @@result;
+END;
+</code></pre>
+            <p>Použití:</p>
+            <pre><code class="language-sql">
+SELECT dbo.FunctionName(5);
+</code></pre>
+        </li>
+        <li>
+            <span>Inline Table-Valued Functions:</span> Tyto funkce vracejí sadu řádků jako výsledek dotazu. Tyto funkce jsou podobné pohledům (VIEW), ale můžete předat parametry. Můžete použít <span>RETURN</span> s dotazem pro vrácení řádků.
+            <pre><code class="language-sql">
+CREATE FUNCTION dbo.FunctionName(@@parameter INT)
+RETURNS TABLE
+AS
+RETURN
+    SELECT column1, column2
+    FROM table_name
+    WHERE column1 = @@parameter;
+</code></pre>
+            <p>Použití:</p>
+            <pre><code class="language-sql">SELECT * FROM dbo.FunctionName(5);</code></pre>
+        </li>
+        <li>
+            <span>Multistatement Table-Valued Functions:</span> Tyto funkce také vracejí sadu řádků, ale umožňují více dotazů a manipulace s daty v těle funkce. Na rozdíl od inline funkcí, zde můžete používat více instrukcí <span>DECLARE</span>, <span>SET</span> a další k manipulaci s daty.
+            <pre><code class="language-sql">
+CREATE FUNCTION dbo.FunctionName(@@parameter INT)
+RETURNS @@resultTable TABLE (column1 INT, column2 VARCHAR(50))
+AS
+BEGIN
+    INSERT INTO @@resultTable (column1, column2)
+    SELECT column1, column2
+    FROM table_name
+    WHERE column1 = @@parameter;
+
+    RETURN;
+END;
+</code></pre>
+            <p>Použití:</p>
+            <pre><code class="language-sql">SELECT * FROM dbo.FunctionName(5);</code></pre>
+        </li>
+        <li><span>System Functions:</span> <span>MS SQL</span> poskytuje mnoho vestavěných systémových funkcí, jako jsou <span>GETDATE()</span>, <span>CONVERT()</span>, <span>LEN()</span>, <span>UPPER()</span> a další. Tyto funkce poskytují různé služby, jako je manipulace s daty, formátování dat a získání informací o systému.</li>
+    </ul>
+
+    <p>Funkce v <span>MS SQL</span> jsou efektivním nástrojem pro abstrakci a opakované použití kódu, což zlepšuje organizaci a efektivitu práce s databázemi.</p>
+
+</article>
+<div class="display-2">Příklady funkce</div>
+<article>
+    <pre><code class="language-sql">
+USE master
+go
+if exists (select * from sys.objects where name = 'fnPythagoras')
+drop function fnPythagoras
+go
+
+create function fnPythagoras(@@s1 real, @@s2 real, @@k bit)
+returns real
+as
+begin
+declare @@vystup real
+
+if @@k = 0
+    begin
+        set @@vystup = power(POWER (@@s1,2) + POWER (@@s2,2), 1/cast(2 as real))
+    end
+else
+    begin
+        if @@s1 > @@s2
+            begin
+            set @@vystup = power(POWER (@@s1,2) - POWER (@@s2,2), 1/cast(2 as real))
+            end 
+        else if @@s1 < @@s2
+            begin
+            set @@vystup = power(POWER (@@s2,2) - POWER (@@s1,2), 1/cast(2 as real))
+            end
+        else
+            set @@vystup = 0
+    end
+
+return @@vystup
+end
+
+go
+
+select dbo.fnPythagoras (4,3,0)
+
+select dbo.fnPythagoras (3,5,1)
+select dbo.fnPythagoras (5,4,1)
+</code></pre>
+</article>
+
+<div class="display-2">
+    Procedury
+</div>
+
+<article>
+    <p>Procedury v <span>MS SQL</span> (Microsoft SQL Server) jsou opakovaně použitelné bloky SQL kódu, které provádějí specifické úkoly nebo řady úloh. Jsou podobné funkcím, ale mají více možností a mohou provádět operace s daty nebo řídicí tok programu.</p>
+
+    <p>Zde je přehled procedur v <span>MS SQL</span> a jejich vlastností:</p>
+
+    <h3>Vytvoření procedury:</h3>
+    <p>Procedura se definuje pomocí klíčového slova <span>CREATE PROCEDURE</span>. Může přijímat vstupní parametry a může mít také výstupní parametry nebo hodnoty.</p>
+    <pre><code class="language-sql">
+CREATE PROCEDURE dbo.ProcedureName
+            @@parameter1 INT,
+            @@parameter2 VARCHAR(50)
+AS
+BEGIN
+    -- SQL kód, který bude proveden
+    SELECT column1, column2
+    FROM table_name
+    WHERE column1 = @@parameter1 AND column2 LIKE @@parameter2;
+
+    -- Další instrukce nebo výpočty
+END;
+</code></pre>
+
+    <h3>Volání procedury:</h3>
+    <p>Proceduru můžete volat pomocí klíčového slova <span>EXEC</span> nebo <span>EXECUTE</span>, následovaného názvem procedury a předáním parametrů.</p>
+    <pre><code>EXEC dbo.ProcedureName(5, 'value');</code></pre>
+
+    <h3>Výstupní parametry:</h3>
+    <p>Procedura může vracet hodnoty prostřednictvím výstupních parametrů (OUTPUT).</p>
+    <pre><code class="language-sql">
+CREATE PROCEDURE dbo.ProcedureName
+            @@inputParameter INT,
+            @@outputParameter INT OUTPUT
+AS
+BEGIN
+    -- Nějaký kód
+    SET @@outputParameter = @@inputParameter * 2;
+END;
+</code></pre>
+
+    <p>Volání procedury s výstupním parametrem:</p>
+    <pre><code class="language-sql">
+DECLARE @@result INT;
+EXEC dbo.ProcedureName(5, @@result OUTPUT);
+PRINT @@result;  -- Vytiskne výsledek
+</code></pre>
+
+    <h3>Řízení toku:</h3>
+    <p>V rámci procedury můžete používat podmínky (<span>IF</span>, <span>ELSE</span>) a smyčky (<span>WHILE</span>) k řízení toku programu.</p>
+
+    <h3>Vazba na data:</h3>
+    <p>Procedury mohou provádět operace s daty, jako jsou vkládání, aktualizace a mazání záznamů v tabulkách.</p>
+
+    <h3>Transakce:</h3>
+    <p>Procedury mohou obsahovat transakce (<span>BEGIN TRANSACTION</span>, <span>COMMIT</span>, <span>ROLLBACK</span>), které umožňují pracovat s daty atomicky a udržet integritu dat.</p>
+
+    <h3>Chyby:</h3>
+    <p>V rámci procedur můžete zachytit a zpracovat chyby pomocí <span>TRY...CATCH</span> bloku.</p>
+</article>
+
+<div class="display-2">
+    Procedury
+</div>
+<article>
+    <pre>
+<code class="language-sql">
+use dbnw
+go
+/*procedura bez parametrů, demo zašifrování*/
+
+if exists(select * from sys.procedures where name = 'proc_A1')
+drop procedure proc_A1
+go
+create  procedure proc_A1
+with encryption
+as
+    select * from dbnw..tbObjednavky
+go
+
+exec proc_A1
+go
+
+select * from sys.procedures where name = 'proc_A1'
+select p.name, * from sys.sql_modules m inner join sys.procedures p
+on p.object_id = m.object_id
+where p.name = 'proc_a1'
+
+go
+
+</code>
+</pre>
+</article>

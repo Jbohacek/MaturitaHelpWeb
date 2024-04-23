@@ -1,12 +1,123 @@
 ﻿@{
     Layout = "_Layout"; // Nechat jak je
 
-    ViewBag.Title = "Základní modifikace dat";
-    ViewBag.Author = "";
-    ViewBag.Editor = "[Editor]"; // Pokud není, tak vymazat
+    ViewBag.Title = "DML - Základní modifikace dat";
+    ViewBag.Author = "Jakub Boháček";
 
     ViewBag.GenerateContent = true;
 }
+
+@section Styles
+{
+    <style>
+        h3, h4, h5 {
+            color: #569cc4;
+        }
+    </style>
+}
+
 <div class="display-1">
-    @ViewBag.Title
+    @@ViewBag.Title
 </div>
+<article>
+    <h2>DML (Data Manipulation Language)</h2>
+
+    <p>DML je soubor příkazů v SQL (Structured Query Language), které umožňují manipulovat s daty v databázi. Tato sada příkazů zahrnuje operace pro vkládání, aktualizaci a mazání dat z tabulek, stejně jako dotazy pro výběr dat.</p>
+
+    <h3>Hlavní příkazy DML v MS SQL:</h3>
+
+    <h4>INSERT:</h4>
+    <p>Příkaz <span>INSERT</span> se používá k vložení nových záznamů (řádků) do tabulky.</p>
+    <pre><code class="language-sql" >INSERT INTO table_name (column1, column2, column3)
+VALUES (value1, value2, value3);
+
+INSERT INTO table_name (column1, column2, column3)
+VALUES
+(value1a, value2a, value3a),
+(value1b, value2b, value3b);
+</code></pre>
+
+    <h4>UPDATE:</h4>
+    <p>Příkaz <span>UPDATE</span> se používá k aktualizaci existujících záznamů v tabulce. Můžete specifikovat podmínky, které určují, které záznamy mají být aktualizovány.</p>
+    <pre><code class="language-sql" >UPDATE table_name
+SET column1 = value1, column2 = value2
+WHERE condition;
+</code></pre>
+
+    <h4>DELETE:</h4>
+    <p>Příkaz <span>DELETE</span> se používá k odstranění záznamů z tabulky. Můžete specifikovat podmínky, které určují, které záznamy mají být odstraněny.</p>
+    <pre><code class="language-sql" >DELETE FROM table_name
+WHERE condition;
+</code></pre>
+
+    <h4>SELECT:</h4>
+    <p>Příkaz <span>SELECT</span> se používá k výběru dat z tabulky nebo více tabulek. Můžete vybrat konkrétní sloupce, řádky, nebo provádět agregace a spojování tabulek.</p>
+    <pre><code class="language-sql" >SELECT column1, column2
+FROM table_name
+WHERE condition;
+</code></pre>
+
+    <p>Příkazy DML jsou klíčové pro práci s daty v databázi, umožňují vkládání, aktualizaci, mazání a výběr dat. Při práci s příkazy DML je důležité dávat pozor na podmínky a správné použití, aby nedošlo k nežádoucím změnám dat v databázi.</p>
+
+</article>
+<div class="display-2">
+    Příklad
+</div>
+<article>
+    <pre><code class="language-sql">if exists(select * from tempdb.sys.tables where name = '##Data')
+drop table ##data
+go
+create table ##data
+(
+id int identity(1,1) not null,
+prijem1 int default(rand()*10000) not null,
+prijem2 int default(rand()*1000) not null,
+datum1 datetime default(getdate() - rand()*10000) null,
+datum2 datetime default(getdate() - rand()*10000) null,
+)
+
+declare @@x int
+set @@x = 0
+
+while @@x @("<") 50000
+begin
+    insert into ##data default values
+    set @@x = @@x + 1
+end
+
+select * from  ##data 
+
+/*příjem 2 je navýšen o 500 Kč v případě, že je menší než 500 */
+
+update ##data
+set prijem2 = prijem2 + 500
+where prijem2 @("<") 500
+
+/*v případě, že jeden z datumů je neděle (nebo oba) bude záznam odstraněn*/
+delete from ##data
+where DATEPART(DW, datum1) = 1 or DATEPART(DW, datum2) = 1
+
+
+/*v případě že Datum2 je sobota bude Prijem1=0 a Prijem2 zvýšen o 50%
+a Datum1 bude NULL*/ 
+update ##Data
+set prijem2 = prijem2 * 1.5, prijem1 = 0, datum1 = null
+where datepart(dw,datum2) = 7
+
+
+/*Vytvoření tabulky ##Data_Prehled se sloupci rok, kvartal, mesic
+- vše z Datum2 a sloupci SumaPrijem1 a SumaPrijem2*/
+
+if exists(select * from tempdb.sys.tables where name = '##Data_Prehled')
+drop table ##Data_Prehled
+
+select datePart(yyyy,datum2) rok
+,datePart(qq,datum2) kvartal,
+datePart(mm,datum2) mesic,
+sum(Prijem1) SumPrijem1, sum(prijem2) SumPrijem2 
+into ##Data_Prehled from ##data
+group by datePart(yyyy,datum2),datePart(qq,datum2),
+datePart(mm,datum2)
+
+select * from ##Data_Prehled</code></pre>
+</article>

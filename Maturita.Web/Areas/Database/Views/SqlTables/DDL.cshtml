@@ -1,0 +1,167 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "DDL - Data Definition Language";
+    ViewBag.Author = "Jakub Boháček";
+
+    ViewBag.GenerateContent = true;
+}
+@section Styles
+{
+    <style>
+        h3,h4,h5 {
+            color: #569cc4;
+        }
+    </style>
+}
+
+<div class="display-1">
+    @ViewBag.Title
+</div>
+<article>
+    <p>DDL je soubor příkazů v SQL (Structured Query Language), které jsou určeny pro definování, správu a manipulaci se strukturou databáze, jako jsou tabulky, indexy, pohledy, procedury a další databázové objekty. Příkazy DDL jsou důležité pro návrh a údržbu databází.</p>
+
+    <h3> Běžné příkazy DDL v MS SQL:</h3>
+
+    <h4>CREATE:</h4>
+    <p>Příkaz <strong>CREATE</strong> se používá k vytvoření nových databázových objektů, jako jsou tabulky, pohledy, indexy, procedury a další.</p>
+
+    <h5>CREATE TABLE:</h5>
+    <pre><code class="language-sql" >CREATE TABLE table_name (
+    column1 INT,
+    column2 VARCHAR(50),
+    column3 DATE
+);</code></pre>
+
+    <h5>CREATE VIEW:</h5>
+    <pre><code class="language-sql" >CREATE VIEW view_name AS
+SELECT column1, column2
+FROM table_name
+WHERE column1 > 10;</code></pre>
+
+    <h5>CREATE INDEX:</h5>
+    <pre><code class="language-sql" >CREATE INDEX index_name ON table_name (column1);</code></pre>
+
+    <h4>ALTER:</h4>
+    <p>Příkaz <strong>ALTER</strong> se používá k úpravě existujících databázových objektů, jako jsou tabulky nebo indexy. Můžete přidat nebo odebrat sloupce, změnit datové typy sloupců, přejmenovat objekty a provádět další úpravy.</p>
+
+    <h5>ALTER TABLE:</h5>
+    <pre><code class="language-sql" >ALTER TABLE table_name
+ADD new_column INT;</code></pre>
+
+    <h4>DROP:</h4>
+    <p>Příkaz <strong>DROP</strong> se používá k odstranění databázových objektů, jako jsou tabulky, pohledy nebo indexy. Po odstranění objektu není možné ho snadno obnovit.</p>
+
+    <h5>DROP TABLE:</h5>
+    <pre><code class="language-sql" >DROP TABLE table_name;</code></pre>
+
+    <h5>DROP VIEW:</h5>
+    <pre><code class="language-sql" >DROP VIEW view_name;</code></pre>
+
+    <h5>DROP INDEX:</h5>
+    <pre><code class="language-sql" >DROP INDEX index_name ON table_name;</code></pre>
+
+    <h4>TRUNCATE:</h4>
+    <p>Příkaz <strong>TRUNCATE TABLE</strong> se používá k rychlému vyprázdnění obsahu tabulky. Na rozdíl od příkazu DELETE nezanechává žádné záznamy v tabulce.</p>
+
+    <pre><code class="language-sql" >TRUNCATE TABLE table_name;</code></pre>
+
+    <p>Příkazy DDL mají velký vliv na strukturu databáze a její obsah, proto je důležité je používat s opatrností.</p>
+
+</article>
+<pre>
+<code class="language-sql">use master
+go
+
+if exists(select * from  sys.databases where name = 'dbDDL_DEMO')
+drop database dbDDL_DEMO
+go
+create database dbDDL_DEMO
+go
+use dbDDL_DEMO
+go
+create table tbKlienti
+(
+id int identity(1,1) not null,
+jmeno varchar (50) not null,
+prijmeni varchar (50) not null,
+vek int null
+) on [Primary]
+
+create table tbUcty
+(
+ucet char(9) not null,
+idKlient int not null,
+typ varchar(20) not null,
+debet bit
+)
+create table tbPlatby
+(
+id int identity(1,1) not null,
+ucet char(9) not null,
+castka money not null,
+datum datetime not null
+)
+
+/*primární klíče*/
+alter table tbKlienti add constraint PkTbKlientiId primary key (id)
+alter table tbUcty add constraint PkTbUctyUcet primary key (ucet)
+alter table tbPlatby add constraint PkTbPlatbyId primary key (id)
+
+/*cizí klíče*/
+alter table tbUcty add constraint FkTbUctyIdKlient foreign key (idKlient)
+references tbKlienti (id)
+alter table tbPlatby add constraint FkTbPlatbyUcet foreign key (ucet)
+references tbUcty (ucet)
+
+/*check*/
+alter table tbPlatby add constraint CkTbPlatbyCastka check (castka > 0)
+alter table tbPlatby add constraint CkTbPlatbyDatum check (datum >= getdate())
+alter table tbUcty add constraint CkTbUctyIdTyp check (typ = 'BU' or typ = 'SU')
+--alter table tbUcty add constraint CkTbUctyIdTyp check (typ in('BU','SU'))
+
+/*defaulty*/
+alter table tbUcty add constraint DfTbUctyIdDebet default (0) for Debet
+alter table tbUcty add constraint DfTbUctyIdTyp default ('BU') for Typ
+alter table tbPlatby add constraint DfTbPlatbyDatum default (getdate()) for Datum
+
+
+/*odstranění sloupce*/
+alter table tbKlienti drop column vek
+
+/*přidání sloupce*/
+alter table tbKlienti  add datNar datetime not null
+
+/*změna sloupce*/
+alter table tbUcty drop constraint DfTbUctyIdTyp
+alter table tbUcty drop constraint CkTbUctyIdTyp
+
+alter table tbUcty alter column typ char(2) not null
+
+alter table tbUcty add constraint DfTbUctyIdTyp default ('BU') for Typ
+alter table tbUcty add constraint CkTbUctyIdTyp check (typ = 'BU' or typ = 'SU')
+
+/*indexy*/
+--alter table tbPlatby drop constraint PkTbPlatbyID
+--alter table tbPlatby add constraint PkTbPlatbyID primary key nonclustered(id)
+
+create nonclustered index IxTbPlatbyCastka on TbPlatby (castka)
+
+/*metadata*/
+
+select * from sys.databases
+select * from sys.tables
+--select * from sys.columns c inner join sys.tables t
+--on t.object_id = c.object_id
+--select * from INFORMATION_SCHEMA.columns
+select * from sys.key_constraints
+select * from sys.foreign_keys
+select * from sys.foreign_key_columns
+select * from sys.check_constraints
+select * from sys.default_constraints
+
+select * from sys.indexes i inner join sys.tables t
+on i.object_id = t.object_id
+
+</code>
+</pre>

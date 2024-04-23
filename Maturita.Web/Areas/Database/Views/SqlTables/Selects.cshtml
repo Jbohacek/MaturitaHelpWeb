@@ -2,11 +2,500 @@
     Layout = "_Layout"; // Nechat jak je
 
     ViewBag.Title = "Dotazy - Selects";
-    ViewBag.Author = "";
-    ViewBag.Editor = "[Editor]"; // Pokud není, tak vymazat
+    ViewBag.Author = "Jakub Boháček";
 
     ViewBag.GenerateContent = true;
 }
 <div class="display-1">
     @ViewBag.Title
 </div>
+<article>
+
+
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/D25YAXNV0o0?si=V_IUKJ7zkgbIzxJ9")
+
+
+<p>V MS SQL (<span>Transact-SQL</span> nebo <span>T-SQL</span>) je <span>SELECT</span> příkaz používán k zobrazení dat z jedné nebo více tabulek v databázi. Je to základní stavební kámen pro dotazování v <span>MS SQL</span>.</p>
+    <pre><code class="language-sql">
+SELECT Name, Email
+FROM Customers
+WHERE City = 'Prague';
+</code></pre>
+    <p>Tento dotaz vybere sloupce <span>Name</span> a <span>Email</span> ze všech zákazníků (<span>Customers</span>) z města <span>Prague</span>.</p>
+    <p>Další možnosti <span>SELECT</span> příkazu:</p>
+    <ul>
+        <li><span>DISTINCT</span>: Zobrazuje pouze jedinečné hodnoty.</li>
+        <li><span>ALIAS</span>: Přejmenuje sloupce pro lepší čitelnost.</li>
+        <li><span>JOIN</span>: Spojuje data z více tabulek.</li>
+        <li><span>GROUP BY</span>: Skupuje data podle určitého kritéria a provádí agregované funkce (<span>SUM</span>, <span>AVG</span>, <span>COUNT</span> atd.).</li>
+        <li><span>HAVING</span>: Filtruje skupiny dat na základě agregovaných funkcí.</li>
+    </ul>
+
+
+
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/5tEApCGgpEQ?si=dppg52cq3w8O67o3")
+
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/G3lJAxg1cy8?si=NiEw2Rw2ZGa1xQCN")
+
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/9HXJUGT-06w?si=SYlIJq00MfMFqTKz")
+
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/lScJW5Qz_5k?si=66eCYkJDfqAaV9fS")
+
+
+</article>
+
+<div class="display-2">
+    Case
+</div>
+
+<article>
+    Příklad:
+    <pre>
+    <code class="language-sql">
+use dbnw
+go
+
+select distinct 
+
+case datePart(q,datumOdeslani) 
+    when 1 then '1. kvartál'
+    when 2 then '2. kvartál'
+    when 3 then '3. kvartál'
+    when 4 then '4. kvartál'
+    else 'NEODESLÁNO'
+end as Kvartal
+
+ from tbObjednavky
+    </code>
+    </pre>
+
+    <p><span>Příkaz CASE</span> slouží k podmíněnému přiřazení hodnoty. V tomto případě testuje hodnotu <span>datePart(q, datumOdeslani)</span>, která vrací čtvrtletí roku z daného sloupce <span>datumOdeslani</span>. Na základě výsledku testu se přiřadí text <span>'1. kvartál'</span>, <span>'2. kvartál'</span>, <span>'3. kvartál'</span>, <span>'4. kvartál'</span> nebo <span>'NEODESLÁNO'</span>.</p>
+
+    <p>Struktura <span>CASE</span> příkazu:</p>
+    <ul>
+        <li><span>CASE:</span> Klíčové slovo označující začátek příkazu.</li>
+        <li><span>datePart(q, datumOdeslani):</span> Výraz, který se testuje.</li>
+        <li><span>WHEN:</span> Klíčové slovo definující podmínku.</li>
+        <li><span>'1. kvartál', '2. kvartál', '3. kvartál', '4. kvartál':</span> Hodnoty, které se přiřadí, pokud je podmínka splněna.</li>
+        <li><span>ELSE:</span> Volitelná část, která se provede, pokud žádná z podmínek <span>WHEN</span> není splněna.</li>
+        <li><span>END:</span> Klíčové slovo označující konec příkazu.</li>
+    </ul>
+    
+    <p>Je možné i pracovat s case v podmínce <span>when</span> například: </p>
+    <pre>
+    <code class="language-sql">
+use dbNw
+go
+
+/*searched case - case s vyhledáváním*/
+
+select Count(CisloObjednavky) as Pocet,
+case
+    when DodatDne = DatumOdeslani then 'Právě včas'
+    when DodatDne > DatumOdeslani then 'S předstihem'
+    when DodatDne @("<") DatumOdeslani then 'Pozdě'
+    else 'NEODESLÁNO'
+end as Poznamka
+from tbObjednavky
+group by case
+    when DodatDne = DatumOdeslani then 'Právě včas'
+    when DodatDne > DatumOdeslani then 'S předstihem'
+    when DodatDne @("<") DatumOdeslani then 'Pozdě'
+    else 'NEODESLÁNO'
+end
+    </code>
+    </pre>
+    
+
+</article>
+
+<div class="display-2">
+    Cross queries
+</div>
+
+<article>
+    <b>Strana 138 v ServerNotesForProfessionals</b>
+    <p>Cross querries vs MS sql nejdou v samotné podtatě vytvořit, ale byl přidán specialní operátor
+        <span>PIVOT</span>, který slouží k transformaci dat z řádků do sloupců.
+        To umožňuje snadnější analýzu a shrnutí dat, která jsou seskupena podle jedné hodnoty a mají detailní informace v jiných sloupcích.</p>
+    <p>Jak funguje:</p>
+    <ul>
+        <li><span>Zdrojová data:</span> Potřebujete tabulku s daty, která chcete transformovat. Tato tabulka by měla obsahovat alespoň tři sloupce:</li>
+        <ul>
+            <li><span>Sloupce pro seskupení:</span> Tento sloupec určuje kategorie, do kterých budou data rozdělena.</li>
+            <li><span>Sloupce hodnot:</span> Tyto sloupce obsahují detailní data, která chcete agregovat (např. <span>SUM</span>, <span>AVG</span>, <span>COUNT</span>). Obvykle jde o číselné hodnoty.</li>
+            <li><span>Sloupce pro otočení:</span> Hodnota v tomto sloupci se stane názvem nového sloupce v pivotovaném výsledku.</li>
+        </ul>
+        <li><span>PIVOT operátor:</span> Použijete <span>PIVOT</span> operátor v rámci příkazu <span>SELECT</span>. Tento operátor vezme zdrojová data a otočí je podle zadaných parametrů.</li>
+        <li><span>Agregační funkce:</span> V rámci <span>PIVOT</span> určíte agregační funkci (například <span>SUM</span>, <span>AVG</span>, <span>COUNT</span>), která se použije pro výpočet výsledných hodnot v nových sloupcích.</li>
+        <li><span>Výsledek:</span> Výsledkem dotazu s <span>PIVOT</span> je nová tabulka, kde původní sloupce hodnot jsou transformovány do sloupců pojmenovaných podle hodnot ze sloupce pro otočení. Řádky představují kategorie ze sloupce pro seskupení a nyní obsahují agregované hodnoty z původních sloupců hodnot.</li>
+    </ul>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/ozy31aJpW-o?si=IcCQ-53oiXgPZrSG")
+
+    <pre>
+<code class="language-sql">
+    use dbNw
+
+select * from
+(
+select 
+k.NazevKategorie, v.NazevVyrobku,
+r.JednotkovaCena * r.Mnozstvi * (1-r.Sleva) as Prodej,
+datepart(q,o.DatumOdeslani) as Kvartal
+from 
+tbKategorie k
+inner join tbVyrobky v on k.CisloKategorie = v.CisloKategorie
+inner join tbRozpisObjednavek r on v.CisloVyrobku = r.CisloVyrobku
+inner join tbObjednavky o on r.CisloObjednavky = o.CisloObjednavky
+where YEAR(o.datumOdeslani) = 1995
+) AS A
+pivot
+(
+sum(Prodej)
+FOR Kvartal in ([1],[2],[3],[4])
+)AS B
+</code>
+</pre>
+
+    <p>Cross querries jdou dělat statické nebo dynamické, které se mění podle dat.
+        Bohužel opět mssql není zrovna otevřená tomuto nápadu a musime používat proměnou @@RunSQL,
+        kterou následně executneme na vyrtvoření požadovaného view</p>
+
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/xpOq1_Ll9zQ?si=pl86EqHc0FebkVVM")
+
+    <pre>
+<code class="language-sql">
+    use dbNw
+go
+
+declare @@rokySeznam as varchar(1000)
+declare @@rok as char(4)
+declare @@tbRoky table (rok char(4))
+declare @@runSQL varchar (4000)
+
+insert into @@tbRoky
+select distinct  year(DatumOdeslani) from tbObjednavky
+where DatumOdeslani is not null
+
+set @@rokySeznam = ''
+
+while exists(select * from @@tbRoky)
+begin
+    set @@rok = (select top 1 rok from @@tbRoky order by rok)
+    set @@rokySeznam = @@rokySeznam + '[' + @@rok + '],'
+    delete from @@tbRoky where rok = @@rok
+end
+
+set @@rokySeznam = STUFF(@@rokySeznam,len(@@rokySeznam),1,'')
+
+--select @@rokySeznam
+
+set @@runSQL =
+'select * from
+(
+select 
+k.NazevKategorie,
+r.JednotkovaCena * r.Mnozstvi * (1-r.Sleva) as Prodej,
+datepart(yyyy,o.DatumOdeslani) as Rok
+from 
+tbKategorie k
+inner join tbVyrobky v on k.CisloKategorie = v.CisloKategorie
+inner join tbRozpisObjednavek r on v.CisloVyrobku = r.CisloVyrobku
+inner join tbObjednavky o on r.CisloObjednavky = o.CisloObjednavky
+) as A
+pivot
+(
+sum(Prodej)
+FOR Rok in (' + @@rokySeznam + ')
+)as B'
+
+exec (@@runSQL)
+
+</code>
+</pre>
+</article>
+
+
+<div class="display-2">
+    Příklady
+</div>
+
+<article>
+    <pre><code class="language-sql">
+use dbnw
+go
+/*základní forma příkazu select*/
+select * from tbObjednavky
+
+/*výběr konkrétních sloupců*/
+select CisloObjednavky, KodZakaznika, DodatDne, Preprava
+ from tbObjednavky
+
+ /*omezení počtu záznamů - kluzule TOP - vždy přímo za slovo select*/
+ select top 10 * from tbObjednavky
+ select top 10 percent * from tbObjednavky
+ select top 100 percent * from tbObjednavky
+
+ /*výběr jedinečných záznamů - klauzule DISTINCT*/
+ select distinct KodZakaznika from tbObjednavky
+ select distinct KodZakaznika, CisloZamestnance from tbObjednavky
+
+ /*rozšíření zdroje - spojení dvou tabulek*/
+ select k.NazevKategorie, v.NazevVyrobku, v.JednotkovaCena from tbKategorie k 
+ inner join tbVyrobky v on k.CisloKategorie = v.CisloKategorie
+
+ /*požadavek na řazení - klauzule ORDER BY*/
+ select * from tbVyrobky order by JednotkovaCena
+ select * from tbVyrobky order by JednotkovaCena desc
+
+ select * from tbObjednavky order by CisloZamestnance, KodZakaznika, datumodeslani desc
+
+
+ /*požadavek na řazení rozšíření klauzule ORDER BY - o TOP a OFFSET  od serveru 2012*/
+
+ select top 10 NazevVyrobku, JednotkovaCena from tbVyrobky
+ order by  JednotkovaCena desc
+
+ select NazevVyrobku, JednotkovaCena from tbVyrobky
+ order by  JednotkovaCena desc
+ offset 0 rows
+ fetch next 10 rows only
+
+  select NazevVyrobku, JednotkovaCena from tbVyrobky
+ order by  JednotkovaCena desc
+ offset 11 rows
+ fetch next 10 rows only
+
+ /*omezující podmínka - klauzule WHERE - píše se za celý select 
+    - před případné ORDER BY*/
+
+ select k.NazevKategorie, v.NazevVyrobku, v.JednotkovaCena from tbKategorie k 
+ inner join tbVyrobky v on k.CisloKategorie = v.CisloKategorie
+ where k.NazevKategorie = 'cukrovinky'
+
+ /*výrobky kategorie 2 až 5 dražší než 1000 Kč*/
+  select k.NazevKategorie, v.NazevVyrobku, v.JednotkovaCena from tbKategorie k 
+ inner join tbVyrobky v on k.CisloKategorie = v.CisloKategorie
+ -- where k.CisloKategorie >=2 and k.CisloKategorie <=5 and v.JednotkovaCena > 1000
+ where  k.CisloKategorie between 2 and 5 and v.JednotkovaCena > 1000
+
+ /*pokračovat*/
+
+
+   select k.NazevKategorie, v.NazevVyrobku, v.JednotkovaCena from tbKategorie k 
+ inner join tbVyrobky v on k.CisloKategorie = v.CisloKategorie
+ where k.CisloKategorie in (2,3,6,9) and v.JednotkovaCena > 1000
+
+
+ select k.NazevKategorie, v.NazevVyrobku, v.JednotkovaCena from tbKategorie k 
+ inner join tbVyrobky v on k.CisloKategorie = v.CisloKategorie
+ where (k.CisloKategorie = 2 or k.CisloKategorie = 9) and v.JednotkovaCena >= 1000
+
+ /*agregace a seskupování -  agregační funkce SUM, MIN, MAX, AVG, COUNT
+a klauzule GROUP BY*/
+
+select k.NazevKategorie, v.JednotkovaCena from tbKategorie k inner join tbVyrobky v 
+on k.CisloKategorie = v.CisloKategorie
+
+/*vše seskupuji*/
+select k.NazevKategorie, v.JednotkovaCena from tbKategorie k inner join tbVyrobky v 
+on k.CisloKategorie = v.CisloKategorie
+group by k.NazevKategorie, v.JednotkovaCena
+
+--select distinct  k.NazevKategorie, v.JednotkovaCena from tbKategorie k inner join tbVyrobky v 
+--on k.CisloKategorie = v.CisloKategorie
+
+/*vše agreguji*/
+select  count(k.NazevKategorie) as Pocet, sum(v.JednotkovaCena) as Celkem from tbKategorie k inner join tbVyrobky v 
+on k.CisloKategorie = v.CisloKategorie
+
+/*co neseskupuji agreguji - co neagreguji seskupuji*/
+select k.NazevKategorie, sum(v.JednotkovaCena) as Celkem from tbKategorie k inner join tbVyrobky v 
+on k.CisloKategorie = v.CisloKategorie
+group by k.NazevKategorie
+
+/*omezující podmínka agregované sady záznamů se nastaví kluzulí HAVING - po agregaci*/
+select k.NazevKategorie, sum(v.JednotkovaCena) as Celkem from tbKategorie k inner join tbVyrobky v 
+on k.CisloKategorie = v.CisloKategorie
+group by k.NazevKategorie
+having sum(v.JednotkovaCena) > 5000
+
+
+/*omezující podmínka agregované sady záznamů se nastaví kluzulí WHERE - před agregací*/
+select k.NazevKategorie, sum(v.JednotkovaCena) as Celkem from tbKategorie k inner join tbVyrobky v 
+on k.CisloKategorie = v.CisloKategorie
+where v.JednotkovaCena > 1000
+group by k.NazevKategorie
+
+
+/*WHERE i HAVING v jednom selecku*/
+select k.NazevKategorie, sum(v.JednotkovaCena) as Celkem from tbKategorie k inner join tbVyrobky v 
+on k.CisloKategorie = v.CisloKategorie
+where v.JednotkovaCena > 1000
+group by k.NazevKategorie
+having sum(v.JednotkovaCena) > 5000
+</code></pre>
+    
+    <pre>
+<code class="language-sql">
+use dbnw
+go
+/*cekové prodeje (sumy) realizované zaměstnaci v roce 1996*/
+
+if exists(select * from sys.views where name = 'vw_ProdZam1996')
+drop view vw_ProdZam1996
+go
+
+create view vw_ProdZam1996
+as
+select 
+z.Prijmeni,
+sum(r.JednotkovaCena * r.Mnozstvi * (1-r.Sleva)) as Prodej 
+from tbZamestnanci z 
+inner join tbObjednavky o on z.CisloZamestnance = o.CisloZamestnance
+inner join tbRozpisObjednavek r on o.CisloObjednavky = r.CisloObjednavky
+where year(datumOdeslani) = 1996
+group by z.Prijmeni
+    </code>
+</pre>
+    
+    <pre>
+<code class="language-sql">
+use dbnw
+go
+/*kvartální celkové prodeje (sumy) Nancy Davolio (1) za rok 1995
+parametrizuj číslem zaměstnance,
+pole zamestnanec bude obsahovat příjmení i jméno oddělené čárkou 
+a mezerou
+*/
+
+
+select 
+z.Prijmeni+ ', ' + z.Jmeno as Zamestnanec,
+sum(r.JednotkovaCena * r.Mnozstvi * (1-r.Sleva)) as Prodej,
+datepart(q,DatumOdeslani) as Kvartal
+from tbZamestnanci z 
+inner join tbObjednavky o on z.CisloZamestnance = o.CisloZamestnance
+inner join tbRozpisObjednavek r on o.CisloObjednavky = r.CisloObjednavky
+where year(datumOdeslani) = 1995 and z.CisloZamestnance = 1
+group by z.Prijmeni+ ', ' + z.Jmeno, datepart(q,DatumOdeslani)
+    </code>
+</pre>
+    
+    <pre>
+<code class="language-sql">
+use dbnw
+go
+/*počet objednávek, které byly opožděny o více než 10 dnů,
+dotaz vrátí pole Zakaznik - zákaznická firma, PocetObj - počet objednávek*/
+
+select 
+z.Firma as Zakaznik,
+count(o.CisloObjednavky) as Pocet
+from tbZakaznici z
+inner join tbObjednavky o on z.KodZakaznika = o.KodZakaznika
+--where datediff(d,o.dodatdne,o.DatumOdeslani) > 10
+where datediff(d,o.DatumOdeslani,o.dodatdne) @("<") -10
+group by z.Firma
+
+--select 
+--DodatDne,
+--DatumOdeslani,
+--datediff(d,dodatdne,DatumOdeslani),
+--datediff(d,DatumOdeslani,dodatdne)
+--from  tbObjednavky
+    </code>
+</pre>
+    
+<pre>
+<code class="language-sql">
+use dbnw
+go
+/*
+celkové prodeje zaměstnanců za rok 1994,
+jen výrobky dodané dodavateli číslo 1,3,18,24,27,29,
+obsah pole zaměstnanec bude ve tvaru KING, R.: obchodní zástupce,
+obsah pole Prodej - vzorec počítající prodej,
+řazeno sestupně podle prodeje
+*/
+
+select 
+upper(z.Prijmeni) + ', ' + left(z.jmeno,1) + '.: ' + z.Funkce as Zamestnanec,
+cast(sum(r.JednotkovaCena * r.Mnozstvi * (1-r.Sleva)) as money) as Prodej
+from tbZamestnanci z
+inner join tbObjednavky o on z.CisloZamestnance = o.CisloZamestnance
+inner join tbRozpisObjednavek r on o.CisloObjednavky = r.CisloObjednavky
+inner join tbVyrobky v on r.CisloVyrobku = v.CisloVyrobku
+where year(DatumOdeslani) = 1994 and v.CisloDodavatele  in (1,3,18,24,27,29)
+group by upper(z.Prijmeni) + ', ' + left(z.jmeno,1) + '.: ' + z.Funkce
+order by Prodej desc
+    </code>
+</pre>
+
+<pre>
+<code class="language-sql">
+use dbnw
+go
+/*demo operátorů INTERSECT, EXCEPT, UNION*/
+
+/*INTERSECT a EXCEPT slouží k porovnání dvou datových sad*/
+
+--if exists(select * from sys.tables where name = 'tbObjednavky2')
+--drop table tbObjednavky2
+--go
+
+--select *   into tbObjednavky2 from tbObjednavky
+
+select * from tbObjednavky
+select * from tbObjednavky2
+
+select * from tbObjednavky INTERSECT select * from tbObjednavky2
+select * from tbObjednavky2 INTERSECT select * from tbObjednavky
+
+delete from tbObjednavky2
+where year(DatumOdeslani) = 1994
+
+select * from tbObjednavky EXCEPT select * from tbObjednavky2
+select * from tbObjednavky2 EXCEPT select * from tbObjednavky
+
+/*UNION - SOUŽÍ KE SLOUČENÍ DVOU DATOVÝCH SAD*/
+
+select * from tbObjednavky2 where cisloZamestnance = 2
+union select * from tbObjednavky2 where cisloZamestnance = 5
+union select * from tbObjednavky2 where cisloZamestnance = 7
+
+select * from tbObjednavky2 where kodzakaznika = 'alfki'
+union
+select * from tbObjednavky2 where kodzakaznika = 'wolza'
+
+    </code>
+</pre>
+
+
+<pre>
+<code class="language-sql">
+use dbNw
+
+select sum(Dopravne) as Dopravne, sum(Prodej) as Prodej from
+(
+select CisloObjednavky, sum(Dopravne) as Dopravne, sum(Prodej) as Prodej from
+(
+select o.CisloObjednavky,z.Firma, sum(distinct o.Dopravne) as Dopravne, sum(r.JednotkovaCena * r.Mnozstvi * (1-r.Sleva)) as Prodej
+from tbZakaznici z
+inner join tbObjednavky o on z.KodZakaznika = o.KodZakaznika
+inner join tbRozpisObjednavek r on r.CisloObjednavky = o.CisloObjednavky
+group by z.Firma, o.CisloObjednavky
+) sa 
+group by CisloObjednavky
+) sx
+
+
+select  sum(r.JednotkovaCena * r.Mnozstvi * (1-r.Sleva)) as Prodej from tbRozpisObjednavek r
+select sum(o.Dopravne) as Dopravne from tbObjednavky o
+
+    </code>
+</pre>
+</article>
+
+
+

@@ -2,11 +2,69 @@
     Layout = "_Layout"; // Nechat jak je
 
     ViewBag.Title = "Triggers";
-    ViewBag.Author = "";
-    ViewBag.Editor = "[Editor]"; // Pokud není, tak vymazat
+    ViewBag.Author = "Jakub Boháček";
 
     ViewBag.GenerateContent = true;
 }
 <div class="display-1">
     @ViewBag.Title
 </div>
+<article>
+    <h2>Triggers</h2>
+    <p><em>Triggers</em>, neboli spouštěče, jsou speciální typy uložených procedur v MS SQL, které se automaticky spouští v reakci na určité události v databázi. Triggers jsou navrženy tak, aby reagovaly na změny v datech nebo struktuře databáze a prováděly určité akce, když k těmto změnám dojde.</p>
+
+    <p>Triggers mohou být užitečné pro automatizaci úloh, vynucení obchodních pravidel nebo provádění dalších operací v reakci na změny dat v databázi.</p>
+
+    <h3>1. DML Triggers (Data Manipulation Language Triggers):</h3>
+    <ul>
+        <li>Tyto triggers se spouští v reakci na změny dat v tabulkách, například při provedení příkazu <code>INSERT</code>, <code>UPDATE</code> nebo <code>DELETE</code>.</li>
+        <li>Můžete definovat, zda se spustí před nebo po provedení příkazu.</li>
+        <li>Tyto triggers mohou provádět další operace, jako je validace dat, záznam změn nebo dokonce rušení změn, pokud nevyhovují určitým pravidlům.</li>
+    </ul>
+
+    <p>Příklad DML triggeru:</p>
+<pre>
+<code class="language-sql">CREATE TRIGGER trg_AfterInsert
+ON table_name
+AFTER INSERT
+AS
+BEGIN
+    -- Kód triggeru, který se provede po vložení záznamu do tabulky
+    INSERT INTO log_table (event, timestamp)
+    VALUES ('INSERT', GETDATE());
+END;
+</code>
+</pre>
+
+    <h3>2. DDL Triggers (Data Definition Language Triggers):</h3>
+    <ul>
+        <li>Tyto triggers se spouští v reakci na změny v DDL příkazech, jako jsou <code>CREATE</code>, <code>ALTER</code> nebo <code>DROP</code>.</li>
+        <li>Jsou užitečné pro sledování změn v databázi, jako je změna struktury tabulek nebo indexů.</li>
+        <li>Lze je použít k zamezení určitých operací nebo k logování změn v databázi.</li>
+    </ul>
+
+    <p>Příklad DDL triggeru:</p>
+<pre>
+<code class="language-sql">CREATE TRIGGER trg_AfterCreateTable
+ON DATABASE
+FOR CREATE_TABLE
+AS
+BEGIN
+    -- Kód triggeru, který se provede po vytvoření nové tabulky
+    INSERT INTO log_table (event, timestamp)
+    VALUES ('CREATE TABLE', GETDATE());
+END;
+</code>
+</pre>
+
+    <p>Triggers jsou silným nástrojem pro automatizaci úloh a vynucení pravidel v databázi. Je důležité je používat opatrně, protože mohou ovlivnit výkon databáze a přinést složitost do systému.</p>
+    
+    <p>Kod na převytvoření triggeru</p>
+    <pre>
+<code class="language-sql">use dbNw
+go
+if exists(select * from sys.triggers where name = 'tg_Dbnw_tbEvents')
+drop trigger tg_Dbnw_tbEvents on database
+go</code>
+</pre>
+</article>

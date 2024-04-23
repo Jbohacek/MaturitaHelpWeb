@@ -2,11 +2,131 @@
     Layout = "_Layout"; // Nechat jak je
 
     ViewBag.Title = "Kurzory - Cursors";
-    ViewBag.Author = "";
-    ViewBag.Editor = "[Editor]"; // Pokud není, tak vymazat
+    ViewBag.Author = "Jakub Boháček";
 
     ViewBag.GenerateContent = true;
 }
 <div class="display-1">
     @ViewBag.Title
 </div>
+<article>
+    <p>Kurzory v MS SQL Serveru jsou nástroje, které umožňují manipulovat s daty na řádcích jedním po druhém. Kurzory se používají, když potřebujete provádět operace nad množinou dat po jednom řádku, což může být užitečné, pokud je zapotřebí provést složité operace nad jednotlivými záznamy.</p>
+
+    <h2>Definice a použití kurzorů</h2>
+    <ul>
+        <li><strong>Definice kurzoru:</strong> Kurzory jsou definovány pomocí příkazu <code>DECLARE CURSOR</code>, který specifikuje název kurzoru a SQL dotaz, který definuje data, se kterými bude kurzor pracovat.</li>
+        <li><strong>Otevření kurzoru:</strong> Kurzor je otevřen pomocí příkazu <code>OPEN</code> a začíná pracovat s výsledkem definovaného SQL dotazu.</li>
+        <li><strong>Pohyb kurzoru:</strong> Kurzor se pohybuje mezi řádky výsledků pomocí příkazu <code>FETCH</code>. Každý řádek může být načten do proměnných, se kterými můžete poté manipulovat.</li>
+        <li><strong>Uzavření kurzoru:</strong> Když jste dokončili práci s kurzorem, měl by být uzavřen pomocí příkazu <code>CLOSE</code>.</li>
+        <li><strong>Uvolnění kurzoru:</strong> Po uzavření kurzoru byste měli uvolnit paměť přidělenou kurzoru pomocí příkazu <code>DEALLOCATE</code>.</li>
+    </ul>
+
+    <h2>Příklad použití kurzoru</h2>
+    <pre>
+<code class="language-sql">-- Nastaví databázi pro použití
+USE dbNw
+GO
+
+-- Deklaruje kurzor s názvem curKat
+-- Specifikuje SQL dotaz, který vrátí sloupce NazevKategorie a Popis z tabulky tbKategorie
+DECLARE curKat CURSOR
+FOR SELECT NazevKategorie, Popis
+    FROM tbKategorie
+
+-- Otevře kurzor curKat
+OPEN curKat
+
+-- Zkontroluje stav kurzoru po jeho otevření
+-- @@@@FETCH_STATUS je globální proměnná, která vrací 0, pokud byl kurzor otevřen a nastaven úspěšně
+SELECT @@@@FETCH_STATUS
+
+-- Načte další řádek dat z kurzoru curKat
+-- Pokud není konec dat, pokračuje dalšími operacemi
+FETCH NEXT FROM curKat
+
+-- While cyklus opakovaně načítá řádky z kurzoru
+-- Cyklus pokračuje, dokud @@@@FETCH_STATUS je rovno 0 (tzn. dokud jsou dostupné další řádky)
+WHILE @@@@FETCH_STATUS = 0
+BEGIN
+    -- Zkontroluje aktuální stav kurzoru
+    SELECT @@@@FETCH_STATUS
+
+    -- Načte další řádek dat z kurzoru curKat
+    FETCH NEXT FROM curKat
+END
+
+-- Zkontroluje konečný stav kurzoru
+-- Po dokončení cyklu a načtení všech dat
+SELECT @@@@FETCH_STATUS
+
+-- Zavře kurzor curKat, aby přestal pracovat s daty
+CLOSE curKat
+
+-- Uvolní kurzor curKat, aby uvolnil paměť
+DEALLOCATE curKat
+
+</code>
+</pre>
+    <p>V tomto příkladu je definován kurzor s názvem <code>order_cursor</code>, který pracuje s daty z tabulky <code>orders</code>. Kurzor je poté otevřen, data jsou načtena řádek po řádku pomocí <code>FETCH NEXT</code>, a můžete provádět operace s načtenými daty. Po dokončení práce je kurzor uzavřen pomocí <code>CLOSE</code> a uvolněn pomocí <code>DEALLOCATE</code>.</p>
+
+    <h2>Výhody a nevýhody kurzorů</h2>
+    <ul>
+        <li><strong>Výhody:</strong> Kurzory umožňují manipulovat s daty po jednotlivých řádcích, což může být užitečné v některých scénářích, kdy potřebujete provádět složité operace nad jednotlivými záznamy.</li>
+        <li><strong>Nevýhody:</strong> Kurzory mohou být pomalé a náročné na zdroje, zejména při práci s velkými množinami dat. Doporučuje se používat kurzory jen v případě, že jiné způsoby manipulace s daty nejsou možné nebo praktické.</li>
+    </ul>
+    <p>Celkově jsou kurzory užitečným nástrojem, ale je důležité je používat s rozmyslem a pouze tam, kde je to nezbytné.</p>
+
+</article>
+<div class="display-2">Pokročilejší procházení kurzoru</div>
+<article>
+    <pre>
+<code class="language-sql">
+-- Nastaví databázi pro použití
+USE dbNw
+GO
+
+-- Deklaruje kurzor s názvem curZam, který umožňuje posun kurzoru (scroll)
+-- Specifikuje SQL dotaz, který vrátí sloupce CisloZamestnance, Jmeno, Prijmeni a Funkce z tabulky tbZamestnanci
+DECLARE curZam CURSOR SCROLL
+FOR
+SELECT CisloZamestnance, Jmeno, Prijmeni, Funkce
+    FROM tbZamestnanci
+
+-- Otevře kurzor curZam
+OPEN curZam
+
+-- Načte další řádek dat z kurzoru (první řádek)
+FETCH NEXT FROM curZam
+
+-- Načte poslední řádek dat z kurzoru
+FETCH LAST FROM curZam
+
+-- Načte předchozí řádek dat z kurzoru
+FETCH PRIOR FROM curZam
+
+-- Načte řádek na pozici 5 (počítáno od začátku) z kurzoru
+FETCH ABSOLUTE 5 FROM curZam
+
+-- Načte řádek o 2 pozice dále od aktuálního umístění kurzoru
+FETCH RELATIVE 2 FROM curZam
+
+-- Načte řádek o 4 pozice zpět od aktuálního umístění kurzoru
+FETCH RELATIVE -4 FROM curZam
+
+-- Načte první řádek dat z kurzoru
+FETCH FIRST FROM curZam
+
+-- Zavře kurzor curZam, aby přestal pracovat s daty
+CLOSE curZam
+
+-- Uvolní kurzor curZam, aby uvolnil paměť
+DEALLOCATE curZam
+</code>
+</pre>
+</article>
+<div class="display-2">Videa</div>
+<article>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/HVWgDvzBtWY?si=JdjnhLR7m_tYgCHX")
+    <hr/>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/D6A3BMzk1w4?si=L6QcBEdrfijraMAo")
+</article>

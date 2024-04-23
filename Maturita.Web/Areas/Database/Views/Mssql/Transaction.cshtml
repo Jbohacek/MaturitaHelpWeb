@@ -1,0 +1,150 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Transactions";
+    ViewBag.Author = "Jakub Boháček";
+
+    ViewBag.GenerateContent = true;
+}
+
+
+<div class="display-1">
+    @ViewBag.Title
+</div>
+<article>
+    <p>Transakce v MS SQL (Microsoft SQL Server) jsou skupinou operací, které jsou spojeny dohromady jako jedna jednotka práce. Cílem transakcí je zajistit, aby operace byly provedeny buď všechny, nebo žádná, což zajišťuje konzistentní a spolehlivé zpracování dat v databázi.</p>
+
+    <h3>ACID vlastnosti:</h3>
+    <ul>
+        <li><span>Atomicita:</span> Transakce jsou buď dokončeny celé, nebo nejsou dokončeny vůbec. Pokud jedna část transakce selže, všechny změny jsou vráceny zpět.</li>
+        <li><span>Konzistence:</span> Transakce přenáší databázi z jednoho konzistentního stavu do jiného. To znamená, že jsou dodržována pravidla integrity dat.</li>
+        <li><span>Izolace:</span> Transakce jsou izolované od jiných transakcí, což znamená, že jedna transakce nemůže vidět změny provedené jinou transakcí, dokud nejsou dokončeny.</li>
+        <li><span>Trvalost:</span> Po dokončení transakce jsou změny trvalé a zůstávají v databázi, i když dojde k výpadku.</li>
+    </ul>
+
+    <h3>Vytvoření transakce:</h3>
+    <p>Transakce se zahajují pomocí příkazu <code>BEGIN TRANSACTION</code>.</p>
+    <p>Uvnitř transakce se provádějí SQL příkazy, které zahrnují vložení, aktualizaci nebo mazání dat.</p>
+
+    <h3>Dokončení nebo vrácení transakce:</h3>
+    <p>Pokud všechny operace v transakci proběhnou úspěšně, transakce je dokončena pomocí příkazu <code>COMMIT</code>.</p>
+    <p>Pokud některá operace selže, transakce by měla být vrácena zpět pomocí příkazu <code>ROLLBACK</code>, čímž se všechny změny provedené během transakce vrátí zpět na původní stav.</p>
+
+    <h3>Příkazy pro transakce:</h3>
+    <ul>
+        <li><code>BEGIN TRANSACTION</code>: Zahájí novou transakci.</li>
+        <li><code>COMMIT TRANSACTION</code>: Potvrzuje a dokončuje transakci, čímž provede všechny změny.</li>
+        <li><code>ROLLBACK TRANSACTION</code>: Vrací zpět všechny změny provedené během transakce.</li>
+    </ul>
+
+    <h3>Příklad transakce:</h3>
+    <pre><code>
+    BEGIN TRANSACTION;
+
+    INSERT INTO orders (order_id, customer_id, amount)
+    VALUES (1, 123, 100.00);
+
+    UPDATE customers
+    SET balance = balance - 100.00
+    WHERE customer_id = 123;
+
+    COMMIT TRANSACTION;
+    </code></pre>
+
+    <p>V tomto příkladu se transakce zahajuje příkazem <code>BEGIN TRANSACTION</code>. Uvnitř transakce se provede vložení nového záznamu do tabulky <code>orders</code> a aktualizace záznamu v tabulce <code>customers</code>. Pokud jsou obě operace úspěšné, transakce se potvrdí příkazem <code>COMMIT TRANSACTION</code>. Pokud by došlo k chybě, mohlo by být místo toho použito <code>ROLLBACK TRANSACTION</code>, aby se všechny změny vrátily zpět.</p>
+
+    <p>Transakce jsou důležitým nástrojem pro zajištění spolehlivosti a konzistence dat v databázi.</p>
+
+</article>
+<div class="display-2">
+    Implicitní transakce
+</div>
+<article>
+    <p><span>Co to je:</span> MS SQL Server podporuje režim implicitních transakcí, což znamená, že každý příkaz <code>INSERT</code>, <code>UPDATE</code> nebo <code>DELETE</code> je automaticky považován za součást transakce, pokud ještě není v rámci nějaké transakce.</p>
+    <p><span>Jak to funguje:</span> V implicitním režimu transakcí SQL Server zahajuje transakci před provedením příkazů DML, jako jsou <code>INSERT</code>, <code>UPDATE</code> nebo <code>DELETE</code>. Tato transakce pokračuje, dokud neukončíte transakci příkazem <code>COMMIT</code> nebo <code>ROLLBACK</code>.</p>
+    <p><span>Výhoda:</span> Automaticky zahajuje transakce, což zvyšuje bezpečnost dat a snižuje riziko nechtěných změn.</p>
+    
+    <pre><code class="language-sql">set implicit_transactions on
+
+set implicit_transactions off</code></pre>
+</article>
+<div class="display-2">
+    XACT_ABORT
+</div>
+<article>
+    <p><span>Co to je:</span> Nastavení <code>XACT_ABORT</code> je konfigurační možnost, která určuje, jak SQL Server reaguje na chyby během transakce.</p>
+    <p><span>Jak to funguje:</span> Když je <code>XACT_ABORT</code> nastaveno na <code>ON</code>, a pokud během transakce nastane chyba, celý kontext transakce je okamžitě vrácen zpět pomocí <code>ROLLBACK</code>.</p>
+    <p><span>Výhoda:</span> Pomáhá zajistit, že žádné nechtěné změny nebudou uloženy do databáze v případě chyby.</p>
+    
+    <pre><code class="language-sql">set xact_abort on
+
+begin transaction Prevod
+    insert into dbBanka_001..T values ('100012345', -5000, default)
+    insert into dbBanka_008..T values ('800012345', 5000, default)
+commit transaction Prevod
+
+set xact_abort off</code></pre>
+</article>
+
+<div class="display-2">
+    BEGIN TRY a BEGIN CATCH
+</div>
+<article>
+    <p><span>Co to je:</span> Bloky <code>BEGIN TRY</code> a <code>BEGIN CATCH</code> poskytují strukturu pro zpracování chyb v SQL Serveru.</p>
+    <p><span>Jak to funguje:</span> Kód uvnitř bloku <code>BEGIN TRY</code> se provádí, a pokud dojde k chybě, SQL Server přeruší provádění a přesměruje provádění do bloku <code>BEGIN CATCH</code>, kde můžete zpracovat chybu.</p>
+    <p><span>Výhoda:</span> Umožňuje elegantně zachytit a zpracovat chyby, aniž by byl narušen tok programu.</p>
+  
+    <pre><code>BEGIN TRY
+    -- Kód, který může způsobit chybu
+    INSERT INTO orders (order_id, customer_id, amount)
+    VALUES (1, 123, 100.00);
+
+    UPDATE customers
+    SET balance = balance - 100.00
+    WHERE customer_id = 123;
+
+    COMMIT TRANSACTION;
+
+END TRY
+BEGIN CATCH
+    -- Kód pro zpracování chyby
+    IF @@@@TRANCOUNT > 0
+        ROLLBACK TRANSACTION;
+
+    DECLARE @@ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+    DECLARE @@ErrorSeverity INT = ERROR_SEVERITY();
+    DECLARE @@ErrorState INT = ERROR_STATE();
+
+    -- Zpracování chybové zprávy
+    PRINT 'Chyba: ' + @@ErrorMessage;
+END CATCH;
+</code></pre>
+</article>
+
+<div class="display-2">@@@@ERROR</div>
+<article>
+    <p><span>Co to je:</span> <code>@@@@ERROR</code> je globální proměnná, která obsahuje kód chyby posledního příkazu.</p>
+    <p><span>Jak to funguje:</span> Po provedení jakéhokoli příkazu můžete zkontrolovat <code>@@@@ERROR</code>. Pokud hodnota není 0, došlo k chybě.</p>
+    <p><span>Výhoda:</span> Umožňuje rychle zjistit, zda poslední příkaz skončil chybou, a provést příslušné akce.</p>
+
+    <h3>Příklad použití:</h3>
+    <pre><code>INSERT INTO orders (order_id, customer_id, amount)
+VALUES (1, 123, 100.00);
+    
+IF @@@@ERROR <> 0
+BEGIN
+    PRINT 'Došlo k chybě při vkládání záznamu do tabulky orders.';
+END
+</code></pre>
+
+    <p>Všechny tyto koncepty pomáhají vylepšit spolehlivost a robustnost kódu v MS SQL Serveru a zajišťují bezpečnost dat a efektivní zpracování chyb.</p>
+</article>
+<div class="display-2">Videa</div>
+<article>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/P80Js_qClUE?si=G5_BZ3cSuHMdN1xE")
+    <hr/>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/AcqtAEzuoj0?si=gUHJodFkZGxNtBJJ")
+    <hr/>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/GOQVlrQohtM?si=-JKR5nUtejiZ_m4U")
+
+</article>

@@ -1,0 +1,123 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Zabezepčení - User, Login a databázová role";
+    ViewBag.Author = "Jakub Boháček";
+
+    ViewBag.GenerateContent = true;
+}
+<div class="display-1">
+    @ViewBag.Title
+</div>
+<article>
+    <p>V MS SQL Serveru jsou uživatelská a přihlašovací oprávnění dvě různé vrstvy zabezpečení, které zajišťují, že správné osoby mají přístup k databázím a zdrojům a že jejich přístup je omezen na to, co je nutné.</p>
+</article>
+<div class="display-2">Login</div>
+<article>
+    <p><strong>Definice:</strong> Login v MS SQL Serveru představuje identitu uživatele na úrovni instance. Jedná se o autentifikaci uživatele při pokusu o připojení k instanci SQL Serveru.</p>
+    <p><strong>Typy login:</strong> MS SQL Server podporuje různé typy přihlášení, například:</p>
+    <ul>
+        <li><strong>SQL Server Authentication (SQL Server autentifikace):</strong> Uživatel se přihlásí pomocí uživatelského jména a hesla, které jsou spravovány v SQL Serveru.</li>
+        <li><strong>Windows Authentication (Windows autentifikace):</strong> Uživatel se přihlásí pomocí svého účtu v rámci domény nebo místního počítače. Tento účet je ověřen pomocí operačního systému.</li>
+    </ul>
+    <p><strong>Přidání login:</strong> Pomocí příkazu <code>CREATE LOGIN</code> lze přidat nové přihlášení.</p>
+    <p><strong>Přiřazení rolí:</strong> Přihlášení mohou být přiřazeny různé role, které určují jejich oprávnění na úrovni instance.</p>
+
+</article>
+
+<div class="display-2">User</div>
+<article>
+    <p><strong>Definice:</strong> Uživatel v MS SQL Serveru představuje identitu uživatele na úrovni databáze. Uživatel je obvykle mapován na přihlášení (login), ale také může být vytvořen bez přihlášení.</p>
+    <p><strong>Přiřazení práv:</strong> Uživatelé jsou přiřazeni k databázím a mohou být členy různých rolí databáze, které určují jejich oprávnění v rámci konkrétní databáze.</p>
+    <p><strong>Vytvoření uživatele:</strong> Uživatel se vytváří pomocí příkazu <code>CREATE USER</code> a obvykle je mapován na existující login.</p>
+    <p><strong>Oddělení od login:</strong> Uživatel může existovat v databázi bez login, například pro role bez login.</p>
+
+</article>
+<div class="display-2">Příklad vytvoření user a login</div>
+<article>
+    <pre><code class="language-sql">-- Vytvoření loginu (přihlášení)
+
+IF  EXISTS (SELECT * FROM sys.server_principals WHERE name = N'myLogin')
+DROP LOGIN [myLogin]
+GO
+
+CREATE LOGIN myLogin
+WITH PASSWORD = 'myPassword'; -- Specifikuje heslo pro nový login
+
+USE [dbNw]
+GO
+CREATE USER [myUser] WITHOUT LOGIN WITH DEFAULT_SCHEMA=[dbo]
+GO
+
+-- Vytvoření uživatele v databázi
+USE myDatabase; -- Přepnutí na konkrétní databázi, ve které chceme vytvořit uživatele
+CREATE USER myUser -- Vytvoření nového uživatele v databázi
+FOR LOGIN myLogin; -- Mapování uživatele na dříve vytvořený login
+
+-- Přiřazení oprávnění uživateli
+GRANT SELECT ON myTable TO myUser; -- Udělení oprávnění k čtení z tabulky myTable uživateli myUser
+GRANT INSERT ON myTable TO myUser; -- Udělení oprávnění k vkládání dat do tabulky myTable uživateli myUser
+</code></pre>
+</article>
+
+
+<div class="display-2">Databázová role</div>
+<article>
+    <h2>Databázové role v MS SQL Serveru</h2>
+
+    <p>Databázové role jsou nástroje v MS SQL Serveru, které pomáhají organizovat a spravovat oprávnění uživatelů v konkrétní databázi. Role umožňují přidělovat oprávnění skupinám uživatelů namísto jednotlivců, což zjednodušuje správu oprávnění.</p>
+
+    <h3>Vestavěné databázové role</h3>
+    <p>Tyto role jsou předdefinované v MS SQL Serveru a poskytují běžné sady oprávnění. Mezi vestavěné databázové role patří:</p>
+    <ul>
+        <li><strong>db_owner:</strong> Má plnou kontrolu nad databází.</li>
+        <li><strong>db_accessadmin:</strong> Může přidávat nebo odebírat přístupy uživatelů do databáze.</li>
+        <li><strong>db_securityadmin:</strong> Může řídit bezpečnostní role a oprávnění v databázi.</li>
+        <li><strong>db_ddladmin:</strong> Může provádět všechny úpravy struktury databáze.</li>
+        <li><strong>db_backupoperator:</strong> Může zálohovat a obnovovat databázi.</li>
+        <li><strong>db_datareader:</strong> Může číst všechna data v databázi.</li>
+        <li><strong>db_datawriter:</strong> Může zapisovat data do databáze.</li>
+        <li><strong>db_denydatareader:</strong> Nesmí číst data z databáze.</li>
+        <li><strong>db_denydatawriter:</strong> Nesmí zapisovat data do databáze.</li>
+    </ul>
+    
+    <h3>public</h3>
+    <p><strong>Definice:</strong> public je role, která automaticky obsahuje všechny uživatele a přihlášení, která nemají jiné explicitní role. Všichni uživatelé, kteří se přihlásí k SQL Serveru, jsou automaticky členy role public.</p>
+    <p><strong>Oprávnění:</strong> Oprávnění role public jsou obecně velmi omezená. Mají základní oprávnění, jako je připojení k databázím. Výchozí oprávnění role public lze změnit, ale je důležité být opatrný při udělování dalších oprávnění této roli, aby nedošlo k nechtěnému zvýšení přístupových práv pro všechny uživatele.</p>
+    <p><strong>Použití:</strong> Role public slouží k definování základních oprávnění pro všechny uživatele, kteří přistupují k databázi. Je užitečná pro určení minimální úrovně přístupu, kterou by měli mít všichni uživatelé.</p>
+
+    <h3>sysadmin</h3>
+    <p><strong>Definice:</strong> sysadmin je role serveru, což znamená, že se jedná o roli na úrovni instance SQL Serveru. Členové této role mají úplnou kontrolu nad serverem.</p>
+    <p><strong>Oprávnění:</strong> Členové role sysadmin mají nejvyšší úroveň oprávnění v celém SQL Serveru. Mohou provádět jakékoliv operace, jako je správa databází, vytváření a změna přihlášení, přidělování oprávnění, zálohování a obnovení databází, a mnohem více. Prakticky mají neomezený přístup ke všem funkcím a zdrojům serveru. Zákazy na ně neplatí !</p>
+    <p><strong>Použití:</strong> Tuto roli by měli mít pouze administrátoři serveru nebo vysoce důvěryhodní uživatelé. Doporučuje se používat tuto roli s opatrností a přiřadit ji pouze uživatelům, kteří potřebují úplnou kontrolu nad serverem.</p>
+
+    <p>Uživatelé mohou být přiděleni k jedné nebo více z těchto rolí pomocí příkazů <strong>sp_addrolemember</strong> nebo <strong>ALTER ROLE</strong>.</p>
+
+    <h3>Vlastní databázové role</h3>
+    <p>Kromě vestavěných rolí můžete také vytvářet vlastní databázové role.</p>
+    <ul>
+        <li>Vytvoření vlastní role se provádí pomocí příkazu <strong>CREATE ROLE</strong>, který umožňuje vytvořit novou roli s konkrétním názvem.</li>
+        <li>Přiřazení oprávnění roli se provádí pomocí příkazu <strong>GRANT</strong> nebo <strong>DENY</strong>.</li>
+        <li>Uživatelé mohou být přiděleni k vlastní roli pomocí příkazů <strong>ALTER ROLE ADD MEMBER</strong> nebo <strong>sp_addrolemember</strong>.</li>
+    </ul>
+
+    <h4>Příklad vytváření a používání vlastních databázových rolí:</h4>
+    <pre><code class="language-sql">-- Vytvoření vlastní role
+CREATE ROLE myCustomRole;
+
+-- Udělení oprávnění role
+GRANT SELECT, INSERT ON myTable TO myCustomRole;
+
+-- Přidání uživatele k roli
+ALTER ROLE myCustomRole ADD MEMBER myUser;
+
+
+-- Přiřazení uživatele do role databáze
+EXEC sp_addrolemember 'db_datareader', 'myUser'; -- Přidání uživatele myUser do role db_datareader (umožňuje číst všechna data v databázi)
+EXEC sp_addrolemember 'db_datawriter', 'myUser'; -- Přidání uživatele myUser do role db_datawriter (umožňuje zapisovat data do databáze)
+</code></pre>
+
+    <p>Role zjednodušují správu oprávnění tím, že umožňují definovat oprávnění jednou pro roli a poté přiřadit tuto roli více uživatelům. To poskytuje flexibilitu a efektivní správu přístupových práv v databázi.</p>
+
+</article>
+

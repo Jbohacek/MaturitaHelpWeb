@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Zabezpečení - Audit";
+    ViewBag.Author = "Jakub Boháček";
+
+    ViewBag.GenerateContent = true;
+}
+<div class="display-1">
+    @ViewBag.Title
+</div>
+<article>
+    <p>Audit v MS SQL Serveru je funkce, která umožňuje monitorovat a zaznamenávat události v databázích a instanci SQL Serveru pro účely zabezpečení a sledování. Auditování v SQL Serveru slouží k zaznamenání aktivit, které mohou být důležité pro správu databáze, zabezpečení, shodu s právními předpisy nebo analýzu výkonu.</p>
+    <ul>
+        <li>Auditování umožňuje sledovat a zaznamenávat určité akce nebo změny v databázích a instanci.</li>
+        <li>Vytvoření auditu se provádí pomocí příkazů <strong>CREATE SERVER AUDIT</strong> (pro instance) a <strong>CREATE DATABASE AUDIT SPECIFICATION</strong> (pro databáze).</li>
+    </ul>
+
+</article>
+<div class="display-2">Serverový Audit</div>
+<article>
+    <ul>
+        <li>Serverový audit umožňuje sledovat události na úrovni instance SQL Serveru.</li>
+        <li>Můžete definovat, které události chcete sledovat, například přihlášení, události serveru, změny oprávnění apod.</li>
+        <li>Audity mohou být uloženy do souborů, událostních protokolů systému Windows nebo na jiné cíle.</li>
+    </ul>
+</article>
+<div class="display-2">
+    Databázový audit
+</div>
+<article>
+    <ul>
+        <li>Databázový audit umožňuje monitorovat akce specifické pro určitou databázi.</li>
+        <li>Můžete definovat, které události chcete sledovat, například operace DML (INSERT, UPDATE, DELETE), výběry dat, změny schémat apod.</li>
+    </ul>
+</article>
+<div class="display-2">Videa</div>
+<article>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/WvE1m5w8NO4?si=PMkbHWHhhmRd0uPM")
+</article>

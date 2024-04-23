@@ -1,0 +1,116 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Zabezpečení - Encryption";
+    ViewBag.Author = "Jakub Boháček";
+
+    ViewBag.GenerateContent = true;
+}
+<div class="display-1">
+    @ViewBag.Title
+</div>
+
+<article>
+    <p>V MS SQL Serveru můžete používat šifrování k ochraně dat, aby bylo čitelné pouze oprávněným uživatelům. Dva hlavní typy šifrování, které jsou v MS SQL Serveru používány, jsou šifrování pomocí certifikátů a symetrických klíčů.</p>
+    <img src="~/Pictures/_Database/Encryption/encryption-hierarchy-stack.gif" class="bg-info img-fluid d-block mx-auto w-50">
+
+</article>
+<div class="display-2">Šifrování pomocí certifikátů</div>
+<article>
+    <p>Certifikáty v MS SQL Serveru jsou digitální identifikátory, které se používají pro různé účely včetně šifrování dat a autentizace. Certifikáty mohou být buď vytvořeny v rámci SQL Serveru, nebo importovány z externích zdrojů.</p>
+
+    <h4>Vytvoření certifikátu</h4>
+    <pre><code class="language-sql">CREATE CERTIFICATE MyCertificate
+ENCRYPTION BY PASSWORD = 'StrongPassword'
+WITH SUBJECT = 'My Certificate';
+</code></pre>
+
+    <h4>Použití certifikátu pro šifrování</h4>
+    <p>Certifikát může být použit pro šifrování a dešifrování dat. Před použitím certifikátu musíte vytvořit symetrický klíč, který je šifrován certifikátem.</p>
+
+    <pre><code class="language-sql">CREATE SYMMETRIC KEY MySymmetricKey
+WITH ALGORITHM = AES_256
+ENCRYPTION BY CERTIFICATE MyCertificate;
+</code></pre>
+
+    <h4>Šifrování a dešifrování dat</h4>
+    <p>Šifrované a dešifrované data se provádí pomocí symetrického klíče.</p>
+
+    <pre><code class="language-sql">-- Šifrování dat
+OPEN SYMMETRIC KEY MySymmetricKey DECRYPTION BY CERTIFICATE MyCertificate;
+DECLARE @@ciphertext VARBINARY(MAX);
+SET @@ciphertext = EncryptByKey(Key_GUID('MySymmetricKey'), 'DataToEncrypt');
+CLOSE SYMMETRIC KEY MySymmetricKey;
+
+-- Dešifrování dat
+OPEN SYMMETRIC KEY MySymmetricKey DECRYPTION BY CERTIFICATE MyCertificate;
+DECLARE @@plaintext NVARCHAR(MAX);
+SET @@plaintext = DecryptByKey(@@ciphertext);
+CLOSE SYMMETRIC KEY MySymmetricKey;
+</code></pre>
+</article>
+
+<div class="display-2">Šifrování pomocí symetrických klíčů</div>
+<article>
+    <p>Symetrické klíče jsou klíče používané pro šifrování a dešifrování dat. V MS SQL Serveru jsou symetrické klíče šifrovány pomocí certifikátů nebo jiných klíčů (např. hlavních klíčů serveru).</p>
+
+    <h4>Vytvoření symetrického klíče</h4>
+    <pre><code>CREATE SYMMETRIC KEY MySymmetricKey
+WITH ALGORITHM = AES_256
+ENCRYPTION BY CERTIFICATE MyCertificate;
+</code></pre>
+
+    <h4>Šifrování a dešifrování dat</h4>
+    <p>Symetrický klíč se používá pro šifrování a dešifrování dat pomocí příkazů EncryptByKey a DecryptByKey.</p>
+
+    <pre><code>-- Šifrování dat
+OPEN SYMMETRIC KEY MySymmetricKey DECRYPTION BY CERTIFICATE MyCertificate;
+DECLARE @@ciphertext VARBINARY(MAX);
+SET @@ciphertext = EncryptByKey(Key_GUID('MySymmetricKey'), 'DataToEncrypt');
+CLOSE SYMMETRIC KEY MySymmetricKey;
+
+-- Dešifrování dat
+OPEN SYMMETRIC KEY MySymmetricKey DECRYPTION BY CERTIFICATE MyCertificate;
+DECLARE @@plaintext NVARCHAR(MAX);
+SET @@plaintext = DecryptByKey(@@ciphertext);
+CLOSE SYMMETRIC KEY MySymmetricKey;
+</code></pre>
+</article>
+<div class="display-2">EncryptByPassPhrase</div>
+<article>
+    <p>V MS SQL Serveru můžete použít příkaz <code>EncryptByPassPhrase</code> k šifrování dat pomocí fráze. Tato metoda šifrování je jednoduchá a efektivní, protože nevyžaduje vytváření a správu certifikátů nebo symetrických klíčů.</p>
+    <h3>Klíčové aspekty používání <code>EncryptByPassPhrase</code>:</h3>
+    <h4>Vytvoření šifrovací fráze:</h4>
+    <ul>
+        <li>Při použití příkazu <code>EncryptByPassPhrase</code> potřebujete šifrovací frázi, kterou použijete k šifrování a dešifrování dat.</li>
+        <li>Doporučuje se používat silné a bezpečné fráze, aby byla zajištěna ochrana dat.</li>
+    </ul>
+    <h4>Šifrování dat pomocí <code class="language-sql">EncryptByPassPhrase</code>:</h4>
+    <ul>
+        <li>
+            Příkaz <code class="language-sql">EncryptByPassPhrase</code> přijímá dvě hlavní argumenty:
+            <ul>
+                <li>Šifrovací frázi (jako znakový řetězec).</li>
+                <li>Data k zašifrování (jako binární data nebo řetězec).</li>
+            </ul>
+        </li>
+        <li>Příkaz vrací zašifrovaná data v binárním formátu.</li>
+    </ul>
+    <h5>Příklad šifrování:</h5>
+    <pre><code>DECLARE @@ciphertext VARBINARY(MAX);
+SET @@ciphertext = EncryptByPassPhrase('MyStrongPassphrase', 'DataToEncrypt');</code></pre>
+    <h4>Dešifrování dat pomocí <code>DecryptByPassPhrase</code>:</h4>
+    <ul>
+        <li>Chcete-li dešifrovat data zašifrovaná pomocí <code>EncryptByPassPhrase</code>, použijte příkaz <code>DecryptByPassPhrase</code>.</li>
+        <li>
+            Příkaz <code class="language-sql">DecryptByPassPhrase</code> přijímá dvě hlavní argumenty:
+            <ul>
+                <li>Šifrovací frázi (stejnou jako byla použita pro šifrování).</li>
+                <li>Zašifrovaná data k dešifrování.</li>
+            </ul>
+        </li>
+    </ul>
+    <h5>Příklad dešifrování:</h5>
+    <pre><code class="language-sql">DECLARE @@plaintext NVARCHAR(MAX);
+SET @@plaintext = DecryptByPassPhrase('MyStrongPassphrase', @@ciphertext);</code></pre>
+</article>

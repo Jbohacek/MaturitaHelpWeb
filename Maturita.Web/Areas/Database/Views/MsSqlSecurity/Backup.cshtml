@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Zabezpečení - Backup";
+    ViewBag.Author = "Jakub Boháček";
+
+    ViewBag.GenerateContent = true;
+}
+@section Styles
+{
+    <style>
+        h3, h4, h5 {
+            color: #569cc4;
+        }
+    </style>
+}
+<div class="display-1">
+    @ViewBag.Title
+</div>
+<article>
+    Backup (záloha) v MS SQL Serveru je proces, kterým se kopíruje obsah databází nebo instancí do souborů nebo jiných úložišť. Zálohování je klíčovým prvkem v procesu správy databází, protože umožňuje obnovení dat v případě selhání, ztráty dat nebo jiných problémů.
+</article>
+<div class="display-2">Typy záloh</div>
+<article>
+    <li><span>Plná záloha (full backup):</span> Zálohuje celou databázi včetně dat, indexů, transakčních protokolů a dalších objektů. Plná záloha poskytuje kompletní snímek databáze v čase zálohování.</li>
+    <li><span>Diferenciální záloha (differential backup):</span> Zálohuje pouze změny provedené od poslední plné zálohy. Diferenciální záloha je obvykle rychlejší než plná záloha a vyžaduje méně úložného prostoru.</li>
+    <li><span>Záloha protokolu transakcí (transaction log backup):</span> Zálohuje změny v transakčních protokolech od poslední zálohy protokolu transakcí. Umožňuje obnovu databáze na konkrétní bod v čase.</li>
+    
+    
+    <img src="~/Pictures/_Database/Backups/referenceBackup.png" class="bg-info img-fluid d-block mx-auto w-100">
+
+</article>
+
+<div class="display-2">
+    With no recovery a with recovery
+</div>
+
+<article>
+    <h2>Při obnově databáze (restore) v MS SQL Serveru existují dva klíčové režimy: WITH NO RECOVERY a WITH RECOVERY</h2>
+    <p>Oba režimy mají specifické využití při procesu obnovy databáze a ovlivňují, jak se databáze chová po obnově.</p>
+
+    <h3>WITH NO RECOVERY</h3>
+    <p>
+        <span>Definice:</span> Když je databáze obnovena s tímto režimem, databáze zůstane ve stavu obnovení (restoring state).
+    </p>
+    <p>
+        <span>Chování:</span> Obnovená databáze není plně funkční a nemůže být použita pro žádné operace, včetně čtení nebo zápisu dat.
+    </p>
+    <p>
+        <span>Důvod:</span> Tento režim se obvykle používá při obnově databáze z více záloh (např. plná záloha + více diferenciálních nebo záloh transakčních protokolů). Po obnově jedné zálohy s tímto režimem můžete pokračovat v obnově dalších záloh, aniž by došlo ke změně databáze.
+    </p>
+    <p>
+        <span>Další kroky:</span> Po dokončení obnovy všech záloh je nutné provést poslední obnovu <span>WITH RECOVERY</span> nebo použít příkaz <span>RESTORE DATABASE</span> s možností <span>RECOVERY</span>, aby se databáze aktivovala pro normální provoz.
+    </p>
+
+    <h3>WITH RECOVERY</h3>
+    <p>
+        <span>Definice:</span> Když je databáze obnovena s tímto režimem, databáze je plně funkční a připravená k použití.
+    </p>
+    <p>
+        <span>Chování:</span> Obnovená databáze je aktivní a dostupná pro operace čtení a zápisu dat.
+    </p>
+    <p>
+        <span>Důvod:</span> Tento režim se používá při posledním kroku obnovy databáze nebo když se provádí pouze jedna obnova (např. pouze plná záloha).
+    </p>
+    <p>
+        <span>Další kroky:</span> Žádné další kroky nejsou potřeba, protože databáze je již aktivní a připravená k použití.
+    </p>
+
+    <h3>Příklad obnovy</h3>
+    <p>
+        Pokud máte plnou zálohu (<span>full.bak</span>) a diferenciální zálohu (<span>diff.bak</span>) databáze, a chcete je obnovit, můžete postupovat takto:
+    </p>
+
+    <h4>Obnovení plné zálohy s <span>WITH NO RECOVERY</span>:</h4>
+    <pre>RESTORE DATABASE MyDatabase FROM DISK = 'full.bak' WITH NO RECOVERY;</pre>
+
+    <h4>Obnovení diferenciální zálohy s <span>WITH RECOVERY</span>:</h4>
+    <pre>RESTORE DATABASE MyDatabase FROM DISK = 'diff.bak' WITH RECOVERY;</pre>
+
+    <p>
+        V tomto příkladu je nejprve obnovena plná záloha s režimem <span>WITH NO RECOVERY</span>, což databázi ponechá ve stavu obnovení. Následně je provedeno obnovení diferenciální zálohy s režimem <span>WITH RECOVERY</span>, což databázi aktivuje a umožní její běžné použití.
+    </p>
+</article>
+<div class="display-2">Videa</div>
+<article>
+    
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/CTqEjguqqiI?si=tc_7G3VpoTaalKZy")
+
+</article>

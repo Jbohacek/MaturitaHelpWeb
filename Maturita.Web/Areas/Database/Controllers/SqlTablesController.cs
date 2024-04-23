@@ -14,6 +14,14 @@ namespace Maturita.Web.Areas.Database.Controllers
         {
             return View();
         }
+        public IActionResult SelectsJoins()
+        {
+            return View();
+        }
+        public IActionResult DDL()
+        {
+            return View();
+        }
 
         public IActionResult Views()
         {

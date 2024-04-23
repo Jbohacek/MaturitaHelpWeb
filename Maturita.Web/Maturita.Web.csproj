@@ -28,7 +28,6 @@
     <Folder Include="Areas\Cestina\Models\" />
     <Folder Include="Areas\Database\Data\" />
     <Folder Include="Areas\Database\Models\" />
-    <Folder Include="Areas\Database\Pages\" />
     <Folder Include="Areas\Programovani\Data\" />
     <Folder Include="Areas\Programovani\Models\" />
     <Folder Include="Areas\Programovani\Pages\" />
@@ -60,7 +59,17 @@
 
     <_ContentIncludedByDefault Remove="Areas\Cestina\Views\Home\PsaniMekkeNeboTvrde.cshtml" />
 
+    <_ContentIncludedByDefault Remove="Areas\Database\Views\MsSqlSecurity\Audit.cshtml" />
+
+    <_ContentIncludedByDefault Remove="Areas\Database\Views\MsSqlSecurity\Encryption.cshtml" />
+
+    <_ContentIncludedByDefault Remove="Areas\Database\Views\MsSqlSecurity\LoginAndUser.cshtml" />
+
     <_ContentIncludedByDefault Remove="Areas\Database\Views\DatabaseCreate\Design.cshtml" />
+
+    <_ContentIncludedByDefault Remove="Areas\Database\Views\Mssql\Transaction.cshtml" />
+
+    <_ContentIncludedByDefault Remove="Areas\Database\Views\SqlTables\DDL.cshtml" />
 
     <_ContentIncludedByDefault Remove="Areas\Database\Views\SqlTables\TokProgramu.cshtml" />
 
@@ -232,6 +241,26 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\ProgramoveVybaveni\Views\MicrosoftApps\Word.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Database\Views\SqlTables\DDL.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Database\Views\Mssql\Transaction.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Database\Views\MsSqlSecurity\LoginAndUser.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Database\Views\MsSqlSecurity\Audit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Database\Views\MsSqlSecurity\Encryption.cshtml" />
   </ItemGroup>
 
 </Project>
