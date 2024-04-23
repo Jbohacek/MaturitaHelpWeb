@@ -2,9 +2,100 @@
     Layout = "_Layout"; // Nechat jak je
 
     ViewBag.Title = "Access - Tabulky a relace";
-    ViewBag.Author = "?";
+    ViewBag.Author = "Jakub Šimůnek";
+    ViewBag.Editor = "Jakub Boháček";
 
 }
 <div class="display-1">
     @ViewBag.Title
 </div>
+
+<article>
+    Access je relační databázový systém který umožňuje uživatelům vytvářet, spravovat a analyzovat databáze.
+</article>
+<div class="display-2">
+    Import a export dat
+</div>
+
+<article>
+    <p>Importovat data do <span>Accessu</span> můžeme v kartě <span>Externí data</span>. Poté, co si vybereme možnost <span>Nový zdroj dat</span>, můžeme jednotlivé tabulky importovat.</p>
+    <p>Pokud importujeme z <span>Excelu</span>, tak po vybrání cesty souboru a zvolení, zdali chceme vytvářet nové tabulky nebo zdali je máme už předpřipravené a chceme do nich jen importovat, zvolíme, jakou z tabulek v Excelu chceme importovat.</p>
+    <p>Zaškrtneme, pokud je první řádek <span>záhlaví</span>, nastavíme <span>datové typy</span> nebo necháme na obecných a pak buď přidáme <span>Id</span> nebo vybereme <span>vlastní indexování</span>.</p>
+    <p>Export funguje podobně a je velmi intuitivní.</p>
+    
+    <img src="~/Pictures/Access/1.png" class="img-fluid d-block mx-auto w-100">
+    
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/5BL4v6-D8Is?si=fkIMms372fe1PCkp")
+
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/ak8mcHWJYvE?si=C0ySD3au6LOK1fJT")
+
+
+</article>
+
+<div class="display-2">
+    Relace
+</div>
+
+<article>
+    <p>Definují vztahy mezi jednotlivými databázemi, nacházejí se v kartě <span>Databázové nástroje</span>. Po kliknutí na <span>Relace</span> budeme přeneseni na samostatnou kartu <span>Návrh Relací</span>.</p>
+    <p>Nejdříve budeme muset naše tabulky přidat a to po kliknutí <span>Přidat tabulky</span> v menu, které se objeví v pravém rohu.</p>
+    <p>Relace můžeme přidat po kliknutí <span>Upravit relace</span> (1) <span>Vytvořit novou</span> (2) a pak jen zvolíme, jaké dvě tabulky chceme propojit a jakým sloupcem (3).</p>
+    <p>Nezapomeňme zaškrtnout <span>Zjistit integritu polí</span>.</p>
+    <p>Pro odstranění relace na ni klikneme pravým tlačítkem (nelehké se trefit) a klikneme na <span>odstranit</span>.</p>
+
+
+    <img src="~/Pictures/Access/2.png" class="img-fluid d-block mx-auto w-100">
+    
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/w9xkFYfPJHE?si=7_B1IU66VUusu7VO")
+
+
+</article>
+
+<div class="display-2">
+    Tabulky
+
+</div>
+
+<article>
+    <p>Na tabulky můžeme nahlížet pomocí dvou zobrazení:</p>
+    <ul>
+        <li><span>Návrhové zobrazení</span>, pomocí kterého můžeme upravovat datové typy, přidávat a odstraňovat další řádky.</li>
+        <li><span>Datový list</span>, kde vidíme všechna naše uložená data.</li>
+    </ul>
+
+    <p>Klasické datové typy:</p>
+    <ul>
+        <li><span>Měna</span>, <span>Číslo</span>, <span>Krátký text</span> a <span>Dlouhý text</span>.</li>
+    </ul>
+    
+    <p>Důležitý datový typ je <span>Automatické číslo</span>, které se používá pro <span>Id záznamu</span> v tabulce.</p>
+
+
+    <p>Neortodoxní datové typy zahrnují například:</p>
+    <ul>
+        <li><span>Logické</span>, což je jako bool (pravda / nepravda).</li>
+        <li><span>Poznámky</span>, což je velké textové pole.</li>
+        <li><span>Přílohy</span>, což jsou jiné uložené soubory v databázi.</li>
+        <li><span>Objekt OLE</span>, což jsou vložené objekty, jako je tabulka Excelu.</li>
+    </ul>
+    
+
+    <img src="~/Pictures/Access/3.png" class="img-fluid d-block mx-auto w-100">
+
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/SrSHMCZQm8c?si=NPgQPAkMgGUZdDDP")
+</article>
+
+<div class="display-2">
+    Filtry
+</div>
+<article>
+    <p>Stejně jako v <span>Excelu</span> máme i v <span>Accessu</span> <span>Filtry</span>.</p>
+    <p>Nachází se na kartě <span>Domů</span> v zobrazení <span>Datového listu</span>.</p>
+    <p>Podle toho, v jakém se nacházíme sloupci, se aplikuje <span>Filtr</span>.</p>
+    
+    <img src="~/Pictures/Access/4.png" class="img-fluid d-block mx-auto w-100">
+
+
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/qOoG8eWPV94?si=bBwFQMi0yRW6hUOA")
+
+</article>
