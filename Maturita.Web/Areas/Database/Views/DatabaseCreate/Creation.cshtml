@@ -2,8 +2,7 @@
     Layout = "_Layout"; // Nechat jak je
 
     ViewBag.Title = "Vytváření databáze";
-    ViewBag.Author = "";
-    ViewBag.Editor = "[Editor]"; // Pokud není, tak vymazat
+    ViewBag.Author = "Jakub Boháček";
 
     ViewBag.GenerateContent = true;
 }
@@ -11,4 +10,45 @@
     @ViewBag.Title
 </div>
 
+<article>
+    <p>Vytváříme databázi přes příkaz <span>CREATE DATABASE [db1]</span>.</p>
+    <p>Na kontrolu, zda databáze existuje a vymazání, jsou dva způsoby:</p>
+    <ol>
+        <li><span>Filip Edition</span>
+            <pre>
+            <code class="language-sql">
+USE MASTER
+IF EXISTS(SELECT * FROM SYS.DATABASES WHERE NAME = 'DB1')
+BEGIN
+    ALTER DATABASE [DB1] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE
+    DROP DATABASE [DB1] 
+END
+
+CREATE DATABASE [DB1]
+            </code>
+        </pre>
+
+        </li>
+        <li><span>Ez edition</span>
+            <pre>
+            <code class="language-sql">
+Use master
+drop database if exists [DB1]
+go
+create database [DB1]
+    </code>
+</pre>
+        </li>
+    </ol>
+    <p>Oba dva způsoby fungují prakticky identicky. Nastavení <a href="https://www.sqlshack.com/alter-database-set-single_user-statement-in-sql-server/">SINGLE_USER WITH ROLLBACK IMMEDIATE</a> by mělo zajišťovat, že i když je databáze používaná, tak se dá vymazat, ačkoli tohle většinou neplatí z praxe.</p>
+    <img src="~/Pictures/_Database/CreateDb/DatabaseOptions.gif" class="img-fluid d-block mx-auto w-100">
+
+    <p>Většinu možností lze najít při vytváření databáze a pak následně zaskriptováním přes tlačítko <span>Script</span>.</p>
+    <p>Lze přidávat více souborů do databáze, kde můžeme nastavovat jejich velikost. Následně pak existují takzvané <span>FileGroups</span>, do kterých můžeme seskupovat soubory.</p>
+    
+    <img src="~/Pictures/_Database/CreateDb/Přidání více souborů.png" class="img-fluid d-block mx-auto w-100">
+
+    <p>Přes <span>SELECT * FROM sys.databases</span> můžeme získat všechny databáze na serveru, včetně systémových.</p>
+
+</article>
 
