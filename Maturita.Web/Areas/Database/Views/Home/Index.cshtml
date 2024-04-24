@@ -56,6 +56,7 @@
 
             <div style="font-weight: 300; font-size: 26px">Práce s daty</div>
             <ul>
+                <li><a asp-controller="Mssql" asp-action="Transaction">Transactions</a></li>
                 <li><a>Import data - CSV,Excel,TXT, Access</a></li>
                 <li><a>Import data - SSIS</a></li>
                 <li><a>Dělení dat - Partitioning</a></li>
@@ -72,8 +73,10 @@
 
             <div style="font-weight: 300; font-size: 26px">Data mezi servery</div>
             <ul>
+                <li><a asp-controller="Mssql" asp-action="LogShipping">Log shipping</a></li>
                 <li><a asp-controller="Mssql" asp-action="Replication">Replikace</a></li>
                 <li><a asp-controller="Mssql" asp-action="Mirroring">Mirroring</a></li>
+
             </ul>
 
         </div>

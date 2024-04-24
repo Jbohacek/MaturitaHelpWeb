@@ -67,6 +67,8 @@
 
     <_ContentIncludedByDefault Remove="Areas\Database\Views\DatabaseCreate\Design.cshtml" />
 
+    <_ContentIncludedByDefault Remove="Areas\Database\Views\Mssql\LogShipping.cshtml" />
+
     <_ContentIncludedByDefault Remove="Areas\Database\Views\Mssql\Partitioning.cshtml" />
 
     <_ContentIncludedByDefault Remove="Areas\Database\Views\Mssql\Transaction.cshtml" />
@@ -267,6 +269,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Database\Views\Mssql\Partitioning.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Database\Views\Mssql\LogShipping.cshtml" />
   </ItemGroup>
 
 </Project>

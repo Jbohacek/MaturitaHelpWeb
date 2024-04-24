@@ -1,0 +1,101 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Log shipping";
+    ViewBag.Author = "Jakub Boháček";
+
+    ViewBag.GenerateContent = true;
+}
+<div class="display-1">
+    Log shipping
+</div>
+<article>
+    <p>Log shipping je technika replikace databází v SQL Serveru, která umožňuje automatické kopírování a aplikování zálohovaných transakčních logů z hlavní databáze (primary database) do záložní databáze (secondary database). Tato technika poskytuje řešení pro obnovení databáze v případě výpadku nebo selhání hlavní databáze.</p>
+
+    <h3>Jak log shipping funguje:</h3>
+    <ul>
+        <li><strong>Nastavení hlavní databáze:</strong> Na hlavní databázi jsou transakční logy pravidelně zálohovány (například každých pár minut) a ukládány na určené místo, jako je sdílená síťová složka.</li>
+        <li><strong>Kopírování logů:</strong> Záložní databáze pravidelně kopíruje nové zálohy transakčních logů z hlavní databáze do své lokace. To může být provedeno buď automaticky pomocí plánovače úloh, nebo manuálně.</li>
+        <li><strong>Obnovení logů:</strong> Na záložní databázi se aplikují nové transakční logy, které jsou kopírovány z hlavní databáze. To umožňuje záložní databázi zůstat aktuální s hlavní databází.</li>
+        <li><strong>Role převzetí (failover):</strong> Pokud hlavní databáze selže, záložní databáze může převzít roli hlavní databáze, což minimalizuje výpadek služeb.</li>
+    </ul>
+</article>
+<div class="display-2">Jak nastavit:</div>
+<article>
+    <p>Nastavení log shipping v SQL Serveru zahrnuje několik kroků, které vám umožní automaticky zálohovat a obnovovat transakční logy z hlavní databáze na záložní databázi. Zde je postup, jak nastavit log shipping:</p>
+
+    <h4>Krok 1: Připravte hlavní a záložní databázi</h4>
+    <ul>
+        <li>
+            <strong>Hlavní databáze:</strong>
+            <ul>
+                <li>Musí být v režimu <strong>plného obnovení (full recovery mode)</strong>, aby byly transakční logy zálohovány.</li>
+                <li>Připravte sdílenou síťovou složku nebo jiné úložiště pro ukládání záloh transakčních logů.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Záložní databáze:</strong>
+            <ul>
+                <li>Vytvořte prázdnou databázi, která bude sloužit jako záložní databáze.</li>
+                <li>Tato databáze by měla mít stejné jméno jako hlavní databáze a měla by být v režimu <strong>režimu NORECOVERY</strong>, aby mohla přijímat transakční logy.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>Krok 2: Spusťte nastavení log shipping</h4>
+    <ol>
+        <li>
+            Otevřete SQL Server Management Studio (SSMS):
+            <ul>
+                <li>Připojte se k serveru, kde je hlavní databáze.</li>
+            </ul>
+        </li>
+        <li>
+            Vyberte hlavní databázi:
+            <ul>
+                <li>Klikněte pravým tlačítkem na hlavní databázi a zvolte <strong>Tasks > Ship Transaction Logs</strong>.</li>
+            </ul>
+        </li>
+        <li>
+            Nastavte log shipping:
+            <ul>
+                <li>V dialogovém okně <strong>Log Shipping Configuration</strong>:</li>
+                <li>Zaškrtněte políčko <strong>Enable this as a primary database in a log shipping configuration</strong>.</li>
+                <li>Nastavte plán pro zálohování transakčních logů.</li>
+                <li>Vyberte sdílenou síťovou složku pro ukládání záloh transakčních logů.</li>
+            </ul>
+        </li>
+        <li>
+            Přidejte záložní databázi:
+            <ul>
+                <li>Klikněte na tlačítko <strong>Add</strong> v sekci <strong>Secondary databases</strong>.</li>
+                <li>Připojte se k serveru, kde je záložní databáze.</li>
+                <li>Vyberte záložní databázi a nastavte plán pro obnovení transakčních logů.</li>
+            </ul>
+        </li>
+        <li>
+            Konfigurujte další možnosti:
+            <ul>
+                <li>Můžete nastavit upozornění, pokud proces log shipping selže.</li>
+                <li>Můžete také nastavit plán čištění starých transakčních logů.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h4>Krok 3: Spusťte log shipping</h4>
+    <ul>
+        <li>Po dokončení konfigurace klikněte na <strong>OK</strong>.</li>
+        <li>Log shipping bude nyní automaticky zálohovat transakční logy z hlavní databáze a obnovovat je na záložní databázi podle nastaveného plánu.</li>
+    </ul>
+
+    <h4>Krok 4: Sledování a údržba</h4>
+    <ul>
+        <li>Pravidelně sledujte stav log shipping pomocí SSMS nebo skriptů.</li>
+        <li>Ujistěte se, že zálohované transakční logy jsou aplikovány na záložní databázi včas a bez chyb.</li>
+        <li>Nastavte čištění starých transakčních logů, aby úložiště nezabíralo příliš mnoho místa.</li>
+    </ul>
+</article>
+<div class="display-2">Videa</div>
+<article>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/Myv4kp1nrIw?si=pmFGSCxi08K0TVQN")
+</article>
