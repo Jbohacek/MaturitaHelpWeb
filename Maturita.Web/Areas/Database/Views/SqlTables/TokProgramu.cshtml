@@ -1,12 +1,224 @@
 ﻿@{
     Layout = "_Layout"; // Nechat jak je
 
-    ViewBag.Title = "Tok programu";
-    ViewBag.Author = "";
-    ViewBag.Editor = "[Editor]"; // Pokud není, tak vymazat
+    ViewBag.Title = "SQL - Proměné, while, if ";
+    ViewBag.Author = "Jakub Boháček";
 
     ViewBag.GenerateContent = true;
 }
 <div class="display-1">
     @ViewBag.Title
 </div>
+<div class="display-2">Proměnné</div>
+
+<article>
+    <p>V SQL se proměnné používají k ukládání hodnot, které mohou být později použity v dotazech nebo v SQL skriptech. Proměnné v SQL umožňují flexibilní práci s daty a usnadňují psaní opakovaně použitelných dotazů nebo skriptů. Zde je vysvětlení, jak fungují proměnné v SQL:</p>
+
+    <h3>Deklarace proměnných:</h3>
+
+    <ul>
+        <li>Proměnné se deklarují pomocí klíčového slova <code>DECLARE</code>.</li>
+        <li><strong>Syntaxe:</strong></li>
+        <pre><code>DECLARE @@variable_name data_type;</code></pre>
+        <li><strong>Parametry:</strong></li>
+        <ul>
+            <li><code>@@variable_name</code>: Název proměnné. Název proměnné musí začínat symbolem <code>@@</code>.</li>
+            <li><code>data_type</code>: Datový typ proměnné, například <code>INT</code>, <code>VARCHAR</code>, <code>DATE</code>, <code>DECIMAL</code> atd.</li>
+        </ul>
+    </ul>
+
+    <h3>Inicializace proměnných:</h3>
+
+    <ul>
+        <li>Po deklaraci lze proměnné přiřadit hodnotu pomocí operátoru <code>=</code>.</li>
+        <li><strong>Syntaxe:</strong></li>
+        <pre><code>SET @@variable_name = value;</code></pre>
+    </ul>
+
+    <h3>Příklad deklarace a inicializace proměnné:</h3>
+
+    <pre><code>DECLARE @@myInt INT;  -- Deklarace proměnné typu INT
+SET @@myInt = 10;     -- Inicializace proměnné hodnotou 10</code></pre>
+
+    <h3>Použití proměnných:</h3>
+
+    <p>Proměnné můžete používat v dotazech nebo v podmíněných výrazech.</p>
+
+    <p><strong>Příklad:</strong></p>
+
+    <pre><code class="language-sql">DECLARE @@myInt INT;
+SET @@myInt = 10;
+
+IF @@myInt > 5
+BEGIN
+    PRINT 'Hodnota @@myInt je větší než 5';
+END;</code></pre>
+
+    <h3>Vnořené dotazy a proměnné:</h3>
+
+    <p>Proměnné mohou být použity v rámci vnořených dotazů nebo jiných SQL operací.</p>
+
+    <p><strong>Příklad:</strong></p>
+
+    <pre><code class="language-sql">DECLARE @@total INT;
+
+SELECT @@total = SUM(column_name)
+FROM my_table;
+
+PRINT 'Celková hodnota je: ' + CAST(@@total AS VARCHAR);</code></pre>
+
+    <h3>Přehled typů proměnných v SQL:</h3>
+
+    <ul>
+        <li><strong>INT</strong>, <strong>BIGINT</strong>, <strong>SMALLINT</strong>, <strong>TINYINT</strong>: Celá čísla.</li>
+        <li><strong>FLOAT</strong>, <strong>REAL</strong>, <strong>DECIMAL</strong>, <strong>NUMERIC</strong>: Čísla s plovoucí desetinnou čárkou.</li>
+        <li><strong>VARCHAR</strong>, <strong>CHAR</strong>, <strong>TEXT</strong>: Řetězce znaků.</li>
+        <li><strong>DATE</strong>, <strong>DATETIME</strong>, <strong>SMALLDATETIME</strong>, <strong>TIME</strong>: Datum a čas.</li>
+        <li>Další datové typy, jako jsou <strong>BIT</strong>, <strong>MONEY</strong>, <strong>UNIQUEIDENTIFIER</strong> atd.</li>
+    </ul>
+
+</article>
+
+<div class="display-2">Cast</div>
+
+<article>
+    <h2>CAST v SQL</h2>
+    <p>V SQL se klíčové slovo <code>CAST</code> používá k převodu datového typu jedné hodnoty na jiný datový typ. Toto je známé jako explicitní převod datového typu nebo casting. <code>CAST</code> je užitečné, když potřebujete převést hodnotu do jiného formátu, například z čísla na řetězec nebo naopak, nebo převést hodnoty mezi různými typy číselných hodnot.</p>
+
+    <h3>Syntaxe:</h3>
+    <pre><code>CAST(expression AS data_type)</code></pre>
+    <ul>
+        <li><strong>expression:</strong> Výraz nebo hodnota, kterou chcete převést.</li>
+        <li><strong>data_type:</strong> Cílový datový typ, na který chcete převést výraz.</li>
+    </ul>
+
+    <h3>Příklady:</h3>
+    <h4>Převod čísla na řetězec:</h4>
+    <pre><code class="language-sql">DECLARE @@myInt INT = 10;
+DECLARE @@myString VARCHAR(10);
+
+SET @@myString = CAST(@@myInt AS VARCHAR);
+PRINT @@myString;  -- Vytiskne: 10</code></pre>
+
+    <h4>Převod řetězce na číslo:</h4>
+    <pre><code class="language-sql">DECLARE @@myString VARCHAR(10) = '20';
+DECLARE @@myInt INT;
+
+SET @@myInt = CAST(@@myString AS INT);
+PRINT @@myInt;  -- Vytiskne: 20</code></pre>
+
+    <h4>Převod čísla s plovoucí desetinnou čárkou na celé číslo:</h4>
+    <pre><code class="language-sql">DECLARE @@myFloat FLOAT = 12.34;
+DECLARE @@myInt INT;
+
+SET @@myInt = CAST(@@myFloat AS INT);
+PRINT @@myInt;  -- Vytiskne: 12</code></pre>
+</article>
+
+<div class="display-2">If</div>
+<article>
+    <h2>Příkaz IF:</h2>
+
+    <p>IF je podmíněný příkaz, který umožňuje provádět různé bloky kódu na základě vyhodnocení podmínky.</p>
+
+    <h3>Syntaxe:</h3>
+
+    <pre><code class="language-sql">IF condition
+BEGIN
+    -- Blok kódu, který se provádí, pokud je condition pravdivá
+END
+ELSE
+BEGIN
+    -- Alternativní blok kódu, který se provádí, pokud je condition nepravdivá (volitelné)
+END;
+</code></pre>
+
+    <h3>Parametry:</h3>
+
+    <ul>
+        <li><strong>condition:</strong> Podmínka, která je vyhodnocena pro určení, který blok kódu se provede.</li>
+    </ul>
+
+    <h3>Příklad:</h3>
+
+    <pre><code class="language-sql">DECLARE @@value INT = 10;
+
+IF @@value > 5
+BEGIN
+    PRINT 'Hodnota je větší než 5.';
+END
+ELSE
+BEGIN
+    PRINT 'Hodnota je menší nebo rovna 5.';
+END;
+</code></pre>
+</article>
+
+
+<div class="display-2">While</div>
+<article>
+    <h2>Příkaz WHILE:</h2>
+
+    <p>WHILE je smyčka, která umožňuje opakování bloku kódu, dokud je splněna zadaná podmínka.</p>
+
+    <h3>Syntaxe:</h3>
+
+    <pre><code class="language-sql">WHILE condition
+BEGIN
+    -- Blok kódu, který se provádí, dokud je condition pravdivá
+END;
+</code></pre>
+
+    <h3>Parametry:</h3>
+
+    <ul>
+        <li><strong>condition:</strong> Podmínka, která je vyhodnocena před každým průchodem smyčky. Pokud je pravdivá, provede se blok kódu uvnitř smyčky.</li>
+    </ul>
+
+    <h3>Příklad:</h3>
+
+    <pre><code class="language-sql">DECLARE @@i INT = 0;
+
+WHILE @@i @@("<") 5
+BEGIN
+    PRINT 'Hodnota @@i: ' + CAST(@@i AS VARCHAR);
+    SET @@i = @@i + 1; -- Zvýšení hodnoty @@i o 1
+END;
+</code></pre>
+
+    <h3>BREAK:</h3>
+    <p>BREAK je příkaz, který vám umožní okamžitě ukončit smyčku <code>WHILE</code> a přeskočit na kód za smyčkou.</p>
+    <p><strong>Syntaxe:</strong></p>
+    <pre><code class="language-sql">DECLARE @@i INT = 0;
+
+WHILE @@i @@("<") 5
+BEGIN
+    IF @@i = 3
+    BEGIN
+        BREAK;
+    END;
+    SET @@i = @@i + 1;
+END;
+</code></pre>
+
+    <h3>CONTINUE:</h3>
+    <p>CONTINUE je příkaz, který vám umožní přeskočit aktuální iteraci smyčky <code>WHILE</code> a pokračovat s další iterací.</p>
+    <p><strong>Syntaxe:</strong></p>
+    <pre><code class="language-sql">DECLARE @@i INT = 0;
+
+WHILE @@i @@("<") 5
+BEGIN
+    IF @@i = 2
+    BEGIN
+        CONTINUE;
+    END;
+    PRINT 'Hodnota @@i: ' + CAST(@@i AS VARCHAR);
+    SET @@i = @@i + 1;
+END;
+</code></pre>
+
+</article>
+
+
+
+<div class="display-2"></div>

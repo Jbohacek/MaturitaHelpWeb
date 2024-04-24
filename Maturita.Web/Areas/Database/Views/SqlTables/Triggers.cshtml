@@ -23,7 +23,7 @@
     </ul>
 
     <p>Příklad DML triggeru:</p>
-<pre>
+    <pre>
 <code class="language-sql">CREATE TRIGGER trg_AfterInsert
 ON table_name
 AFTER INSERT
@@ -44,7 +44,7 @@ END;
     </ul>
 
     <p>Příklad DDL triggeru:</p>
-<pre>
+    <pre>
 <code class="language-sql">CREATE TRIGGER trg_AfterCreateTable
 ON DATABASE
 FOR CREATE_TABLE
@@ -67,4 +67,141 @@ if exists(select * from sys.triggers where name = 'tg_Dbnw_tbEvents')
 drop trigger tg_Dbnw_tbEvents on database
 go</code>
 </pre>
+    <div class="sha text-center">Více informací: <a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/create-trigger-transact-sql?view=sql-server-ver16">learn.microsoft</a></div>
+
+</article>
+<div class="display-2">
+    For (after) / InsteadOF
+</div>
+<article>
+    <h2>FOR (AFTER):</h2>
+    <p>Trigger typu FOR se také někdy označuje jako AFTER.</p>
+    <p>Spouští se po dokončení dané akce (vložení, aktualizace nebo smazání dat) na tabulce.</p>
+    <p>Tento trigger se spustí poté, co je akce dokončena, takže má přístup k aktuálním hodnotám změněných řádků.</p>
+    <p>Může být užitečný pro logování operací nebo provádění následných akcí.</p>
+    <h4>Trigger typu FOR (AFTER):</h4>
+    <pre>
+<code class="language-sql">CREATE TRIGGER myTrigger
+ON myTable
+AFTER INSERT
+AS
+BEGIN
+    -- Kód, který se má provést po vložení dat
+END
+</code>
+</pre>
+
+    <h2>INSTEAD OF:</h2>
+    <p>INSTEAD OF trigger se spouští místo akce, na kterou reaguje.</p>
+    <p>V podstatě nahrazuje původní akci a umožňuje vám definovat, co se má stát místo toho, co bylo původně zamýšleno.</p>
+    <p>Tento typ triggeru je obzvláště užitečný při práci s pohledy (view), kde může umožnit provádění operací, jako je vložení, aktualizace nebo smazání, které by normálně na view nebyly povoleny.</p>
+    <p>V případě, že se akce spustí, trigger nahradí tuto akci jinou operací, kterou napíšete do jeho těla.</p>
+    
+    <h4>Trigger typu INSTEAD OF:</h4>
+    <pre>
+<code class="language-sql">CREATE TRIGGER myTrigger
+ON myView
+INSTEAD OF INSERT
+AS
+BEGIN
+    -- Kód, který se má provést místo vložení dat
+END
+</code>
+</pre>
+</article>
+
+<div class="display-2">Tabulky, které se vážou na Triggery</div>
+<article>
+    <p>V SQL Serveru jsou dvě speciální tabulky, které se používají ve spojení s trigramy (spouštěči): <strong>INSERTED</strong> a <strong>DELETED</strong>. Tyto tabulky mají zvláštní význam a poskytují informace o datech, která byla změněna v důsledku akcí provedených na tabulkách, na kterých jsou triggery nastaveny.</p>
+
+    <h3><span>INSERTED:</span></h3>
+    <p>Tabulka INSERTED obsahuje nové řádky, které byly přidány do tabulky, na kterou se trigger vztahuje.</p>
+    <p>Když je provedena operace INSERT, obsahuje tabulka INSERTED nově přidané řádky.</p>
+    <p>Když je provedena operace UPDATE, obsahuje tabulka INSERTED řádky s novými hodnotami po aktualizaci.</p>
+    <p>Tuto tabulku lze použít k získání informací o datech, která byla vložena nebo aktualizována.</p>
+    
+    <pre><code class="language-sql">CREATE TRIGGER myInsertTrigger
+ON myTable
+AFTER INSERT
+AS
+BEGIN
+    -- Použití tabulky INSERTED k přístupu k nově vloženým řádkům
+    SELECT * FROM INSERTED;
+    -- Další kód spouštěče
+END;
+</code></pre>
+    
+    <h3><span>DELETED:</span></h3>
+    <p>Tabulka DELETED obsahuje řádky, které byly odebrány z tabulky, na kterou se trigger vztahuje.</p>
+    <p>Když je provedena operace DELETE, obsahuje tabulka DELETED řádky, které byly smazány.</p>
+    <p>Když je provedena operace UPDATE, obsahuje tabulka DELETED řádky s původními hodnotami před aktualizací.</p>
+    <p>Tuto tabulku lze použít k získání informací o datech, která byla odstraněna nebo změněna.</p>
+    
+    
+    <p>Podobně můžete použít tabulku DELETED k přístupu k řádkům, které byly odstraněny nebo změněny:</p>
+
+    <pre><code class="language-sql">CREATE TRIGGER myDeleteTrigger
+ON myTable
+AFTER DELETE
+AS
+BEGIN
+    -- Použití tabulky DELETED k přístupu k odstraněným řádkům
+    SELECT * FROM DELETED;
+    -- Další kód spouštěče
+END;
+</code></pre>
+    
+    <h4><span>Naplnění dat závislosti na akci</span></h4>
+    <table>
+        <thead>
+        <tr>
+            <th>INSERTED</th>
+            <th>DELETED</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>INSERT</th>
+            <td class="text-success">Všechny nový řádky, které byli vložené</td>
+            <td class="text-danger">Nic</td>
+        </tr>
+        <tr>
+            <th>DELETE</th>
+            <td class="text-danger">Nic</td>
+            <td class="text-success">Všechny tabulky, které se budou mazat / jsou smazaný</td>
+        </tr>
+        <tr>
+            <th>UPDATE</th>
+            <td class="text-success">Všechny řádky, které se aktulizovali, ale s novými hodnotami</td>
+            <td class="text-success">Všechny řádky, které se aktulizovali, ale se původníma hodnotama</td>
+        </tr>
+        </tbody>
+    </table>
+</article>
+
+<div class="display-2">
+    Triggery a views
+</div>
+<article>
+    <p>
+        Triggery v SQL Serveru mohou být nastaveny nejen na tabulky, ale také na pohledy (views). Toto umožňuje kontrolovat a manipulovat s daty, která jsou přístupná přes pohledy, a to v situacích, kdy by běžně nebylo možné provést změny přímo v pohledech. Zde jsou některé spojitosti a možnosti použití triggerů mezi pohledy:
+    </p>
+    <h3>Nemožnost použití AFTER triggerů na pohledech:</h3>
+    <p>Pohledy jsou logickými pohledy na data z jedné nebo více tabulek. Na rozdíl od tabulek nejsou pohledy samostatnými úložišti dat.</p>
+    <p>Když se provádí operace jako <strong>INSERT</strong>, <strong>UPDATE</strong> nebo <strong>DELETE</strong> na pohledu, ve skutečnosti to znamená operace na podkladových tabulkách, na kterých je pohled založen.</p>
+    <p>Proto není možné použít <strong>AFTER</strong> triggery na pohledech, protože `AFTER` triggery se spouštějí po dokončení operace na daném objektu (v tomto případě pohledu).</p>
+    <p>Vzhledem k tomu, že pohledy neukládají data samy o sobě a operace na pohledech se ve skutečnosti promítají do operací na podkladových tabulkách, neexistuje žádná vlastní datová manipulace, po které by mohl být trigger spuštěn.</p>
+
+    <h3>Použití INSTEAD OF triggerů na pohledech:</h3>
+    <p><strong>INSTEAD OF</strong> triggery umožňují zpracování operací na pohledech podle vašich specifických požadavků.</p>
+    <p>Můžete definovat, jak by se měly operace provádět na podkladových tabulkách na základě akcí provedených na pohledu.</p>
+    <p>To umožňuje flexibilní manipulaci s daty a případnou implementaci obchodních pravidel nebo logiky.</p>
+
+</article>
+<div class="display-2">
+    Videa
+</div>
+<article>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/U9EJzQS-ilQ?si=L9saE2nN5vp5Jkv1")
+
 </article>

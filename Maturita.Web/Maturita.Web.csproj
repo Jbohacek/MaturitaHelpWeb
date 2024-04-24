@@ -67,6 +67,8 @@
 
     <_ContentIncludedByDefault Remove="Areas\Database\Views\DatabaseCreate\Design.cshtml" />
 
+    <_ContentIncludedByDefault Remove="Areas\Database\Views\Mssql\Partitioning.cshtml" />
+
     <_ContentIncludedByDefault Remove="Areas\Database\Views\Mssql\Transaction.cshtml" />
 
     <_ContentIncludedByDefault Remove="Areas\Database\Views\SqlTables\DDL.cshtml" />
@@ -261,6 +263,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Database\Views\MsSqlSecurity\Encryption.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Database\Views\Mssql\Partitioning.cshtml" />
   </ItemGroup>
 
 </Project>

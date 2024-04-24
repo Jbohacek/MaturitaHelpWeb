@@ -18,7 +18,7 @@
 <div class="display-2">Šifrování pomocí certifikátů</div>
 <article>
     <p>Certifikáty v MS SQL Serveru jsou digitální identifikátory, které se používají pro různé účely včetně šifrování dat a autentizace. Certifikáty mohou být buď vytvořeny v rámci SQL Serveru, nebo importovány z externích zdrojů.</p>
-
+    <p>Pokud šifrování vrací <pre>NULL</pre> po dokončení, překročili jste limit znaků co snese šifrování. Je potřeba obejít tenot problém, třeba rozdělením řetězce nebo změny šifrovací metody</p>
     <h4>Vytvoření certifikátu</h4>
     <pre><code class="language-sql">CREATE CERTIFICATE MyCertificate
 ENCRYPTION BY PASSWORD = 'StrongPassword'
@@ -26,24 +26,24 @@ WITH SUBJECT = 'My Certificate';
 </code></pre>
 
     <h4>Použití certifikátu pro šifrování</h4>
-    <p>Certifikát může být použit pro šifrování a dešifrování dat. Před použitím certifikátu musíte vytvořit symetrický klíč, který je šifrován certifikátem.</p>
+    <p>Certifikát může být použit pro šifrování a dešifrování dat. Před použitím certifikátu musíte vytvořit symetrický klíč, který může být šifrován certifikátem.</p>
 
     <pre><code class="language-sql">CREATE SYMMETRIC KEY MySymmetricKey
 WITH ALGORITHM = AES_256
-ENCRYPTION BY CERTIFICATE MyCertificate;
+encryption by password = '111111'
 </code></pre>
 
     <h4>Šifrování a dešifrování dat</h4>
     <p>Šifrované a dešifrované data se provádí pomocí symetrického klíče.</p>
 
     <pre><code class="language-sql">-- Šifrování dat
-OPEN SYMMETRIC KEY MySymmetricKey DECRYPTION BY CERTIFICATE MyCertificate;
+OPEN SYMMETRIC KEY MySymmetricKey decryption by password = '111111';
 DECLARE @@ciphertext VARBINARY(MAX);
 SET @@ciphertext = EncryptByKey(Key_GUID('MySymmetricKey'), 'DataToEncrypt');
 CLOSE SYMMETRIC KEY MySymmetricKey;
 
 -- Dešifrování dat
-OPEN SYMMETRIC KEY MySymmetricKey DECRYPTION BY CERTIFICATE MyCertificate;
+OPEN SYMMETRIC KEY MySymmetricKey decryption by password = '111111';
 DECLARE @@plaintext NVARCHAR(MAX);
 SET @@plaintext = DecryptByKey(@@ciphertext);
 CLOSE SYMMETRIC KEY MySymmetricKey;
@@ -52,25 +52,25 @@ CLOSE SYMMETRIC KEY MySymmetricKey;
 
 <div class="display-2">Šifrování pomocí symetrických klíčů</div>
 <article>
-    <p>Symetrické klíče jsou klíče používané pro šifrování a dešifrování dat. V MS SQL Serveru jsou symetrické klíče šifrovány pomocí certifikátů nebo jiných klíčů (např. hlavních klíčů serveru).</p>
+    <p>Symetrické klíče jsou klíče používané pro šifrování a dešifrování dat. V MS SQL Serveru jsou symetrické klíče šifrovány pomocí certifikátů nebo jednoduchého hesla (např. hlavních klíčů serveru).</p>
 
     <h4>Vytvoření symetrického klíče</h4>
     <pre><code>CREATE SYMMETRIC KEY MySymmetricKey
 WITH ALGORITHM = AES_256
-ENCRYPTION BY CERTIFICATE MyCertificate;
+encryption by password = '111111'
 </code></pre>
 
     <h4>Šifrování a dešifrování dat</h4>
     <p>Symetrický klíč se používá pro šifrování a dešifrování dat pomocí příkazů EncryptByKey a DecryptByKey.</p>
 
     <pre><code>-- Šifrování dat
-OPEN SYMMETRIC KEY MySymmetricKey DECRYPTION BY CERTIFICATE MyCertificate;
+OPEN SYMMETRIC KEY MySymmetricKey decryption by password = '111111'
 DECLARE @@ciphertext VARBINARY(MAX);
 SET @@ciphertext = EncryptByKey(Key_GUID('MySymmetricKey'), 'DataToEncrypt');
 CLOSE SYMMETRIC KEY MySymmetricKey;
 
 -- Dešifrování dat
-OPEN SYMMETRIC KEY MySymmetricKey DECRYPTION BY CERTIFICATE MyCertificate;
+OPEN SYMMETRIC KEY MySymmetricKey decryption by password = '111111'
 DECLARE @@plaintext NVARCHAR(MAX);
 SET @@plaintext = DecryptByKey(@@ciphertext);
 CLOSE SYMMETRIC KEY MySymmetricKey;
@@ -113,4 +113,48 @@ SET @@ciphertext = EncryptByPassPhrase('MyStrongPassphrase', 'DataToEncrypt');</
     <h5>Příklad dešifrování:</h5>
     <pre><code class="language-sql">DECLARE @@plaintext NVARCHAR(MAX);
 SET @@plaintext = DecryptByPassPhrase('MyStrongPassphrase', @@ciphertext);</code></pre>
+</article>
+
+<div class="display-2">
+    TDE
+</div>
+<article>
+    <p>Transparentní šifrování dat (TDE) v SQL Serveru je funkce, která poskytuje šifrování na úrovni databáze. Tato technologie šifruje data uložená v databázových souborech (data v klidu), což zahrnuje data, indexy a zálohy. Šifrování je transparentní pro aplikace, což znamená, že aplikace pracující s databází si nevšimnou rozdílu ve výkonu nebo chování, protože šifrování a dešifrování se provádí automaticky.</p>
+
+    <h2>Jak TDE funguje:</h2>
+    <ul>
+        <li><strong>Šifrování dat v klidu:</strong> TDE šifruje celou databázi nebo jednotlivé soubory, včetně všech dat a indexů. To znamená, že data uložená na disku jsou zašifrovaná, což chrání před neoprávněným přístupem.</li>
+        <li><strong>Šifrování a dešifrování na pozadí:</strong> Když je TDE aktivováno, šifrování a dešifrování se provádí na pozadí při čtení nebo zápisu dat do databáze. To je pro aplikace transparentní, což znamená, že neexistují žádné změny v kódu aplikací.</li>
+        <li><strong>Správa šifrovacích klíčů:</strong> TDE používá klíč správce databáze (DMK) k šifrování klíče pro šifrování databáze (DEK), který je použit k šifrování a dešifrování dat. Klíče mohou být chráněny pomocí modulu správy klíčů (KMS).</li>
+        <li><strong>Zálohy jsou také šifrované:</strong> Když je TDE aktivováno, všechny zálohy databází jsou také šifrované. To poskytuje další úroveň ochrany pro vaše data.</li>
+    </ul>
+
+    <h2>Postup pro aktivaci TDE:</h2>
+    <h3>Vytvoření certifikátu a klíče správce databáze:</h3>
+    <p>Vytvořte certifikát v databázi <em>master</em>, který se použije k ochraně klíče pro šifrování databáze.</p>
+    <pre><code class="language-sql">USE master;
+GO
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'your_password';
+CREATE CERTIFICATE MyServerCert
+WITH SUBJECT = 'MyCertificate';</code></pre>
+
+    <h3>Vytvoření šifrovacího klíče databáze:</h3>
+    <p>Vytvořte šifrovací klíč databáze a šifrujte jej pomocí certifikátu.</p>
+    <pre><code class="language-sql">USE your_database;
+GO
+CREATE DATABASE ENCRYPTION KEY
+WITH ALGORITHM = AES_256
+ENCRYPTION BY SERVER CERTIFICATE MyServerCert;</code></pre>
+
+    <h3>Povolení TDE:</h3>
+    <p>Povolení šifrování databáze pomocí klíče.</p>
+    <pre><code class="language-sql">ALTER DATABASE your_database
+SET ENCRYPTION ON;</code></pre>
+
+    <h2>Výhody TDE:</h2>
+    <ul>
+        <li><strong>Ochrana dat v klidu:</strong> Šifrování dat uložených na disku chrání před neoprávněným přístupem.</li>
+        <li><strong>Transparentnost pro aplikace:</strong> Aplikace si nevšimnou žádných změn ve výkonu nebo chování.</li>
+        <li><strong>Snadná správa:</strong> Šifrování a dešifrování jsou automatické, což zjednodušuje správu.</li>
+    </ul>
 </article>

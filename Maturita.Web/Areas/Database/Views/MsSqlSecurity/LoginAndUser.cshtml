@@ -10,7 +10,44 @@
     @ViewBag.Title
 </div>
 <article>
-    <p>V MS SQL Serveru jsou uživatelská a přihlašovací oprávnění dvě různé vrstvy zabezpečení, které zajišťují, že správné osoby mají přístup k databázím a zdrojům a že jejich přístup je omezen na to, co je nutné.</p>
+    <p>V SQL Serveru existují dva hlavní způsoby autentizace uživatelů: přihlášení pomocí Windows Authentication a SQL Server Authentication (často označované jako SQL Client). Každá metoda má své vlastní charakteristiky a výhody:</p>
+</article>
+<div class="display-2">Rozdíl mezi Windows a SQL Clientem</div>
+<article>
+    <h2>1. Windows Authentication:</h2>
+    <h3>Charakteristika:</h3>
+    <p>Uživatelé jsou ověřováni pomocí svých přihlašovacích údajů k účtu Windows (Active Directory).</p>
+    <p>Server ověří přihlašovací údaje uživatele proti systému Windows nebo Active Directory.</p>
+
+    <h3>Výhody:</h3>
+    <ul>
+        <li><strong>Bezpečnost:</strong> Díky integraci s Active Directory poskytuje vysokou úroveň bezpečnosti a centrální správu uživatelů a jejich oprávnění.</li>
+        <li><strong>Jednotné přihlášení:</strong> Uživatelé se mohou přihlásit jednou a mít přístup k více zdrojům, aniž by museli zadávat své přihlašovací údaje znovu.</li>
+        <li><strong>Správa:</strong> Správa přístupových práv může být prováděna centrálně přes Active Directory.</li>
+    </ul>
+
+    <h3>Příklady použití:</h3>
+    <ul>
+        <li>V prostředí, kde je k dispozici Active Directory a jednotné přihlášení je preferováno.</li>
+        <li>U firem, které chtějí centralizovat správu uživatelů a oprávnění.</li>
+    </ul>
+
+    <h2>2. SQL Server Authentication (SQL Client):</h2>
+    <h3>Charakteristika:</h3>
+    <p>Uživatelé jsou ověřováni pomocí přihlašovacího jména a hesla, které jsou spravovány v rámci SQL Serveru.</p>
+    <p>Tato metoda nevyžaduje integraci s Windows nebo Active Directory.</p>
+
+    <h3>Výhody:</h3>
+    <ul>
+        <li><strong>Nezávislost na Windows:</strong> Uživatelé mohou být ověřováni pouze na základě údajů spravovaných v rámci SQL Serveru, což může být vhodné pro aplikace nebo systémy mimo ekosystém Windows.</li>
+        <li><strong>Flexibilita:</strong> Umožňuje nastavit specifická uživatelská jména a hesla pro přístup k SQL Serveru.</li>
+    </ul>
+
+    <h3>Příklady použití:</h3>
+    <ul>
+        <li>V prostředí, kde není dostupné nebo vhodné použití Active Directory.</li>
+        <li>Pro aplikace nebo systémy, které vyžadují vlastní správu přihlášení a hesel mimo Windows.</li>
+    </ul>
 </article>
 <div class="display-2">Login</div>
 <article>
@@ -121,3 +158,10 @@ EXEC sp_addrolemember 'db_datawriter', 'myUser'; -- Přidání uživatele myUser
 
 </article>
 
+<div class="display-2">
+    Videa
+</div>
+<article>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/PUOvuVx7woU?si=6GtfXlaBVozDxw3G")
+
+</article>

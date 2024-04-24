@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Partitioning";
+    ViewBag.Author = "Jakub Boháček";
+
+    ViewBag.GenerateContent = true;
+}
+<div class="display-1">
+    @ViewBag.Title
+</div>
+<article>
+    <p>
+        Partitioning v SQL Serveru je technika, která umožňuje rozdělit velké databázové tabulky nebo indexy na menší, spravovatelnější části zvané "partitions" (oddíly). Oddělení dat do oddílů usnadňuje správu a zlepšuje výkon operací nad daty.
+    </p>
+    <img src="~/Pictures/_Database/Paritioning.png" class="bg-info img-fluid d-block mx-auto w-100">
+
+</article>
+<div class="display-2">Jak partitioning funguje</div>
+<article>
+    <h2>Jak partitioning funguje:</h2>
+    <ul>
+        <li><strong>Rozdělení dat:</strong> Tabulky nebo indexy jsou rozděleny na základě hodnoty klíčového slova, které označuje hranice oddílů. Toto klíčové slovo je známo jako <strong>partition key</strong> (oddílový klíč).</li>
+        <li><strong>Partiční funkce:</strong> Partiční funkce určuje, jak jsou data rozdělena do jednotlivých oddílů na základě hodnoty partičního klíče.</li>
+        <li><strong>Partiční schéma:</strong> Partiční schéma určuje, jak jsou oddíly rozmístěny na různých úložištích (například různých pevných discích nebo oddílech).</li>
+    </ul>
+    <h2>Výhody partitioningu:</h2>
+    <ul>
+        <li><strong>Zlepšení výkonu:</strong> Díky oddělení dat do menších částí může SQL Server pracovat efektivněji při dotazech a aktualizacích.</li>
+        <li><strong>Snazší správa:</strong> Menší oddíly usnadňují správu dat, například zálohování, obnovení nebo přidávání nových dat.</li>
+        <li><strong>Méně zablokování:</strong> Práce s menšími částmi dat může snížit zablokování a zlepšit škálovatelnost.</li>
+    </ul>
+</article>
+
+<div class="display-2">Jak Nastavit</div>
+<article>
+    <h3>Vytvoření partiční funkce:</h3>
+    <p>Definujete hranice jednotlivých oddílů:</p>
+    <pre><code class="language-sql">CREATE PARTITION FUNCTION myPartitionFunction (INT)
+AS RANGE LEFT FOR VALUES (100, 200, 300);
+</code></pre>
+    <h3>Vytvoření partičního schématu:</h3>
+    <p>Určujete, kde budou jednotlivé oddíly uloženy:</p>
+    <pre><code class="language-sql">CREATE PARTITION SCHEMA myPartitionSchema
+AS PARTITION myPartitionFunction
+TO ([primary], [filegroup1], [filegroup2], [filegroup3]);
+</code></pre>
+    <h3>Vytvoření tabulky s partičním schématem:</h3>
+    <p>Vytvořte tabulku a použijte partiční schéma pro umístění dat do oddílů:</p>
+    <pre><code class="language-sql">CREATE TABLE myTable (
+    id INT,
+    name VARCHAR(100)
+)
+ON myPartitionSchema (id);
+</code></pre>
+</article>
+<div class="display-2">Videa</div>
+<article>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/221mz_g5NuQ?si=tBVXoDArzz9tm5aE")
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/wnZk5XclrlE?si=NcH9d40ENk2fEKYK")
+
+</article>

@@ -2,11 +2,34 @@
     Layout = "_Layout"; // Nechat jak je
 
     ViewBag.Title = "Pohledy - views";
-    ViewBag.Author = "";
-    ViewBag.Editor = "[Editor]"; // Pokud není, tak vymazat
+    ViewBag.Author = "Jakub Boháček";
 
     ViewBag.GenerateContent = true;
 }
 <div class="display-1">
     @ViewBag.Title
 </div>
+<article>
+    <p>Objekt VIEW v Microsoft SQL Serveru (MSSQL) je databázový objekt, který slouží k reprezentaci určitého pohledu na data v tabulkách.</p>
+    <p>View je logický pohled na data, který v podstatě představuje uložený SQL dotaz. Obsahuje dotaz, který vybírá data z jedné nebo více tabulek, a vrací je jako sadu výsledků.</p>
+    <ul>
+        <li>View se neukládají jako fyzická data; jsou to uložené dotazy, které se spouštějí, když se k nim přistupuje.</li>
+        <li>Můžete vytvořit view z jedné nebo více tabulek a případně také z jiných view.</li>
+        <li>View lze použít k omezení přístupu k datům v tabulkách, např. zobrazením pouze určitých sloupců nebo řádků.</li>
+    </ul>
+    <p>Vytváříme například takto:</p>
+    <pre>
+<code class="language-sql">CREATE VIEW myView AS
+SELECT column1, column2
+FROM myTable
+WHERE condition;
+</code>
+</pre>
+
+</article>
+<div class="display-2">
+    Videa
+</div>
+<article>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/vLLkNI-vkV8?si=4rH5VV2POkQig7cl")
+</article>

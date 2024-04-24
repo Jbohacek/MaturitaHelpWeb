@@ -19,5 +19,15 @@ namespace Maturita.Web.Areas.Database.Controllers
         {
             return View();
         }
+
+        public IActionResult Partitioning()
+        {
+            return View();
+        }
+
+        public IActionResult LogShipping()
+        {
+            return View();
+        }
     }
 }

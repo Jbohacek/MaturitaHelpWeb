@@ -18,48 +18,42 @@
     <ul>
         <li>
             <strong>INNER JOIN:</strong> Vrací pouze řádky, které mají odpovídající hodnoty v obou tabulkách na základě podmínky joinu. Pokud tedy nejsou žádné odpovídající řádky, výsledkem bude prázdná sada.
-            <pre><code class="language-sql">
-SELECT columns
+            <pre><code class="language-sql">SELECT columns
 FROM table1
 INNER JOIN table2 ON table1.common_column = table2.common_column;
 </code></pre>
         </li>
         <li>
             <strong>LEFT JOIN (také LEFT OUTER JOIN):</strong> Vrací všechny řádky z levé tabulky a odpovídající řádky z pravé tabulky. Pokud neexistuje shoda v pravé tabulce, výsledkem bude NULL.
-            <pre><code class="language-sql">
-SELECT columns
+            <pre><code class="language-sql">SELECT columns
 FROM table1
 LEFT JOIN table2 ON table1.common_column = table2.common_column;
 </code></pre>
         </li>
         <li>
             <strong>RIGHT JOIN (také RIGHT OUTER JOIN):</strong> Opačný k LEFT JOIN, vrací všechny řádky z pravé tabulky a odpovídající řádky z levé tabulky. Pokud neexistuje shoda v levé tabulce, výsledkem bude NULL.
-            <pre><code class="language-sql">
-SELECT columns
+            <pre><code class="language-sql">SELECT columns
 FROM table1
 RIGHT JOIN table2 ON table1.common_column = table2.common_column;
 </code></pre>
         </li>
         <li>
             <strong>FULL JOIN (také FULL OUTER JOIN):</strong> Kombinuje výsledky LEFT JOIN a RIGHT JOIN. Vrací všechny řádky z obou tabulek, a pokud nejsou žádné odpovídající řádky, výsledek bude NULL.
-            <pre><code class="language-sql">
-SELECT columns
+            <pre><code class="language-sql">SELECT columns
 FROM table1
 FULL JOIN table2 ON table1.common_column = table2.common_column;
 </code></pre>
         </li>
         <li>
             <strong>CROSS JOIN:</strong> Vrací kartézský součin tabulek, což znamená, že každý řádek z první tabulky se spojí s každým řádkem z druhé tabulky. Nebo také vrací všechny kombinace řádků z obou tabulek.
-            <pre><code class="language-sql">
-SELECT columns
+            <pre><code class="language-sql">SELECT columns
 FROM table1
 CROSS JOIN table2;
 </code></pre>
         </li>
         <li>
             <strong>SELF JOIN:</strong> Je vlastně join na stejné tabulce, může být užitečný pro porovnání hodnot v různých řádcích téže tabulky.
-            <pre><code class="language-sql">
-SELECT a.columns, b.columns
+            <pre><code class="language-sql">SELECT a.columns, b.columns
 FROM table a
 JOIN table b ON a.common_column = b.common_column;
 </code></pre>

@@ -16,8 +16,7 @@
 
 
 <p>V MS SQL (<span>Transact-SQL</span> nebo <span>T-SQL</span>) je <span>SELECT</span> příkaz používán k zobrazení dat z jedné nebo více tabulek v databázi. Je to základní stavební kámen pro dotazování v <span>MS SQL</span>.</p>
-    <pre><code class="language-sql">
-SELECT Name, Email
+    <pre><code class="language-sql">SELECT Name, Email
 FROM Customers
 WHERE City = 'Prague';
 </code></pre>
@@ -51,8 +50,7 @@ WHERE City = 'Prague';
 <article>
     Příklad:
     <pre>
-    <code class="language-sql">
-use dbnw
+    <code class="language-sql">use dbnw
 go
 
 select distinct 
@@ -83,8 +81,7 @@ end as Kvartal
     
     <p>Je možné i pracovat s case v podmínce <span>when</span> například: </p>
     <pre>
-    <code class="language-sql">
-use dbNw
+    <code class="language-sql">use dbNw
 go
 
 /*searched case - case s vyhledáváním*/
@@ -133,8 +130,7 @@ end
     @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/ozy31aJpW-o?si=IcCQ-53oiXgPZrSG")
 
     <pre>
-<code class="language-sql">
-    use dbNw
+<code class="language-sql">use dbNw
 
 select * from
 (
@@ -164,8 +160,7 @@ FOR Kvartal in ([1],[2],[3],[4])
     @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/xpOq1_Ll9zQ?si=pl86EqHc0FebkVVM")
 
     <pre>
-<code class="language-sql">
-    use dbNw
+<code class="language-sql">use dbNw
 go
 
 declare @@rokySeznam as varchar(1000)

@@ -34,6 +34,42 @@
         <li>Můžete definovat, které události chcete sledovat, například operace DML (INSERT, UPDATE, DELETE), výběry dat, změny schémat apod.</li>
     </ul>
 </article>
+
+<div class="display-2">Použití auditu</div>
+
+<article>
+    <h2>1. Nastavení Auditní specifikace na serveru:</h2>
+    <h3>Vytvořte audit na serveru:</h3>
+    <p>Použijte příkaz <code>CREATE SERVER AUDIT</code> k vytvoření auditního objektu na serveru.</p>
+    <p>Můžete specifikovat cílové umístění pro ukládání auditních záznamů (například soubor nebo aplikaci).</p>
+    <pre><code class="language-sql">CREATE SERVER AUDIT MyServerAudit
+TO FILE (FILENAME = 'C:\\AuditLogs\\AuditLogFile.sqlaudit');</code></pre>
+
+    <h3>Povolte audit:</h3>
+    <p>Po vytvoření auditního objektu je nutné jej povolit.</p>
+    <pre><code class="language-sql">ALTER SERVER AUDIT MyServerAudit
+WITH (STATE = ON);</code></pre>
+
+    <h2>2. Nastavení Auditní specifikace na databázi:</h2>
+    <h3>Vytvořte auditní specifikaci na databázi:</h3>
+    <p>Použijte příkaz <code>CREATE DATABASE AUDIT SPECIFICATION</code> k vytvoření auditní specifikace na úrovni databáze.</p>
+    <p>Můžete definovat, jaké akce nebo události chcete auditovat (například přístup k tabulkám nebo změny dat).</p>
+    <pre><code class="language-sql">CREATE DATABASE AUDIT SPECIFICATION MyDatabaseAuditSpec
+FOR SERVER AUDIT MyServerAudit
+ADD (SELECT ON myTable BY [username]),
+ADD (INSERT ON myTable BY [username]);</code></pre>
+
+    <h3>Povolte auditní specifikaci:</h3>
+    <p>Po vytvoření specifikace je nutné ji povolit.</p>
+    <pre><code class="language-sql">ALTER DATABASE AUDIT SPECIFICATION MyDatabaseAuditSpec
+WITH (STATE = ON);</code></pre>
+
+    <h2>3. Monitorování a zobrazení auditních záznamů:</h2>
+    <h3>Zobrazení auditních záznamů:</h3>
+    <p>Auditní záznamy můžete zobrazit pomocí různých nástrojů, jako je SQL Server Management Studio (SSMS), nebo pomocí dotazů na cílové umístění, kde se záznamy ukládají.</p>
+    <pre><code class="language-sql">SELECT * FROM fn_get_audit_file('C:\\AuditLogs\\AuditLogFile*.sqlaudit', DEFAULT, DEFAULT);</code></pre>
+</article>
+
 <div class="display-2">Videa</div>
 <article>
     @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/WvE1m5w8NO4?si=PMkbHWHhhmRd0uPM")
