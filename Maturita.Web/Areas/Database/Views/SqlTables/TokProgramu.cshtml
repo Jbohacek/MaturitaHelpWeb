@@ -179,7 +179,7 @@ END;
 
     <pre><code class="language-sql">DECLARE @@i INT = 0;
 
-WHILE @@i @@("<") 5
+WHILE @@i @("<") 5
 BEGIN
     PRINT 'Hodnota @@i: ' + CAST(@@i AS VARCHAR);
     SET @@i = @@i + 1; -- Zvýšení hodnoty @@i o 1
@@ -191,7 +191,7 @@ END;
     <p><strong>Syntaxe:</strong></p>
     <pre><code class="language-sql">DECLARE @@i INT = 0;
 
-WHILE @@i @@("<") 5
+WHILE @@i @("<") 5
 BEGIN
     IF @@i = 3
     BEGIN
@@ -206,7 +206,7 @@ END;
     <p><strong>Syntaxe:</strong></p>
     <pre><code class="language-sql">DECLARE @@i INT = 0;
 
-WHILE @@i @@("<") 5
+WHILE @@i @("<") 5
 BEGIN
     IF @@i = 2
     BEGIN
@@ -221,4 +221,3 @@ END;
 
 
 
-<div class="display-2"></div>

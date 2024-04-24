@@ -14,7 +14,7 @@
 </article>
 <div class="display-2">Rozdíl mezi Windows a SQL Clientem</div>
 <article>
-    <h2>1. Windows Authentication:</h2>
+    <h2><span>Windows Authentication:</span></h2>
     <h3>Charakteristika:</h3>
     <p>Uživatelé jsou ověřováni pomocí svých přihlašovacích údajů k účtu Windows (Active Directory).</p>
     <p>Server ověří přihlašovací údaje uživatele proti systému Windows nebo Active Directory.</p>
@@ -32,7 +32,7 @@
         <li>U firem, které chtějí centralizovat správu uživatelů a oprávnění.</li>
     </ul>
 
-    <h2>2. SQL Server Authentication (SQL Client):</h2>
+    <h2><span>SQL Server Authentication (SQL Client):</span> </h2>
     <h3>Charakteristika:</h3>
     <p>Uživatelé jsou ověřováni pomocí přihlašovacího jména a hesla, které jsou spravovány v rámci SQL Serveru.</p>
     <p>Tato metoda nevyžaduje integraci s Windows nebo Active Directory.</p>
@@ -118,19 +118,19 @@ GRANT INSERT ON myTable TO myUser; -- Udělení oprávnění k vkládání dat d
         <li><strong>db_denydatawriter:</strong> Nesmí zapisovat data do databáze.</li>
     </ul>
     
-    <h3>public</h3>
+    <h3><span>public</span></h3>
     <p><strong>Definice:</strong> public je role, která automaticky obsahuje všechny uživatele a přihlášení, která nemají jiné explicitní role. Všichni uživatelé, kteří se přihlásí k SQL Serveru, jsou automaticky členy role public.</p>
     <p><strong>Oprávnění:</strong> Oprávnění role public jsou obecně velmi omezená. Mají základní oprávnění, jako je připojení k databázím. Výchozí oprávnění role public lze změnit, ale je důležité být opatrný při udělování dalších oprávnění této roli, aby nedošlo k nechtěnému zvýšení přístupových práv pro všechny uživatele.</p>
     <p><strong>Použití:</strong> Role public slouží k definování základních oprávnění pro všechny uživatele, kteří přistupují k databázi. Je užitečná pro určení minimální úrovně přístupu, kterou by měli mít všichni uživatelé.</p>
 
-    <h3>sysadmin</h3>
+    <h3><span>sysadmin</span></h3>
     <p><strong>Definice:</strong> sysadmin je role serveru, což znamená, že se jedná o roli na úrovni instance SQL Serveru. Členové této role mají úplnou kontrolu nad serverem.</p>
     <p><strong>Oprávnění:</strong> Členové role sysadmin mají nejvyšší úroveň oprávnění v celém SQL Serveru. Mohou provádět jakékoliv operace, jako je správa databází, vytváření a změna přihlášení, přidělování oprávnění, zálohování a obnovení databází, a mnohem více. Prakticky mají neomezený přístup ke všem funkcím a zdrojům serveru. Zákazy na ně neplatí !</p>
     <p><strong>Použití:</strong> Tuto roli by měli mít pouze administrátoři serveru nebo vysoce důvěryhodní uživatelé. Doporučuje se používat tuto roli s opatrností a přiřadit ji pouze uživatelům, kteří potřebují úplnou kontrolu nad serverem.</p>
 
     <p>Uživatelé mohou být přiděleni k jedné nebo více z těchto rolí pomocí příkazů <strong>sp_addrolemember</strong> nebo <strong>ALTER ROLE</strong>.</p>
 
-    <h3>Vlastní databázové role</h3>
+    <h3><span>Vlastní databázové role</span></h3>
     <p>Kromě vestavěných rolí můžete také vytvářet vlastní databázové role.</p>
     <ul>
         <li>Vytvoření vlastní role se provádí pomocí příkazu <strong>CREATE ROLE</strong>, který umožňuje vytvořit novou roli s konkrétním názvem.</li>

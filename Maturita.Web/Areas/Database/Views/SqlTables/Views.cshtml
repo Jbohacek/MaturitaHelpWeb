@@ -19,7 +19,8 @@
     </ul>
     <p>Vytváříme například takto:</p>
     <pre>
-<code class="language-sql">CREATE VIEW myView AS
+<code class="language-sql">drop view if exists myView
+CREATE VIEW myView AS
 SELECT column1, column2
 FROM myTable
 WHERE condition;
