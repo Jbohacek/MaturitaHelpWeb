@@ -12,8 +12,8 @@
 <div class="d-flex gap-5 flex-md-row flex-column-reverse">
     <div class="h-100 w-100">
         <div class="background-text">
-            Zde najdeš všechny okruhy z čeho je maturitní zkoušení a praxe.
-
+            Zde najdeš všechny okruhy z čeho je maturitní zkoušení a praxe.<br/>
+            <code>CTRL + SHIFT + R</code> = resetuje intellsence v mssql studiu
         </div>
 
         <div class="display-4 hidden">
@@ -57,10 +57,9 @@
             <div style="font-weight: 300; font-size: 26px">Práce s daty</div>
             <ul>
                 <li><a asp-controller="Mssql" asp-action="Transaction">Transactions</a></li>
-                <li><a>Import data - CSV,Excel,TXT, Access</a></li>
-                <li><a>Import data - SSIS</a></li>
-                <li><a>Dělení dat - Partitioning</a></li>
-                <li><a>Zasílání protokolu - Log shipping</a></li>
+                <li><a asp-area="Database" asp-controller="SqlDataManipulation" asp-action="ImportExportTextElements">Import data - CSV,Excel,TXT, Access</a></li>
+                <li><a asp-controller="SqlDataManipulation" asp-action="ImportExportSsis">Import data - SSIS</a></li>
+                <li><a asp-controller="Mssql" asp-action="Partitioning">Dělení dat - Partitioning</a></li>
             </ul>
 
             <div style="font-weight: 300; font-size: 26px">Zabezpečení serveru/dat</div>

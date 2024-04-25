@@ -11,6 +11,9 @@
 <div class="display-1">
     @ViewBag.Title
 </div>
+<article>
+    <a href="https://www.youtube.com/playlist?list=PLy9h4t5j-04Cjjc8TOdcrJbX93BSQb9se">Video návody zde</a>
+</article>
 <div class="display-2">Formátování písma </div>
 <article>
     Písmo v MS Wordu lze formátovat na kartě Domů v sekci Písmo. 
@@ -168,5 +171,8 @@
     <img src="~/Pictures/MicrosoftApps/WordVyvojařské2.png" class="img-fluid d-block mx-auto w-100">
     <p>Opět uložíme jako <span>Šablonu</span>.</p>
     <img src="~/Pictures/MicrosoftApps/WordVyvojařské3.png" class="img-fluid d-block mx-auto w-100">
+    
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/QB9y-HoScvM?si=wcTocx28DqL2pLC1")
+
 
 </article>

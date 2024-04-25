@@ -1,0 +1,94 @@
+﻿@{
+    Layout = "_Layout"; // Nechat jak je
+
+    ViewBag.Title = "Import export - csv, excel";
+    ViewBag.Author = "Jakub Boháček";
+
+    //Ani jedna z nich není nutná, nějaký stánky nemají Editora, tak to prostě nenapiště:
+
+}
+
+@* Nadpisy *@
+<div class="display-1">
+    Import Export - txt, excel
+</div>
+
+<div class="display-2">
+    csv
+</div>
+<article>
+    <h3><span>Možnost 1, jen vložení dat</span></h3>
+    Velmi jednoduché, umí rozeznat automaticky čím se rozděluje
+    <img src="~/Pictures/_Database/ImportExport/CSV1.png" class="img-fluid d-block mx-auto w-100">
+    <img src="~/Pictures/_Database/ImportExport/csv2.png" class="img-fluid d-block mx-auto w-100">
+    <img src="~/Pictures/_Database/ImportExport/csv3.png" class="img-fluid d-block mx-auto w-100">
+
+    <h3><span>Možnost 2, vložení dat a vytvoření soubour .dtsx (SSIS packpaga)</span></h3>
+    <img src="~/Pictures/_Database/ImportExport/FlatFile1.png" class="img-fluid d-block mx-auto w-100">
+    
+    <p>
+        <code>Data source =</code><span> Flat File Source</span>
+        <br/>Měl by rozeznat sám mezery, pokud né tak <code>Column delimiter</code> určuje co rozděluje
+    </p>
+    <p>
+        <code>Destination =</code><span> SQL Server Native Client 11.0</span><br/>
+        Níže vyberte do jaké databáze bude vloženo (uplně dole)
+    </p>
+    
+    <p>
+        <code>Edit mappings</code><span> zde se určuje na co je namapovaný</span><br/>
+    </p>
+    
+    <p>
+        <code>Save SSIS pacpage</code><span> uloží SSIS pacpage</span><br/>
+    </p>
+    
+    Data na procvičení
+    <pre><code class="language-sql">
+"customer_id","first_name","last_name","email","phone_number","join_date"
+1,"John","Doe","john.doe@example.com","+123456789","2022-01-15"
+2,"Jane","Smith","jane.smith@example.com","+987654321","2022-02-20"
+3,"Michael","Johnson","michael.johnson@example.com","+555123456","2022-03-12"
+4,"Emily","Wilson","emily.wilson@example.com","+654321987","2022-04-25"
+5,"Robert","Brown","robert.brown@example.com","+123123123","2022-05-30"
+</code></pre>
+
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/JVP9frj2VSQ?si=-5vRRIvabPlmOFQk")
+
+
+</article>
+<div class="display-2">
+    Excel
+
+</div>
+
+<article>
+    Pokud si to chcete udělat lehčí, exportujte excel jako csv a ten pak naimportujte!
+    
+
+    <span class="text-danger">Pokud vyskočí chyba: </span>
+    <img src="~/Pictures/_Database/ImportExport/error1.png" class="img-fluid d-block mx-auto w-100">
+    <span>Je nutné použít tohle: </span>
+    <img src="~/Pictures/_Database/ImportExport/error2.png" class="img-fluid d-block mx-auto w-100">
+
+    <h3>Import</h3>
+    <img src="~/Pictures/_Database/ImportExport/FlatFile1.png" class="img-fluid d-block mx-auto w-100">
+
+    <p>
+        <code>Data source =</code><span> Microsoft Excel</span>
+        <br/>Zvolte verzi excelu (Rok 2007 je dělící verze, jinak je to jedno)
+    </p>
+    <p>
+        <code>Destination =</code><span> SQL Server Native Client 11.0</span><br/>
+        Níže vyberte do jaké databáze bude vloženo (uplně dole)
+    </p>
+    
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/JVP9frj2VSQ?si=-5vRRIvabPlmOFQk")
+
+</article>
+
+<div class="display-2">Access</div>
+<article>
+    @await Html.PartialAsync("_YoutubeVideoPlayer", "https://www.youtube.com/embed/Y_yv3XX_XH0?si=J3YLJ6LSI5JMtKWR")
+
+</article>

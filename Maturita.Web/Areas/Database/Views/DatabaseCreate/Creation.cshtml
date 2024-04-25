@@ -51,4 +51,52 @@ create database [DB1]
     <p>Přes <span>SELECT * FROM sys.databases</span> můžeme získat všechny databáze na serveru, včetně systémových.</p>
 
 </article>
+<div class="display-2">
+    Metadata
+</div>
+<article>
+    <pre>
+<code class="language-sql">use master
+drop if exists database dbKurzy
 
+create database dbKurzy
+
+/*databáze*/
+select * from sys.databases where name = 'dbKurzy'
+
+/*databázové soubory*/
+select * from sys.database_files
+
+/*tabulky*/
+select * from sys.tables
+
+/*sloupce*/
+select * from sys.columns c inner join sys.tables t
+on c.object_id = t.object_id
+
+select * from INFORMATION_SCHEMA.columns
+
+/*primární klíče*/
+
+select * from sys.key_constraints
+
+/*cizí klíče*/
+
+select * from sys.foreign_keys
+select * from sys.foreign_key_columns
+
+/*check*/
+
+select * from sys.check_constraints
+
+/*default*/
+
+select * from sys.default_constraints
+
+/*indexy*/
+select * from sys.indexes i inner join sys.tables t
+on i.object_id = t.object_id
+
+</code>
+</pre>
+</article>

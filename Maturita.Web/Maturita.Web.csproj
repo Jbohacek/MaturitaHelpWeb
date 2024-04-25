@@ -28,6 +28,7 @@
     <Folder Include="Areas\Cestina\Models\" />
     <Folder Include="Areas\Database\Data\" />
     <Folder Include="Areas\Database\Models\" />
+    <Folder Include="Areas\Database\Pages\" />
     <Folder Include="Areas\Programovani\Data\" />
     <Folder Include="Areas\Programovani\Models\" />
     <Folder Include="Areas\Programovani\Pages\" />
@@ -39,6 +40,7 @@
     <Folder Include="wwwroot\doc\" />
     <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\Pictures\Gui\" />
+    <Folder Include="wwwroot\Pictures\_Database\ImportExport\" />
     <Folder Include="wwwroot\Projects\Dbs\Exercises\" />
     <Folder Include="wwwroot\Projects\Dbs\Solutions\" />
     <Folder Include="wwwroot\Projects\Prg\Exercises\" />
