@@ -1,0 +1,18 @@
+﻿@model List<VideoModel>
+
+@{
+    ViewBag.Title = "Auto Clips";
+    Layout = "_Layout";
+}
+
+<div class="text-center my-5">
+    <h1>Nahraná videa z mých jízd</h1>
+
+</div>
+
+@foreach (var item in Model)
+{
+    <h2>@item.Title</h2>
+    @await Html.PartialAsync("_VideoPlayer", item)
+    <hr/>
+}

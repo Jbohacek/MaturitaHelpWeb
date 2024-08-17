@@ -47,6 +47,7 @@
     <Folder Include="wwwroot\Projects\Prg\Solutions\" />
     <Folder Include="wwwroot\Projects\Pvy\Exercises\" />
     <Folder Include="wwwroot\Projects\Pvy\Solutions\" />
+    <Folder Include="wwwroot\Videos\CarClips\" />
   </ItemGroup>
 
   <ItemGroup>
