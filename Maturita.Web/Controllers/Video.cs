@@ -19,7 +19,7 @@ namespace Maturita.Web.Controllers
 
             List<VideoModel> videoModels = new List<VideoModel>();
 
-            foreach (var video in folderInfo.GetFiles())
+            foreach (var video in folderInfo.GetFiles().ToList().OrderBy(x => x.CreationTime.Date).Reverse())
             {
                 videoModels.Add(new VideoModel(@"CarClips\" + video.Name, @"\Videos\CarClips\" + video.Name, video.Name.Replace(".mp4","")));
 
